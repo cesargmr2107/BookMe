@@ -33,12 +33,11 @@ $atributesToSet = array( "LOGIN_USUARIO" => "newuser",
 $usuarioAdd->setAtributes($atributesToSet);
 echo '<pre>' . var_export($usuarioAdd->EDIT(), true) . '</pre>';
 
-/*echo "<br/>TEST DELETE<br/>";
+echo "<br/>TEST DELETE<br/>";
 $usuarioDelete = new UsuariosModel();
 $atributesToSet = array ("LOGIN_USUARIO" => "newuser");
 $usuarioDelete->setAtributes($atributesToSet);
-echo '<pre>' . var_export($usuarioDelete->DELETE(), true) . '</pre>';*/
+echo '<pre>' . var_export($usuarioDelete->DELETE(), true) . '</pre>';
 
-//echo '<pre>' . var_export($usuario->SEARCH(), true) . '</pre>';
 
 ?>

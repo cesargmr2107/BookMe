@@ -2,13 +2,43 @@
 
 class BaseModel {
 
-    private $connection;
     protected $atributes;
     protected $primary_key;
     protected $tableName;
 
+    private $connection;
+
+    public $msgs;
+
+    public const CANNOT_CONNECT = "cannot_connect";
+    
+    public const ADD_FAIL = "add_fail";
+    public const EDIT_FAIL = "edit_fail";    
+    public const DELETE_FAIL = "delete_fail";
+    
+    public const ADD_SUCCESS = "add_success";
+    public const EDIT_SUCCESS = "edit_success";    
+    public const DELETE_SUCCESS = "delete_success";
+ 
+    function __construct() {
+
+        $entityName = substr(get_class($this), 0, -6);
+
+        $this->msgs = array(
+            self::CANNOT_CONNECT => array("000", "No se ha podido conectar a la base de datos"),
+            self::ADD_FAIL => array( "code" => "000", "msg" => $entityName . " no añadido correctamente a la base de datos"),
+            self::EDIT_FAIL => array( "code" => "000", "msg" => $entityName . " no editado correctamente en la base de datos"),
+            self::DELETE_FAIL => array( "code" => "000", "msg" => $entityName . " no borrado correctamente de la base de datos"),
+            self::ADD_SUCCESS => array( "code" => "000", "msg" => $entityName . " añadido correctamente a la base de datos"),
+            self::EDIT_SUCCESS => array( "code" => "000", "msg" => $entityName . " editado correctamente en la base de datos"),
+            self::DELETE_SUCCESS => array( "code" => "000", "msg" => $entityName . " borrado correctamente de la base de datos"),
+        );
+        // DEBUG: See msgs structure
+        // echo '<pre>' . var_export($this->msgs, true) . '</pre>';
+    }
+
     private function openConnection(){
-		return($this->connection = new mysqli('localhost', 'pma', 'iu', '53196285E') or die('fallo conexion'));
+        return($this->connection = new mysqli('localhost', 'pma', 'iu', '53196285E') /*or die('fallo conexion')*/);
 	}
 
     private function closeConnection(){
@@ -18,7 +48,7 @@ class BaseModel {
     private function executeQuery($query){
         $isConnected = $this->openConnection();
         if (!$isConnected) {
-
+            return $this->msgs[self::CANNOT_CONNECT];
         } else {
             $response = $this->connection->query($query);
             $this->closeConnection();
@@ -45,10 +75,6 @@ class BaseModel {
         // echo '<pre>' . var_export($this->atributes, true) . '</pre>';
     }
 
-
-    /*
-        Adds a new ModelObject to the DB using the atributes stored in $this->atributes
-    */
     public function ADD(){
 
         // Build the insert query
@@ -62,8 +88,11 @@ class BaseModel {
         // DEBUG: Show sql query
         // echo "<br/>" . $insertQuery . "<br/>";
 
-        return $this->executeQuery($insertQuery);
+        if( $this->executeQuery($insertQuery) ) {
+            return $this->msgs[self::ADD_SUCCESS];
+        }
         
+        return $this->msgs[self::ADD_FAIL];       
     }
 
     public function EDIT(){
@@ -85,10 +114,13 @@ class BaseModel {
 
             // DEBUG: Show sql query
             // echo "<br/>" . $updateQuery . "<br/>";
-            return $this->executeQuery($updateQuery);
+
+            if($this->executeQuery($updateQuery)){
+                return $this->msgs[self::EDIT_SUCCESS];
+            }
         }
         
-        return false;
+        return $this->msgs[self::EDIT_FAIL];
     }
 
     public function DELETE(){
@@ -105,10 +137,12 @@ class BaseModel {
             // DEBUG: Show sql query
             // echo "<br/>" . $deleteQuery . "<br/>";
 
-            return $this->executeQuery($deleteQuery);
+            if($this->executeQuery($deleteQuery)){
+                return $this->msgs[self::DELETE_SUCCESS];
+            }
         }
 
-        return false;		   			
+        return $this->msgs[self::DELETE_FAIL];	   			
     }
 
     public function SEARCH(){
