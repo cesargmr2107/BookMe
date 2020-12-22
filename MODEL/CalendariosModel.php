@@ -8,14 +8,14 @@ class CalendariosModel extends BaseModel {
 
         parent::__construct();
 
-        $this->msgs[parent::ADD_SUCCESS]["code"] = "111";
-        $this->msgs[parent::ADD_FAIL]["code"] = "111";
+        $this->actionMsgs[parent::ADD_SUCCESS]["code"] = "111";
+        $this->actionMsgs[parent::ADD_FAIL]["code"] = "111";
 
-        $this->msgs[parent::EDIT_SUCCESS]["code"] = "111";
-        $this->msgs[parent::EDIT_FAIL]["code"] = "111";
+        $this->actionMsgs[parent::EDIT_SUCCESS]["code"] = "111";
+        $this->actionMsgs[parent::EDIT_FAIL]["code"] = "111";
 
-        $this->msgs[parent::DELETE_SUCCESS]["code"] = "111";
-        $this->msgs[parent::EDIT_FAIL]["code"] = "111";
+        $this->actionMsgs[parent::DELETE_SUCCESS]["code"] = "111";
+        $this->actionMsgs[parent::EDIT_FAIL]["code"] = "111";
 
         $this->tableName = "USUARIOS";
 
