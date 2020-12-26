@@ -5,18 +5,16 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 include './UsuariosModel.php';
+include './CalendariosModel.php';
 
 
 function testAction($atributes, $entityName, $action, $expectedCode) {
-
-   
 
     // Show results
     echo '<h1>--------------------------------------------------------------------</h1>';
     /*echo '<h2>Testing ' . $action . ' for ' . $entityName . '</h2>';
     echo '<h4>Input model object:</h4>';*/
-    echo '<pre>' . var_export($atributes, true) . '</pre>';
-    
+    echo '<pre>' . var_export($atributes, true) . '</pre>';   
 
 }
 
@@ -43,8 +41,8 @@ function testModel($entityName, $atributes, $actionsAndCodes){
     }
 }
 
-function test(){
-
+function testUsuariosModel(){
+    
     // Testing proper behaviour
 
     $actionsAndCodes = array(   "ADD" => "111",
@@ -63,71 +61,56 @@ function test(){
 
     // Testing error behaviour
 
-    $actionsAndCodes = array(   /*"ADD" => "222",
-                        "SEARCH" => "none",
-                        "EDIT" => "222",*/
-                        "DELETE" => "222" );
+    $actionsAndCodes = array(   "ADD" => "222",
+                                "SEARCH" => "none",
+                                "EDIT" => "222",
+                                "DELETE" => "222" );
 
-    $atributes = array( "LOGIN_USUARIO" => "12newuser",
+    $atributes = array( "LOGIN_USUARIO" => "15logindemasiadolargo",
                         "PASSWD_USUARIO" => "",
-                        "NOMBRE_USUARIO" => "New_User",
-                        "EMAIL_USUARIO" => "newuser@mail.com",
-                        "TIPO_USUARIO" => "NORMAL",
-                        "ES_ACTIVO" => "SI" );
+                        "NOMBRE_USUARIO" => "New User",
+                        "EMAIL_USUARIO" => "newuser",
+                        "TIPO_USUARIO" => "BLA",
+                        "ES_ACTIVO" => "BLA" );
 
     testModel("UsuariosModel", $atributes, $actionsAndCodes);
+}
+
+function testCalendariosModel(){
+
+    // Testing proper behaviour
+
+    $actionsAndCodes = array(   "ADD" => "333",
+                                "SEARCH" => "none",
+                                "EDIT" => "333",
+                                "DELETE" => "333" );
+
+    $atributes = array( "NOMBRE_CALENDARIO" => "Calendario curso 2020/21",
+                        "DESCRIPCION_CALENDARIO" => "Este es el calendario para el curso académico 2020/21",
+                        "FECHA_INICIO_CALENDARIO" => "2020-09-21",
+                        "FECHA_FIN_CALENDARIO" => "2021-06-21",
+                        "HORA_INICIO_CALENDARIO" => "08:00", 
+                        "HORA_FIN_CALENDARIO" => "22:00" );
+
+    testModel("CalendariosModel", $atributes, $actionsAndCodes);
+
+    // Testing error behaviour
+
+    $actionsAndCodes = array(   "ADD" => "222",
+    "SEARCH" => "none",
+    "EDIT" => "222",
+    "DELETE" => "222" );
+
+}
+
+
+function test(){
+
+    //testUsuariosModel();
+    testCalendariosModel();    
 
 }
 
 test();
 
-/*echo "<br/>TEST SEARCH<br/>";
-$usuarioSearch = new UsuariosModel();
-echo '<pre>' . var_export($usuarioSearch->SEARCH(), true) . '</pre>';*/
-
-/*echo "<br/>TEST ADD<br/>";
-$usuarioAdd = new UsuariosModel();
-$atributesToSet = array( "LOGIN_USUARIO" => "newuser",
-                          "PASSWD_USUARIO" => "0354d89c28ec399c00d3cb2d094cf093",
-                          "NOMBRE_USUARIO" => "New User",
-                          "EMAIL_USUARIO" => "newuser@mail.com",
-                          "TIPO_USUARIO" => "NORMAL",
-                          "ES_ACTIVO" => "SI" );
-$usuarioAdd->setAtributes($atributesToSet);
-echo '<pre>' . var_export($usuarioAdd->ADD(), true) . '</pre>';*/
-
-/*echo "<br/>TEST UPDATE<br/>";
-$usuarioAdd = new UsuariosModel();
-$atributesToSet = array( "LOGIN_USUARIO" => "newuser",
-                          "PASSWD_USUARIO" => "",
-                          "NOMBRE_USUARIO" => "New User Updated",
-                          "EMAIL_USUARIO" => "",
-                          "TIPO_USUARIO" => "",
-                          "ES_ACTIVO" => "" );
-$usuarioAdd->setAtributes($atributesToSet);
-echo '<pre>' . var_export($usuarioAdd->EDIT(), true) . '</pre>';
-
-echo "<br/>TEST DELETE<br/>";
-$usuarioDelete = new UsuariosModel();
-$atributesToSet = array ("LOGIN_USUARIO" => "newuser");
-$usuarioDelete->setAtributes($atributesToSet);
-echo '<pre>' . var_export($usuarioDelete->DELETE(), true) . '</pre>';*/
-
-
-/*$usuarioCheck = new UsuariosModel();
-$atributesToSet = array( "LOGIN_USUARIO" => "5hola",
-                          "PASSWD_USUARIO" => "",
-                          "NOMBRE_USUARIO" => "New User Updated",
-                          "EMAIL_USUARIO" => "",
-                          "TIPO_USUARIO" => "",
-                          "ES_ACTIVO" => "" );
-$usuarioCheck->setAtributes($atributesToSet);
-$result = $usuarioCheck->checkAtributes();
-echo '<pre>' . var_export($result, true) . '</pre>';
-if ($usuarioCheck->checkValidations($result)){
-    echo "All good <br/>";
-}else{
-    echo "Problems <br/>";
-}
-*/
 ?>
