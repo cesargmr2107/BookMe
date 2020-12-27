@@ -31,8 +31,14 @@ class ReservasModel extends BaseModel {
                                   "FECHA_SOLICITUD_RESERVA" => "",
                                   "FECHA_RESPUESTA_RECURSO" => "",
                                   "MOTIVO_RECHAZO_RESERVA" => "",
-                                  "ESTADO_RESERVA" => "PENDIENTE" );
+                                  "ESTADO_RESERVA" => "",
+                                  "COSTE_RESERVA" => "" );
   
+    
+        $this->defaultValues = array( "ESTADO_RESERVA" => "PENDIENTE" );
+        
+        $this->nullAtributes = array ("FECHA_RESPUESTA_RECURSO", "MOTIVO_RECHAZO_RESERVA");
+
         $this->primary_key = "ID_RESERVA";
 
         // Subscribe atributes to validations
@@ -59,6 +65,9 @@ class ReservasModel extends BaseModel {
             ),
             "ESTADO_RESERVA" => array( 
                 "checkEnum" => array('ESTADO_RESERVA', $bookingStatus, '222', 'El estado de la reserva no es válido')
+            ),
+            "COSTE_RESERVA" => array(
+                "checkNumeric" => array('COSTE_RESERVA', '222', 'El coste de la reserva debe ser un valor numérico'),
             )
         );
     }

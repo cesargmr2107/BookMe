@@ -212,8 +212,7 @@ function testReservasModel(){
     $atributes = array( "LOGIN_USUARIO" => "emmolina15",
                         "ID_RECURSO" => "1",
                         "FECHA_SOLICITUD_RESERVA" => "2020-12-27",
-                        "FECHA_RESPUESTA_RECURSO" => "",
-                        "MOTIVO_RECHAZO_RESERVA" => "" );
+                        "COSTE_RESERVA" => "5" );
 
     testModel("ReservasModel", $atributes, $actionsAndCodes);
 
