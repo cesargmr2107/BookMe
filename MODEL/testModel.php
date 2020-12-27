@@ -8,6 +8,7 @@ include './UsuariosModel.php';
 include './CalendariosModel.php';
 include './ResponsablesModel.php';
 include './RecursosModel.php';
+include './ReservasModel.php';
 
 
 function testModel($entityName, $atributes, $actionsAndCodes){
@@ -199,12 +200,59 @@ function testRecursosModel(){
 
 }
 
+function testReservasModel(){
+
+    // Testing proper behaviour
+
+    // Testing ADD
+
+    $actionsAndCodes = array(   "ADD" => "999",
+                                "SEARCH" => "none" );
+
+    $atributes = array( "LOGIN_USUARIO" => "emmolina15",
+                        "ID_RECURSO" => "1",
+                        "FECHA_SOLICITUD_RESERVA" => "2020-12-27",
+                        "FECHA_RESPUESTA_RECURSO" => "",
+                        "MOTIVO_RECHAZO_RESERVA" => "" );
+
+    testModel("ReservasModel", $atributes, $actionsAndCodes);
+
+    // Testing EDIT
+
+    $actionsAndCodes = array(   "EDIT" => "999",
+                                "SEARCH" => "none" );
+
+    $atributes = array( "ID_RESERVA" => "3",
+                        "ESTADO_RESERVA" => "ACEPTADA"  );
+
+    testModel("ReservasModel", $atributes, $actionsAndCodes);
+
+    // Testing DELETE
+    
+    $actionsAndCodes = array(   "SEARCH" => "none",
+                                "DELETE" => "333",
+                                "SEARCH" => "none" );
+
+    $atributes = array( "ID_RESERVA" => "3" );
+
+    testModel("ReservasModel", $atributes, $actionsAndCodes);
+
+    // Testing error behaviour
+
+    $actionsAndCodes = array(   "ADD" => "222",
+                                "SEARCH" => "none",
+                                "EDIT" => "222",
+                                "DELETE" => "222" );
+
+}
+
 function test(){
 
     //testUsuariosModel();
     //testCalendariosModel();    
     //testResponsablesModel();    
-    testRecursosModel();
+    //testRecursosModel();
+    testReservasModel();
 }
 
 test();

@@ -57,7 +57,7 @@ class CalendariosModel extends BaseModel {
             ),
             "HORA_FIN_CALENDARIO" => array( 
                 "checkTime" => array('HORA_FIN_CALENDARIO', '222', 'La hora debe tener el formato hh:mm')
-            ),
+            )
         );
 
     }
