@@ -9,7 +9,7 @@ include './CalendariosModel.php';
 include './ResponsablesModel.php';
 include './RecursosModel.php';
 include './ReservasModel.php';
-
+include './SubreservasModel.php';
 
 function testModel($entityName, $atributes, $actionsAndCodes){
     
@@ -245,13 +245,64 @@ function testReservasModel(){
 
 }
 
+function testSubreservasModel(){
+
+    // Testing proper behaviour
+
+    // Testing ADD
+
+    $actionsAndCodes = array(   "ADD" => "1111",
+                                "SEARCH" => "none" );
+
+    $atributes = array( "ID_RESERVA" => "1",
+                        "FECHA_INICIO_SUBRESERVA" => "2021-01-21",
+                        "FECHA_FIN_SUBRESERVA" => "2021-01-25",
+                        "HORA_INICIO_SUBRESERVA" => "10:00",
+                        "HORA_FIN_SUBRESERVA" => "14:00",
+                        "COSTE_SUBRESERVA" => "30" );
+
+    testModel("SubreservasModel", $atributes, $actionsAndCodes);
+
+    // Testing EDIT
+
+    $actionsAndCodes = array(   "EDIT" => "1111",
+                                "SEARCH" => "none" );
+
+    $atributes = array( "ID_RESERVA" => "1",
+                        "ID_SUBRESERVA" => "3",
+                        "HORA_FIN_SUBRESERVA" => "15:00" );
+
+    testModel("SubreservasModel", $atributes, $actionsAndCodes);
+
+    // Testing DELETE
+    
+    $actionsAndCodes = array(   "SEARCH" => "none",
+                                "DELETE" => "1111",
+                                "SEARCH" => "none" );
+
+    $atributes = array( "ID_RESERVA" => "1",
+                        "ID_SUBRESERVA" => "3", );
+
+    testModel("SubreservasModel", $atributes, $actionsAndCodes);
+
+    // Testing error behaviour
+
+    $actionsAndCodes = array(   "ADD" => "222",
+                                "SEARCH" => "none",
+                                "EDIT" => "222",
+                                "DELETE" => "222" );
+
+}
+
 function test(){
 
     //testUsuariosModel();
     //testCalendariosModel();    
     //testResponsablesModel();    
     //testRecursosModel();
-    testReservasModel();
+    //testReservasModel();
+    testSubreservasModel();
+
 }
 
 test();

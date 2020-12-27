@@ -20,7 +20,7 @@ class ReservasModel extends BaseModel {
         $this->actionMsgs[parent::DELETE_SUCCESS]["code"] = "999";
         $this->actionMsgs[parent::EDIT_FAIL]["code"] = "999";
         
-        // Set different user types
+        // Set booking status
         $bookingStatus = array("PENDIENTE", "ACEPTADA", "RECHAZADA", "CANCELADA", "RECURSO_USADO", "RECURSO_NO_USADO");
         
         $this->tableName = "RESERVAS";      
