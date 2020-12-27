@@ -114,6 +114,24 @@ class BaseModel {
         }
     }
 
+    public function checkNumeric($atribute, $errorCode, $errorMsg){
+        $value = $this->atributes[$atribute];
+        if(doubleval($value)) {
+            return true;
+        }else{
+            return array("code" => $errorCode, "msg" => $errorMsg);
+        }
+    }
+
+    public function checkRange($atribute, $min, $max, $errorCode, $errorMsg){
+        $value = doubleval($this->atributes[$atribute]);
+        if($value > $min && $value < $max ) {
+            return true;
+        }else{
+            return array("code" => $errorCode, "msg" => $errorMsg);
+        }
+    }
+
     public function checkEnum($atribute, $enumValues, $errorCode, $errorMsg){
         $value = $this->atributes[$atribute];
         if(in_array($value, $enumValues)){
@@ -261,7 +279,7 @@ class BaseModel {
                 foreach ($this->atributes as $key => $value) {
                     if ($key != $this->primary_key && $value != "") {
                         $updateQuery = $updateQuery . $key . " = '" . $value . "'," ;
-                    }echo $key ." --> " . $value . "<br/>";
+                    }
                 }
                 $updateQuery = substr($updateQuery, 0, -1);
                 $updateQuery =  $updateQuery . " WHERE " . $this->primary_key . " = '" . $updateKey . "'";

@@ -7,21 +7,8 @@ error_reporting(E_ALL);
 include './UsuariosModel.php';
 include './CalendariosModel.php';
 include './ResponsablesModel.php';
+include './RecursosModel.php';
 
-
-function testAction($atributes, $entityName, $action, $expectedCode) {
-
-    // Show results
-    echo '<h1>--------------------------------------------------------------------</h1>';
-    /*echo '<h2>Testing ' . $action . ' for ' . $entityName . '</h2>';
-    echo '<h4>Input model object:</h4>';*/
-    echo '<pre>' . var_export($atributes, true) . '</pre>';   
-
-}
-
-function testAtributes(){
-
-}
 
 function testModel($entityName, $atributes, $actionsAndCodes){
     
@@ -77,6 +64,47 @@ function testUsuariosModel(){
     testModel("UsuariosModel", $atributes, $actionsAndCodes);
 }
 
+function testResponsablesModel(){
+    
+    // Testing proper behaviour
+
+    // Testing ADD
+    $actionsAndCodes = array(   "ADD" => "555",
+                                "SEARCH" => "none",
+                                "DELETE" => "555" );
+
+    $atributes = array( "LOGIN_RESPONSABLE" => "emmolina15",
+                        "DIRECCION_RESPONSABLE" => "Avenida Castelao 15 3A, 36209 Vigo",
+                        "TELEFONO_RESPONSABLE" => "666555111" );
+
+    testModel("ResponsablesModel", $atributes, $actionsAndCodes);
+
+    // Testing EDIT
+    $actionsAndCodes = array(   "SEARCH" => "none",
+                                "EDIT" => "555",
+                                "SEARCH" => "none" );
+
+    $atributes = array( "LOGIN_RESPONSABLE" => "resp1",
+                        "DIRECCION_RESPONSABLE" => "Avenida Castelao 15 3A, 36209 Vigo",
+                        "TELEFONO_RESPONSABLE" => "666555111" );
+
+    testModel("ResponsablesModel", $atributes, $actionsAndCodes);
+
+    // Testing error behaviour
+
+    $actionsAndCodes = array(   "ADD" => "222",
+                                "SEARCH" => "none",
+                                "EDIT" => "222",
+                                "DELETE" => "222" );
+
+    $atributes = array( "LOGIN_RESPONSABLE" => "cesarino",
+                        "DIRECCION_RESPONSABLE" => "Avenida Castelao 15 3A, 36209 Vigo",
+                        "TELEFONO_RESPONSABLE" => "666555111" );
+
+    testModel("ResponsablesModel", $atributes, $actionsAndCodes);
+
+}
+
 function testCalendariosModel(){
 
     // Testing proper behaviour
@@ -124,44 +152,50 @@ function testCalendariosModel(){
 
 }
 
-function testResponsablesModel(){
-    
+function testRecursosModel(){
+
     // Testing proper behaviour
 
     // Testing ADD
-    $actionsAndCodes = array(   "ADD" => "555",
-                                "SEARCH" => "none",
-                                "DELETE" => "555" );
 
-    $atributes = array( "LOGIN_RESPONSABLE" => "emmolina15",
-                        "DIRECCION_RESPONSABLE" => "Avenida Castelao 15 3A, 36209 Vigo",
-                        "TELEFONO_RESPONSABLE" => "666555111" );
-
-    testModel("ResponsablesModel", $atributes, $actionsAndCodes);
-
-    // Testing EDIT
-    $actionsAndCodes = array(   "SEARCH" => "none",
-                                "EDIT" => "555",
+    $actionsAndCodes = array(   "ADD" => "333",
                                 "SEARCH" => "none" );
 
-    $atributes = array( "LOGIN_RESPONSABLE" => "resp1",
-                        "DIRECCION_RESPONSABLE" => "Avenida Castelao 15 3A, 36209 Vigo",
-                        "TELEFONO_RESPONSABLE" => "666555111" );
+    $atributes = array( "NOMBRE_RECURSO" => "Nuevo recurso",
+                        "DESCRIPCION_RECURSO" => "Este es un nuevo recurso",
+                        "TARIFA_RECURSO" => "10",
+                        "RANGO_TARIFA_RECURSO" => "SEMANA",
+                        "ID_CALENDARIO" => "1",
+                        "LOGIN_RESPONSABLE" => "resp1" );
 
-    testModel("ResponsablesModel", $atributes, $actionsAndCodes);
+    testModel("RecursosModel", $atributes, $actionsAndCodes);
+
+    // Testing EDIT
+
+    $actionsAndCodes = array(   "EDIT" => "333",
+                                "SEARCH" => "none" );
+
+    $atributes = array( "ID_RECURSO" => "1",
+                        "TARIFA_RECURSO" => "100" );
+
+    testModel("RecursosModel", $atributes, $actionsAndCodes);
+
+    // Testing DELETE
+    
+    $actionsAndCodes = array(   "SEARCH" => "none",
+                                "DELETE" => "333",
+                                "SEARCH" => "none" );
+
+    $atributes = array( "ID_RECURSO" => "7" );
+
+    testModel("RecursosModel", $atributes, $actionsAndCodes);
 
     // Testing error behaviour
 
     $actionsAndCodes = array(   "ADD" => "222",
-                                "SEARCH" => "none",
-                                "EDIT" => "222",
-                                "DELETE" => "222" );
-
-    $atributes = array( "LOGIN_RESPONSABLE" => "cesarino",
-                        "DIRECCION_RESPONSABLE" => "Avenida Castelao 15 3A, 36209 Vigo",
-                        "TELEFONO_RESPONSABLE" => "666555111" );
-
-    testModel("ResponsablesModel", $atributes, $actionsAndCodes);
+    "SEARCH" => "none",
+    "EDIT" => "222",
+    "DELETE" => "222" );
 
 }
 
@@ -170,7 +204,7 @@ function test(){
     //testUsuariosModel();
     //testCalendariosModel();    
     //testResponsablesModel();    
-    
+    testRecursosModel();
 }
 
 test();
