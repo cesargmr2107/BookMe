@@ -47,11 +47,10 @@ class ReservasModel extends BaseModel {
                 "checkAutoKey" => array('ID_RESERVA', '222', 'El id de la reserva (gestionado por el sistema) es un entero'),
             ),
             "LOGIN_USUARIO" => array(
-                "checkSize" => array('LOGIN_USUARIO', 3, 15, '222', 'El login debe tener de 3 a 15 caracteres'),
-                "checkRegex" => array('LOGIN_USUARIO', '/^[a-z][a-z][a-z]+[0-9]*$/', '222', 'El login solo puede letras minúsculas y números, pero no puede empezar por números')
+                "checkIsForeignKey" => array('LOGIN_USUARIO', 'LOGIN_USUARIO', 'UsuariosModel', '222', 'El usuario es desconocido')
             ),
             "ID_RECURSO" => array(
-                "checkAutoKey" => array('ID_RECURSO', '222', 'El id de la reserva (gestionado por el sistema) es un entero'),
+                "checkIsForeignKey" => array('ID_RECURSO', 'ID_RECURSO', 'RecursosModel', '222', 'El recurso es desconocido')
             ),
             "FECHA_SOLICITUD_RESERVA" => array(
                 "checkDate" => array('FECHA_SOLICITUD_RESERVA', '222', 'La fecha debe tener el formato yyyy-mm-dd')

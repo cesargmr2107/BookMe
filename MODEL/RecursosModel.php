@@ -54,12 +54,12 @@ class RecursosModel extends BaseModel {
             "RANGO_TARIFA_RECURSO" => array(
                 "checkEnum" => array('RANGO_TARIFA_RECURSO', $priceRanges, '222', 'El rango de tarifa del recurso no es válido')
             ),
-            /*"ID_CALENDARIO" => array(
-                "checkYesOrNo" => array('ES_ACTIVO', '222', 'El usuario solo puede ser SI o NO activo')
+            "ID_CALENDARIO" => array(
+                "checkIsForeignKey" => array('ID_CALENDARIO', 'ID_CALENDARIO', 'CalendariosModel', '222', 'El id del calendario es desconocido')
             ),
             "LOGIN_RESPONSABLE" => array(
-                "checkYesOrNo" => array('ES_ACTIVO', '222', 'El usuario solo puede ser SI o NO activo')
-            )*/
+                "checkIsForeignKey" => array('LOGIN_RESPONSABLE', 'LOGIN_RESPONSABLE', 'ResponsablesModel', '222', 'El usuario responsable es desconocido')
+            )
         );
     }
 

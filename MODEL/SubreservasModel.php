@@ -35,6 +35,9 @@ class SubreservasModel extends BaseModel {
 
         // Subscribe atributes to validations
         $this->checks = array (
+            "ID_RESERVA" => array(
+                "checkIsForeignKey" => array('ID_RESERVA', 'ID_RESERVA', 'ReservasModel', '222', 'El id de la reserva es desconocido')
+            ),
             "FECHA_INICIO_SUBRESERVA" => array(
                 "checkDate" => array('FECHA_INICIO_SUBRESERVA', '222', 'La fecha debe tener el formato yyyy-mm-dd')
             ),

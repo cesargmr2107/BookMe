@@ -101,6 +101,19 @@ class BaseModel {
         }
     }
 
+    public function checkIsForeignKey($foreignKeyThis, $foreignKeyOther, $otherModel, $errorCode, $errorMsg ){
+        include_once './' . $otherModel . '.php';
+        $entity = new $otherModel();
+        $atributesToSet = array($foreignKeyOther => $this->atributes[$foreignKeyThis]);
+        $entity->setAtributes($atributesToSet);
+        $isForeignKey = count($entity->SEARCH());
+        if($isForeignKey){
+            return true;
+        }else{
+            return array("code" => $errorCode, "msg" => $errorMsg);
+        }
+    }
+
     public function checkRegex($atribute, $regex, $errorCode, $errorMsg){
         $value = $this->atributes[$atribute];
         if (preg_match($regex, $value)) {
@@ -320,14 +333,14 @@ class BaseModel {
                 $updateQuery = "UPDATE ". $this->tableName . " SET ";
                 foreach ($this->atributes as $key => $value) {
                     if ($key != $this->primary_key && $value != "") {
-                        $updateQuery = $updateQuery . $key . " = '" . $value . "'," ;
+                        $updateQuery = $updateQuery . $key . " = '" . $value . "', " ;
                     }
                 }
-                $updateQuery = substr($updateQuery, 0, -1);
+                $updateQuery = substr($updateQuery, 0, -2);
                 $updateQuery = $updateQuery . $where;
 
                 // DEBUG: Show sql query and affected rows 
-                 echo "<br/>" . $updateQuery . "<br/>";
+                // echo "<br/>" . $updateQuery . "<br/>";
 
                 if($this->executeQuery($updateQuery)["affected_rows"] === 1){
                     return $this->actionMsgs[self::EDIT_SUCCESS];

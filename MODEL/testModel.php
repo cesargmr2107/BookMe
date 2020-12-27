@@ -198,6 +198,20 @@ function testRecursosModel(){
     "EDIT" => "222",
     "DELETE" => "222" );
 
+    // Testing ADD
+
+    $actionsAndCodes = array(   "ADD" => "333",
+                                "SEARCH" => "none" );
+
+    $atributes = array( "NOMBRE_RECURSO" => "Nuevo recurso incorrecto",
+                        "DESCRIPCION_RECURSO" => "Este es un nuevo recurso incorrecto",
+                        "TARIFA_RECURSO" => "10",
+                        "RANGO_TARIFA_RECURSO" => "SEMANA",
+                        "ID_CALENDARIO" => "10",
+                        "LOGIN_RESPONSABLE" => "resp10" );
+
+    testModel("RecursosModel", $atributes, $actionsAndCodes);
+
 }
 
 function testReservasModel(){
@@ -299,9 +313,9 @@ function test(){
     //testUsuariosModel();
     //testCalendariosModel();    
     //testResponsablesModel();    
-    //testRecursosModel();
+    testRecursosModel();
     //testReservasModel();
-    testSubreservasModel();
+    //testSubreservasModel();
 
 }
 

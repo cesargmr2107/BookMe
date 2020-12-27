@@ -31,8 +31,7 @@ class ResponsablesModel extends BaseModel {
         // Subscribe atributes to validations
         $this->checks = array (
             "LOGIN_RESPONSABLE" => array(
-                "checkSize" => array('LOGIN_RESPONSABLE', 3, 15, '222', 'El login debe tener de 3 a 15 caracteres'),
-                "checkRegex" => array('LOGIN_RESPONSABLE', '/^[a-z][a-z][a-z]+[0-9]*$/', '222', 'El login solo puede letras minúsculas y números, pero no puede empezar por números')
+                "checkIsForeignKey" => array('LOGIN_RESPONSABLE', 'LOGIN_USUARIO', 'UsuariosModel', '222', 'El usuario responsable es desconocido')
             ),
             "DIRECCION_RESPONSABLE" => array(
                 "checkSize" => array('DIRECCION_RESPONSABLE', 10, 100, '222', 'La dirección debe tener entre 10 y 100 caracteres')
