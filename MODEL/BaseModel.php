@@ -72,7 +72,7 @@ class BaseModel {
     public function checkAtributesForEdit(){
         $validations = array();
         foreach($this->checks as $atribute => $checks){
-            if($this->atributes[$atribute] !== NULL){ // Not all atributes have to be present in edit
+            if($this->atributes[$atribute] !== ""){ // Not all atributes have to be present in edit
                 $atributeValidation = array();
                 foreach($checks as $check => $args){
                     //var_dump($args);
@@ -88,7 +88,7 @@ class BaseModel {
 
     public function checkAutoKey($key_atribute, $errorCode, $errorMsg){
         $value = $this->atributes[$key_atribute];
-        if (is_int($value)) {
+        if (intval($value)) {
             return true;
         } else {
             return array("code" => $errorCode, "msg" => $errorMsg);
@@ -259,14 +259,14 @@ class BaseModel {
                 // Build the insert query
                 $updateQuery = "UPDATE ". $this->tableName . " SET ";
                 foreach ($this->atributes as $key => $value) {
-                    if ($key != $this->primary_key && $value != NULL) {
+                    if ($key != $this->primary_key && $value != "") {
                         $updateQuery = $updateQuery . $key . " = '" . $value . "'," ;
-                    }
+                    }echo $key ." --> " . $value . "<br/>";
                 }
                 $updateQuery = substr($updateQuery, 0, -1);
                 $updateQuery =  $updateQuery . " WHERE " . $this->primary_key . " = '" . $updateKey . "'";
 
-                // DEBUG: Show sql query
+                // DEBUG: Show sql query and affected rows 
                 // echo "<br/>" . $updateQuery . "<br/>";
 
                 if($this->executeQuery($updateQuery)["affected_rows"] === 1){
