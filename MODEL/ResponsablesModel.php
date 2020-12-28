@@ -40,6 +40,12 @@ class ResponsablesModel extends BaseModel {
                 "checkRegex" => array('TELEFONO_RESPONSABLE', '/^[6|7|8|9][0-9]{8}$/', '222', 'Solo se aceptan teléfonos españoles')
             )
         );
+
+        $this->checksForDelete = array(
+            "LOGIN_RESPONSABLE" => array(
+                "checkNoAssoc" => array('LOGIN_RESPONSABLE', "RecursosModel", '222', 'No se puede borrar un responsable con recursos asociados')
+            )
+        );
     }
 
 

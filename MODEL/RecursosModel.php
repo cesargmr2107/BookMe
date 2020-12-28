@@ -61,6 +61,25 @@ class RecursosModel extends BaseModel {
                 "checkIsForeignKey" => array('LOGIN_RESPONSABLE', 'LOGIN_RESPONSABLE', 'ResponsablesModel', '222', 'El usuario responsable es desconocido')
             )
         );
+
+        $this->checksForDelete = array(
+            "ID_RECURSO" => array(
+                "checkNoReservas" => array('222', 'No se pueden borrar recursos con reservas activas asociadas')
+            )
+        );
+    }
+
+    public function checkNoReservas($errorCode, $errorMsg){
+        include_once './ReservasModel.php';
+        $booking = new ReservasModel();
+        $query = "SELECT * FROM RESERVAS WHERE ID_RECURSO = " . $this->atributes["ID_RECURSO"] .
+                 " and ESTADO_RESERVA IN ('PENDIENTE','ACEPTADA')";
+        $hasNoAssoc = !count($booking->SEARCH($query));
+        if($hasNoAssoc){
+            return true;
+        }else{
+            return array("code" => $errorCode, "msg" => $errorMsg);
+        }
     }
 
 

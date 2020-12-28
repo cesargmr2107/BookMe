@@ -60,7 +60,15 @@ class CalendariosModel extends BaseModel {
             )
         );
 
+
+        $this->checksForDelete = array(
+            "ID_CALENDARIO" => array(
+                "checkNoAssoc" => array('ID_CALENDARIO', "RecursosModel", '222', 'No se puede borrar un calendario con recursos asociados')
+            )
+        );
     }
+
+
 
 
 }

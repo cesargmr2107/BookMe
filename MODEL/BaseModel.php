@@ -25,6 +25,7 @@ class BaseModel {
     public $formatMsgs;
 
     public $checks;
+    public $checksForDelete;
 
     function __construct() {
 
@@ -65,7 +66,7 @@ class BaseModel {
             if( !$canBeNull || $this->atributes[$atribute] != "" ){
                 foreach($checks as $check => $args){
                     //var_dump($args);
-                    $result = call_user_func_array("self::" . $check, $args);
+                    $result = call_user_func_array(array($this, $check), $args);
                     if($result !== true) {
                         $validations[$atribute][$check] = $result;
                     }
@@ -79,16 +80,29 @@ class BaseModel {
         $validations = array();
         foreach($this->checks as $atribute => $checks){
             if($this->atributes[$atribute] !== ""){ // Not all atributes have to be present in edit
-                $atributeValidation = array();
                 foreach($checks as $check => $args){
                     //var_dump($args);
-                    $result = call_user_func_array("self::" . $check, $args);
+                    $result = call_user_func_array(array($this, $check), $args);
                     if($result !== true) {
                         $validations[$atribute][$check] = $result;
                     }
                 }
             }
          }
+        return $validations;
+    }
+
+    public function checkAtributesForDelete(){
+        $validations = array();
+        foreach($this->checksForDelete as $atribute => $checks){
+                foreach($checks as $check => $args){
+                    //var_dump($args);
+                    $result = call_user_func_array(array($this, $check), $args);
+                    if($result !== true) {
+                        $validations[$atribute][$check] = $result;
+                    }
+                }
+            }
         return $validations;
     }
 
@@ -108,6 +122,15 @@ class BaseModel {
         $entity->setAtributes($atributesToSet);
         $isForeignKey = count($entity->SEARCH());
         if($isForeignKey){
+            return true;
+        }else{
+            return array("code" => $errorCode, "msg" => $errorMsg);
+        }
+    }
+
+    public function checkNoAssoc($foreignKey, $otherModel, $errorCode, $errorMsg){
+        $noAssoc = is_array($this->checkIsForeignKey($foreignKey,$foreignKey,$otherModel,"",""));
+        if ($noAssoc){
             return true;
         }else{
             return array("code" => $errorCode, "msg" => $errorMsg);
@@ -357,7 +380,17 @@ class BaseModel {
     }
 
     public function DELETE(){
-        
+
+        // Do checks for delete if there are any
+        if($this->checksForDelete){
+            $validations = $this->checkAtributesForDelete();
+            if(!$this->checkValidations($validations)){
+                $response = $this->actionMsgs[self::ADD_FAIL];
+                    $response["atributeErrors"] = $validations;
+                    return $response;
+            }
+        }
+
         // Get value that will be used for delete
         $where = $this->getWhere();
 
@@ -377,18 +410,20 @@ class BaseModel {
         return $this->actionMsgs[self::DELETE_FAIL];	   			
     }
 
-    public function SEARCH(){
+    public function SEARCH($selectQuery = ""){
 
-        // Build the select query
-        $selectQuery = "SELECT * FROM $this->tableName WHERE (";
-        foreach($this->atributes as $key => $value){
-            //if($value != ""){
-                $selectQuery = $selectQuery . "( " . $key . " LIKE '%" . $value . "%' ) and ";
-            //}
-        }        
-        $selectQuery = substr($selectQuery, 0, -4);
-        $selectQuery =  $selectQuery . ")";
-
+        // Build the select query if not passed
+        if($selectQuery == ""){
+            $selectQuery = "SELECT * FROM $this->tableName WHERE (";
+            foreach($this->atributes as $key => $value){
+                //if($value != ""){
+                    $selectQuery = $selectQuery . "( " . $key . " LIKE '%" . $value . "%' ) and ";
+                //}
+            }        
+            $selectQuery = substr($selectQuery, 0, -4);
+            $selectQuery =  $selectQuery . ")";
+        }
+       
         // DEBUG: Show sql query
         // echo "<br/>" . $selectQuery . "<br/>";
 

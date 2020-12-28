@@ -104,6 +104,16 @@ function testResponsablesModel(){
 
     testModel("ResponsablesModel", $atributes, $actionsAndCodes);
 
+    // Testing DELETE
+
+    $actionsAndCodes = array(   "SEARCH" => "none",
+                                "DELETE" => "333",
+                                "SEARCH" => "none" );
+
+    $atributes = array( "LOGIN_RESPONSABLE" => "resp1" );
+
+    testModel("ResponsablesModel", $atributes, $actionsAndCodes);
+
 }
 
 function testCalendariosModel(){
@@ -150,6 +160,14 @@ function testCalendariosModel(){
     "SEARCH" => "none",
     "EDIT" => "222",
     "DELETE" => "222" );
+
+    $actionsAndCodes = array(   "SEARCH" => "none",
+                                "DELETE" => "333",
+                                "SEARCH" => "none" );
+
+    $atributes = array( "ID_CALENDARIO" => "1" );
+
+    testModel("CalendariosModel", $atributes, $actionsAndCodes);
 
 }
 
@@ -209,6 +227,16 @@ function testRecursosModel(){
                         "RANGO_TARIFA_RECURSO" => "SEMANA",
                         "ID_CALENDARIO" => "10",
                         "LOGIN_RESPONSABLE" => "resp10" );
+
+    testModel("RecursosModel", $atributes, $actionsAndCodes);
+
+    // Testing DELETE
+
+    $actionsAndCodes = array(   "SEARCH" => "none",
+                                "DELETE" => "333",
+                                "SEARCH" => "none" );
+
+    $atributes = array( "ID_RECURSO" => "1" );
 
     testModel("RecursosModel", $atributes, $actionsAndCodes);
 
@@ -313,7 +341,7 @@ function test(){
     //testUsuariosModel();
     //testCalendariosModel();    
     //testResponsablesModel();    
-    testRecursosModel();
+    //testRecursosModel();
     //testReservasModel();
     //testSubreservasModel();
 
