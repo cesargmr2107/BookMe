@@ -336,15 +336,109 @@ function testSubreservasModel(){
 
 }
 
-function test(){
+function testSubreservaOverlappings(){
+    
+    // ADD RESERVA
 
+    $actionsAndCodes = array(   "ADD" => "999",
+                                "SEARCH" => "none" );
+
+    $atributes = array( "LOGIN_USUARIO" => "emmolina15",
+                        "ID_RECURSO" => "1",
+                        "FECHA_SOLICITUD_RESERVA" => "2020-12-27",
+                        "COSTE_RESERVA" => "5" );
+
+    testModel("ReservasModel", $atributes, $actionsAndCodes);
+
+    // ADD SUBRESERVA CORRECTA
+
+    $actionsAndCodes = array(   "ADD" => "1111",
+                                "SEARCH" => "none" );
+
+    $atributes = array( "ID_RESERVA" => "3",
+                        "FECHA_INICIO_SUBRESERVA" => "2021-01-21",
+                        "FECHA_FIN_SUBRESERVA" => "2021-01-25",
+                        "HORA_INICIO_SUBRESERVA" => "10:00",
+                        "HORA_FIN_SUBRESERVA" => "14:00",
+                        "COSTE_SUBRESERVA" => "30" );
+
+    testModel("SubreservasModel", $atributes, $actionsAndCodes);
+
+    // ADD SUBRESERVA SOLAPADA
+
+    $actionsAndCodes = array(   "ADD" => "1111",
+                                "SEARCH" => "none" );
+
+    $atributes = array( "ID_RESERVA" => "3",
+                        "FECHA_INICIO_SUBRESERVA" => "2021-01-21",
+                        "FECHA_FIN_SUBRESERVA" => "2021-01-25",
+                        "HORA_INICIO_SUBRESERVA" => "14:00",
+                        "HORA_FIN_SUBRESERVA" => "15:00",
+                        "COSTE_SUBRESERVA" => "30" );
+
+    testModel("SubreservasModel", $atributes, $actionsAndCodes);
+}
+
+function testReservaOverlappings(){
+
+    // ADD RESERVA
+
+    $actionsAndCodes = array(   "ADD" => "999",
+                                "SEARCH" => "none" );
+
+    $atributes = array( "LOGIN_USUARIO" => "emmolina15",
+                        "ID_RECURSO" => "5",
+                        "FECHA_SOLICITUD_RESERVA" => "2020-12-27",
+                        "COSTE_RESERVA" => "5" );
+
+    testModel("ReservasModel", $atributes, $actionsAndCodes);
+
+
+    // ADD SUBRESERVA INCORRECTA, PERO QUE LO SERÁ AL ACEPTAR LA OTRA RESERVA CON LA QUE COLISIONA
+
+    $actionsAndCodes = array(   "ADD" => "1111",
+                                "SEARCH" => "none" );
+
+    $atributes = array( "ID_RESERVA" => "3",
+                        "FECHA_INICIO_SUBRESERVA" => "2021-02-10",
+                        "FECHA_FIN_SUBRESERVA" => "2021-03-10",
+                        "HORA_INICIO_SUBRESERVA" => "10:00",
+                        "HORA_FIN_SUBRESERVA" => "14:00",
+                        "COSTE_SUBRESERVA" => "30" );
+
+    testModel("SubreservasModel", $atributes, $actionsAndCodes);
+
+
+    // Aceptamos reserva con la que hay overlapping
+    $atributes = array( "ID_RESERVA" => "2",
+                        "ESTADO_RESERVA" => "ACEPTADA");
+
+    $actionsAndCodes = array(   "EDIT" => "1111",
+                                "SEARCH" => "none" );
+
+    testModel("ReservasModel", $atributes, $actionsAndCodes);
+
+    // Intentamos aceptar la otra reserva
+    $atributes = array( "ID_RESERVA" => "3",
+                        "ESTADO_RESERVA" => "ACEPTADA");
+
+    $actionsAndCodes = array(   "EDIT" => "1111",
+                                "SEARCH" => "none" );
+
+    testModel("ReservasModel", $atributes, $actionsAndCodes);
+
+
+}
+
+function test(){
     //testUsuariosModel();
     //testCalendariosModel();    
     //testResponsablesModel();    
     //testRecursosModel();
     //testReservasModel();
     //testSubreservasModel();
-
+    //testSubreservaOverlappings();
+    testReservaOverlappings();
 }
 
 test();

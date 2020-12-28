@@ -26,14 +26,13 @@ class ReservasModel extends BaseModel {
         $this->tableName = "RESERVAS";      
         
         $this->atributes = array( "ID_RESERVA" => "",
-                                  "LOGIN_USUARIO" => "",
-                                  "ID_RECURSO" => "",
-                                  "FECHA_SOLICITUD_RESERVA" => "",
-                                  "FECHA_RESPUESTA_RECURSO" => "",
-                                  "MOTIVO_RECHAZO_RESERVA" => "",
-                                  "ESTADO_RESERVA" => "",
-                                  "COSTE_RESERVA" => "" );
-  
+                                "LOGIN_USUARIO" => "",
+                                "ID_RECURSO" => "",
+                                "FECHA_SOLICITUD_RESERVA" => "",
+                                "FECHA_RESPUESTA_RECURSO" => "",
+                                "MOTIVO_RECHAZO_RESERVA" => "",
+                                "ESTADO_RESERVA" => "",
+                                "COSTE_RESERVA" => "" );
     
         $this->defaultValues = array( "ESTADO_RESERVA" => "PENDIENTE" );
         
@@ -63,14 +62,44 @@ class ReservasModel extends BaseModel {
                 "checkSize" => array('MOTIVO_RECHAZO_RESERVA', 0, 200, '222', 'El motivo de rechazo no puede superar los 200 caracteres'),
             ),
             "ESTADO_RESERVA" => array( 
-                "checkEnum" => array('ESTADO_RESERVA', $bookingStatus, '222', 'El estado de la reserva no es válido')
+                "checkEnum" => array('ESTADO_RESERVA', $bookingStatus, '222', 'El estado de la reserva no es válido'),
+                "checkNoOverlappings" => array('222', 'El intervalo de reserva coincide con una reserva existente')
             ),
             "COSTE_RESERVA" => array(
                 "checkNumeric" => array('COSTE_RESERVA', '222', 'El coste de la reserva debe ser un valor numérico'),
             )
         );
     }
+    
+    public function checkNoOverlappings($errorCode, $errorMsg){
 
+        if($this->atributes["ESTADO_RESERVA"] == "ACEPTADA"){
+
+            // Get booking intervals
+            include_once './SubreservasModel.php';
+            $atributesToSet = array ("ID_RESERVA" => $this->atributes["ID_RESERVA"]);
+            $subreserva = new SubreservasModel();
+            $subreserva->setAtributes($atributesToSet);
+            $subreservas = $subreserva->SEARCH();
+
+            // DEBUG: Check result
+            // echo '<pre>' . var_export($subreservas, true) . '</pre>';
+
+            foreach($subreservas as $sr){
+                $subreserva->setAtributes($sr);
+                $check = $subreserva->checkNoOverlappings($this->atributes["ID_RECURSO"], "", "");
+                
+                // DEBUG: Check result
+                // echo '<pre>' . var_export($check, true) . '</pre>';
+
+                if(is_array($check)){
+                    return array("code" => $errorCode, "msg" => $errorMsg);
+                }
+            }
+        }
+        
+        return true;
+    }
 
 }
 

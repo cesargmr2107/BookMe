@@ -27,12 +27,12 @@ class CalendariosModel extends BaseModel {
 
         // Define atributes
         $this->atributes = array( "ID_CALENDARIO" => "",
-                                  "NOMBRE_CALENDARIO" => "",
-                                  "DESCRIPCION_CALENDARIO" => "",
-                                  "FECHA_INICIO_CALENDARIO" => "",
-                                  "FECHA_FIN_CALENDARIO" => "",
-                                  "HORA_INICIO_CALENDARIO" => "", 
-                                  "HORA_FIN_CALENDARIO" => "" );
+                                "NOMBRE_CALENDARIO" => "",
+                                "DESCRIPCION_CALENDARIO" => "",
+                                "FECHA_INICIO_CALENDARIO" => "",
+                                "FECHA_FIN_CALENDARIO" => "",
+                                "HORA_INICIO_CALENDARIO" => "", 
+                                "HORA_FIN_CALENDARIO" => "" );
 
         // Subscribe atributes to validations                          
         $this->checks = array (

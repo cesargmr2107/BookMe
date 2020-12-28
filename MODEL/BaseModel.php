@@ -117,8 +117,8 @@ class BaseModel {
 
     public function checkIsForeignKey($foreignKeyThis, $foreignKeyOther, $otherModel, $errorCode, $errorMsg ){
         include_once './' . $otherModel . '.php';
-        $entity = new $otherModel();
         $atributesToSet = array($foreignKeyOther => $this->atributes[$foreignKeyThis]);
+        $entity = new $otherModel();
         $entity->setAtributes($atributesToSet);
         $isForeignKey = count($entity->SEARCH());
         if($isForeignKey){
@@ -268,9 +268,9 @@ class BaseModel {
 
     private function getNewWeakKey(){
         $className = get_class($this);
-        $entity = new $className();
         $parentKey = $this->primary_key["parentKey"];
         $atributesToSet = array ( $parentKey => $this->atributes[$parentKey]);
+        $entity = new $className();
         $entity->setAtributes($atributesToSet);
         return count($entity->SEARCH()) + 1;
     }
@@ -416,9 +416,10 @@ class BaseModel {
         if($selectQuery == ""){
             $selectQuery = "SELECT * FROM $this->tableName WHERE (";
             foreach($this->atributes as $key => $value){
-                //if($value != ""){
+                $canBeNull = in_array($key, $this->nullAtributes);
+                if( !$canBeNull || $this->atributes[$key] != "" ){
                     $selectQuery = $selectQuery . "( " . $key . " LIKE '%" . $value . "%' ) and ";
-                //}
+                }
             }        
             $selectQuery = substr($selectQuery, 0, -4);
             $selectQuery =  $selectQuery . ")";

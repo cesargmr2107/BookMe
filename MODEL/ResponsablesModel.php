@@ -23,9 +23,9 @@ class ResponsablesModel extends BaseModel {
         $this->tableName = "RESPONSABLES_RECURSO";      
         
         $this->atributes = array( "LOGIN_RESPONSABLE" => "",
-                                  "DIRECCION_RESPONSABLE" => "",
-                                  "TELEFONO_RESPONSABLE" => "" );
-  
+                                    "DIRECCION_RESPONSABLE" => "",
+                                    "TELEFONO_RESPONSABLE" => "" );
+
         $this->primary_key = "LOGIN_RESPONSABLE";
 
         // Subscribe atributes to validations

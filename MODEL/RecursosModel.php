@@ -20,17 +20,16 @@ class RecursosModel extends BaseModel {
         $this->actionMsgs[parent::DELETE_SUCCESS]["code"] = "777";
         $this->actionMsgs[parent::EDIT_FAIL]["code"] = "777";
         
-        
         $this->tableName = "RECURSOS";      
         
         $this->atributes = array( "ID_RECURSO" => "",
-                                  "NOMBRE_RECURSO" => "",
-                                  "DESCRIPCION_RECURSO" => "",
-                                  "TARIFA_RECURSO" => "",
-                                  "RANGO_TARIFA_RECURSO" => "",
-                                  "ID_CALENDARIO" => "",
-                                  "LOGIN_RESPONSABLE" => "" );
-        
+                                "NOMBRE_RECURSO" => "",
+                                "DESCRIPCION_RECURSO" => "",
+                                "TARIFA_RECURSO" => "",
+                                "RANGO_TARIFA_RECURSO" => "",
+                                "ID_CALENDARIO" => "",
+                                "LOGIN_RESPONSABLE" => "" );
+
         $this->primary_key = "ID_RECURSO";
         
         // Set different user types
