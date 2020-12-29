@@ -1,59 +1,60 @@
 <?php
 
+// DEBUG: SHOW ALL ERRORS
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+
 include './COMMON/FuncionesGenerales.php';
 
 session_start();
 
-if (Autenticacion()===false){
-
+if (isAuthenticated() === false){
 	if (!($_POST)){
-		include_once './CONTROLLER/LOGIN_CONTROLLER.php';
-		$login = new LOGIN;
-		$login->formlogin();
+		include_once './CONTROLLER/LoginController.php';
+		$loginController = new LoginController();
+		$loginController->loginForm();
 	}
 	else{
-		if ($_POST['controlador'] === 'REGISTRO'){
-			if ($_REQUEST['action'] === 'formregistrar'){
-				include './CONTROLLER/REGISTRO_CONTROLLER.php';
-				$registro = new REGISTRO;
-				$registro->formregistrar();
+		if ($_POST['controller'] === 'RegisterController') {
+			if ($_REQUEST['action'] === 'registerForm') {
+				include './CONTROLLER/RegisterController.php';
+				$registerController = new RegisterController();
+				$registerController->registerForm();
 			}
 			else{
-				include './CONTROLLER/REGISTRO_CONTROLLER.php';
-				$registro = new REGISTRO;
-				$registro->registrar();	
+				include './CONTROLLER/RegisterController.php';
+				$registerController = new RegisterController();
+				$registerController->registrar();	
 			}
 		}
 		else{
-			include_once './CONTROLLER/LOGIN_CONTROLLER.php';
-			$login = new LOGIN;
-			$login->login();
+			include_once './CONTROLLER/LoginController.php';
+			$loginController = new LoginController();
+			$loginController->login();
 		}
 	}
 }
 else{
 
-	if (!isset($_REQUEST['controlador'])){
-		$controlador = 'MENU';
-	}
-	else{
-		$controlador = $_REQUEST['controlador'];	
-	}
+	// session_destroy();
 
-	if (!isset($_REQUEST['action'])) {
-		$action = 'MENU';
-	}
-	else{
-		$action = $_REQUEST['action'];
-	}
+	// DEBUG: Check SESSION variable
+	echo '<pre>' . var_export($_SESSION, true) . '</pre>';
 
-	include_once './CONTROLLER/'.$controlador.'_CONTROLLER.php';
+	// Get controller
+	$controller = $_REQUEST['controller'];
 
-	echo $controlador.'-'.$action;
+	// Get action
+	$action = $_REQUEST['action'];
 
+	// DEBUG: Check values
+	// echo $controlador.'-'.$action;
 
-	$objcontrolador = new $controlador;
-	$objcontrolador->$action();
+	$controllerObject = new $controller();
+	$controllerObject->$action();
 
 }
+
 ?>

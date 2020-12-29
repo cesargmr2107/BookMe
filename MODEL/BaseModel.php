@@ -250,10 +250,18 @@ class BaseModel {
     }
 
     public function patchEntity(){
-        if ($_POST) {
-            foreach($this->atributes as $key => $value){
-                $this->atributes[$key] = $_POST[$key]; 
+        foreach($_REQUEST as $key => $value){
+            if($key !== "controller" && $key !== "action"){
+                $this->atributes[$key] = $_REQUEST[$key];    
             }
+        }
+        // DEBUG: Check patched atributes
+        // echo '<pre>' . var_export($this->atributes, true) . '</pre>';
+    }
+
+    public function get($atribute){
+        if(array_key_exists($atribute, $this->atributes)){
+            return $this->atributes[$atribute];
         }
     }
 

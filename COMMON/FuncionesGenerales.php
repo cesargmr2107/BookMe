@@ -7,15 +7,8 @@ function conectarBD(){
 
 }
 
-function Autenticacion(){
-
-	if ((isset($_SESSION['login_usuario'])) && ($_SESSION['login_usuario']!='')) {
-		return true;
-	}
-	else{
-		return false;
-	}
-	
+function isAuthenticated(){
+	return isset($_SESSION['LOGIN_USUARIO']) && $_SESSION['LOGIN_USUARIO'] != '';	
 }
 
 ?>

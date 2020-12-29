@@ -1,6 +1,6 @@
 <?php
 
-include_once './BaseModel.php';
+include_once './MODEL/BaseModel.php';
 
 class UsuariosModel extends BaseModel {
     
@@ -26,11 +26,11 @@ class UsuariosModel extends BaseModel {
         $this->tableName = "USUARIOS";      
         
         $this->atributes = array( "LOGIN_USUARIO" => "",
-        "PASSWD_USUARIO" => "",
-        "NOMBRE_USUARIO" => "",
-        "EMAIL_USUARIO" => "",
-        "TIPO_USUARIO" => "",
-        "ES_ACTIVO" => "" );
+                                  "PASSWD_USUARIO" => "",
+                                  "NOMBRE_USUARIO" => "",
+                                  "EMAIL_USUARIO" => "",
+                                  "TIPO_USUARIO" => "",
+                                  "ES_ACTIVO" => "" );
   
         $this->primary_key = "LOGIN_USUARIO";
 
@@ -59,6 +59,24 @@ class UsuariosModel extends BaseModel {
         );
     }
 
+    public function checkCredentials(){
+
+        $error = array("code" => '222', "msg" => 'Credenciales de usuario incorrectas');
+        
+        if($this->atributes["LOGIN_USUARIO"] == ""){
+            return $error;
+        }
+        
+        $userSearch= $this->SEARCH();
+        
+        if(!count($userSearch)){
+            return $error;
+        }
+
+        $this->atributes = $userSearch[0];
+
+        return true;
+    }
 
 }
 
