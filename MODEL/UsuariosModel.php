@@ -3,7 +3,17 @@
 include_once './MODEL/BaseModel.php';
 
 class UsuariosModel extends BaseModel {
-    
+
+    // Define atributes
+    public static $atributeNames = array(
+        "LOGIN_USUARIO",
+        "PASSWD_USUARIO",
+        "NOMBRE_USUARIO",
+        "EMAIL_USUARIO",
+        "TIPO_USUARIO",
+        "ES_ACTIVO"
+    );
+
     function __construct (){
         
         // Call parent constructor
@@ -24,14 +34,7 @@ class UsuariosModel extends BaseModel {
         $userTypes = array("NORMAL", "ADMINISTRADOR", "RESPONSABLE");
         
         $this->tableName = "USUARIOS";      
-        
-        $this->atributes = array( "LOGIN_USUARIO" => "",
-                                  "PASSWD_USUARIO" => "",
-                                  "NOMBRE_USUARIO" => "",
-                                  "EMAIL_USUARIO" => "",
-                                  "TIPO_USUARIO" => "",
-                                  "ES_ACTIVO" => "" );
-  
+          
         $this->primary_key = "LOGIN_USUARIO";
 
         // Subscribe atributes to validations

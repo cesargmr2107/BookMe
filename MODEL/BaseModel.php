@@ -2,6 +2,8 @@
 
 class BaseModel {
 
+    public static $atributeNames;
+    protected static $atributesForSearch = array("*");
     protected $tableName;
     protected $primary_key;
     protected $atributes;
@@ -44,6 +46,11 @@ class BaseModel {
             self::EDIT_SUCCESS => array( "code" => "000", "msg" => $entityName . " editado correctamente en la base de datos"),
             self::DELETE_SUCCESS => array( "code" => "000", "msg" => $entityName . " borrado correctamente de la base de datos")
         );
+
+        // Initialize atributes to empty string
+        foreach(static::$atributeNames as $atribute){
+            $this->atributes[$atribute]  = "";
+        }
 
         // DEBUG: See actionMsgs structure
         // echo '<pre>' . var_export($this->actionMsgs, true) . '</pre>';
@@ -118,7 +125,7 @@ class BaseModel {
     }
 
     public function checkIsForeignKey($foreignKeyThis, $foreignKeyOther, $otherModel, $errorCode, $errorMsg ){
-        include_once './' . $otherModel . '.php';
+        include_once './MODEL/' . $otherModel . '.php';
         $atributesToSet = array($foreignKeyOther => $this->atributes[$foreignKeyThis]);
         $entity = new $otherModel();
         $entity->setAtributes($atributesToSet);
@@ -263,6 +270,24 @@ class BaseModel {
         if(array_key_exists($atribute, $this->atributes)){
             return $this->atributes[$atribute];
         }
+    }
+
+    public static function getFormattedAtributeNames(){
+        
+        $entityName = strtoupper(substr(get_called_class(), 0, -6));
+        
+        $formatted = array();
+        $toExplore = in_array("*", static::$atributesForSearch) ? static::$atributeNames : static::$atributesForSearch;
+
+        foreach($toExplore as $name){
+            $toReplace = array($entityName,"_");
+            $replacement = array("", " ");
+            $name =  str_replace($toReplace, $replacement, $name);
+            $name = substr($name,0,-1);
+            array_push($formatted, $name);
+        }
+
+        return $formatted;
     }
 
     public function setAtributes($atributesToSet) {
@@ -424,7 +449,14 @@ class BaseModel {
 
         // Build the select query if not passed
         if($selectQuery == ""){
-            $selectQuery = "SELECT * FROM $this->tableName WHERE (";
+
+            $aux = "";
+            foreach(static::$atributesForSearch as $atribute){
+                $aux = $aux . $atribute . ",";
+            }
+            $aux = substr($aux, 0, -1);
+
+            $selectQuery = "SELECT " . $aux . " FROM $this->tableName WHERE (";
             foreach($this->atributes as $key => $value){
                 $canBeNull = in_array($key, $this->nullAtributes);
                 if( !$canBeNull || $this->atributes[$key] != "" ){
@@ -452,6 +484,34 @@ class BaseModel {
             return $this->actionMsgs[self::BAD_QUERY];
         }
 
+    }
+
+    public function SHOW(){
+
+        // Build query
+        $selectQuery = "SELECT * FROM $this->tableName WHERE (";
+        foreach($this->atributes as $key => $value){
+            $canBeNull = in_array($key, $this->nullAtributes);
+            if( !$canBeNull || $this->atributes[$key] != "" ){
+                $selectQuery = $selectQuery . "( " . $key . " LIKE '%" . $value . "%' ) and ";
+            }
+        }        
+        $selectQuery = substr($selectQuery, 0, -4);
+        $selectQuery =  $selectQuery . ")";
+
+         // Execute the select query
+         $response = $this->executeQuery($selectQuery)["result"];
+
+         if($response !== false){
+             // Get tuples from query response 
+             $tuples = array();
+             while($row = $response->fetch_assoc()){
+                 array_push($tuples, $row);
+             }
+             return $tuples;
+         } else {
+             return $this->actionMsgs[self::BAD_QUERY];
+         }
     }
 
 }

@@ -4,6 +4,13 @@ include_once './MODEL/BaseModel.php';
 
 class ResponsablesModel extends BaseModel {
     
+    // Define atributes
+    public static $atributeNames = array(
+        "LOGIN_RESPONSABLE",
+        "DIRECCION_RESPONSABLE",
+        "TELEFONO_RESPONSABLE"
+    );
+
     function __construct (){
         
         // Call parent constructor
@@ -22,10 +29,6 @@ class ResponsablesModel extends BaseModel {
         
         $this->tableName = "RESPONSABLES_RECURSO";      
         
-        $this->atributes = array( "LOGIN_RESPONSABLE" => "",
-                                    "DIRECCION_RESPONSABLE" => "",
-                                    "TELEFONO_RESPONSABLE" => "" );
-
         $this->primary_key = "LOGIN_RESPONSABLE";
 
         // Subscribe atributes to validations

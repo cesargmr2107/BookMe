@@ -4,6 +4,17 @@ include_once './MODEL/BaseModel.php';
 
 class SubreservasModel extends BaseModel {
     
+    // Define atributes
+    public static $atributeNames = array(
+        "ID_RESERVA",
+        "ID_SUBRESERVA",
+        "FECHA_INICIO_SUBRESERVA",
+        "FECHA_FIN_SUBRESERVA",
+        "HORA_INICIO_SUBRESERVA",
+        "HORA_FIN_SUBRESERVA",
+        "COSTE_SUBRESERVA"
+    );
+
     function __construct (){
         
         // Call parent constructor
@@ -20,18 +31,8 @@ class SubreservasModel extends BaseModel {
         $this->actionMsgs[parent::DELETE_SUCCESS]["code"] = "1111";
         $this->actionMsgs[parent::EDIT_FAIL]["code"] = "1111";
         
-    
         $this->tableName = "SUBRESERVAS";      
-        
-        $this->atributes = array( "ID_RESERVA" => "",
-                                    "ID_SUBRESERVA" => "",
-                                    "FECHA_INICIO_SUBRESERVA" => "",
-                                    "FECHA_FIN_SUBRESERVA" => "",
-                                    "HORA_INICIO_SUBRESERVA" => "",
-                                    "HORA_FIN_SUBRESERVA" => "",
-                                    "COSTE_SUBRESERVA" => "" );
-
-          
+                  
         $this->primary_key = array("parentKey" => "ID_RESERVA", "weakKey" => "ID_SUBRESERVA");
 
         // Subscribe atributes to validations
@@ -63,7 +64,7 @@ class SubreservasModel extends BaseModel {
         
         if($id_recurso == NULL){
             // Get resource id
-            include_once './ReservasModel.php';
+            include_once './MODEL/ReservasModel.php';
             $atributesToSet = array ("ID_RESERVA" => $this->atributes["ID_RESERVA"]);
             $reservaSearch = new ReservasModel();
             $reservaSearch->setAtributes($atributesToSet);

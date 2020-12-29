@@ -4,6 +4,18 @@ include_once './MODEL/BaseModel.php';
 
 class ReservasModel extends BaseModel {
     
+    // Define atributes
+    public static $atributeNames = array(
+        "ID_RESERVA",
+        "LOGIN_USUARIO",
+        "ID_RECURSO",
+        "FECHA_SOLICITUD_RESERVA",
+        "FECHA_RESPUESTA_RECURSO",
+        "MOTIVO_RECHAZO_RESERVA",
+        "ESTADO_RESERVA",
+        "COSTE_RESERVA"
+    );
+
     function __construct (){
         
         // Call parent constructor
@@ -20,19 +32,11 @@ class ReservasModel extends BaseModel {
         $this->actionMsgs[parent::DELETE_SUCCESS]["code"] = "999";
         $this->actionMsgs[parent::EDIT_FAIL]["code"] = "999";
         
+        
+        $this->tableName = "RESERVAS";
+        
         // Set booking status
         $bookingStatus = array("PENDIENTE", "ACEPTADA", "RECHAZADA", "CANCELADA", "RECURSO_USADO", "RECURSO_NO_USADO");
-        
-        $this->tableName = "RESERVAS";      
-        
-        $this->atributes = array( "ID_RESERVA" => "",
-                                "LOGIN_USUARIO" => "",
-                                "ID_RECURSO" => "",
-                                "FECHA_SOLICITUD_RESERVA" => "",
-                                "FECHA_RESPUESTA_RECURSO" => "",
-                                "MOTIVO_RECHAZO_RESERVA" => "",
-                                "ESTADO_RESERVA" => "",
-                                "COSTE_RESERVA" => "" );
     
         $this->defaultValues = array( "ESTADO_RESERVA" => "PENDIENTE" );
         
@@ -76,7 +80,7 @@ class ReservasModel extends BaseModel {
         if($this->atributes["ESTADO_RESERVA"] == "ACEPTADA"){
 
             // Get booking intervals
-            include_once './SubreservasModel.php';
+            include_once './MODEL/SubreservasModel.php';
             $atributesToSet = array ("ID_RESERVA" => $this->atributes["ID_RESERVA"]);
             $subreserva = new SubreservasModel();
             $subreserva->setAtributes($atributesToSet);

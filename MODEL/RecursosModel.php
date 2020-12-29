@@ -4,6 +4,17 @@ include_once './MODEL/BaseModel.php';
 
 class RecursosModel extends BaseModel {
     
+    // Define atributes
+    public static $atributeNames = array(
+        "ID_RECURSO",
+        "NOMBRE_RECURSO",
+        "DESCRIPCION_RECURSO",
+        "TARIFA_RECURSO",
+        "RANGO_TARIFA_RECURSO",
+        "ID_CALENDARIO",
+        "LOGIN_RESPONSABLE"
+    );
+
     function __construct (){
         
         // Call parent constructor
@@ -21,14 +32,6 @@ class RecursosModel extends BaseModel {
         $this->actionMsgs[parent::EDIT_FAIL]["code"] = "777";
         
         $this->tableName = "RECURSOS";      
-        
-        $this->atributes = array( "ID_RECURSO" => "",
-                                "NOMBRE_RECURSO" => "",
-                                "DESCRIPCION_RECURSO" => "",
-                                "TARIFA_RECURSO" => "",
-                                "RANGO_TARIFA_RECURSO" => "",
-                                "ID_CALENDARIO" => "",
-                                "LOGIN_RESPONSABLE" => "" );
 
         $this->primary_key = "ID_RECURSO";
         
@@ -69,7 +72,7 @@ class RecursosModel extends BaseModel {
     }
 
     public function checkNoReservas($errorCode, $errorMsg){
-        include_once './ReservasModel.php';
+        include_once './MODEL/ReservasModel.php';
         $booking = new ReservasModel();
         $query = "SELECT * FROM RESERVAS WHERE ID_RECURSO = " . $this->atributes["ID_RECURSO"] .
                  " and ESTADO_RESERVA IN ('PENDIENTE','ACEPTADA')";

@@ -4,12 +4,12 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-include './UsuariosModel.php';
-include './CalendariosModel.php';
-include './ResponsablesModel.php';
-include './RecursosModel.php';
-include './ReservasModel.php';
-include './SubreservasModel.php';
+include './MODEL/UsuariosModel.php';
+include './MODEL/CalendariosModel.php';
+include './MODEL/ResponsablesModel.php';
+include './MODEL/RecursosModel.php';
+include './MODEL/ReservasModel.php';
+include './MODEL/SubreservasModel.php';
 
 function testModel($entityName, $atributes, $actionsAndCodes){
     

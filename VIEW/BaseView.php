@@ -1,8 +1,11 @@
 <?php
 
-abstract class AuthenticationView{
+abstract class BaseView{
 
-    function __construct(){
+    protected $data;
+
+    function __construct($data = null){
+        $this->data = $data;
         $this->render();
     }
 
@@ -28,6 +31,11 @@ abstract class AuthenticationView{
 
             </head>
             <body>
+
+                <form name="logoutForm" action="index.php" method="post">
+                    <span class="fas fa-sign-out-alt" onclick="sendForm(document.logoutForm, 'UsuariosController', 'logout', true)"></span>
+                </form>
+
                 <?php $this->body()?>
             </body>
         </html>

@@ -28,7 +28,7 @@ class LoginController {
 			MessageView::withLink($check, 'index.php');
 		}
 		
-	}	
+	}
 
 }
 ?>

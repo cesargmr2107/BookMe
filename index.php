@@ -41,19 +41,18 @@ if (isAuthenticated() === false){
 
 } else {
 
-	session_destroy();
-
 	// DEBUG: Check SESSION variable
-	echo '<pre>' . var_export($_SESSION, true) . '</pre>';
+	// echo '<pre>' . var_export($_SESSION, true) . '</pre>';
 
-	// Get controller
-	$controller = $_REQUEST['controller'];
-
+	// Get and include controller
+	$controller = isset($_REQUEST['controller']) ? $_REQUEST['controller'] : 'CalendariosController'; 
+	include_once './CONTROLLER/'. $controller . '.php';
+	
 	// Get action
-	$action = $_REQUEST['action'];
+	$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : 'search'; 
 
 	// DEBUG: Check values
-	// echo $controlador.'-'.$action;
+	echo $controller.' - '.$action;
 
 	$controllerObject = new $controller();
 	$controllerObject->$action();
