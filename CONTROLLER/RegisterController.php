@@ -3,29 +3,32 @@
 class RegisterController{
 
 	function __construct(){
-		include './VIEW/MESSAGE_VIEW.php';
-		include './VIEW/REGISTRO_VIEW.php';
-		include './MODEL/USUARIO_MODEL.php';
+		include './MODEL/UsuariosModel.php';
 	}
 
 	function registerForm(){
-		new REGISTRO_VIEW;
+		include './VIEW/authentication/RegisterView.php';
+		new RegisterView();
 	}
 
-	function registrar(){
+	function register(){
 
-		$usuario = new USUARIO_MODEL(); //instancio el modelo de usuario
+		$usuario = new UsuariosModel();
+		$usuario->patchEntity();
 
-		$respuesta = $usuario->registrar();
-
-		new MESSAGE($respuesta['code'], 'index.php');
-			
+		$check = $usuario->ADD();
+		if ($check === true){
+			session_start(); 
+			$_SESSION['LOGIN_USUARIO'] = $usuario->get("LOGIN_USUARIO");
+			$_SESSION['TIPO_USUARIO'] = $usuario->get("TIPO_USUARIO");
+			header('location: index.php');
+		}
+		else{
+			include './VIEW/MessageView.php';
+			MessageView::withLink($check, 'index.php');
+		}
 		
 	}
-
-
-	
-	
 
 } //FIN DE CLASS
 ?>

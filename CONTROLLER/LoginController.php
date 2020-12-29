@@ -7,7 +7,7 @@ class LoginController {
 	}
 
 	function loginForm(){
-		include './VIEW/LoginView.php';
+		include './VIEW/authentication/LoginView.php';
 		new LoginView();
 	}
 
