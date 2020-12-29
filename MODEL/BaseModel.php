@@ -13,6 +13,7 @@ class BaseModel {
     public $actionMsgs;
     
     public const CANNOT_CONNECT = "cannot_connect";
+    public const BAD_QUERY = "bad_query";
     
     public const ADD_FAIL = "add_fail";
     public const EDIT_FAIL = "edit_fail";    
@@ -34,7 +35,8 @@ class BaseModel {
         $this->nullAtributes = array();
 
         $this->actionMsgs = array(
-            self::CANNOT_CONNECT => array("000", "No se ha podido conectar a la base de datos"),
+            self::CANNOT_CONNECT => array("code" => "000", "msg" => "No se ha podido conectar a la base de datos"),
+            self::BAD_QUERY => array("code" => "000", "msg" => "Query a la base de datos incorrecta"),
             self::ADD_FAIL => array( "code" => "000", "msg" => $entityName . " no añadido correctamente a la base de datos"),
             self::EDIT_FAIL => array( "code" => "000", "msg" => $entityName . " no editado correctamente en la base de datos"),
             self::DELETE_FAIL => array( "code" => "000", "msg" => $entityName . " no borrado correctamente de la base de datos"),
@@ -431,13 +433,17 @@ class BaseModel {
         // Execute the select query
         $response = $this->executeQuery($selectQuery)["result"];
 
-        // Get tuples from query response 
-        $tuples = array();
-        while($row = $response->fetch_assoc()){
-            array_push($tuples, $row);
+        if($response !== false){
+            // Get tuples from query response 
+            $tuples = array();
+            while($row = $response->fetch_assoc()){
+                array_push($tuples, $row);
+            }
+            return $tuples;
+        } else {
+            return $this->actionMsgs[self::BAD_QUERY];
         }
 
-        return $tuples;
     }
 
 }
