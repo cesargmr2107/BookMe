@@ -52,7 +52,7 @@ if (isAuthenticated() === false){
 	$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : 'search'; 
 
 	// DEBUG: Check values
-	echo $controller.' - '.$action;
+	// echo $controller.' - '.$action;
 
 	$controllerObject = new $controller();
 	$controllerObject->$action();

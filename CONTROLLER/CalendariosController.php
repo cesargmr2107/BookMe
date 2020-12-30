@@ -3,7 +3,8 @@
 class CalendariosController {	
 	
 	function __construct(){
-        include './MODEL/CalendariosModel.php';
+		include './MODEL/CalendariosModel.php';
+		include './VIEW/MessageView.php';
         foreach (glob("./VIEW/calendarios/*.php") as $filename)
         {
             include_once $filename;
@@ -21,8 +22,16 @@ class CalendariosController {
 	function show(){
 		$calendario = new CalendariosModel();
 		$calendario->patchEntity();
-		$data["result"] = $calendario->SHOW();
-        new CalendariosShowView($data);
+        new CalendariosShowView($calendario->SHOW());
+	}
+
+	function delete(){
+		$calendario = new CalendariosModel();
+		$calendario->patchEntity();
+		$data["result"] = $calendario->DELETE();
+		$data["controller"] = "CalendariosController";
+		$data["action"] = "search";
+		new MessageView($data);
 	}
 
 }

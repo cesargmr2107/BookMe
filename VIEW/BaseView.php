@@ -3,45 +3,30 @@
 abstract class BaseView{
 
     protected $data;
+    
+    protected abstract function body();
 
-    function __construct($data = null){
+    public function __construct($data = null){
         $this->data = $data;
         $this->render();
     }
 
-    function render(){
-    ?>
-        <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
-            
-            <head>
-                <!-- Required meta tags -->
-                <meta charset="utf-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-                <!-- Bootstrap CSS -->
-                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-
-                <!-- Font awesome icons -->
-                <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
-                <script src="https://kit.fontawesome.com/ae3641038e.js" crossorigin="anonymous"></script>
-
-                <!-- My scripts -->
-                <script type="text/javascript" src="./VIEW/js/common.js"></script> 
-                <script type="text/javascript" src="./VIEW/js/md5.js"></script>
-
-            </head>
-            <body>
-
-                <form name="logoutForm" action="index.php" method="post">
-                    <span class="fas fa-sign-out-alt" onclick="sendForm(document.logoutForm, 'UsuariosController', 'logout', true)"></span>
-                </form>
-
-                <?php $this->body()?>
-            </body>
-        </html>
-    <?php
+    protected function render(){
+        include_once './VIEW/components/header.php';
+        $this->includeButton("fas fa-sign-out-alt", "logoutButton", "post", "UsuariosController", "logout");
+        $this->body();
+        include_once './VIEW/components/footer.php';
     }
 
-    protected abstract function body();
+    protected function includeButton($icon, $button_id, $method, $controller, $action, $object_data = null){
+        echo "<form id='$button_id' name='$button_id' action='index.php' method='$method'>";
+            if(is_array($object_data)){
+                foreach ($object_data as $atributeName => $value) {
+                    echo "<input type='hidden' name='$atributeName' value='$value'/>"; 
+                }
+            }
+            echo "<span class='$icon' onclick='sendForm(document.$button_id, \"$controller\", \"$action\", true)'></span>";
+        echo '</form>';
+    }
 }
 ?>

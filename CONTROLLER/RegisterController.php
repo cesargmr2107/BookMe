@@ -16,8 +16,8 @@ class RegisterController{
 		$usuario = new UsuariosModel();
 		$usuario->patchEntity();
 
-		$check = $usuario->ADD();
-		if ($check === true){
+		$result = $usuario->ADD();
+		if ($result === true){
 			session_start(); 
 			$_SESSION['LOGIN_USUARIO'] = $usuario->get("LOGIN_USUARIO");
 			$_SESSION['TIPO_USUARIO'] = $usuario->get("TIPO_USUARIO");
@@ -25,10 +25,12 @@ class RegisterController{
 		}
 		else{
 			include './VIEW/MessageView.php';
-			MessageView::withLink($check, 'index.php');
+			$data["result"] = $result;
+			$data["link"] = 'index.php';
+			new MessageView($data);
 		}
 		
 	}
 
-} //FIN DE CLASS
+}
 ?>

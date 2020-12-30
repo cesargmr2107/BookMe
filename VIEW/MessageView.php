@@ -1,44 +1,54 @@
 <?php
 
-class MessageView{
+include_once './VIEW/BaseView.php';
 
-	public static function withLink($response, $link){
-		self::render( $response["code"],  $response["msg"], $link, "", "");
-	}
+class MessageView extends BaseView {
 
-	public static function withController($response, $controller, $action){
-		self::render( $response["code"],  $response["msg"], "", $controller, $action);
-	}
+	// Response atributes
+	private $code;
+	private $msg;
+	private $atributeErrors;
 
-	private static function render($code, $msg, $link, $controller, $action){
-		include './VIEW/components/header.php';
-		?>
-			<h1>Mensaje del sistema<h1>
+	// Variables for going back
+	private $link;
+	private $controller;
+	private $action;
+	
+	protected function body(){
 
-			<h1>
-				<?php echo $code ." - " . $msg; ?>
-			</h1>
+		// DEBUG: Check result
+		// echo '<pre>' . var_export($this->data["result"], true) . '</pre>';
 
-		<?php
-			if ($link){
-				?>
-					<a href="<?php echo $link; ?>">
-						<span class="fas fa-arrow-left"></span>
-					</a>
-				<?php
-			} else {
-		?>
-				<!-- Hidden form -->
-				<form name="goBackForm" action="index.php">
-					<!-- Hidden fields -->
-					<input type="hidden" name="controller" value="<?php echo $controller; ?>"/>
-					<input type="hidden" name="action" value="<?php echo $action; ?>"/>
-					<span class="fas fa-arrow-left" onclick="sendForm(document.goBackForm, true)"></span>
-				</form>
-		<?php
-			}
-			include './VIEW/components/footer.php';
+		echo "<h1>Mensaje del sistema</h1>";
+		echo "<h1>" . $this->data["result"]["code"] . " - " . $this->data["result"]["msg"] . "</h1>";
+		
+		if (array_key_exists("link", $this->data)){
+			?>
+				<a href="<?= $this->data["link"]; ?>">
+					<span class="fas fa-arrow-left"></span>
+				</a>
+			<?php
+		} else {
+			$this->includeButton("fas fa-arrow-left", "goBackForm", "post", $this->data["controller"], $this->data["action"]);
 		}
+
+		if(array_key_exists("atributeErrors", $this->data["result"])){
+			echo "<h5>Error(es) de atributo</p>";
+			echo "<ul>";
+			foreach ($this->data["result"]["atributeErrors"] as $atribute => $errors) {
+				echo "<li>" . $atribute . ":</li>";
+				echo "<ul>";
+				foreach ($errors as $check => $info) {
+					echo "<li>" . $info["code"] . " - " .  $info["msg"] . "</li>";
+				}
+				echo "</ul>";
+			}
+			echo "</ul>";
+		}
+		
+	}
+
+	
 
 }
 ?>

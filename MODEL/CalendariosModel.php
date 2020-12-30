@@ -75,8 +75,19 @@ class CalendariosModel extends BaseModel {
                 "checkNoAssoc" => array('ID_CALENDARIO', "RecursosModel", '222', 'No se puede borrar un calendario con recursos asociados')
             )
         );
+        
     }
 
+    public function SHOW(){
+        $result = parent::SHOW();
+
+        include_once './MODEL/RecursosModel.php';
+		$resourcesSearch = new RecursosModel();
+        $query = "SELECT ID_RECURSO, NOMBRE_RECURSO FROM RECURSOS WHERE ID_CALENDARIO = " . $this->atributes["ID_CALENDARIO"];
+        $result["resources"] = $resourcesSearch->SEARCH($query);
+
+        return $result;
+    }
 
 
 
