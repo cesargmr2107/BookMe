@@ -25,11 +25,11 @@ class MessageView extends BaseView {
 		if (array_key_exists("link", $this->data)){
 			?>
 				<a href="<?= $this->data["link"]; ?>">
-					<span class="fas fa-arrow-left"></span>
+					<span class="<?=$this->icons["BACK"]?>"></span>
 				</a>
 			<?php
 		} else {
-			$this->includeButton("fas fa-arrow-left", "goBackForm", "post", $this->data["controller"], $this->data["action"]);
+			$this->includeButton("BACK", "goBackForm", "post", $this->data["controller"], $this->data["action"]);
 		}
 
 		if(array_key_exists("atributeErrors", $this->data["result"])){

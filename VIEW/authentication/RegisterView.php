@@ -25,7 +25,7 @@ class RegisterView extends AuthenticationView{
                     <input type='password' name='PASSWD_USUARIO'/>
                 </div>
                 <!-- Login button -->
-                <span class="fas fa-sign-in-alt" onclick="sendCredentialsForm(document.registerForm, 'RegisterController', 'register', true)"></span>
+                <span class="<?=$this->icons["LOGIN"]?>" onclick="sendCredentialsForm(document.registerForm, 'RegisterController', 'register', true)"></span>
             </form>
 
             <form name="goToLogin" action="index.php" method="post">

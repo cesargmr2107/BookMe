@@ -6,11 +6,7 @@ class CalendariosSearchView extends BaseView{
 
     protected function body(){
 
-        ?>
-            <form name="goToAddForm" action="index.php" method="post">
-                <span class="fas fa-plus-square" onclick="sendForm(document.goToAddForm, 'CalendariosController', 'add', true)"></span>
-            </form>
-        <?php
+        $this->includeButton("ADD", "goToAddForm", "post", "CalendariosController", "addForm");
 
         // CRUD TABLE
         echo "<table>";
@@ -35,10 +31,10 @@ class CalendariosSearchView extends BaseView{
 
                     //Option Column
                     echo "<td>";
-                        $this->includeButton("far fa-eye", "goToShow$id", "post", "CalendariosController", "show", array ("ID_CALENDARIO" => $id) );
+                        $this->includeButton("SHOW", "goToShow$id", "post", "CalendariosController", "show", array ("ID_CALENDARIO" => $id) );
                         if($_SESSION["TIPO_USUARIO"] === "ADMINISTRADOR"){
                             $name = $row["NOMBRE_CALENDARIO"];
-                            $this->includeDeleteModal($id, $name);
+                            $this->includeDeleteModal($id, $name, "CalendariosController");
                         }
                     echo '</td>';
 
@@ -47,32 +43,5 @@ class CalendariosSearchView extends BaseView{
         echo '</table>';
     }
 
-    private function includeDeleteModal($id, $name){
-    ?>
-        <!-- Delete button -->
-        <span class="far fa-trash-alt" data-toggle="modal" href="#deleteModal<?= $id ?>"></span>
-
-        <!-- Delete modal -->
-        <div class="modal" id="deleteModal<?= $id ?>">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                
-                    <!-- Modal Header  -->
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">¿Estás seguro de que quieres borrar '<?= $name?>'?</h4>
-                    </div>
-
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                        <span class="far fa-times-circle" data-dismiss="modal"></span>
-                        <?= $this->includeButton("far fa-check-circle", "deleteForm$id", "post", "CalendariosController", "delete" ) ?>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    <?php
-    }
 }
 ?>

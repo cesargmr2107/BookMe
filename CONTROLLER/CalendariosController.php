@@ -34,5 +34,19 @@ class CalendariosController {
 		new MessageView($data);
 	}
 
+	function addForm(){
+		include_once './VIEW/calendarios/CalendariosAddView.php';
+		new CalendariosAddView();
+	}
+
+	function add(){
+		$calendario = new CalendariosModel();
+		$calendario->patchEntity();
+		$data["result"] = $calendario->ADD();
+		$data["controller"] = "CalendariosController";
+		$data["action"] = "search";
+		new MessageView($data);
+	}
+
 }
 ?>

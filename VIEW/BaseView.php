@@ -2,6 +2,19 @@
 
 abstract class BaseView{
 
+    // FONTAWESOME ICONS
+    protected $icons = array(
+        "SHOW" => "far fa-eye",
+        "ADD" => "far fa-plus-square",
+        "DELETE" => "far fa-trash-alt",
+        "CANCEL" => "far fa-times-circle",
+        "ACCEPT" => "far fa-check-circle",
+        "LOGIN" => "fas fa-sign-in-alt",
+        "LOGOUT" => "fas fa-sign-out-alt",
+        "BACK" => "fas fa-arrow-left",
+        "CALENDAR" => "far fa-calendar-alt"
+    );
+
     protected $data;
     
     protected abstract function body();
@@ -13,7 +26,7 @@ abstract class BaseView{
 
     protected function render(){
         include_once './VIEW/components/header.php';
-        $this->includeButton("fas fa-sign-out-alt", "logoutButton", "post", "UsuariosController", "logout");
+        $this->includeButton("LOGOUT", "logoutButton", "post", "UsuariosController", "logout");
         $this->body();
         include_once './VIEW/components/footer.php';
     }
@@ -25,8 +38,88 @@ abstract class BaseView{
                     echo "<input type='hidden' name='$atributeName' value='$value'/>"; 
                 }
             }
+            $icon = $this->icons[$icon];
             echo "<span class='$icon' onclick='sendForm(document.$button_id, \"$controller\", \"$action\", true)'></span>";
         echo '</form>';
     }
+
+
+    protected function includeTextField($label, $atribute){
+        ?>
+            <div class="form-group">
+                <label for="<?=$atribute?>"><?=$label?></label> 
+                <input type="text" name="<?=$atribute?>"/>
+            </div>
+        <?php
+    }
+
+    protected function includeDateField($label, $atribute){
+       $this->includeDatetimeField($label, $atribute, 'DD/MM/YYYY');
+    }
+    
+    protected function includeTimeField($label, $atribute){
+        $this->includeDatetimeField($label, $atribute, 'HH');
+    }
+
+    private function includeDatetimeField($label, $atribute, $format){
+        $icon = ($format === 'DD/MM/YYYY') ? 'fa fa-calendar' : 'fa fa-clock';
+        ?>
+            <!--<div class="input-group date" id="<?=$atribute?>">
+                
+                <input class=""type='text' readonly />
+                <div class="input-group-append" data-target="#<?=$atribute?>" data-toggle="datetimepicker">
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>-->
+            <label for="<?=$atribute?>"><?=$label?></label>
+            <div class='input-group date' id='<?=$atribute?>'>
+                <input type='text' class="form-control" name="<?=$atribute?>" readonly />
+                <span class="input-group-addon">
+                    <span class="<?= $icon ?>"></span>
+                </span>
+            </div>
+            <script type="text/javascript">
+                $(function () {
+                    $('#<?=$atribute?>').datetimepicker(
+                        {
+                            format: '<?=$format?>',
+                            minDate: new Date(),
+                            ignoreReadonly: true
+                        }
+                    );
+                });
+            </script>
+        <?php
+    }
+
+
+    protected function includeDeleteModal($id, $name, $controller){
+        ?>
+            <!-- Delete button -->
+            <span class="<?= $this->icons["DELETE"]?>" data-toggle="modal" href="#deleteModal<?= $id ?>"></span>
+    
+            <!-- Delete modal -->
+            <div class="modal" id="deleteModal<?= $id ?>">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                    
+                        <!-- Modal Header  -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">¿Estás seguro de que quieres borrar '<?= $name?>'?</h4>
+                        </div>
+    
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <span class="<?= $this->icons["CANCEL"] ?>" data-dismiss="modal"></span>
+                            <?= $this->includeButton("ACCEPT", "deleteForm$id", "post", $controller, "delete" ) ?>
+                        </div>
+    
+                    </div>
+                </div>
+            </div>
+        <?php
+        }
 }
 ?>

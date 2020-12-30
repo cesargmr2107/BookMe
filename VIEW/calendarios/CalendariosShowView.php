@@ -5,7 +5,10 @@ include_once './VIEW/BaseView.php';
 class CalendariosShowView extends BaseView{
 
     protected function body(){
-        echo '<pre>' . var_export($this->data, true) . '</pre>';
+        
+        // DEBUG: Check data passed to view
+        // echo '<pre>' . var_export($this->data, true) . '</pre>';
+        
         ?>
             <h1>Detalles de calendario</h1>
             

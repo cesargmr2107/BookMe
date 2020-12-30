@@ -20,7 +20,7 @@ class LoginView extends AuthenticationView{
                     <input type='password' name='PASSWD_USUARIO'/>
                 </div>
                 <!-- Login button -->
-                <span class="fas fa-sign-in-alt" onclick="sendCredentialsForm(document.loginForm, 'LoginController', 'login', true)"></span>
+                <span class="<?=$this->icons["LOGIN"]?>" onclick="sendCredentialsForm(document.loginForm, 'LoginController', 'login', true)"></span>
             </form>
 
             <form name="goToRegister" action="index.php" method="post">
