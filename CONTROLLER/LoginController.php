@@ -16,8 +16,8 @@ class LoginController {
 		$usuario = new UsuariosModel();
 		$usuario->patchEntity();
 
-		$check = $usuario->checkCredentials();
-		if ($check === true){
+		$result = $usuario->checkCredentials();
+		if ($result === true){
 			session_start(); 
 			$_SESSION['LOGIN_USUARIO'] = $usuario->get("LOGIN_USUARIO");
 			$_SESSION['TIPO_USUARIO'] = $usuario->get("TIPO_USUARIO");
@@ -25,7 +25,9 @@ class LoginController {
 		}
 		else{
 			include './VIEW/MessageView.php';
-			MessageView::withLink($check, 'index.php');
+			$data["result"] = $result;
+			$data["link"] = 'index.php';
+			new MessageView($data);
 		}
 		
 	}

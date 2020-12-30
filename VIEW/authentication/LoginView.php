@@ -4,7 +4,7 @@ include_once './VIEW/authentication/AuthenticationView.php';
 
 class LoginView extends AuthenticationView{
 
-    function body(){
+    protected function body(){
         ?>
             <h1>Bienvenido a <span>BookMe</span></h1>
 

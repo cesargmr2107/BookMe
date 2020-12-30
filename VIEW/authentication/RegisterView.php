@@ -4,7 +4,7 @@ include_once './VIEW/authentication/AuthenticationView.php';
 
 class RegisterView extends AuthenticationView{
 
-    function body(){
+    protected function body(){
         ?>
             <h1>Bienvenido a <span>BookMe</span></h1>
 
@@ -29,7 +29,7 @@ class RegisterView extends AuthenticationView{
             </form>
 
             <form name="goToLogin" action="index.php" method="post">
-                <div onclick="sendForm(document.goToLogin, 'LoginController', 'loginForm', true)">Iniciar sesión</a>
+                <a onclick="sendForm(document.goToLogin, 'LoginController', 'loginForm', true)">Iniciar sesión</a>
             </form>
         <?php
     }

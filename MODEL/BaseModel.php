@@ -420,7 +420,7 @@ class BaseModel {
         if($this->checksForDelete){
             $validations = $this->checkAtributesForDelete();
             if(!$this->checkValidations($validations)){
-                $response = $this->actionMsgs[self::ADD_FAIL];
+                $response = $this->actionMsgs[self::DELETE_FAIL];
                     $response["atributeErrors"] = $validations;
                     return $response;
             }
@@ -435,7 +435,7 @@ class BaseModel {
             $deleteQuery = "DELETE FROM " . $this->tableName . $where;
 
             // DEBUG: Show sql query
-            // echo "<br/>" . $deleteQuery . "<br/>";
+            echo "<br/>" . $deleteQuery . "<br/>";
 
             if($this->executeQuery($deleteQuery)["affected_rows"] === 1){
                 return $this->actionMsgs[self::DELETE_SUCCESS];
@@ -502,13 +502,8 @@ class BaseModel {
          // Execute the select query
          $response = $this->executeQuery($selectQuery)["result"];
 
-         if($response !== false){
-             // Get tuples from query response 
-             $tuples = array();
-             while($row = $response->fetch_assoc()){
-                 array_push($tuples, $row);
-             }
-             return $tuples;
+         if($response !== false || count($response) > 1 ){
+             return $response->fetch_assoc();
          } else {
              return $this->actionMsgs[self::BAD_QUERY];
          }
