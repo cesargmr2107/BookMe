@@ -55,10 +55,10 @@ class CalendariosModel extends BaseModel {
                 "checkSize" => array('NOMBRE_CALENDARIO', 10, 200, '222', 'La descripción debe tener entre 10 y 200 caracteres'),
             ),
             "FECHA_INICIO_CALENDARIO" => array(
-                "checkDate" => array('FECHA_INICIO_CALENDARIO', '222', 'La fecha debe tener el formato yyyy-mm-dd')
+                "checkDate" => array('FECHA_INICIO_CALENDARIO', '222', 'La fecha debe tener el formato dd-mm-yyyy')
             ),
             "FECHA_FIN_CALENDARIO" => array( 
-                "checkDate" => array('FECHA_FIN_CALENDARIO', '222', 'La fecha debe tener el formato yyyy-mm-dd'),
+                "checkDate" => array('FECHA_FIN_CALENDARIO', '222', 'La fecha debe tener el formato dd-mm-yyyy'),
                 "checkDateInterval" => array('FECHA_INICIO_CALENDARIO', 'FECHA_FIN_CALENDARIO', '222', 'La fecha de inicio debe ser anterior a la fecha de fin')
             ),
             "HORA_INICIO_CALENDARIO" => array(

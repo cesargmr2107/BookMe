@@ -56,10 +56,10 @@ class ReservasModel extends BaseModel {
                 "checkIsForeignKey" => array('ID_RECURSO', 'ID_RECURSO', 'RecursosModel', '222', 'El recurso es desconocido')
             ),
             "FECHA_SOLICITUD_RESERVA" => array(
-                "checkDate" => array('FECHA_SOLICITUD_RESERVA', '222', 'La fecha debe tener el formato yyyy-mm-dd')
+                "checkDate" => array('FECHA_SOLICITUD_RESERVA', '222', 'La fecha debe tener el formato dd-mm-yyyy')
             ),
             "FECHA_RESPUESTA_RECURSO" => array( 
-                "checkDate" => array('FECHA_RESPUESTA_RECURSO', '222', 'La fecha debe tener el formato yyyy-mm-dd'),
+                "checkDate" => array('FECHA_RESPUESTA_RECURSO', '222', 'La fecha debe tener el formato dd-mm-yyyy'),
                 "checkDateInterval" => array('FECHA_SOLICITUD_RESERVA', 'FECHA_RESPUESTA_RECURSO', '222', 'La fecha de respuesta debe ser posterior a la fecha de solicitud')
             ),
             "MOTIVO_RECHAZO_RESERVA" => array(

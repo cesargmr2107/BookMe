@@ -206,7 +206,7 @@ class BaseModel {
     
         if($dStart && $dStart->format($format) === $start &&
            $dEnd && $dEnd->format($format) === $end &&
-           $dStart->getTimestamp() < $dEnd->getTimestamp()) {
+           $dStart->getTimestamp() <= $dEnd->getTimestamp()) {
                return true;
         }
 
@@ -258,12 +258,17 @@ class BaseModel {
 
     public function patchEntity(){
         foreach($_REQUEST as $key => $value){
-            if($key !== "controller" && $key !== "action"){
-                $this->atributes[$key] = $_REQUEST[$key];    
+            if (strpos($key, 'FECHA') !== false){ // Parse date to format
+                echo "<p>" . $key . "</p>";
+                $d = DateTime::createFromFormat('d/m/Y', $value);
+                $this->atributes[$key] = date_format($d,'Y-m-d');
+            }
+            else if($key !== "controller" && $key !== "action"){
+                $this->atributes[$key] = $value;    
             }
         }
         // DEBUG: Check patched atributes
-        // echo '<pre>' . var_export($this->atributes, true) . '</pre>';
+        echo '<pre>' . var_export($this->atributes, true) . '</pre>';
     }
 
     public function get($atribute){

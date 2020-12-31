@@ -11,8 +11,8 @@ class CalendariosAddView extends BaseView{
             <?php
                 $this->includeTextField('Nombre', 'NOMBRE_CALENDARIO');
                 $this->includeTextField('Descripción', 'DESCRIPCION_CALENDARIO');
-                $this->includeDateField('Fecha de inicio', 'FECHA_INICIO_CALENDARIO');
-                $this->includeDateField('Fecha de fin', 'FECHA_FIN_CALENDARIO');
+                $this->includeDateField('Fecha de inicio', 'FECHA_INICIO_CALENDARIO', false);
+                $this->includeDateField('Fecha de fin', 'FECHA_FIN_CALENDARIO', false);
                 $this->includeTimeField('Hora de inicio', 'HORA_INICIO_CALENDARIO');
                 $this->includeTimeField('Hora de fin', 'HORA_FIN_CALENDARIO');
             ?>

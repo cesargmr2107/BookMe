@@ -41,10 +41,10 @@ class SubreservasModel extends BaseModel {
                 "checkIsForeignKey" => array('ID_RESERVA', 'ID_RESERVA', 'ReservasModel', '222', 'El id de la reserva es desconocido')
             ),
             "FECHA_INICIO_SUBRESERVA" => array(
-                "checkDate" => array('FECHA_INICIO_SUBRESERVA', '222', 'La fecha debe tener el formato yyyy-mm-dd')
+                "checkDate" => array('FECHA_INICIO_SUBRESERVA', '222', 'La fecha debe tener el formato dd-mm-yyyy')
             ),
             "FECHA_FIN_SUBRESERVA" => array(
-                "checkDate" => array('FECHA_FIN_SUBRESERVA', '222', 'La fecha debe tener el formato yyyy-mm-dd'),
+                "checkDate" => array('FECHA_FIN_SUBRESERVA', '222', 'La fecha debe tener el formato dd-mm-yyyy'),
                 "checkDateInterval" => array('FECHA_INICIO_SUBRESERVA', 'FECHA_FIN_SUBRESERVA', '222', 'La fecha de fin debe ser posterior a la fecha de inicio'),
                 "checkNoOverlappings" => array('', '222', 'El intervalo de reserva coincide con una reserva existente')
             ),

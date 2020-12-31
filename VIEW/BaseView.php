@@ -53,15 +53,15 @@ abstract class BaseView{
         <?php
     }
 
-    protected function includeDateField($label, $atribute){
-       $this->includeDatetimeField($label, $atribute, 'DD/MM/YYYY');
+    protected function includeDateField($label, $atribute, $useMinDateAsCurrent){
+       $this->includeDatetimeField($label, $atribute, 'DD/MM/YYYY', $useMinDateAsCurrent );
     }
     
     protected function includeTimeField($label, $atribute){
-        $this->includeDatetimeField($label, $atribute, 'HH');
+        $this->includeDatetimeField($label, $atribute, 'H:00');
     }
 
-    private function includeDatetimeField($label, $atribute, $format){
+    private function includeDatetimeField($label, $atribute, $format, $useMinDateAsCurrent = false){
         $icon = ($format === 'DD/MM/YYYY') ? 'fa fa-calendar' : 'fa fa-clock';
         ?>
             <!--<div class="input-group date" id="<?=$atribute?>">
@@ -85,7 +85,10 @@ abstract class BaseView{
                     $('#<?=$atribute?>').datetimepicker(
                         {
                             format: '<?=$format?>',
-                            minDate: new Date(),
+                            <?php
+                                if($format === 'DD/MM/YYYY' && $useMinDateAsCurrent === true)
+                                    echo 'minDate: new Date(),';
+                            ?>
                             ignoreReadonly: true
                         }
                     );
