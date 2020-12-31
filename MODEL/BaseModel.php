@@ -259,7 +259,6 @@ class BaseModel {
     public function patchEntity(){
         foreach($_REQUEST as $key => $value){
             if (strpos($key, 'FECHA') !== false){ // Parse date to format
-                echo "<p>" . $key . "</p>";
                 $d = DateTime::createFromFormat('d/m/Y', $value);
                 $this->atributes[$key] = date_format($d,'Y-m-d');
             }
@@ -275,6 +274,7 @@ class BaseModel {
         if(array_key_exists($atribute, $this->atributes)){
             return $this->atributes[$atribute];
         }
+        return null;
     }
 
     public static function getFormattedAtributeNames(){

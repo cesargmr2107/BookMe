@@ -6,6 +6,7 @@ abstract class BaseView{
     protected $icons = array(
         "SHOW" => "far fa-eye",
         "ADD" => "far fa-plus-square",
+        "EDIT" => "far fa-edit",
         "DELETE" => "far fa-trash-alt",
         "CANCEL" => "far fa-times-circle",
         "ACCEPT" => "far fa-check-circle",
@@ -43,39 +44,39 @@ abstract class BaseView{
         echo '</form>';
     }
 
+    protected function includeHiddenField($atribute, $value){
+        echo "<input type='hidden' name='$atribute' value='$value'/>";
+    }
 
-    protected function includeTextField($label, $atribute){
+    protected function includeTextField($label, $atribute, $value = null){
+        $valueTag = ($value !== null) ? "value='$value'" : '';
         ?>
             <div class="form-group">
                 <label for="<?=$atribute?>"><?=$label?></label> 
-                <input type="text" name="<?=$atribute?>"/>
+                <input type="text" name="<?=$atribute?>" <?=$valueTag?>/>
             </div>
         <?php
     }
 
-    protected function includeDateField($label, $atribute, $useMinDateAsCurrent){
-       $this->includeDatetimeField($label, $atribute, 'DD/MM/YYYY', $useMinDateAsCurrent );
+    protected function includeDateField($label, $atribute, $useMinDateAsCurrent, $value = 'dd/mm/yyyy'){
+        if($value !== 'dd/mm/yyyy') {
+            $d = DateTime::createFromFormat('Y-m-d', $value);
+            $value = date_format($d,'d/m/Y');
+        }
+        $this->includeDatetimeField($label, $atribute, 'DD/MM/YYYY', $value, $useMinDateAsCurrent);
     }
     
-    protected function includeTimeField($label, $atribute){
-        $this->includeDatetimeField($label, $atribute, 'H:00');
+    protected function includeTimeField($label, $atribute, $value = 'hh:mm'){
+        $this->includeDatetimeField($label, $atribute, 'HH:00', $value);
     }
 
-    private function includeDatetimeField($label, $atribute, $format, $useMinDateAsCurrent = false){
+    private function includeDatetimeField($label, $atribute, $format, $value, $useMinDateAsCurrent = false){
         $icon = ($format === 'DD/MM/YYYY') ? 'fa fa-calendar' : 'fa fa-clock';
+        $valueTag = ($value !== null) ? "value='$value'" : '';
         ?>
-            <!--<div class="input-group date" id="<?=$atribute?>">
-                
-                <input class=""type='text' readonly />
-                <div class="input-group-append" data-target="#<?=$atribute?>" data-toggle="datetimepicker">
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-            </div>-->
             <label for="<?=$atribute?>"><?=$label?></label>
             <div class='input-group date' id='<?=$atribute?>'>
-                <input type='text' class="form-control" name="<?=$atribute?>" readonly />
+                <input type='text' class="form-control" name="<?=$atribute?>" <?=$valueTag?> readonly />
                 <span class="input-group-addon">
                     <span class="<?= $icon ?>"></span>
                 </span>
@@ -84,11 +85,11 @@ abstract class BaseView{
                 $(function () {
                     $('#<?=$atribute?>').datetimepicker(
                         {
-                            format: '<?=$format?>',
                             <?php
                                 if($format === 'DD/MM/YYYY' && $useMinDateAsCurrent === true)
-                                    echo 'minDate: new Date(),';
+                                echo 'minDate: new Date(),';
                             ?>
+                            format: '<?=$format?>',
                             ignoreReadonly: true
                         }
                     );

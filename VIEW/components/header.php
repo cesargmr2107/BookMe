@@ -1,9 +1,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
             
     <head>
+
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Title -->
+        <title>BookMe</title>
 
         <!-- Bootstrap and Datetime pickers -->
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet"/>
