@@ -35,7 +35,7 @@ class CalendariosSearchView extends BaseView{
                         if($_SESSION["TIPO_USUARIO"] === "ADMINISTRADOR"){
                             $name = $row["NOMBRE_CALENDARIO"];
                             $this->includeButton("EDIT", "editBt$id", "post", "CalendariosController", "editForm", array ("ID_CALENDARIO" => $id));
-                            $this->includeDeleteModal($id, $name, "CalendariosController");
+                            $this->includeDeleteModal("ID_CALENDARIO", $id, $name, "CalendariosController");
                         }
                     echo '</td>';
 

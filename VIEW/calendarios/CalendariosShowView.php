@@ -45,7 +45,7 @@ class CalendariosShowView extends BaseView{
                 <?php
                     if(!count($this->data["resources"])){
                     ?>
-                        <span>Todavía no hay ningún recurso ascociado a este calendario."</span>
+                        <span>Todavía no hay ningún recurso ascociado a este calendario.</span>
                     </p>
                     <?php
                     }else{

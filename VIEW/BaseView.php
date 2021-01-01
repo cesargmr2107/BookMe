@@ -99,7 +99,7 @@ abstract class BaseView{
     }
 
 
-    protected function includeDeleteModal($id, $name, $controller){
+    protected function includeDeleteModal($atribute, $id, $name, $controller){
         ?>
             <!-- Delete button -->
             <span class="<?= $this->icons["DELETE"]?>" data-toggle="modal" href="#deleteModal<?= $id ?>"></span>
@@ -117,7 +117,7 @@ abstract class BaseView{
                         <!-- Modal body -->
                         <div class="modal-body">
                             <span class="<?= $this->icons["CANCEL"] ?>" data-dismiss="modal"></span>
-                            <?= $this->includeButton("ACCEPT", "deleteForm$id", "post", $controller, "delete" ) ?>
+                            <?= $this->includeButton("ACCEPT", "deleteForm$id", "post", $controller, "delete", array($atribute => $id)) ?>
                         </div>
     
                     </div>
