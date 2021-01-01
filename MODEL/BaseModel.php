@@ -290,7 +290,7 @@ class BaseModel {
             $toReplace = array($entityName,"_");
             $replacement = array("", " ");
             $name =  str_replace($toReplace, $replacement, $name);
-            $name = substr($name,0,-1);
+            //$name = substr($name,0,-1);
             array_push($formatted, $name);
         }
 

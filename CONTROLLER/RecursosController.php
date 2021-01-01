@@ -2,7 +2,7 @@
 
 include_once './CONTROLLER/BaseController.php';
 
-class CalendariosController extends BaseController{	
+class RecursosController extends BaseController {	
 	
 }
 ?>

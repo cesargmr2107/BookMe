@@ -15,6 +15,12 @@ class RecursosModel extends BaseModel {
         "LOGIN_RESPONSABLE"
     );
 
+    // Define which atributes will be selected in search
+    protected static $atributesForSearch = array (  "ID_RECURSO",
+                                                    "NOMBRE_RECURSO",
+                                                    "TARIFA_RECURSO",
+                                                    "LOGIN_RESPONSABLE");
+
     function __construct (){
         
         // Call parent constructor

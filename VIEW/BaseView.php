@@ -98,8 +98,42 @@ abstract class BaseView{
         <?php
     }
 
+    protected function includeCrudTable($idAtribute, $nameAtribute, $controller){
+        echo "<table>";
+            // Headers
+            echo "<tr>";
+            foreach($this->data["atributeNames"] as $atribute){
+                echo "<th>" . $atribute . "</th>";
+            }
+            echo "<th>Opciones</th>";
+            echo "</tr>";
 
-    protected function includeDeleteModal($atribute, $id, $name, $controller){
+            // Rows
+            foreach($this->data["result"] as $row){
+                echo "<tr>";
+
+                    // Atribute columns
+                    foreach($row as $atribute){
+                        $id = $row[$idAtribute];
+                        echo "<td>" . $atribute ."</td>";
+                    }
+
+                    //Option Column
+                    echo "<td>";
+                        $this->includeButton("SHOW", "goToShow$id", "post", $controller, "show", array ($idAtribute => $id) );
+                        if($_SESSION["TIPO_USUARIO"] === "ADMINISTRADOR"){
+                            $name = $row[$nameAtribute];
+                            $this->includeButton("EDIT", "editBt$id", "post", $controller, "editForm", array ($idAtribute => $id));
+                            $this->includeDeleteButtonAndModal($idAtribute, $id, $name, $controller);
+                        }
+                    echo '</td>';
+
+                echo "</tr>";
+            }
+        echo '</table>';
+    }
+
+    protected function includeDeleteButtonAndModal($atribute, $id, $name, $controller){
         ?>
             <!-- Delete button -->
             <span class="<?= $this->icons["DELETE"]?>" data-toggle="modal" href="#deleteModal<?= $id ?>"></span>
