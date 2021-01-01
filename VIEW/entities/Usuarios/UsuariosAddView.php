@@ -9,7 +9,7 @@ class UsuariosAddView extends BaseView{
     protected function body(){
         $this->includeTitle("Añadir nuevo usuario", "h1");
         ?>
-            <form id="addForm" name="addForm" action="index.php" >
+            <form id="addForm" name="addForm" action="index.php" method="post">
                 <?php
                     $this->includeTextField('Login', 'LOGIN_USUARIO');
                     $this->includeTextField('Nombre', 'NOMBRE_USUARIO');

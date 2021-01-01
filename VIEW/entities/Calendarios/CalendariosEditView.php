@@ -7,7 +7,7 @@ class CalendariosEditView extends BaseView{
     protected function body(){
         $this->includeTitle("Modificar información de calendario", "h1");
         ?>
-            <form id="editForm" name="editForm" action="index.php" >
+            <form id="editForm" name="editForm" action="index.php" method="post" >
                 <?php
                     $this->includeHiddenField('ID_CALENDARIO', $this->data["ID_CALENDARIO"]);
                     $this->includeTextField('Nombre', 'NOMBRE_CALENDARIO', $this->data["NOMBRE_CALENDARIO"]);

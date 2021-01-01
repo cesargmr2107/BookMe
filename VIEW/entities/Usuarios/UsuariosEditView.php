@@ -9,7 +9,7 @@ class UsuariosEditView extends BaseView{
     protected function body(){
         $this->includeTitle("Modificar información de usuario", "h1");
         ?>
-            <form id="editForm" name="editForm" action="index.php" >
+            <form id="editForm" name="editForm" action="index.php" method="post">
                 <?php
                     $this->includeReadOnlyField('Login', 'LOGIN_USUARIO', $this->data["normal_info"]["LOGIN_USUARIO"]);
                     $this->includeReadOnlyField('Tipo', 'TIPO_USUARIO', $this->data["normal_info"]["TIPO_USUARIO"]);

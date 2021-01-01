@@ -7,7 +7,7 @@ class RecursosAddView extends BaseView{
     protected function body(){
         $this->includeTitle("Añadir nuevo recurso", "h1");
         ?>
-            <form id="addForm" name="addForm" action="index.php" >
+            <form id="addForm" name="addForm" action="index.php" method="post">
                 <?php
                     $this->includeTextField('Nombre', 'NOMBRE_RECURSO');
                     $this->includeTextField('Descripción', 'DESCRIPCION_RECURSO');

@@ -7,7 +7,7 @@ class CalendariosAddView extends BaseView{
     protected function body(){
         $this->includeTitle("Añadir nuevo calendario", "h1");
         ?>
-            <form id="addForm" name="addForm" action="index.php" >
+            <form id="addForm" name="addForm" action="index.php" method="post" >
                 <?php
                     $this->includeTextField('Nombre', 'NOMBRE_CALENDARIO');
                     $this->includeTextField('Descripción', 'DESCRIPCION_CALENDARIO');

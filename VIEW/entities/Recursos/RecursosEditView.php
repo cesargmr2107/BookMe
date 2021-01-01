@@ -7,7 +7,7 @@ class RecursosEditView extends BaseView{
     protected function body(){
         $this->includeTitle("Modificar información de recurso", "h1");
         ?>
-            <form id="editForm" name="editForm" action="index.php" >
+            <form id="editForm" name="editForm" action="index.php" method="post" >
                 <?php
                     $this->includeHiddenField('ID_RECURSO', $this->data["resource"]["ID_RECURSO"]);
                     $this->includeTextField('Nombre', 'NOMBRE_RECURSO', $this->data["resource"]["NOMBRE_RECURSO"]);

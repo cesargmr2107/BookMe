@@ -16,7 +16,7 @@ class ReservasPendientesSearchView extends BaseView{
         }else{
             foreach($this->data as $resource){
                 ?> 
-                    <form name="goToManage<?=$resource["ID_RECURSO"]?>" action="index.php" method="<?=$method?>">
+                    <form name="goToManage<?=$resource["ID_RECURSO"]?>" action="index.php" method="post">
                         <?= $this->includeHiddenField("ID_RECURSO", $resource["ID_RECURSO"])?>
                         <div onclick="sendForm(document.goToManage<?=$resource['ID_RECURSO']?>, 'ReservasController', 'managePendingForm', true)">
                             <strong><?=$resource["NOMBRE_RECURSO"]?></strong>

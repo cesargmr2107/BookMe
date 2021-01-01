@@ -270,7 +270,7 @@ class BaseModel {
             }
         }
         // DEBUG: Check patched atributes
-        echo '<pre>' . var_export($this->atributes, true) . '</pre>';
+        // echo '<pre>' . var_export($this->atributes, true) . '</pre>';
     }
 
     public function get($atribute){
@@ -453,7 +453,7 @@ class BaseModel {
             $deleteQuery = "DELETE FROM " . $this->tableName . $where;
 
             // DEBUG: Show sql query
-            echo "<br/>" . $deleteQuery . "<br/>";
+            // echo "<br/>" . $deleteQuery . "<br/>";
 
             if($this->executeQuery($deleteQuery)["affected_rows"] === 1){
                 return $this->actionMsgs[self::DELETE_SUCCESS];
