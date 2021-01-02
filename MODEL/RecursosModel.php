@@ -21,6 +21,8 @@ class RecursosModel extends BaseModel {
                                                     "TARIFA_RECURSO",
                                                     "LOGIN_RESPONSABLE");
 
+    public static $priceRanges = array("HORA", "DIA", "SEMANA", "MES");
+
     function __construct (){
         
         // Call parent constructor
@@ -41,9 +43,6 @@ class RecursosModel extends BaseModel {
 
         $this->primary_key = "ID_RECURSO";
         
-        // Set different user types
-        $priceRanges = array("HORA", "DIA", "SEMANA", "MES");
-
         // Subscribe atributes to validations
         $this->checks = array (
             "ID_RECURSO" => array(
@@ -60,7 +59,7 @@ class RecursosModel extends BaseModel {
                 "checkRange" => array('TARIFA_RECURSO', 0, 1000, '222', 'La tarifa del recurso debe estar entre 0€ y 1000€')
             ),
             "RANGO_TARIFA_RECURSO" => array(
-                "checkEnum" => array('RANGO_TARIFA_RECURSO', $priceRanges, '222', 'El rango de tarifa del recurso no es válido')
+                "checkEnum" => array('RANGO_TARIFA_RECURSO', static::$priceRanges, '222', 'El rango de tarifa del recurso no es válido')
             ),
             "ID_CALENDARIO" => array(
                 "checkIsForeignKey" => array('ID_CALENDARIO', 'ID_CALENDARIO', 'CalendariosModel', '222', 'El id del calendario es desconocido')

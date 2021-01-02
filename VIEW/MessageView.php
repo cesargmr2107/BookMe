@@ -4,16 +4,6 @@ include_once './VIEW/BaseView.php';
 
 class MessageView extends BaseView {
 
-	// Response atributes
-	private $code;
-	private $msg;
-	private $atributeErrors;
-
-	// Variables for going back
-	private $link;
-	private $controller;
-	private $action;
-	
 	protected function body(){
 
 		// DEBUG: Check result

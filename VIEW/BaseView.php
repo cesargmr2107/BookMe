@@ -58,6 +58,16 @@ abstract class BaseView{
         <?php
     }
 
+    protected function includeNumberField($label, $atribute, $value = null){
+        $valueTag = ($value !== null) ? "value='$value'" : '';
+        ?>
+            <div class="form-group">
+                <label for="<?=$atribute?>"><?=$label?></label> 
+                <input type="number" name="<?=$atribute?>" <?=$valueTag?>/>
+            </div>
+        <?php
+    }
+
     protected function includeDateField($label, $atribute, $useMinDateAsCurrent, $value = 'dd/mm/yyyy'){
         if($value !== 'dd/mm/yyyy') {
             $d = DateTime::createFromFormat('Y-m-d', $value);
@@ -95,6 +105,33 @@ abstract class BaseView{
                     );
                 });
             </script>
+        <?php
+    }
+
+    protected function includeSelectField($label, $atribute, $options, $assocOptions, $value = null){
+        ?>
+            <label for="<?=$atribute?>"><?=$label?></label>
+            <select name="<?=$atribute?>" id="<?=$atribute?>" class="custom-select">
+                <?php
+                if($assocOptions){
+                    foreach ($options as $id => $text) {
+                        if($value === null){
+                            echo "<option value='$id'>$text</option>";
+                        }else if($value === $id){
+                            echo "<option value='$id' selected='selected'>$text</option>";
+                        }                      
+                    }
+                }else{
+                    foreach ($options as $text) {
+                        if($value === null){
+                            echo "<option value='$text'>$text</option>";
+                        }else if($value === $text){
+                            echo "<option value='$text' selected='selected'>$text</option>";
+                        }                      
+                    }
+                }
+                ?>
+            </select>
         <?php
     }
 

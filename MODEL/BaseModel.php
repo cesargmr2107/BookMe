@@ -130,7 +130,6 @@ class BaseModel {
         $entity = new $otherModel();
         $entity->setAtributes($atributesToSet);
         $isForeignKey = count($entity->SEARCH());
-        echo "<pre>" . var_export($isForeignKey, true) . "</pre>";
         if($isForeignKey){
             return true;
         }else{
@@ -140,7 +139,6 @@ class BaseModel {
 
     public function checkNoAssoc($foreignKey, $otherModel, $errorCode, $errorMsg){
         $noAssoc = is_array($this->checkIsForeignKey($foreignKey,$foreignKey,$otherModel,"",""));
-        echo "<pre>" . var_export($noAssoc, true) . "</pre>";
         if ($noAssoc){
             return true;
         }else{
@@ -328,6 +326,14 @@ class BaseModel {
             $where =  " WHERE " . $this->primary_key . " = '" . $this->atributes[$this->primary_key] . "'";
         }
         return $where;
+    }
+
+    public function getIdAndNameArray($id, $name){
+        $search = $this->SEARCH("SELECT $id, $name FROM $this->tableName");
+        foreach ($search as $entity) {
+            $result[$entity[$id]] = $entity[$name];
+        }
+        return $result;
     }
 
     public function ADD(){
