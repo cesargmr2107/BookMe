@@ -43,7 +43,7 @@ class AuthenticationController {
 		$usuario->patchEntity();
 
 		$result = $usuario->ADD();
-		if ($result === true){
+		if ($result["code"] === "111"){
 			session_start(); 
 			$_SESSION['LOGIN_USUARIO'] = $usuario->get("LOGIN_USUARIO");
 			$_SESSION['TIPO_USUARIO'] = $usuario->get("TIPO_USUARIO");

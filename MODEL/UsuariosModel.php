@@ -37,6 +37,9 @@ class UsuariosModel extends BaseModel {
           
         $this->primary_key = "LOGIN_USUARIO";
 
+        $this->defaultValues = array( "TIPO_USUARIO" => "NORMAL" , "ES_ACTIVO" => "SI");
+
+
         // Subscribe atributes to validations
         $this->checks = array (
             "LOGIN_USUARIO" => array(

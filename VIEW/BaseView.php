@@ -27,7 +27,7 @@ abstract class BaseView{
 
     protected function render(){
         include_once './VIEW/components/header.php';
-        $this->includeButton("LOGOUT", "logoutButton", "post", "UsuariosController", "logout");
+        $this->includeButton("LOGOUT", "logoutButton", "post", "AuthenticationController", "logout");
         $this->body();
         include_once './VIEW/components/footer.php';
     }
@@ -42,6 +42,14 @@ abstract class BaseView{
             $icon = $this->icons[$icon];
             echo "<span class='$icon' onclick='sendForm(document.$button_id, \"$controller\", \"$action\", true)'></span>";
         echo '</form>';
+    }
+
+    protected function includeLink($text, $name, $method, $controller, $action){
+        ?>
+            <form name="<?=$name?>" action="index.php" method="<?=$method?>">
+                <a onclick="sendForm(document.<?=$name?>, '<?=$controller?>', '<?=$action?>', true)"><?=$text?></a>
+            </form>
+        <?php
     }
 
     protected function includeTitle($title, $tag){
@@ -90,6 +98,16 @@ abstract class BaseView{
             <div class="form-group">
                 <label for="<?=$atribute?>"><?=$label?></label> 
                 <input type="text" name="<?=$atribute?>" <?=$valueTag?>/>
+            </div>
+        <?php
+    }
+
+    protected function includePasswordField($label, $atribute, $value = null){
+        $valueTag = ($value !== null) ? "value='$value'" : '';
+        ?>
+            <div class="form-group">
+                <label for="<?=$atribute?>"><?=$label?></label> 
+                <input type="password" name="<?=$atribute?>" <?=$valueTag?>/>
             </div>
         <?php
     }
