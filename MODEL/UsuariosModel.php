@@ -14,6 +14,12 @@ class UsuariosModel extends BaseModel {
         "ES_ACTIVO"
     );
 
+    // Define which atributes will be selected in search
+    protected static $atributesForSearch = array (  "LOGIN_USUARIO",
+                                                    "NOMBRE_USUARIO",
+                                                    "EMAIL_USUARIO",
+                                                    "TIPO_USUARIO");
+
     function __construct (){
         
         // Call parent constructor
@@ -82,6 +88,22 @@ class UsuariosModel extends BaseModel {
         $this->atributes = $userSearch[0];
 
         return true;
+    }
+
+
+    public function SHOW(){
+        $result["normal_info"] = parent::SHOW();
+
+        if($result["normal_info"]["TIPO_USUARIO"] === "RESPONSABLE"){
+            include_once './MODEL/ResponsablesModel.php';
+            $responsableInfo = new ResponsablesModel();
+            $atributesToSet = array("LOGIN_RESPONSABLE" => $this->atributes["LOGIN_USUARIO"]);
+            $responsableInfo->setAtributes($atributesToSet);
+            $result["resp_info"] = $responsableInfo->SHOW();
+        }
+
+        echo "<pre>" . var_export($result, true) . "</pre>";
+        return $result;
     }
 
 }

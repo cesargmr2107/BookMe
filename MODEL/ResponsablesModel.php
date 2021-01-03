@@ -52,6 +52,16 @@ class ResponsablesModel extends BaseModel {
     }
 
 
+    public function SHOW(){
+        $result = parent::SHOW();
+
+        include_once './MODEL/RecursosModel.php';
+		$resourcesSearch = new RecursosModel();
+        $query = "SELECT ID_RECURSO, NOMBRE_RECURSO FROM RECURSOS WHERE LOGIN_RESPONSABLE LIKE '%" . $this->atributes["LOGIN_RESPONSABLE"] . "%'";
+        $result["resources"] = $resourcesSearch->SEARCH($query);
+
+        return $result;
+    }
 }
 
 ?>

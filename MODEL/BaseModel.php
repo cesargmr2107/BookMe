@@ -481,7 +481,7 @@ class BaseModel {
         }
        
         // DEBUG: Show sql query
-        // echo "<br/>" . $selectQuery . "<br/>";
+        echo "<br/>" . $selectQuery . "<br/>";
 
         // Execute the select query
         $response = $this->executeQuery($selectQuery)["result"];
