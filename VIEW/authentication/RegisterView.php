@@ -24,11 +24,11 @@ class RegisterView extends AuthenticationView{
                     <input type='password' name='PASSWD_USUARIO'/>
                 </div>
                 <!-- Login button -->
-                <span class="<?=$this->icons["LOGIN"]?>" onclick="sendCredentialsForm(document.registerForm, 'RegisterController', 'register', true)"></span>
+                <span class="<?=$this->icons["LOGIN"]?>" onclick="sendCredentialsForm(document.registerForm, 'AuthenticationController', 'register', true)"></span>
             </form>
 
             <form name="goToLogin" action="index.php" method="post">
-                <a onclick="sendForm(document.goToLogin, 'LoginController', 'loginForm', true)">Iniciar sesión</a>
+                <a onclick="sendForm(document.goToLogin, 'AuthenticationController', 'loginForm', true)">Iniciar sesión</a>
             </form>
         <?php
     }

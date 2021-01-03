@@ -19,11 +19,11 @@ class LoginView extends AuthenticationView{
                     <input type='password' name='PASSWD_USUARIO'/>
                 </div>
                 <!-- Login button -->
-                <span class="<?=$this->icons["LOGIN"]?>" onclick="sendCredentialsForm(document.loginForm, 'LoginController', 'login', true)"></span>
+                <span class="<?=$this->icons["LOGIN"]?>" onclick="sendCredentialsForm(document.loginForm, 'AuthenticationController', 'login', true)"></span>
             </form>
 
             <form name="goToRegister" action="index.php" method="post">
-                <a onclick="sendForm(document.goToRegister, 'RegisterController', 'registerForm', true)">Crear cuenta</a>
+                <a onclick="sendForm(document.goToRegister, 'AuthenticationController', 'registerForm', true)">Crear cuenta</a>
             </form>
         <?php
     }

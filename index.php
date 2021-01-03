@@ -11,32 +11,15 @@ include './COMMON/FuncionesGenerales.php';
 session_start();
 
 if (isAuthenticated() === false){
-	
+
+	include_once './CONTROLLER/AuthenticationController.php';
+	$authController = new AuthenticationController();
+
 	if (!($_POST)){
-
-		include_once './CONTROLLER/LoginController.php';
-		$loginController = new LoginController();
-		$loginController->loginForm();
-
+		$authController->loginForm();
 	} else{
-
-		$authControllers = array(
-			"RegisterController" => array( "registerForm", "register" ),
-			"LoginController" => array( "loginForm", "login" )
-		);
-		
-		$controllerName = $_POST['controller'];
 		$action = $_POST['action'];
-
-		if( array_key_exists($controllerName, $authControllers) &&
-			in_array($action, $authControllers[$controllerName]) ){
-
-			include_once './CONTROLLER/' . $controllerName . '.php';
-			$controller = new $controllerName();
-			$controller->$action();
-			
-		}
-		
+		$authController->$action();
 	}
 
 } else {
