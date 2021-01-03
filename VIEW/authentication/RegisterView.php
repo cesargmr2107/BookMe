@@ -5,9 +5,8 @@ include_once './VIEW/authentication/AuthenticationView.php';
 class RegisterView extends AuthenticationView{
 
     protected function body(){
+        $this->includeTitle("Bienvenido a <span>BookMe</span>", "h1");
         ?>
-            <h1>Bienvenido a <span>BookMe</span></h1>
-
             <form name="registerForm" action="index.php" method="post">
                 <!-- Login field -->
                 <div class="form-group">

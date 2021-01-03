@@ -44,6 +44,42 @@ abstract class BaseView{
         echo '</form>';
     }
 
+    protected function includeTitle($title, $tag){
+        $valid_title_tags = array("h1","h2","h3","h4","h5","h6");
+        if(in_array($tag, $valid_title_tags)){
+            echo "<$tag>$title</$tag>";
+        }else{
+            echo "<h1>$title</h1>";
+        }
+    }
+
+    protected function includeShowInfo($title, $info){
+        ?>
+            <p>
+                <strong><?= $title ?>:</strong>
+                <span><?= $info ?></span>
+            </p>
+        <?php
+    }
+
+    protected function includeShowList($list, $title, $noneMsg, $name, $id = null){
+        echo "<p><strong>$title: <strong>";
+        if(!count($list)){
+            echo "<span>$noneMsg</span></p>";
+        }else{
+            echo '</p>';
+            echo '<ul>';
+            foreach ($list as $element) {
+                if($id === null){
+                    echo "<li>$element[$name]</li>";
+                }else{
+                    echo "<li>$element[$id]: $element[$name]</li>";
+                }
+            }
+            echo '</ul>';
+        }
+    }
+
     protected function includeHiddenField($atribute, $value){
         echo "<input type='hidden' name='$atribute' value='$value'/>";
     }
@@ -115,17 +151,17 @@ abstract class BaseView{
                 <?php
                 if($assocOptions){
                     foreach ($options as $id => $text) {
-                        if($value === null){
+                        if($value != $id){
                             echo "<option value='$id'>$text</option>";
-                        }else if($value === $id){
+                        }else {
                             echo "<option value='$id' selected='selected'>$text</option>";
                         }                      
                     }
                 }else{
                     foreach ($options as $text) {
-                        if($value === null){
+                        if($value != $text){
                             echo "<option value='$text'>$text</option>";
-                        }else if($value === $text){
+                        }else{
                             echo "<option value='$text' selected='selected'>$text</option>";
                         }                      
                     }
