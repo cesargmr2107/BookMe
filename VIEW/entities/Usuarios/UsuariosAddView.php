@@ -4,7 +4,7 @@ include_once './VIEW/BaseView.php';
 
 class UsuariosAddView extends BaseView{
 
-    protected $jsFiles;
+    protected $jsFiles = array ("md5.js"); 
 
     protected function body(){
         $this->includeTitle("Añadir nuevo usuario", "h1");
@@ -13,15 +13,23 @@ class UsuariosAddView extends BaseView{
                 <?php
                     $this->includeTextField('Login', 'LOGIN_USUARIO');
                     $this->includeTextField('Nombre', 'NOMBRE_USUARIO');
-                    $this->includeSelectField('Correo electrónico', 'ID_CALENDARIO', $this->data["calendars"], true);
-                    $this->includeTextField('Tarifa', 'TARIFA_RECURSO');
-                    $this->includeSelectField('Rango de tarifa', 'RANGO_TARIFA_RECURSO', $this->data["priceRanges"], false);
-                    $this->includeSelectField('Responsable', 'LOGIN_RESPONSABLE', $this->data["responsables"], true);
+                    $this->includePasswordField('Contraseña', 'PASSWD_USUARIO');
+                    $this->includeTextField('Correo electrónico', 'EMAIL_USUARIO');
+                    $this->includeSelectField('Tipo de usuario', 'TIPO_USUARIO', $this->data["userTypes"], false);
                 ?>
-                <div style="display:none">
-
-                </div>
-                <span class="<?=$this->icons["ADD"]?>" onclick="sendForm(document.addForm, 'UsuariosController', 'add', true)"></span>
+                <div id="respAtributes"></div>
+                <script>
+                    $("#TIPO_USUARIO").change(function () {
+                        var type = $(this).val();
+                        if(type == "RESPONSABLE"){
+                            $("#respAtributes").append('<?= $this->includeTextField('Dirección', 'DIRECCION_RESPONSABLE')?>');
+                            $("#respAtributes").append('<?= $this->includeTextField('Teléfono', 'TELEFONO_RESPONSABLE')?>');
+                        }else{
+                            document.getElementById("respAtributes").innerHTML = '';
+                        }
+                    });          
+                </script>
+                <span class="<?=$this->icons["ADD"]?>" onclick="sendCredentialsForm(document.addForm, 'UsuariosController', 'add', true)"></span>
             </form>
         <?php
     }

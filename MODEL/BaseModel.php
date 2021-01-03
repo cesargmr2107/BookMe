@@ -258,12 +258,14 @@ class BaseModel {
 
     public function patchEntity(){
         foreach($_REQUEST as $key => $value){
-            if (strpos($key, 'FECHA') !== false){ // Parse date to format
-                $d = DateTime::createFromFormat('d/m/Y', $value);
-                $this->atributes[$key] = date_format($d,'Y-m-d');
-            }
-            else if($key !== "controller" && $key !== "action"){
-                $this->atributes[$key] = $value;    
+            if(in_array($key,static::$atributeNames)) {
+                if (strpos($key, 'FECHA') !== false){ // Parse date to format
+                    $d = DateTime::createFromFormat('d/m/Y', $value);
+                    $this->atributes[$key] = date_format($d,'Y-m-d');
+                }
+                else if($key !== "controller" && $key !== "action"){
+                    $this->atributes[$key] = $value;    
+                }
             }
         }
         // DEBUG: Check patched atributes
@@ -341,7 +343,9 @@ class BaseModel {
         // Set default values
         if($this->defaultValues){
             foreach($this->defaultValues as $atribute => $defValue){
-                $this->atributes[$atribute] = $defValue;
+                if($this->atributes[$atribute] === ""){
+                    $this->atributes[$atribute] = $defValue;
+                }
             }
         }
 

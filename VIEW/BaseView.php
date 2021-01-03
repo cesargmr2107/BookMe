@@ -148,12 +148,7 @@ abstract class BaseView{
 
     protected function includeTextField($label, $atribute, $value = null){
         $valueTag = ($value !== null) ? "value='$value'" : '';
-        ?>
-            <div class="form-group">
-                <label for="<?=$atribute?>"><?=$label?></label> 
-                <input type="text" name="<?=$atribute?>" <?=$valueTag?>/>
-            </div>
-        <?php
+        ?><div class="form-group"><label for="<?=$atribute?>"><?=$label?></label><input type="text" name="<?=$atribute?>" <?=$valueTag?>/></div><?php
     }
 
     protected function includePasswordField($label, $atribute, $value = null){

@@ -20,6 +20,9 @@ class UsuariosModel extends BaseModel {
                                                     "EMAIL_USUARIO",
                                                     "TIPO_USUARIO");
 
+    // Set different user types
+    public static $userTypes = array("NORMAL", "ADMINISTRADOR", "RESPONSABLE");
+
     function __construct (){
         
         // Call parent constructor
@@ -35,10 +38,7 @@ class UsuariosModel extends BaseModel {
         
         $this->actionMsgs[parent::DELETE_SUCCESS]["code"] = "111";
         $this->actionMsgs[parent::EDIT_FAIL]["code"] = "111";
-        
-        // Set different user types
-        $userTypes = array("NORMAL", "ADMINISTRADOR", "RESPONSABLE");
-        
+                
         $this->tableName = "USUARIOS";      
           
         $this->primary_key = "LOGIN_USUARIO";
@@ -63,7 +63,7 @@ class UsuariosModel extends BaseModel {
                 "checkRegex" => array('EMAIL_USUARIO', '/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix', '222', 'El correo electrónico es incorrecto')
             ),
             "TIPO_USUARIO" => array(
-                "checkEnum" => array('TIPO_USUARIO', $userTypes, '222', 'El tipo de usuario no es válido')
+                "checkEnum" => array('TIPO_USUARIO', static::$userTypes, '222', 'El tipo de usuario no es válido')
             ),
             "ES_ACTIVO" => array(
                 "checkYesOrNo" => array('ES_ACTIVO', '222', 'El usuario solo puede ser SI o NO activo')
