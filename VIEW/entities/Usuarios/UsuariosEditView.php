@@ -4,7 +4,7 @@ include_once './VIEW/BaseView.php';
 
 class UsuariosEditView extends BaseView{
 
-    protected $jsFiles = array ("md5.js"); 
+    protected $jsFiles = array ("./VIEW/js/md5.js"); 
 
     protected function body(){
         $this->includeTitle("Modificar información de usuario", "h1");

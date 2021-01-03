@@ -4,10 +4,13 @@ include_once './VIEW/BaseView.php';
 
 class RecursosShowView extends BaseView{
 
+    protected $jsFiles = array("./VIEW/libraries/fullcalendar-5.4.0/lib/main.js");
+    protected $cssFiles = array("./VIEW/libraries/fullcalendar-5.4.0/lib/main.css");
+
     protected function body(){
         
         // DEBUG: Check data passed to view
-        // echo '<pre>' . var_export($this->data, true) . '</pre>';
+        echo '<pre>' . var_export($this->data, true) . '</pre>';
         
         $this->includeTitle("Detalles de recurso", "h1");
 
@@ -20,6 +23,11 @@ class RecursosShowView extends BaseView{
             $this->includeShowInfo("Tarifa (€)", $this->data["TARIFA_RECURSO"]);
             $this->includeShowInfo("Rango de tarifa", $this->data["RANGO_TARIFA_RECURSO"]);
             $this->includeShowInfo("Descripción", $this->data["DESCRIPCION_RECURSO"]);
+        echo "</div>";
+
+        echo "<div>";
+            $this->includeTitle("Disponibilidad y Ocupación", "h3");
+            $this->includeCalendar($this->data["events"], false);
         echo "</div>";
     }
 }
