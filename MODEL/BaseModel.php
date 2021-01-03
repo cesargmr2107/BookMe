@@ -481,7 +481,7 @@ class BaseModel {
         }
        
         // DEBUG: Show sql query
-        echo "<br/>" . $selectQuery . "<br/>";
+        // echo "<br/>" . $selectQuery . "<br/>";
 
         // Execute the select query
         $response = $this->executeQuery($selectQuery)["result"];
@@ -512,14 +512,14 @@ class BaseModel {
         $selectQuery = substr($selectQuery, 0, -4);
         $selectQuery =  $selectQuery . ")";
 
-         // Execute the select query
-         $response = $this->executeQuery($selectQuery)["result"];
+        // Execute the select query
+        $response = $this->executeQuery($selectQuery)["result"];
 
-         if($response !== false || count($response) > 1 ){
-             return $response->fetch_assoc();
-         } else {
-             return $this->actionMsgs[self::BAD_QUERY];
-         }
+        if($response !== false || count($response) > 1 ){
+            return $response->fetch_assoc();
+        } else {
+            return $this->actionMsgs[self::BAD_QUERY];
+        }
     }
 
 }

@@ -14,8 +14,9 @@ class UsuariosShowView extends BaseView{
         echo "<div>";
             $this->includeShowInfo("Login", $this->data["normal_info"]["LOGIN_USUARIO"]);
             $this->includeShowInfo("Nombre", $this->data["normal_info"]["NOMBRE_USUARIO"]);
-            $this->includeShowInfo("Activo", $this->data["normal_info"]["ES_ACTIVO"]);
+            $this->includeShowInfo("Correo electrónico", $this->data["normal_info"]["EMAIL_USUARIO"]);
             $this->includeShowInfo("Tipo de usuario", $this->data["normal_info"]["TIPO_USUARIO"]);
+            $this->includeShowInfo("Activo", $this->data["normal_info"]["ES_ACTIVO"]);
             if($this->data["normal_info"]["TIPO_USUARIO"] === "RESPONSABLE"){
                 $this->includeShowInfo("Dirección", $this->data["resp_info"]["DIRECCION_RESPONSABLE"]);
                 $this->includeShowInfo("Teléfono", $this->data["resp_info"]["TELEFONO_RESPONSABLE"]);
