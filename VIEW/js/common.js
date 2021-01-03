@@ -28,6 +28,8 @@ function sendForm(form, controller, action, check){
 }
 
 function sendCredentialsForm(form, controller, action, check){
-	form["PASSWD_USUARIO"].value = hex_md5(form["PASSWD_USUARIO"].value);
+	if(action != "edit" || form["PASSWD_USUARIO"].value != ''){
+		form["PASSWD_USUARIO"].value = hex_md5(form["PASSWD_USUARIO"].value);
+	}
 	return sendForm(form, controller, action, check);
 }

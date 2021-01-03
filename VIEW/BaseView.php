@@ -151,6 +151,11 @@ abstract class BaseView{
         ?><div class="form-group"><label for="<?=$atribute?>"><?=$label?></label><input type="text" name="<?=$atribute?>" <?=$valueTag?>/></div><?php
     }
 
+    protected function includeReadOnlyField($label, $atribute, $value = null){
+        $valueTag = ($value !== null) ? "value='$value'" : '';
+        ?><div class="form-group"><label for="<?=$atribute?>"><?=$label?></label><input type="text" name="<?=$atribute?>" <?=$valueTag?> readonly="readonly"/></div><?php
+    }
+
     protected function includePasswordField($label, $atribute, $value = null){
         $valueTag = ($value !== null) ? "value='$value'" : '';
         ?>
