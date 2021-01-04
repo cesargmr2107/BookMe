@@ -28,11 +28,11 @@ if (isAuthenticated() === false){
 	// echo '<pre>' . var_export($_SESSION, true) . '</pre>';
 
 	// Get and include controller
-	$controller = isset($_REQUEST['controller']) ? $_REQUEST['controller'] : 'UsuariosController'; 
+	$controller = isset($_REQUEST['controller']) ? $_REQUEST['controller'] : 'ReservasController'; 
 	include_once './CONTROLLER/'. $controller . '.php';
 	
 	// Get action
-	$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : 'search'; 
+	$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : 'searchOwn'; 
 
 	// DEBUG: Check values
 	// echo $controller.' - '.$action;

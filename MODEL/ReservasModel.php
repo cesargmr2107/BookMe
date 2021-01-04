@@ -112,6 +112,32 @@ class ReservasModel extends BaseModel {
         return true;
     }
 
+    public function SEARCH_OWN($login){
+        $query = "SELECT REC.NOMBRE_RECURSO, RES.ID_RESERVA, RES.FECHA_SOLICITUD_RESERVA, RES.ESTADO_RESERVA " .
+                 "FROM RESERVAS RES, RECURSOS REC WHERE REC.ID_RECURSO = RES.ID_RECURSO AND " .
+                 "RES.LOGIN_USUARIO = '$login'";
+        $bookings = $this->SEARCH($query);
+        
+        // DEBUG: Check bookings    
+        // echo '<pre>' . var_export($bookings, true) . '</pre>';
+
+        $result = array();
+        foreach (static::$bookingStatus as $status) {
+            $result[$status] = array();
+        }
+        foreach ($bookings as $booking) {
+            array_push(
+                $result[$booking["ESTADO_RESERVA"]],
+                $booking
+            );
+        }
+
+        // DEBUG: Check bookings    
+        // echo '<pre>' . var_export($result, true) . '</pre>';
+
+        return $result;
+    }
+
 }
 
 ?>

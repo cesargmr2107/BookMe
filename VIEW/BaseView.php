@@ -15,7 +15,8 @@ abstract class BaseView{
         "BACK" => "fas fa-arrow-left",
         "CALENDAR" => "far fa-calendar-alt",
         "CHART" => "far fa-chart-bar",
-        "SEARCH" => "fas fa-search"
+        "SEARCH" => "fas fa-search",
+        "BOOKING" => "far fa-calendar-plus"
     );
 
 
