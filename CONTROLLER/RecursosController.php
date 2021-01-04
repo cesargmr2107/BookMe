@@ -36,5 +36,21 @@ class RecursosController extends BaseController {
         new $this->editView($data);
     }
 
+    function stats(){
+        $resourceSearch = new RecursosModel();
+        $atributesToSet = array("ID_RECURSO" => $_POST["ID_RECURSO"]);
+        $resourceSearch->setAtributes($atributesToSet);
+        if( array_key_exists("FECHA_INICIO_INFORME", $_POST) &&
+            array_key_exists("FECHA_FIN_INFORME", $_POST) ){
+            $data = $resourceSearch->STATS(
+                $_POST["FECHA_INICIO_INFORME"],
+                $_POST["FECHA_FIN_INFORME"]
+            );
+        }else{
+            $data = $resourceSearch->STATS();
+        }
+        new RecursosStatsView($data);
+    }
+    
 }
 ?>

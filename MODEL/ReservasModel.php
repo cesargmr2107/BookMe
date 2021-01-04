@@ -16,6 +16,10 @@ class ReservasModel extends BaseModel {
         "COSTE_RESERVA"
     );
 
+    // Set booking status
+    public static $bookingStatus = array("PENDIENTE", "ACEPTADA", "RECHAZADA", "CANCELADA", "RECURSO_USADO", "RECURSO_NO_USADO");
+    
+
     function __construct (){
         
         // Call parent constructor
@@ -35,9 +39,7 @@ class ReservasModel extends BaseModel {
         
         $this->tableName = "RESERVAS";
         
-        // Set booking status
-        $bookingStatus = array("PENDIENTE", "ACEPTADA", "RECHAZADA", "CANCELADA", "RECURSO_USADO", "RECURSO_NO_USADO");
-    
+        
         $this->defaultValues = array( "ESTADO_RESERVA" => "PENDIENTE" );
         
         $this->nullAtributes = array ("FECHA_RESPUESTA_RECURSO", "MOTIVO_RECHAZO_RESERVA");
@@ -66,7 +68,7 @@ class ReservasModel extends BaseModel {
                 "checkSize" => array('MOTIVO_RECHAZO_RESERVA', 0, 200, '222', 'El motivo de rechazo no puede superar los 200 caracteres'),
             ),
             "ESTADO_RESERVA" => array( 
-                "checkEnum" => array('ESTADO_RESERVA', $bookingStatus, '222', 'El estado de la reserva no es válido'),
+                "checkEnum" => array('ESTADO_RESERVA', static::$bookingStatus, '222', 'El estado de la reserva no es válido'),
                 "checkNoOverlappings" => array('222', 'El intervalo de reserva coincide con una reserva existente')
             ),
             "COSTE_RESERVA" => array(

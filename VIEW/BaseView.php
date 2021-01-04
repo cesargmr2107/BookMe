@@ -13,12 +13,17 @@ abstract class BaseView{
         "LOGIN" => "fas fa-sign-in-alt",
         "LOGOUT" => "fas fa-sign-out-alt",
         "BACK" => "fas fa-arrow-left",
-        "CALENDAR" => "far fa-calendar-alt"
+        "CALENDAR" => "far fa-calendar-alt",
+        "CHART" => "far fa-chart-bar",
+        "SEARCH" => "fas fa-search"
     );
 
 
-    // JS FILE
+    // JS FILES
     protected $jsFiles;
+
+    // CSS FILES
+    protected $cssFiles;
 
     protected $data;
     
@@ -48,7 +53,10 @@ abstract class BaseView{
         
                 <!-- Title -->
                 <title>BookMe</title>
-        
+
+                <!-- Favicon -->
+                <link rel="shortcut icon" href="./favicon.png">
+
                 <!-- Bootstrap and Datetime pickers -->
                 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet"/>
                 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
@@ -66,7 +74,16 @@ abstract class BaseView{
                 <?php
                     if($this->jsFiles){
                         foreach ($this->jsFiles as $file) {
-                            echo "<script type='text/javascript' src='./VIEW/js/$file'></script>";
+                            echo "<script type='text/javascript' src='$file'></script>";
+                        }
+                    }
+                ?>
+
+                <!-- Other CSS -->
+                <?php
+                    if($this->cssFiles){
+                        foreach ($this->cssFiles as $file) {
+                            echo "<link href='$file' rel='stylesheet'/>";
                         }
                     }
                 ?>
@@ -83,8 +100,6 @@ abstract class BaseView{
             </html>
         <?php
     }
-
-
 
     protected function includeButton($icon, $button_id, $method, $controller, $action, $object_data = null){
         echo "<form id='$button_id' name='$button_id' action='index.php' method='$method'>";
@@ -303,6 +318,52 @@ abstract class BaseView{
                 </div>
             </div>
         <?php
+    }
+
+    protected function includeCalendar($events, $showTitle){
+        
+        // Include HTML
+        echo "<div id='calendar'></div>";
+
+        // Format events for JS
+        $event_string = ''; 
+        foreach($events as $event){
+            $title = ($showTitle === true) ? "title: '" . $event["NOMBRE_RECURSO"] . "'," : '';
+            $event_string = $event_string .
+                            "{" .
+                            $title .
+                            "startRecur: '" . $event["FECHA_INICIO_SUBRESERVA"] . "'," .
+                            "endRecur: new Date ('" . $event["FECHA_FIN_SUBRESERVA"] . "')," .
+                            "startTime: '" . $event["HORA_INICIO_SUBRESERVA"] . "'," .
+                            "endTime: '" . $event["HORA_FIN_SUBRESERVA"] . "'" .
+                            "},";
         }
+        if (strpos($event_string, '{') !== false){
+            $event_string = substr($event_string,0,-1);
+        }
+
+        // Include JS
+        ?>
+            <script>
+                var resource_events = [<?= $event_string ?>];
+                document.addEventListener('DOMContentLoaded', function() {
+                    var calendarEl = document.getElementById('calendar');
+                    var calendar = new FullCalendar.Calendar(calendarEl, {
+                        allDaySlot : false,
+                        nowIndicator: true,
+                        locale: 'es',
+                        initialView: 'timeGridWeek',
+                        slotLabelFormat :{
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            hour12: false
+                        },
+                        events: resource_events
+                    });
+                    calendar.render();
+                });
+            </script>
+        <?php
+    }
 }
 ?>

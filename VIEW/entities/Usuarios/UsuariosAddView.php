@@ -4,7 +4,7 @@ include_once './VIEW/BaseView.php';
 
 class UsuariosAddView extends BaseView{
 
-    protected $jsFiles = array ("md5.js"); 
+    protected $jsFiles = array ("./VIEW/js/md5.js"); 
 
     protected function body(){
         $this->includeTitle("Añadir nuevo usuario", "h1");
