@@ -10,7 +10,7 @@ class RecursosShowView extends BaseView{
     protected function body(){
         
         // DEBUG: Check data passed to view
-        // echo '<pre>' . var_export($this->data, true) . '</pre>';
+        echo '<pre>' . var_export($this->data, true) . '</pre>';
         
         $this->includeTitle("Detalles de recurso", "h1");
 
@@ -34,8 +34,7 @@ class RecursosShowView extends BaseView{
             $this->includeTitle("Disponibilidad y Ocupación", "h3");
             $this->includeCalendar($this->data["events"], false);
         echo "</div>";
-
-        
+ 
     }
 }
 ?>
