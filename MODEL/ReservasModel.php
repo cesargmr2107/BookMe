@@ -10,15 +10,21 @@ class ReservasModel extends BaseModel {
         "LOGIN_USUARIO",
         "ID_RECURSO",
         "FECHA_SOLICITUD_RESERVA",
-        "FECHA_RESPUESTA_RECURSO",
+        "FECHA_RESPUESTA_RESERVA",
         "MOTIVO_RECHAZO_RESERVA",
         "ESTADO_RESERVA",
         "COSTE_RESERVA"
     );
 
+    // Define which atributes will be selected in search
+    protected static $atributesForSearch = array (  "ID_RESERVA",
+                                                    "LOGIN_USUARIO",
+                                                    "ID_RECURSO",
+                                                    "FECHA_SOLICITUD_RESERVA",
+                                                    "ESTADO_RESERVA");
+
     // Set booking status
     public static $bookingStatus = array("PENDIENTE", "ACEPTADA", "RECHAZADA", "CANCELADA", "RECURSO_USADO", "RECURSO_NO_USADO");
-    
 
     function __construct (){
         
@@ -38,11 +44,10 @@ class ReservasModel extends BaseModel {
         
         
         $this->tableName = "RESERVAS";
-        
-        
+                
         $this->defaultValues = array( "ESTADO_RESERVA" => "PENDIENTE" );
         
-        $this->nullAtributes = array ("FECHA_RESPUESTA_RECURSO", "MOTIVO_RECHAZO_RESERVA");
+        $this->nullAtributes = array ("FECHA_RESPUESTA_RESERVA", "MOTIVO_RECHAZO_RESERVA");
 
         $this->primary_key = "ID_RESERVA";
 
@@ -60,9 +65,9 @@ class ReservasModel extends BaseModel {
             "FECHA_SOLICITUD_RESERVA" => array(
                 "checkDate" => array('FECHA_SOLICITUD_RESERVA', '222', 'La fecha debe tener el formato dd-mm-yyyy')
             ),
-            "FECHA_RESPUESTA_RECURSO" => array( 
-                "checkDate" => array('FECHA_RESPUESTA_RECURSO', '222', 'La fecha debe tener el formato dd-mm-yyyy'),
-                "checkDateInterval" => array('FECHA_SOLICITUD_RESERVA', 'FECHA_RESPUESTA_RECURSO', '222', 'La fecha de respuesta debe ser posterior a la fecha de solicitud')
+            "FECHA_RESPUESTA_RESERVA" => array( 
+                "checkDate" => array('FECHA_RESPUESTA_RESERVA', '222', 'La fecha debe tener el formato dd-mm-yyyy'),
+                "checkDateInterval" => array('FECHA_SOLICITUD_RESERVA', 'FECHA_RESPUESTA_RESERVA', '222', 'La fecha de respuesta debe ser posterior a la fecha de solicitud')
             ),
             "MOTIVO_RECHAZO_RESERVA" => array(
                 "checkSize" => array('MOTIVO_RECHAZO_RESERVA', 0, 200, '222', 'El motivo de rechazo no puede superar los 200 caracteres'),

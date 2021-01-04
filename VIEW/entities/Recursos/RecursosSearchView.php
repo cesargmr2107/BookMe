@@ -7,7 +7,12 @@ class RecursosSearchView extends BaseView{
     protected function body(){
         $this->includeTitle("Recursos en el sistema", "h1");
         $this->includeButton("ADD", "goToAddForm", "post", "RecursosController", "addForm");
-        $this->includeCrudTable("ID_RECURSO", "NOMBRE_RECURSO", "RecursosController");
+        $optionsData = array(
+            "idAtribute" => "ID_RECURSO",
+            "nameAtribute" => "NOMBRE_RECURSO",
+            "controller" => "RecursosController"
+        );
+        $this->includeCrudTable($optionsData);
     }
 }
 ?>

@@ -258,7 +258,7 @@ abstract class BaseView{
         <?php
     }
 
-    protected function includeCrudTable($idAtribute, $nameAtribute, $controller){
+    protected function includeCrudTable($optionsData){
         echo "<table>";
             // Headers
             echo "<tr>";
@@ -269,28 +269,38 @@ abstract class BaseView{
             echo "</tr>";
 
             // Rows
-            foreach($this->data["result"] as $row){
+            foreach($this->data["result"]as $row){
                 echo "<tr>";
 
                     // Atribute columns
                     foreach($row as $atribute){
-                        $id = $row[$idAtribute];
+                        $optionsData["row"] = $row;
                         echo "<td>" . $atribute ."</td>";
                     }
 
-                    //Option Column
-                    echo "<td>";
-                        $this->includeButton("SHOW", "goToShow$id", "post", $controller, "show", array ($idAtribute => $id) );
-                        if($_SESSION["TIPO_USUARIO"] === "ADMINISTRADOR"){
-                            $name = $row[$nameAtribute];
-                            $this->includeButton("EDIT", "editBt$id", "post", $controller, "editForm", array ($idAtribute => $id));
-                            $this->includeDeleteButtonAndModal($idAtribute, $id, $name, $controller);
-                        }
-                    echo '</td>';
+                    $this->includeOptions($optionsData);
 
                 echo "</tr>";
             }
         echo '</table>';
+    }
+
+    protected function includeOptions($optionsData){
+
+        // Get data
+        $idAtribute = $optionsData["idAtribute"];
+        $id = $optionsData["row"][$idAtribute];
+        $nameAtribute = $optionsData["nameAtribute"];
+        $name = $optionsData["row"][$nameAtribute];
+        $controller = $optionsData["controller"];
+
+        echo "<td>";
+            $this->includeButton("SHOW", "goToShow$id", "post", $controller, "show", array ($idAtribute => $id) );
+            if($_SESSION["TIPO_USUARIO"] === "ADMINISTRADOR"){
+                $this->includeButton("EDIT", "editBt$id", "post", $controller, "editForm", array ($idAtribute => $id));
+                $this->includeDeleteButtonAndModal($idAtribute, $id, $name, $controller);
+            }
+        echo '</td>';
     }
 
     protected function includeDeleteButtonAndModal($atribute, $id, $name, $controller){

@@ -7,7 +7,12 @@ class UsuariosSearchView extends BaseView{
     protected function body(){
         $this->includeTitle("Usuarios en el sistema", "h1");
         $this->includeButton("ADD", "goToAddForm", "post", "UsuariosController", "addForm");
-        $this->includeCrudTable("LOGIN_USUARIO", "LOGIN_USUARIO", "UsuariosController");
+        $optionsData = array(
+            "idAtribute" => "LOGIN_USUARIO",
+            "nameAtribute" => "LOGIN_USUARIO",
+            "controller" => "UsuariosController"
+        );
+        $this->includeCrudTable($optionsData);
     }
 }
 ?>
