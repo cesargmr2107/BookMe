@@ -10,6 +10,12 @@ class ReservasController extends BaseController{
         new ReservasPropiasView($data);
     }
 
+    function searchPending(){
+        $reservasSearch = new ReservasModel();
+        $data = $reservasSearch->SEARCH_PENDING();
+        new ReservasPendientesSearchView($data);
+    }
+
     function addForm(){
         // Get resources
         include_once './MODEL/RecursosModel.php';
@@ -43,5 +49,7 @@ class ReservasController extends BaseController{
 		$data["action"] = "searchOwn";
 		new MessageView($data);
     }
+
+
 }
 ?>

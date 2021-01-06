@@ -186,6 +186,19 @@ class ReservasModel extends BaseModel {
         return $result;
     }
 
+    public function SEARCH_PENDING(){
+        
+        $query = "SELECT REC.ID_RECURSO, REC.NOMBRE_RECURSO, COUNT(*) AS COUNT FROM RESERVAS RES, RECURSOS REC " .
+                 "WHERE RES.ID_RECURSO = REC.ID_RECURSO AND RES.ESTADO_RESERVA = 'PENDIENTE' GROUP BY ID_RECURSO";
+        
+        $result = $this->SEARCH($query);
+        
+        // DEBUG: Check bookings    
+        echo '<pre>' . var_export($query, true) . '</pre>';
+
+        return $result;
+    }
+
     public function SHOW(){
         $result = parent::SHOW();
 

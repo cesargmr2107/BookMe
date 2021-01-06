@@ -32,7 +32,7 @@ if (isAuthenticated() === false){
 	include_once './CONTROLLER/'. $controller . '.php';
 	
 	// Get action
-	$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : 'search'; 
+	$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : 'searchPending'; 
 
 	// DEBUG: Check values
 	// echo $controller.' - '.$action;
