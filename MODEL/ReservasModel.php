@@ -186,6 +186,42 @@ class ReservasModel extends BaseModel {
         return $result;
     }
 
+    public function SHOW(){
+        $result = parent::SHOW();
+
+        // Bookings info 
+        include_once './MODEL/SubreservasModel.php';
+        $subreservasSearch = new SubreservasModel();
+        
+        $subreservasSearch->setAtributes(
+            array("ID_RESERVA" => $result["ID_RESERVA"])
+        );
+
+        $result["subreservas"] = $subreservasSearch->SEARCH();
+
+        // Resource info
+        include_once './MODEL/RecursosModel.php';
+        $resourcesSearch = new RecursosModel();
+        
+        $resourcesSearch->setAtributes(
+            array("ID_RECURSO" => $result["ID_RECURSO"])
+        );
+
+        $result["resource"] = $resourcesSearch->SEARCH()[0];
+
+        // User info if necessary
+        if($_SESSION["LOGIN_USUARIO"] !== $result["LOGIN_USUARIO"]){
+            include_once './MODEL/UsuariosModel.php';
+            $usersSearch = new UsuariosModel();
+            $usersSearch->setAtributes(
+                array("LOGIN_USUARIO" => $result["LOGIN_USUARIO"])
+            );
+            $result["user"] = $usersSearch->SEARCH()[0];
+        }
+
+        return $result;
+    }
+
 }
 
 ?>

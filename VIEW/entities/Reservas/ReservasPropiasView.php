@@ -35,6 +35,7 @@ class ReservasPropiasView extends BaseView{
         ?>
             <div>
                 <strong><?= $booking["NOMBRE_RECURSO"] ?></strong>
+                <?= $this->includeButton("SHOW", "goToShow" . $booking["ID_RESERVA"], "post", "ReservasController", "show", array( "ID_RESERVA" => $booking["ID_RESERVA"] )) ?>
                 <p><?= $booking["FECHA_SOLICITUD_RESERVA"] ?></p>
             </div>
         <?php
