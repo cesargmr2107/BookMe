@@ -26,6 +26,8 @@ class ReservasModel extends BaseModel {
     // Set booking status
     public static $bookingStatus = array("PENDIENTE", "ACEPTADA", "RECHAZADA", "CANCELADA", "RECURSO_USADO", "RECURSO_NO_USADO");
 
+    public $infoSubreservas;
+
     function __construct (){
         
         // Call parent constructor
@@ -81,7 +83,53 @@ class ReservasModel extends BaseModel {
             )
         );
     }
+
+    public function setInfoSubreservas($jsonString){
+        $this->infoSubreservas = json_decode($jsonString, true)["subreservas"];
+    }
     
+    public function ADD(){
+
+        $validations = $this->checkValidBooking();
+
+        if($validations === true){
+
+            // Build the insert query
+            $insertQuery = "INSERT INTO RESERVAS (LOGIN_USUARIO, ID_RECURSO, FECHA_SOLICITUD_RESERVA, COSTE_RESERVA ) " .
+                           "VALUES ('" . 
+                                $this->atributes["LOGIN_USUARIO"] . "', '" .
+                                $this->atributes["ID_RECURSO"] . "', '" .
+                                $this->atributes["FECHA_SOLICITUD_RESERVA"] . "', '" .
+                                $this->atributes["COSTE_RESERVA"] . "'" .
+                            ")";
+
+            // DEBUG: Show sql query
+            // echo "<br/>" . $insertQuery . "<br/>";
+    
+            // Execute query
+            $exec = $this->executeQuery($insertQuery);
+
+            if($exec["result"] === true){
+
+                include_once './MODEL/SubreservasModel.php';
+
+                foreach($this->infoSubreservas as $intervalId => $info){
+                    $info["ID_RESERVA"] = $exec["last_insert_id"];
+                    $subreserva = new SubreservasModel();
+                    $subreserva->setAtributes($info);
+                    $subreserva->ADD();
+                }
+            }
+            return $this->actionMsgs[self::ADD_SUCCESS];
+        }else{
+            return $this->actionMsgs[self::ADD_FAIL];
+        }
+    }
+
+    public function checkValidBooking(){
+        return true;
+    }
+
     public function checkNoOverlappings($errorCode, $errorMsg){
 
         if($this->atributes["ESTADO_RESERVA"] == "ACEPTADA"){

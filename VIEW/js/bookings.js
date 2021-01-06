@@ -1,14 +1,38 @@
-function addEvent(){
-    var startDate = $('#FECHA_INICIO_SUBRESERVA').data('date');
-    var endDate = $('#FECHA_FIN_SUBRESERVA').data('date');
+
+var calendar;
+var events;
+
+function createCalendar(resource_events){
+    events = resource_events;
+    var calendarEl = document.getElementById('calendar');
+    calendarEl.innerHTML = "";
+    calendar = new FullCalendar.Calendar(calendarEl, {
+        allDaySlot : false,
+        nowIndicator: true,
+        locale: 'es',
+        initialView: 'timeGridWeek',
+        slotLabelFormat :{
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+        },
+        events: resource_events
+    });
+    calendar.render();
+}
+
+function addBooking(){
+    
+    var startDate = formatDate($('#FECHA_INICIO_SUBRESERVA').data('date'));
+    var endDate = formatDate($('#FECHA_FIN_SUBRESERVA').data('date'));
     var startTime = $('#HORA_INICIO_SUBRESERVA').data('date');
     var endTime = $('#HORA_FIN_SUBRESERVA').data('date');
-    /*
-    console.log(startDate);
+    
+    /*console.log(startDate);
     console.log(endDate);
     console.log(startTime);
-    console.log(endTime);
-    */
+    console.log(endTime);*/
+    
     if( startDate!=undefined && endDate!=undefined &&
         startTime != undefined && endTime != undefined ){
 
@@ -28,7 +52,8 @@ function addEvent(){
                                                     FECHA_INICIO_SUBRESERVA: startDate,
                                                     FECHA_FIN_SUBRESERVA: endDate,
                                                     HORA_INICIO_SUBRESERVA: startTime,
-                                                    HORA_FIN_SUBRESERVA: endTime
+                                                    HORA_FIN_SUBRESERVA: endTime,
+                                                    COSTE_SUBRESERVA: "5"
                                                   }
             document.addForm["INFO_SUBRESERVAS"].value = JSON.stringify(jsonObject);
 
@@ -58,6 +83,31 @@ function addEvent(){
             divInterval.appendChild(divTitle);
             divInterval.appendChild(ul);
             divIntervals.appendChild(divInterval);
+
+            // Add event to calendar
+            var d1 = new Date (`${startDate}T${startTime}`);
+            var d2 = new Date (`${startDate}T${endTime}`);
+            var end = new Date (`${endDate}T${startTime}`);
+            while(d1 <= end){
+                calendar.addEvent({
+                    id: eventId,
+                    start: d1,
+                    end: d2,
+                    color: '#4B62BF'
+                });
+                d1.setDate(d1.getDate() + 1);
+                d2.setDate(d2.getDate() + 1);
+            }                                      
+            
+    }
+
+    function formatDate($dateStr){
+        if($dateStr == undefined) {
+            return undefined;
+        }else{
+            var d = $dateStr.split("/");
+            return `${d[2]}-${d[1]}-${d[0]}`;
+        }
     }
 
     function removeEvent(eventId){
@@ -70,8 +120,14 @@ function addEvent(){
         var jsonString = document.addForm["INFO_SUBRESERVAS"].value;
         var jsonObject = JSON.parse(jsonString);
         delete jsonObject.subreservas[eventId];
-        console.log( JSON.stringify(jsonObject));
         document.addForm["INFO_SUBRESERVAS"].value = JSON.stringify(jsonObject);
+
+        // Remove from calendar
+        var event = calendar.getEventById(eventId);
+        while (event != null){
+            event.remove();
+            event = calendar.getEventById(eventId);
+        }
 
     }
 }

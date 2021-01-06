@@ -23,5 +23,25 @@ class ReservasController extends BaseController{
 
         new $this->addView($data);
     }
+
+    function add(){
+        
+        $reserva = new ReservasModel();
+
+        $atributesToSet = array(
+            "LOGIN_USUARIO" => $_SESSION["LOGIN_USUARIO"],
+            "ID_RECURSO" => $_POST["ID_RECURSO"],
+            "FECHA_SOLICITUD_RESERVA" => date_format(new DateTime(), 'Y-m-d'),
+            "COSTE_RESERVA" => $_POST["COSTE_RESERVA"]
+        );
+
+        $reserva->setAtributes($atributesToSet);
+        $reserva->setInfoSubreservas($_POST["INFO_SUBRESERVAS"]);
+                
+		$data["result"] = $reserva->ADD();
+		$data["controller"] = $this->controller;
+		$data["action"] = "searchOwn";
+		new MessageView($data);
+    }
 }
 ?>

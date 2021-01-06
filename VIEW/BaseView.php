@@ -238,6 +238,9 @@ abstract class BaseView{
             <select name="<?=$atribute?>" id="<?=$atribute?>" class="custom-select">
                 <?php
                 if($assocOptions){
+                    if($value === null){
+                        echo "<option disabled='disabled' selected>Opciones</option>";
+                    }
                     foreach ($options as $id => $text) {
                         if($value != $id){
                             echo "<option value='$id'>$text</option>";
@@ -346,7 +349,9 @@ abstract class BaseView{
                             "startRecur: '" . $event["FECHA_INICIO_SUBRESERVA"] . "'," .
                             "endRecur: new Date ('" . $event["FECHA_FIN_SUBRESERVA"] . "')," .
                             "startTime: '" . $event["HORA_INICIO_SUBRESERVA"] . "'," .
-                            "endTime: '" . $event["HORA_FIN_SUBRESERVA"] . "'" .
+                            "endTime: '" . $event["HORA_FIN_SUBRESERVA"] . "'," .
+                            "color: '#D9D9D9'," .
+                            "textColor: 'black'" .
                             "},";
         }
         if (strpos($event_string, '{') !== false){
@@ -358,20 +363,7 @@ abstract class BaseView{
             <script>
                 var resource_events = [<?= $event_string ?>];
                 document.addEventListener('DOMContentLoaded', function() {
-                    var calendarEl = document.getElementById('calendar');
-                    var calendar = new FullCalendar.Calendar(calendarEl, {
-                        allDaySlot : false,
-                        nowIndicator: true,
-                        locale: 'es',
-                        initialView: 'timeGridWeek',
-                        slotLabelFormat :{
-                            hour: '2-digit',
-                            minute: '2-digit',
-                            hour12: false
-                        },
-                        events: resource_events
-                    });
-                    calendar.render();
+                    createCalendar(resource_events);
                 });
             </script>
         <?php

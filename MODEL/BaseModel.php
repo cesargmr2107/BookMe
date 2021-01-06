@@ -243,13 +243,14 @@ class BaseModel {
 		$this->connection->close();
     }
     
-    private function executeQuery($query){
+    protected function executeQuery($query){
         $isConnected = $this->openConnection();
         if (!$isConnected) {
             return $this->actionMsgs[self::CANNOT_CONNECT];
         } else {
             $response = array();
             $response["result"] = $this->connection->query($query);
+            $response["last_insert_id"] = mysqli_insert_id($this->connection);
             $response["affected_rows"] = $this->connection->affected_rows;
             $this->closeConnection();
         }
