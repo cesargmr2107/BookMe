@@ -104,5 +104,31 @@ class ReservasController extends BaseController{
        new ReservasPendientesManageView($data);
     }
 
+    function confirmUse(){
+        $this->confirm("RECURSO_USADO");
+    }
+
+    function confirmNoUse(){
+        $this->confirm("RECURSO_NO_USADO");
+    }
+
+    function confirm($confirmation = null){
+
+        if($confirmation !== null){
+            $reserva = new ReservasModel();
+            $reserva->setAtributes(array(
+                "ID_RESERVA" => $_POST["ID_RESERVA"],
+                "ESTADO_RESERVA" => $confirmation
+            ));
+            $reserva->EDIT();
+        }
+
+        $reservas = new ReservasModel();
+        $data = $reservas->SEARCH_CONFIRM();
+
+        new ReservasConfirmView($data);
+
+    }
+
 }
 ?>

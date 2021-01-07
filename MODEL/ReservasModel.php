@@ -235,6 +235,12 @@ class ReservasModel extends BaseModel {
         return $result;
     }
 
+    public function SEARCH_CONFIRM(){
+        $query = "SELECT RES.ID_RESERVA, RES.FECHA_SOLICITUD_RESERVA, RES.LOGIN_USUARIO,  REC.NOMBRE_RECURSO " .
+                 "FROM RESERVAS RES, RECURSOS REC WHERE RES.ID_RECURSO = REC.ID_RECURSO AND RES.ESTADO_RESERVA = 'ACEPTADA'";
+        return $this->SEARCH($query);
+    }
+
     public function SHOW_PENDING(){
         
         $subreservasQuery = "SELECT C.ID_RESERVA, C.ESTADO_RESERVA, C.FECHA_SOLICITUD_RESERVA,  C.COSTE_RESERVA, C.LOGIN_USUARIO, C.ID_RECURSO, B.FECHA_INICIO_SUBRESERVA, B.FECHA_FIN_SUBRESERVA, B.HORA_INICIO_SUBRESERVA, B.HORA_FIN_SUBRESERVA " .
@@ -270,7 +276,7 @@ class ReservasModel extends BaseModel {
         $subreservas = $this->SHOW()["subreservas"];
         
         // DEBUG: Check subreservas    
-        echo '<pre>' . var_export($this->atributes, true) . '</pre>';
+        // echo '<pre>' . var_export($this->atributes, true) . '</pre>';
 
         foreach ($subreservas as $subreserva) {
 

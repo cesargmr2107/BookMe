@@ -37,7 +37,7 @@ abstract class BaseView{
 
     protected function render(){
         $this->header();
-        $this->includeButton("LOGOUT", "logoutButton", "post", "AuthenticationController", "logout");
+        $this->includeNavigationBar();
         $this->body();
         $this->footer();
     }
@@ -105,6 +105,126 @@ abstract class BaseView{
     protected function formatDate($date){
         $d = preg_split("/-/", $date);
         return $d[2] . "/" . $d[1] . "/" . $d[0];
+    }
+
+    protected function includeNavigationBar(){
+        ?>
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                    <a class="navbar-brand" href="#">BookMe</a>
+                    </div>
+                    <ul class="nav navbar-nav">
+                        <?php
+                            // Navegación de solicitudes
+                            $this->includeNavBarSolicitudes();
+
+                            // Navegación de recursos
+                            $this->includeNavBarRecursos();
+
+                            // Navegación de calendarios
+                            $this->includeNavBarCalendarios();
+
+                            // Navegación de usuarios
+                            $this->includeNavBarUsuarios();
+                        ?>
+                    </ul>
+                    <?= $this->includeButton("LOGOUT", "logoutButton", "post", "AuthenticationController", "logout") ?>
+                </div>
+            </nav>
+        <?php
+    }
+
+    private function includeNavBarSolicitudes(){
+        
+        $options = array(
+            array("text" => "Mis solicitudes", "controller" => "ReservasController", "action" => "searchOwn"),
+            array("text" => "Nueva solicitud", "controller" => "ReservasController", "action" => "addForm")
+        );
+
+        if($_SESSION["TIPO_USUARIO"] !== "NORMAL"){
+            array_push(
+                $options,
+                array("text" => "Solicitudes pendientes", "controller" => "ReservasController", "action" => "searchPending"),
+                array("text" => "Confirmación de uso", "controller" => "ReservasController", "action" => "confirm")
+            );
+            if($_SESSION["TIPO_USUARIO"] === "ADMINISTRADOR"){
+                array_push(
+                    $options,
+                    array("text" => "Historial de solicitudes", "controller" => "ReservasController", "action" => "search")
+                );
+            }
+        }
+
+        $this->includeNavBarDropdown("Solicitudes", $options);
+    }
+
+    private function includeNavBarRecursos(){
+
+        $options = array(
+            array("text" => "Recursos de la aplicación", "controller" => "RecursosController", "action" => "search")
+        );
+
+        if($_SESSION["TIPO_USUARIO"] === "ADMINISTRADOR"){
+            array_push(
+                $options,
+                array("text" => "Nuevo recurso", "controller" => "RecursosController", "action" => "addForm")
+            );
+        }
+
+        $this->includeNavBarDropdown("Recursos", $options);
+    }
+
+    private function includeNavBarCalendarios(){
+
+        $options = array(
+            array("text" => "Calendarios de la aplicación", "controller" => "CalendariosController", "action" => "search"),
+        );
+
+        if($_SESSION["TIPO_USUARIO"] === "ADMINISTRADOR"){
+            array_push(
+                $options,
+                array("text" => "Nuevo calendario", "controller" => "CalendariosController", "action" => "addForm")
+            );
+        }
+
+        $this->includeNavBarDropdown("Calendarios", $options);
+    }
+
+    private function includeNavBarUsuarios(){
+        if($_SESSION["TIPO_USUARIO"] === "ADMINISTRADOR"){
+            $options = array(
+                array("text" => "Usuarios de la aplicación", "controller" => "UsuariosController", "action" => "search"),
+                array("text" => "Nueva solicitud", "controller" => "UsuariosController", "action" => "addForm")
+            );
+            $this->includeNavBarDropdown("Usuarios", $options);
+        }
+    }
+
+    private function includeNavBarDropdown($title, $options){
+        ?>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown">
+                    <span><?= $title?></span>
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <?php
+                        foreach ($options as $option) {
+                            echo "<li>";
+                                $this->includeLink(
+                                    $option["text"],
+                                    "goTo" . $option["controller"] . $option["action"],
+                                    "post",
+                                    $option["controller"],
+                                    $option["action"]
+                                );
+                            echo "</li>";
+                        }
+                    ?>
+                </ul>
+            </li>
+        <?php
     }
 
     protected function includeButton($icon, $button_id, $method, $controller, $action, $object_data = null){
