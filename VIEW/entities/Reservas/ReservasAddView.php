@@ -50,7 +50,7 @@ class ReservasAddView extends BaseView{
             // DEBUG: Check    
             // echo '<pre>' . var_export($events, true) . '</pre>';
 
-            $this->includeCalendar($events, "Disponibilidad y ocupación");
+            $this->includeCalendar($events, false);
 
         }
 

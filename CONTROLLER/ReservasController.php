@@ -50,6 +50,36 @@ class ReservasController extends BaseController{
 		new MessageView($data);
     }
 
+    function managePendingForm(){
+        $reservasSearch = new ReservasModel();
+        $reservasSearch->patchEntity();
+        $data["pending"] = $reservasSearch->SHOW_PENDING();
+        new ReservasPendientesManageView($data);
+    }
+
+    function acceptPending(){
+        
+        // Accept pending and reject overlappings
+        $reserva = new ReservasModel();
+        $reserva->setAtributes(
+            array(
+                "ID_RESERVA" => $_POST["ID_RESERVA"],
+                "ID_RECURSO" => $_POST["ID_RECURSO"],
+                "ESTADO_RESERVA" => 'ACEPTADA',
+                "FECHA_RESPUESTA_RESERVA" => date_format(new DateTime(), 'Y-m-d'),
+            )
+        );
+        $data["accept"] = $reserva->ACCEPT_PENDING();
+
+        // Get other view info
+        $reservasSearch = new ReservasModel();
+        $reservasSearch->patchEntity();
+        $data["pending"] = $reservasSearch->SHOW_PENDING();
+
+        // Load view
+        new ReservasPendientesManageView($data);
+    }
+
 
 }
 ?>

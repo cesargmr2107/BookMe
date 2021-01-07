@@ -59,16 +59,16 @@ abstract class BaseView{
                 <link rel="shortcut icon" href="./favicon.png">
 
                 <!-- Bootstrap and Datetime pickers -->
-                <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet"/>
-                <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+                <link href="./VIEW/libraries/bootstrap/bootstrap.min.css" rel="stylesheet"/>
+                <link href="./VIEW/libraries/bootstrap/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
+                <script src="./VIEW/libraries/bootstrap/jquery.min.js"></script>
+                <script src="./VIEW/libraries/bootstrap/bootstrap.min.js"></script>
+                <script src="./VIEW/libraries/bootstrap/moment.min.js"></script>
+                <script src="./VIEW/libraries/bootstrap/bootstrap-datetimepicker.min.js"></script>
                 
                 <!-- Font awesome icons -->
-                <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
-                <script src="https://kit.fontawesome.com/ae3641038e.js" crossorigin="anonymous"></script>
+                <link href="./VIEW/libraries/fontawesome/font-awesome.min.css" rel="stylesheet"/>
+                <script src="./VIEW/libraries/fontawesome/ae3641038e.js" crossorigin="anonymous"></script>
         
                 <!-- My scripts -->
                 <script type="text/javascript" src="./VIEW/js/common.js"></script> 
@@ -100,6 +100,11 @@ abstract class BaseView{
                 </body>
             </html>
         <?php
+    }
+
+    protected function formatDate($date){
+        $d = preg_split("/-/", $date);
+        return $d[2] . "/" . $d[1] . "/" . $d[0];
     }
 
     protected function includeButton($icon, $button_id, $method, $controller, $action, $object_data = null){
@@ -339,25 +344,28 @@ abstract class BaseView{
         // Include HTML
         echo "<div id='calendar'></div>";
 
-        // Format events for JS
-        $event_string = ''; 
-        foreach($events as $event){
-            $title = ($showTitle === true) ? "title: '" . $event["NOMBRE_RECURSO"] . "'," : '';
-            $event_string = $event_string .
-                            "{" .
-                            $title .
-                            "startRecur: '" . $event["FECHA_INICIO_SUBRESERVA"] . "'," .
-                            "endRecur: new Date ('" . $event["FECHA_FIN_SUBRESERVA"] . "')," .
-                            "startTime: '" . $event["HORA_INICIO_SUBRESERVA"] . "'," .
-                            "endTime: '" . $event["HORA_FIN_SUBRESERVA"] . "'," .
-                            "color: '#D9D9D9'," .
-                            "textColor: 'black'" .
-                            "},";
+        // Format events for JS if passed as array
+        if(is_string($events)) {
+            $event_string = $events;
+        } else {
+            foreach($events as $event){
+                $title = ($showTitle === true) ? "title: '" . $event["NOMBRE_RECURSO"] . "'," : '';
+                $event_string = $event_string .
+                                "{" .
+                                $title .
+                                "startRecur: '" . $event["FECHA_INICIO_SUBRESERVA"] . "'," .
+                                "endRecur: new Date ('" . $event["FECHA_FIN_SUBRESERVA"] . "')," .
+                                "startTime: '" . $event["HORA_INICIO_SUBRESERVA"] . "'," .
+                                "endTime: '" . $event["HORA_FIN_SUBRESERVA"] . "'," .
+                                "color: '#D9D9D9'," .
+                                "textColor: 'black'" .
+                                "},";
+            }
+            if (strpos($event_string, '{') !== false){
+                $event_string = substr($event_string,0,-1);
+            }
         }
-        if (strpos($event_string, '{') !== false){
-            $event_string = substr($event_string,0,-1);
-        }
-
+        
         // Include JS
         ?>
             <script>

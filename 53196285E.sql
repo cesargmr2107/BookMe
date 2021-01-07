@@ -186,6 +186,12 @@ INSERT INTO `RECURSOS` (`NOMBRE_RECURSO`, `DESCRIPCION_RECURSO`, `TARIFA_RECURSO
 -- Para tabla 'RESERVAS'
 INSERT INTO `RESERVAS` (`LOGIN_USUARIO`, `ID_RECURSO`, `FECHA_SOLICITUD_RESERVA`, `FECHA_RESPUESTA_RESERVA`, `MOTIVO_RECHAZO_RESERVA`, `ESTADO_RESERVA`, `COSTE_RESERVA`) VALUES
 ('emmolina15', '1', '2020-11-14', '2020-11-20', NULL, 'ACEPTADA', '20'),
+('emmolina15', '5', '2020-11-15', NULL, NULL, 'PENDIENTE', '100'),
+('emmolina15', '5', '2020-11-15', NULL, NULL, 'PENDIENTE', '100'),
+('emmolina15', '5', '2020-11-15', NULL, NULL, 'PENDIENTE', '100'),
+('emmolina15', '5', '2020-11-15', NULL, NULL, 'PENDIENTE', '100'),
+('emmolina15', '5', '2020-11-15', NULL, NULL, 'PENDIENTE', '100'),
+('emmolina15', '5', '2020-11-15', NULL, NULL, 'PENDIENTE', '100'),
 ('emmolina15', '5', '2020-11-15', NULL, NULL, 'PENDIENTE', '100');
 
 -- Para tabla 'SUBRESERVAS'
@@ -193,7 +199,19 @@ INSERT INTO `SUBRESERVAS` (`ID_RESERVA`, `ID_SUBRESERVA`, `FECHA_INICIO_SUBRESER
 ('1', '1', STR_TO_DATE('01/01/2021','%d/%m/%Y'),  STR_TO_DATE('08/01/2021','%d/%m/%Y'), '15:00', '20:00', '10'),
 ('1', '2', STR_TO_DATE('14/01/2021','%d/%m/%Y'),  STR_TO_DATE('21/01/2021','%d/%m/%Y'), '15:00', '20:00', '10'),
 ('2', '1', STR_TO_DATE('05/01/2021','%d/%m/%Y'),  STR_TO_DATE('05/02/2021','%d/%m/%Y'), '10:00', '13:00', '50'),
-('2', '2', STR_TO_DATE('10/02/2021','%d/%m/%Y'),  STR_TO_DATE('10/03/2021','%d/%m/%Y'), '10:00', '13:00', '50');
+('2', '2', STR_TO_DATE('10/02/2021','%d/%m/%Y'),  STR_TO_DATE('10/03/2021','%d/%m/%Y'), '10:00', '13:00', '50'),
+('3', '1', STR_TO_DATE('05/01/2021','%d/%m/%Y'),  STR_TO_DATE('05/02/2021','%d/%m/%Y'), '10:00', '13:00', '50'),
+('3', '2', STR_TO_DATE('10/02/2021','%d/%m/%Y'),  STR_TO_DATE('10/03/2021','%d/%m/%Y'), '10:00', '13:00', '50'),
+('4', '1', STR_TO_DATE('05/01/2021','%d/%m/%Y'),  STR_TO_DATE('05/02/2021','%d/%m/%Y'), '10:00', '13:00', '50'),
+('4', '2', STR_TO_DATE('10/02/2021','%d/%m/%Y'),  STR_TO_DATE('10/03/2021','%d/%m/%Y'), '10:00', '13:00', '50'),
+('5', '1', STR_TO_DATE('05/01/2021','%d/%m/%Y'),  STR_TO_DATE('05/02/2021','%d/%m/%Y'), '15:00', '17:00', '50'),
+('5', '2', STR_TO_DATE('10/02/2021','%d/%m/%Y'),  STR_TO_DATE('10/03/2021','%d/%m/%Y'), '15:00', '17:00', '50'),
+('6', '1', STR_TO_DATE('05/01/2021','%d/%m/%Y'),  STR_TO_DATE('05/02/2021','%d/%m/%Y'), '15:00', '17:00', '50'),
+('6', '2', STR_TO_DATE('10/02/2021','%d/%m/%Y'),  STR_TO_DATE('10/03/2021','%d/%m/%Y'), '15:00', '17:00', '50'),
+('7', '1', STR_TO_DATE('05/01/2021','%d/%m/%Y'),  STR_TO_DATE('05/02/2021','%d/%m/%Y'), '15:00', '17:00', '50'),
+('7', '2', STR_TO_DATE('10/02/2021','%d/%m/%Y'),  STR_TO_DATE('10/03/2021','%d/%m/%Y'), '15:00', '17:00', '50'),
+('8', '1', STR_TO_DATE('05/01/2021','%d/%m/%Y'),  STR_TO_DATE('05/02/2021','%d/%m/%Y'), '15:00', '17:00', '50'),
+('8', '2', STR_TO_DATE('10/02/2021','%d/%m/%Y'),  STR_TO_DATE('10/03/2021','%d/%m/%Y'), '15:00', '17:00', '50');
 
 
 COMMIT;

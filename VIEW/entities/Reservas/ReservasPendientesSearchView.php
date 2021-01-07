@@ -11,14 +11,23 @@ class ReservasPendientesSearchView extends BaseView{
         // DEBUG: Check data passed to view
         // echo '<pre>' . var_export($this->data, true) . '</pre>';
 
-        foreach($this->data as $resource){
-            echo "<div>";
-                echo "<strong>" . $resource["NOMBRE_RECURSO"] . "</strong>";
-                echo "<p>";
-                    echo "<span>" . $resource["COUNT"] . "</span>";
-                    echo "<span> solicitudes pendientes</span>";
-                echo "</p>";
-            echo "</div>";
+        if(empty($this->data)){
+            $this->includeTitle("No hay recursos que tengan solicitudes pendientes", "h4");
+        }else{
+            foreach($this->data as $resource){
+                ?> 
+                    <form name="goToManage<?=$resource["ID_RECURSO"]?>" action="index.php" method="<?=$method?>">
+                        <?= $this->includeHiddenField("ID_RECURSO", $resource["ID_RECURSO"])?>
+                        <div onclick="sendForm(document.goToManage<?=$resource['ID_RECURSO']?>, 'ReservasController', 'managePendingForm', true)">
+                            <strong><?=$resource["NOMBRE_RECURSO"]?></strong>
+                            <p>
+                                <span><?=$resource["COUNT"]?></span>
+                                <span> solicitudes pendientes</span>
+                            </p>
+                        </div>
+                    </form>
+                <?php
+            }
         }
     }
 }

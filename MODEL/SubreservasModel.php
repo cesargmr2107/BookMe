@@ -68,7 +68,7 @@ class SubreservasModel extends BaseModel {
             $atributesToSet = array ("ID_RESERVA" => $this->atributes["ID_RESERVA"]);
             $reservaSearch = new ReservasModel();
             $reservaSearch->setAtributes($atributesToSet);
-            $reserva = $reservaSearch->SEARCH()[0];
+            $id_recurso = $reservaSearch->SEARCH()[0]["ID_RECURSO"];
         }
         
         // Build query
@@ -77,8 +77,8 @@ class SubreservasModel extends BaseModel {
         $horaInicio = $this->atributes["HORA_INICIO_SUBRESERVA"];
         $horaFin = $this->atributes["HORA_FIN_SUBRESERVA"];
         $query = "SELECT * FROM RESERVAS R, SUBRESERVAS S " .
-                 "WHERE R.ID_RESERVA = S.ID_RESERVA AND R.ID_RECURSO = " . $reserva["ID_RECURSO"] . 
-                 " AND ( R.ESTADO_RESERVA = 'ACEPTADA' OR R.ID_RESERVA = " . $reserva["ID_RESERVA"]. ") AND (" .
+                 "WHERE R.ID_RESERVA = S.ID_RESERVA AND R.ID_RECURSO = $id_recurso " . 
+                 "AND ( R.ESTADO_RESERVA = 'ACEPTADA' OR R.ID_RESERVA = " . $this->atributes["ID_RESERVA"]. ") AND (" .
                  "( S.FECHA_INICIO_SUBRESERVA BETWEEN '" . $fechaInicio . "' AND '" . $fechaFin . "' ) OR " .
                  "( S.FECHA_FIN_SUBRESERVA BETWEEN '" . $fechaInicio . "' AND '" . $fechaFin . "' ) ) AND ( " .
                  "( S.HORA_INICIO_SUBRESERVA > '" . $horaInicio . "' AND S.HORA_INICIO_SUBRESERVA < '" . $horaFin . "' ) OR " .
