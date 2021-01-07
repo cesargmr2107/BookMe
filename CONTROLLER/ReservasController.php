@@ -80,6 +80,29 @@ class ReservasController extends BaseController{
         new ReservasPendientesManageView($data);
     }
 
+    function rejectPending(){
+       
+        // Reject pending
+       $reserva = new ReservasModel();
+       $reserva->setAtributes(
+           array(
+               "ID_RESERVA" => $_POST["ID_RESERVA"],
+               "ID_RECURSO" => $_POST["ID_RECURSO"],
+               "MOTIVO_RECHAZO_RESERVA" => $_POST["MOTIVO_RECHAZO_RESERVA"],
+               "ESTADO_RESERVA" => 'RECHAZADA',
+               "FECHA_RESPUESTA_RESERVA" => date_format(new DateTime(), 'Y-m-d'),
+           )
+       );
+       $data["reject"] = $reserva->EDIT();
+
+       // Get other view info
+       $reservasSearch = new ReservasModel();
+       $reservasSearch->patchEntity();
+       $data["pending"] = $reservasSearch->SHOW_PENDING();
+
+       // Load view
+       new ReservasPendientesManageView($data);
+    }
 
 }
 ?>

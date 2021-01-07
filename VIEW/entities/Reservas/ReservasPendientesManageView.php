@@ -10,7 +10,7 @@ class ReservasPendientesManageView extends BaseView{
     protected function body(){
         
         // DEBUG: Check data passed to view
-        echo '<pre>' . var_export($this->data, true) . '</pre>';
+        // echo '<pre>' . var_export($this->data, true) . '</pre>';
         
         $this->includeTitle("Solicitudes pendientes", "h1");
         if(empty($this->data["pending"])){
@@ -41,6 +41,7 @@ class ReservasPendientesManageView extends BaseView{
                     }
                     echo "<li><strong>Coste:</strong>" . $subreserva["COSTE_RESERVA"] . "€</li>";
                     $this->includeAcceptButtonAndModal($reserva[0]["ID_RESERVA"], $reserva[0]["ID_RECURSO"], $fechaSolicitud, $user);
+                    $this->includeRejectButtonAndModal($reserva[0]["ID_RESERVA"], $reserva[0]["ID_RECURSO"], $fechaSolicitud, $user);
                     echo "</ul>";
                 echo "</div>";
             }
@@ -50,36 +51,70 @@ class ReservasPendientesManageView extends BaseView{
 
     private function includeAcceptButtonAndModal($bookingId, $resourceId, $fechaSolicitud, $user){
         ?>
-        <!-- Delete button -->
-        <span class="<?= $this->icons["ACCEPT"]?>" data-toggle="modal" href="#acceptModal<?= $bookingId ?>"></span>
+            <!-- Accept button -->
+            <span class="<?= $this->icons["ACCEPT"]?>" data-toggle="modal" href="#acceptModal<?= $bookingId ?>"></span>
 
-        <!-- Delete modal -->
-        <div class="modal" id="acceptModal<?= $bookingId ?>">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                
-                    <!-- Modal Header  -->
-                    <div class="modal-header">
-                        <h4 class="modal-title">¿Estás seguro de que quieres aceptar la reserva de '<?= $user?>' para el <?= $fechaSolicitud?>?</h4>
+            <!-- Accept modal -->
+            <div class="modal" id="acceptModal<?= $bookingId ?>">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                    
+                        <!-- Modal Header  -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">¿Estás seguro de que quieres aceptar la reserva de '<?= $user?>' para el <?= $fechaSolicitud?>?</h4>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <p>Se rechazarán automáticamente todas las reservas que coincidan con esta en el tiempo utilizando como motivo de rechazo el mensaje "Tu reserva ha sido rechazada porque se solapaba en el tiempo con otra de mayor prioridad"</p>
+                            <span class="<?= $this->icons["CANCEL"] ?>" data-dismiss="modal"></span>
+                            <?php
+                                $data = array(
+                                    "ID_RESERVA" => $bookingId,
+                                    "ID_RECURSO" => $resourceId
+                                );
+                                $this->includeButton("ACCEPT", "acceptModal$bookingId", "post", "ReservasController", "acceptPending", $data)
+                            ?>
+                        </div>
+
                     </div>
-
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                        <p>Se rechazarán automáticamente todas las reservas que coincidan con esta en el tiempo utilizando como motivo de rechazo el mensaje "Tu reserva ha sido rechazada porque se solapaba en el tiempo con otra de mayor prioridad"</p>
-                        <span class="<?= $this->icons["CANCEL"] ?>" data-dismiss="modal"></span>
-                        <?php
-                            $data = array(
-                                "ID_RESERVA" => $bookingId,
-                                "ID_RECURSO" => $resourceId
-                            );
-                            $this->includeButton("ACCEPT", "acceptModal$bookingId", "post", "ReservasController", "acceptPending", $data)
-                        ?>
-                    </div>
-
                 </div>
             </div>
-        </div>
-    <?php
+        <?php
+    }
+
+    private function includeRejectButtonAndModal($bookingId, $resourceId, $fechaSolicitud, $user){
+        ?>
+            <!-- Reject button -->
+            <span class="<?= $this->icons["CANCEL"]?>" data-toggle="modal" href="#rejectModal<?= $bookingId ?>"></span>
+
+            <!-- Reject modal -->
+            <div class="modal" id="rejectModal<?= $bookingId ?>">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                    
+                        <!-- Modal Header  -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">¿Estás seguro de que quieres aceptar la reserva de '<?= $user?>' para el <?= $fechaSolicitud?>?</h4>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <form id='rejectForm<?=$bookingId?>' name='rejectForm<?=$bookingId?>' action='index.php' method='post'>
+                                <?php
+                                    $this->includeHiddenField("ID_RESERVA", $bookingId);
+                                    $this->includeHiddenField("ID_RECURSO", $resourceId);
+                                    $this->includeTextField("Motivo de rechazo", "MOTIVO_RECHAZO_RESERVA");
+                                ?>
+                                <span class="<?= $this->icons["CANCEL"] ?>" data-dismiss="modal"></span>
+                                <span class="<?=$this->icons["ACCEPT"]?>" onclick="sendForm(document.rejectForm<?=$bookingId?>, 'ReservasController', 'rejectPending', true)"></span>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        <?php
     }
 
     private function includeColoredCalendar(){
