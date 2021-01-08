@@ -12,17 +12,17 @@ class UsuariosShowView extends BaseView{
         $this->includeTitle("Perfil de usuario", "h1");
 
         echo "<div>";
-            $this->includeShowInfo("Login", $this->data["normal_info"]["LOGIN_USUARIO"]);
-            $this->includeShowInfo("Nombre", $this->data["normal_info"]["NOMBRE_USUARIO"]);
-            $this->includeShowInfo("Correo electrónico", $this->data["normal_info"]["EMAIL_USUARIO"]);
-            $this->includeShowInfo("Tipo de usuario", $this->data["normal_info"]["TIPO_USUARIO"]);
-            $this->includeShowInfo("Activo", $this->data["normal_info"]["ES_ACTIVO"]);
+            $this->includeShowInfo("i18n-login", $this->data["normal_info"]["LOGIN_USUARIO"]);
+            $this->includeShowInfo("i18n-nombre", $this->data["normal_info"]["NOMBRE_USUARIO"]);
+            $this->includeShowInfo("i18n-email", $this->data["normal_info"]["EMAIL_USUARIO"]);
+            $this->includeShowInfo("i18n-type", $this->data["normal_info"]["TIPO_USUARIO"]);
+            $this->includeShowInfo("i18n-active", $this->data["normal_info"]["ES_ACTIVO"]);
             if($this->data["normal_info"]["TIPO_USUARIO"] === "RESPONSABLE"){
-                $this->includeShowInfo("Dirección", $this->data["resp_info"]["DIRECCION_RESPONSABLE"]);
-                $this->includeShowInfo("Teléfono", $this->data["resp_info"]["TELEFONO_RESPONSABLE"]);
+                $this->includeShowInfo("i18n-address", $this->data["resp_info"]["DIRECCION_RESPONSABLE"]);
+                $this->includeShowInfo("i18n-phone", $this->data["resp_info"]["TELEFONO_RESPONSABLE"]);
                 $this->includeShowList( $this->data["resp_info"]["resources"],
-                                        "Recursos bajo su responsabilidad",
-                                        "Todavía no es responsable de ningún recurso.",
+                                        "i18n-respResources",
+                                        "i18n-noRespResources",
                                         "NOMBRE_RECURSO",
                                         "ID_RECURSO" );
             }

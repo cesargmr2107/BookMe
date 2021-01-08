@@ -1,15 +1,24 @@
 var translations_es = {
-    
-    // Login and Register
-    "i18n-welcome" : "Bienvenido a ",
+
+    /* COMMON FOR SEVERAL VIEWS */
     "i18n-login" : "Login",
-    "i18n-password" : "Contraseña",
-    "i18n-username" : "Nombre",
     "i18n-email" : "Correo electrónico",
+    "i18n-password" : "Contraseña",
+    "i18n-options" : "Opciones",
+    "i18n-id" : "ID",
+    "i18n-nombre" : "Nombre",
+    "i18n-descripcion" : "Descripción" ,
+    "i18n-fecha_inicio" : "Fecha de inicio" ,
+    "i18n-fecha_fin" : "Fecha de fin",
+    "i18n-hora_inicio" : "Hora de inicio" ,
+    "i18n-hora_fin" : "Hora de fin",
+
+    /* LOGIN AND REGISTER VIEWS */
+    "i18n-welcome" : "Bienvenido a ",
     "i18n-goToLogin" : "Inicia sesión",
     "i18n-goToRegister" : "Crea una cuenta",
 
-    /* Navigation bar and titles*/
+    /* NAVIGATION BAR AND TITLES */
 
     // Bookings
     "i18n-navbar-bookings" : "Solicitudes",
@@ -34,19 +43,16 @@ var translations_es = {
     "i18n-usersSearch" : "Lista de usuarios",
     "i18n-newUser" : "Nuevo usuario",
 
-    /* COMMON FOR SEVERAL VIEWS */
-    "i18n-options" : "Opciones",
-    "i18n-id" : "ID",
-    "i18n-nombre" : "Nombre",
-    "i18n-descripcion" : "Descripción" ,
-    "i18n-fecha_inicio" : "Fecha de inicio" ,
-    "i18n-fecha_fin" : "Fecha de fin",
-    "i18n-hora_inicio" : "Hora de inicio" ,
-    "i18n-hora_fin" : "Hora de fin",
-
     /* CALENDAR VIEWS */
     "i18n-assocResources" : "Recursos asociados:",
-    "i18n-nonAssocResources" : "Todavía no hay ningún recurso ascociado a este calendario."
+    "i18n-nonAssocResources" : "Todavía no hay ningún recurso ascociado a este calendario.",
 
+    /* USER VIEWS */
+    "i18n-type" : "Tipo",
+    "i18n-active" : "Activo",
+    "i18n-address" : "Dirección",
+    "i18n-phone" : "Teléfono",
+    "i18n-respResources" : "Recursos bajo su responsabilidad",
+    "i18n-noRespResources" : "Todavía no es responsable de ningún recurso."
 
 }

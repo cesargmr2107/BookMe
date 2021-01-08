@@ -10,7 +10,7 @@ class RegisterView extends AuthenticationView{
             <form name="registerForm" action="index.php" method="post">
                 <?php
                 $this->includeTextField("i18n-login","LOGIN_USUARIO");
-                $this->includeTextField("i18n-username","NOMBRE_USUARIO");
+                $this->includeTextField("i18n-name","NOMBRE_USUARIO");
                 $this->includeTextField("i18n-email","EMAIL_USUARIO");
                 $this->includePasswordField("i18n-password","PASSWD_USUARIO");
                 ?>

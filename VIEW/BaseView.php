@@ -309,9 +309,9 @@ abstract class BaseView{
         ?><div class="form-group"><label class="<?=$labelCode?>" for="<?=$atribute?>"></label><input type="text" name="<?=$atribute?>" <?=$valueTag?>/></div><?php
     }
 
-    protected function includeReadOnlyField($label, $atribute, $value = null){
+    protected function includeReadOnlyField($labelCode, $atribute, $value = null){
         $valueTag = ($value !== null) ? "value='$value'" : '';
-        ?><div class="form-group"><label for="<?=$atribute?>"><?=$label?></label><input type="text" name="<?=$atribute?>" <?=$valueTag?> readonly="readonly"/></div><?php
+        ?><div class="form-group"><label class="<?=$labelCode?>" for="<?=$atribute?>"></label><input type="text" name="<?=$atribute?>" <?=$valueTag?> readonly="readonly"/></div><?php
     }
 
     protected function includePasswordField($labelCode, $atribute, $value = null){
@@ -374,9 +374,9 @@ abstract class BaseView{
         <?php
     }
 
-    protected function includeSelectField($label, $atribute, $options, $assocOptions, $value = null){
+    protected function includeSelectField($labelCode, $atribute, $options, $assocOptions, $value = null){
         ?>
-            <label for="<?=$atribute?>"><?=$label?></label>
+            <label class="<?=$labelCode?>" for="<?=$atribute?>"></label>
             <select name="<?=$atribute?>" id="<?=$atribute?>" class="custom-select">
                 <?php
                 if($assocOptions){

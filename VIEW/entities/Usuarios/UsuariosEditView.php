@@ -11,14 +11,14 @@ class UsuariosEditView extends BaseView{
         ?>
             <form id="editForm" name="editForm" action="index.php" method="post">
                 <?php
-                    $this->includeReadOnlyField('Login', 'LOGIN_USUARIO', $this->data["normal_info"]["LOGIN_USUARIO"]);
-                    $this->includeReadOnlyField('Tipo', 'TIPO_USUARIO', $this->data["normal_info"]["TIPO_USUARIO"]);
-                    $this->includeTextField('Nombre', 'NOMBRE_USUARIO', $this->data["normal_info"]["NOMBRE_USUARIO"]);
-                    $this->includePasswordField('Contraseña', 'PASSWD_USUARIO');
-                    $this->includeTextField('Correo electrónico', 'EMAIL_USUARIO', $this->data["normal_info"]["EMAIL_USUARIO"]);
+                    $this->includeReadOnlyField("i18n-login", 'LOGIN_USUARIO', $this->data["normal_info"]["LOGIN_USUARIO"]);
+                    $this->includeReadOnlyField("i18n-type", 'TIPO_USUARIO', $this->data["normal_info"]["TIPO_USUARIO"]);
+                    $this->includeTextField("i18n-nombre", 'NOMBRE_USUARIO', $this->data["normal_info"]["NOMBRE_USUARIO"]);
+                    $this->includePasswordField("i18n-password", 'PASSWD_USUARIO');
+                    $this->includeTextField("i18n-email", 'EMAIL_USUARIO', $this->data["normal_info"]["EMAIL_USUARIO"]);
                     if($this->data["normal_info"]["TIPO_USUARIO"] === 'RESPONSABLE'){
-                        $this->includeTextField('Direccion', 'DIRECCION_RESPONSABLE', $this->data["resp_info"]["DIRECCION_RESPONSABLE"]);
-                        $this->includeTextField('Teléfono', 'TELEFONO_RESPONSABLE', $this->data["resp_info"]["TELEFONO_RESPONSABLE"]);
+                        $this->includeTextField("i18n-address", 'DIRECCION_RESPONSABLE', $this->data["resp_info"]["DIRECCION_RESPONSABLE"]);
+                        $this->includeTextField("i18n-phone", 'TELEFONO_RESPONSABLE', $this->data["resp_info"]["TELEFONO_RESPONSABLE"]);
                     }
                 ?>
                 <span class="<?=$this->icons["EDIT"]?>" onclick="sendCredentialsForm(document.editForm, 'UsuariosController', 'edit', true)"></span>

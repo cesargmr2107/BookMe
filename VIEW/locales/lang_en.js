@@ -1,11 +1,20 @@
 var translations_en = {
     
+    /* COMMON FOR SEVERAL VIEWS */
+    "i18n-login" : "Login",
+    "i18n-email" : "Email",
+    "i18n-password" : "Password",
+    "i18n-options" : "Options",
+    "i18n-id" : "ID",
+    "i18n-nombre" : "Name",
+    "i18n-descripcion" : "Description" ,
+    "i18n-fecha_inicio" : "Start Date" ,
+    "i18n-fecha_fin" : "End Date",
+    "i18n-hora_inicio" : "Start Time" ,
+    "i18n-hora_fin" : "End Time",
+
     /* LOGIN AND REGISTER VIEWS */
     "i18n-welcome" : "Welcome to ",
-    "i18n-login" : "Login",
-    "i18n-password" : "Password",
-    "i18n-username" : "Username",
-    "i18n-email" : "Email",
     "i18n-goToLogin" : "Sign in",
     "i18n-goToRegister" : "Sign up",
     
@@ -34,18 +43,16 @@ var translations_en = {
     "i18n-usersSearch" : "Users list",
     "i18n-newUser" : "New user",
 
-    /* COMMON FOR SEVERAL VIEWS */
-    "i18n-options" : "Options",
-    "i18n-id" : "ID",
-    "i18n-nombre" : "Name",
-    "i18n-descripcion" : "Description" ,
-    "i18n-fecha_inicio" : "Start Date" ,
-    "i18n-fecha_fin" : "End Date",
-    "i18n-hora_inicio" : "Start Time" ,
-    "i18n-hora_fin" : "End Time",
-
     /* CALENDAR VIEWS */
     "i18n-assocResources" : "Associated resources:",
-    "i18n-nonAssocResources" : "There aren't any associated resources with this calendar."
+    "i18n-nonAssocResources" : "There aren't any associated resources with this calendar.",
+
+    /* USER VIEWS */
+    "i18n-type" : "Type",
+    "i18n-active" : "Active",
+    "i18n-address" : "Address",
+    "i18n-phone" : "Phone",
+    "i18n-respResources" : "Resources under their responsibility",
+    "i18n-noRespResources" : "There aren't any resources under their responsibility."
 
 }
