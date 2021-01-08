@@ -19,6 +19,7 @@ class RecursosModel extends BaseModel {
     protected static $atributesForSearch = array (  "ID_RECURSO",
                                                     "NOMBRE_RECURSO",
                                                     "TARIFA_RECURSO",
+                                                    "RANGO_TARIFA_RECURSO",
                                                     "LOGIN_RESPONSABLE");
 
     public static $priceRanges = array("HORA", "DIA", "SEMANA", "MES");
@@ -95,8 +96,11 @@ class RecursosModel extends BaseModel {
         $query = "SELECT A.NOMBRE_RECURSO, B.FECHA_INICIO_SUBRESERVA, B.FECHA_FIN_SUBRESERVA, B.HORA_INICIO_SUBRESERVA, B.HORA_FIN_SUBRESERVA " .
                  "FROM RECURSOS A, SUBRESERVAS B, RESERVAS C " .
                  "WHERE A.ID_RECURSO = C.ID_RECURSO AND B.ID_RESERVA = C.ID_RESERVA AND " .
-                 "C.ESTADO_RESERVA = 'ACEPTADA' AND" .
+                 "C.ESTADO_RESERVA = 'ACEPTADA' AND " .
                  "A.ID_RECURSO = '" . $this->atributes["ID_RECURSO"] . "'"; 
+        
+        // DEBUG: Check events
+        // echo "<p>" . $query . "</p>";
         
         $result["events"] = $this->SEARCH($query);
 

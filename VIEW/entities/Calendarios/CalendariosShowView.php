@@ -9,7 +9,7 @@ class CalendariosShowView extends BaseView{
         // DEBUG: Check data passed to view
         // echo '<pre>' . var_export($this->data, true) . '</pre>';
         
-        $this->includeTitle("Detalles de calendario", "h1");
+        $this->includeTitle("i18n-calendarInfo", "h1");
         echo "<div>";
             $this->includeShowInfo("i18n-id", $this->data["ID_CALENDARIO"]);
             $this->includeShowInfo("i18n-nombre", $this->data["NOMBRE_CALENDARIO"]);

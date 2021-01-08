@@ -7,7 +7,7 @@ class UsuariosEditView extends BaseView{
     protected $jsFiles = array ("./VIEW/js/md5.js"); 
 
     protected function body(){
-        $this->includeTitle("Modificar información de usuario", "h1");
+        $this->includeTitle("i18n-editUser", "h1");
         ?>
             <form id="editForm" name="editForm" action="index.php" method="post">
                 <?php

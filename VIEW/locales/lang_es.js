@@ -46,6 +46,8 @@ var translations_es = {
     /* CALENDAR VIEWS */
     "i18n-assocResources" : "Recursos asociados:",
     "i18n-nonAssocResources" : "Todavía no hay ningún recurso ascociado a este calendario.",
+    "i18n-editCalendar" : "Modificar información de calendario",
+    "i18n-calendarInfo" : "Información de calendario",
 
     /* USER VIEWS */
     "i18n-type" : "Tipo",
@@ -53,6 +55,29 @@ var translations_es = {
     "i18n-address" : "Dirección",
     "i18n-phone" : "Teléfono",
     "i18n-respResources" : "Recursos bajo su responsabilidad",
-    "i18n-noRespResources" : "Todavía no es responsable de ningún recurso."
+    "i18n-noRespResources" : "Todavía no es responsable de ningún recurso.",
+    "i18n-editUser" : "Modificar información de usuario",
+    "i18n-userProfile" : "Perfil de usuario",
+
+    /* RESOURCE VIEWS */
+    "i18n-tarifa" : "Tarifa (€)",
+    "i18n-rango_tarifa" : "Rango",
+    "i18n-login_responsable" : "Responsable",
+    "i18n-calendar" : "Calendario de uso",
+    "i18n-resourceInfo" : "Información del recurso",
+    "i18n-resourceData" : "Datos específicos del recurso",
+    "i18n-availability" : "Disponibilidad y Ocupación",
+    "i18n-editResource" : "Modificar información de recurso",
+    "i18n-resourceStats" : "Estadísticas de recurso",
+    "i18n-resourceBookings" : "Reservas del recurso",
+    "i18n-nBookAccepted" : "Reservas aceptadas: ",
+    "i18n-nBookPending" : "Reservas pendientes: ",
+    "i18n-nBookRejected" : "Reservas rechazadas: ",
+    "i18n-nBookCanceled" : "Reservas canceladas: ",
+    "i18n-nBookUsed" : "Reservas con recurso usado: ",
+    "i18n-nBookNotUsed" : "Reservas con recurso no usado: ",
+    "i18n-availableHours" : "Horas disponibles",
+    "i18n-unavailableHours" : "Horas ocupadas"
+
 
 }

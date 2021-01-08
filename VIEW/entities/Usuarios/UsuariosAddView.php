@@ -7,7 +7,7 @@ class UsuariosAddView extends BaseView{
     protected $jsFiles = array ("./VIEW/js/md5.js"); 
 
     protected function body(){
-        $this->includeTitle("Añadir nuevo usuario", "h1");
+        $this->includeTitle("i18n-newUser", "h1");
         ?>
             <form id="addForm" name="addForm" action="index.php" method="post">
                 <?php

@@ -7,9 +7,9 @@ function createCalendar(resource_events){
     var calendarEl = document.getElementById('calendar');
     calendarEl.innerHTML = "";
     calendar = new FullCalendar.Calendar(calendarEl, {
+        locale: 'es',
         allDaySlot : false,
         nowIndicator: true,
-        locale: 'es',
         initialView: 'timeGridWeek',
         slotLabelFormat :{
             hour: '2-digit',

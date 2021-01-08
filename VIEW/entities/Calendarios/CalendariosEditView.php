@@ -5,7 +5,7 @@ include_once './VIEW/BaseView.php';
 class CalendariosEditView extends BaseView{
 
     protected function body(){
-        $this->includeTitle("Modificar información de calendario", "h1");
+        $this->includeTitle("i18n-editCalendar", "h1");
         ?>
             <form id="editForm" name="editForm" action="index.php" method="post" >
                 <?php

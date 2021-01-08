@@ -4,7 +4,12 @@ include_once './VIEW/BaseView.php';
 
 class ReservasAddView extends BaseView{
     
-    protected $jsFiles = array("./VIEW/libraries/fullcalendar-5.4.0/lib/main.js" , "./VIEW/js/bookings.js");
+    protected $jsFiles = array(
+        "./VIEW/libraries/fullcalendar-5.4.0/lib/main.min.js",
+        "./VIEW/libraries/fullcalendar-5.4.0/lib/locales-all.min.js",
+        "./VIEW/js/bookings.js"
+    );
+    
     protected $cssFiles = array("./VIEW/libraries/fullcalendar-5.4.0/lib/main.css");
 
     protected function body(){

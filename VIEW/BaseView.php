@@ -235,7 +235,7 @@ abstract class BaseView{
     }
 
     private function includeLangSelection(){
-        $langs = array ("ES", "GA", "EN");
+        $langs = array ("ES", "GL", "EN");
         $toShow = '';
         foreach ($langs as $lang) {
             $toShow = $toShow . "<a onclick=\"setLang('$lang')\">$lang</a> | ";
@@ -489,6 +489,7 @@ abstract class BaseView{
         if(is_string($events)) {
             $event_string = $events;
         } else {
+            $event_string = "";
             foreach($events as $event){
                 $title = ($showTitle === true) ? "title: '" . $event["NOMBRE_RECURSO"] . "'," : '';
                 $event_string = $event_string .

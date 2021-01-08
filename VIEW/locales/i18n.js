@@ -1,31 +1,46 @@
+var translations;
+
 function setLang(lang = null) {
 
-    // Check lang
-    if(lang == null){
-        
-        // Set lang from cookie if possible; if not ES by default
-        if (getCookie('lang') != '') {
-          lang = getCookie('lang');
-        }else{
-            lang='ES';
-        }
-    
+    // Get cookie and select lang; if already translated return
+    var cookie = getCookie('lang');
+    if(lang === null){
+        lang = (cookie == '') ? 'ES' : cookie;
+    }else if(lang === cookie){
+        return;
     }
 
     // Reset lang cookie
     setCookie('lang', lang, 1);
 
-    // Translate to lang
+    // Select translation lang
     switch (lang) {
-        case 'EN': translate(translations_en);
+        case 'EN': translations = translations_en;
             break;
 
-        case 'GA':
+        case 'GL':
             break;
     
-        default: translate(translations_es);
+        default: translations = translations_es;
             break;
     }
+
+    // Translate elements
+    translate(translations);
+
+    // Reload calendar if necessary
+    if(typeof calendar !== 'undefined'){
+        var locale = lang.toLowerCase();
+        calendar.setOption('locale', locale);
+    }
+
+    // Reload graph if necessary
+    if(typeof statsChart !== 'undefined'){
+        statsChart.data.labels[0] = translations["i18n-availableHours"];
+        statsChart.data.labels[1] = translations["i18n-unavailableHours"];
+        statsChart.update();
+    }
+
 }
 
 function translate(translations){

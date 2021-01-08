@@ -46,6 +46,8 @@ var translations_en = {
     /* CALENDAR VIEWS */
     "i18n-assocResources" : "Associated resources:",
     "i18n-nonAssocResources" : "There aren't any associated resources with this calendar.",
+    "i18n-editCalendar" : "Edit calendar information",
+    "i18n-calendarInfo" : "Calendar information",
 
     /* USER VIEWS */
     "i18n-type" : "Type",
@@ -53,6 +55,28 @@ var translations_en = {
     "i18n-address" : "Address",
     "i18n-phone" : "Phone",
     "i18n-respResources" : "Resources under their responsibility",
-    "i18n-noRespResources" : "There aren't any resources under their responsibility."
+    "i18n-noRespResources" : "There aren't any resources under their responsibility.",
+    "i18n-editUser" : "Edit user information",
+    "i18n-userProfile" : "User profile",
+
+    /* RESOURCE VIEWS */
+    "i18n-tarifa" : "Price",
+    "i18n-rango_tarifa" : "Rate",
+    "i18n-login_responsable" : "Manager",
+    "i18n-calendar" : "Availability calendar",
+    "i18n-resourceInfo" : "Resource information",
+    "i18n-resourceData" : "Resource-specific data",
+    "i18n-editResource" : "Edit resource information",
+    "i18n-resourceStats" : "Resource stats",
+    "i18n-resourceBookings" : "Resource bookings",
+    "i18n-nBookAccepted" : "Accepted bookings: ",
+    "i18n-nBookPending" : "Pending bookings: ",
+    "i18n-nBookRejected" : "Rejected bookings: ",
+    "i18n-nBookCanceled" : "Canceled bookings: ",
+    "i18n-nBookUsed" : "Bookings with used resource: ",
+    "i18n-nBookNotUsed" : "Bookings with unused resource: ",
+    "i18n-availableHours" : "Available hours",
+    "i18n-unavailableHours" : "Unavailable hours"
+
 
 }

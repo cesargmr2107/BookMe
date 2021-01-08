@@ -9,9 +9,9 @@ class RecursosStatsView extends BaseView{
     protected function body(){
         
         // DEBUG: Check data passed to view
-        echo '<pre>' . var_export($this->data, true) . '</pre>';
+        // echo '<pre>' . var_export($this->data, true) . '</pre>';
 
-        $this->includeTitle("Informe de recurso", "h1");
+        $this->includeTitle("i18n-resourceStats", "h1");
         $this->includeStatsForm();
         $this->includeStats();
         
@@ -21,8 +21,8 @@ class RecursosStatsView extends BaseView{
         ?>
             <form id="statsForm" name="statsForm" action="index.php" method="post">
                 <?= $this->includeHiddenField("ID_RECURSO", $this->data["id"])?>
-                <?= $this->includeDateField("Fecha de inicio", "FECHA_INICIO_INFORME", false, $this->data["defaultStartDate"])?>
-                <?= $this->includeDateField("Fecha de fin", "FECHA_FIN_INFORME", false, $this->data["defaultEndDate"])?>
+                <?= $this->includeDateField("i18n-fecha_inicio", "FECHA_INICIO_INFORME", false, $this->data["defaultStartDate"])?>
+                <?= $this->includeDateField("i18n-fecha_fin", "FECHA_FIN_INFORME", false, $this->data["defaultEndDate"])?>
                 <span class="<?=$this->icons["SEARCH"]?>" onclick="sendForm(document.statsForm, 'RecursosController', 'stats', true)"></span>
             </form>
         <?php
@@ -31,14 +31,32 @@ class RecursosStatsView extends BaseView{
     protected function includeStats(){
         ?>
             <div>
-                <?= $this->includeTitle("Reservas del recurso", "h3") ?>
+                <?= $this->includeTitle("i18n-resourceBookings", "h3") ?>
                 <ul>
-                    <li>Reservas pendientes: <?= $this->data["count"]["PENDIENTE"]?></li>
-                    <li>Reservas aceptadas: <?= $this->data["count"]["ACEPTADA"]?></li>
-                    <li>Reservas rechazada: <?= $this->data["count"]["RECHAZADA"]?></li>
-                    <li>Reservas canceladas: <?= $this->data["count"]["CANCELADA"]?></li>
-                    <li>Reservas con recurso usado: <?= $this->data["count"]["RECURSO_USADO"]?></li>
-                    <li>Reservas con recurso no usado: <?= $this->data["count"]["RECURSO_NO_USADO"]?></li>
+                    <li>
+                        <strong class="i18n-nBookAccepted"></strong>
+                        <span><?= $this->data["count"]["PENDIENTE"]?></span>
+                    </li>
+                    <li>
+                        <strong class="i18n-nBookPending"></strong>
+                        <span><?= $this->data["count"]["ACEPTADA"]?></span>
+                    </li>
+                    <li>
+                        <strong class="i18n-nBookRejected"></strong>
+                        <span><?= $this->data["count"]["RECHAZADA"]?></span>
+                    </li>
+                    <li>
+                        <strong class="i18n-nBookCanceled"></strong>
+                        <span><?= $this->data["count"]["CANCELADA"]?></span>
+                    </li>
+                    <li>
+                        <strong class="i18n-nBookUsed"></strong>
+                        <span><?= $this->data["count"]["RECURSO_USADO"]?></span>
+                    </li>
+                    <li>
+                        <strong class="i18n-nBookNotUsed"></strong>
+                        <span><?= $this->data["count"]["RECURSO_NO_USADO"]?></span>
+                    </li>
                 </ul>
             </div>
 

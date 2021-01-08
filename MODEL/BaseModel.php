@@ -291,7 +291,10 @@ class BaseModel {
             $toReplace = array($entityName);
             $replacement = array("");
             $name =  str_replace($toReplace, $replacement, $name);
-            $name = strtolower(substr($name,0,-1));
+            if( $name[strlen($name)-1] === "_"){
+                $name = substr($name,0,-1);
+            }
+            $name = strtolower($name);
             array_push($formatted, $name);
         }
 

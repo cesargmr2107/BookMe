@@ -9,7 +9,7 @@ class UsuariosShowView extends BaseView{
         // DEBUG: Check data passed to view
         // echo '<pre>' . var_export($this->data, true) . '</pre>';
         
-        $this->includeTitle("Perfil de usuario", "h1");
+        $this->includeTitle("i18n-userProfile", "h1");
 
         echo "<div>";
             $this->includeShowInfo("i18n-login", $this->data["normal_info"]["LOGIN_USUARIO"]);
