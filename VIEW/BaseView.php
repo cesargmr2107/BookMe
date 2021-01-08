@@ -72,7 +72,7 @@ abstract class BaseView{
         
                 <!-- My scripts: common and locales -->
                 <script type="text/javascript" src="./VIEW/js/common.js"></script> 
-                <script type="text/javascript" src="./VIEW/locales/lang.js"></script> 
+                <script type="text/javascript" src="./VIEW/locales/i18n.js"></script> 
                 <script type="text/javascript" src="./VIEW/locales/lang_es.js"></script> 
                 <script type="text/javascript" src="./VIEW/locales/lang_en.js"></script> 
                 <?php
@@ -133,7 +133,10 @@ abstract class BaseView{
                             $this->includeNavBarUsuarios();
                         ?>
                     </ul>
-                    <?= $this->includeButton("LOGOUT", "logoutButton", "post", "AuthenticationController", "logout") ?>
+                    <?php
+                        $this->includeLangSelection();
+                        $this->includeButton("LOGOUT", "logoutButton", "post", "AuthenticationController", "logout");
+                    ?>
                 </div>
             </nav>
         <?php
@@ -142,74 +145,74 @@ abstract class BaseView{
     private function includeNavBarSolicitudes(){
         
         $options = array(
-            array("text" => "Mis solicitudes", "controller" => "ReservasController", "action" => "searchOwn"),
-            array("text" => "Nueva solicitud", "controller" => "ReservasController", "action" => "addForm")
+            array("textCode" => "i18n-myBookings", "controller" => "ReservasController", "action" => "searchOwn"),
+            array("textCode" => "i18n-newBooking", "controller" => "ReservasController", "action" => "addForm")
         );
 
         if($_SESSION["TIPO_USUARIO"] !== "NORMAL"){
             array_push(
                 $options,
-                array("text" => "Solicitudes pendientes", "controller" => "ReservasController", "action" => "searchPending"),
-                array("text" => "Confirmación de uso", "controller" => "ReservasController", "action" => "confirm")
+                array("textCode" => "i18n-pendingBookings", "controller" => "ReservasController", "action" => "searchPending"),
+                array("textCode" => "i18n-confirmBooking", "controller" => "ReservasController", "action" => "confirm")
             );
             if($_SESSION["TIPO_USUARIO"] === "ADMINISTRADOR"){
                 array_push(
                     $options,
-                    array("text" => "Historial de solicitudes", "controller" => "ReservasController", "action" => "search")
+                    array("textCode" => "i18n-bookingHistory", "controller" => "ReservasController", "action" => "search")
                 );
             }
         }
 
-        $this->includeNavBarDropdown("Solicitudes", $options);
+        $this->includeNavBarDropdown("i18n-navbar-bookings", $options);
     }
 
     private function includeNavBarRecursos(){
 
         $options = array(
-            array("text" => "Recursos de la aplicación", "controller" => "RecursosController", "action" => "search")
+            array("textCode" => "i18n-resourcesSearch", "controller" => "RecursosController", "action" => "search")
         );
 
         if($_SESSION["TIPO_USUARIO"] === "ADMINISTRADOR"){
             array_push(
                 $options,
-                array("text" => "Nuevo recurso", "controller" => "RecursosController", "action" => "addForm")
+                array("textCode" => "i18n-newResource", "controller" => "RecursosController", "action" => "addForm")
             );
         }
 
-        $this->includeNavBarDropdown("Recursos", $options);
+        $this->includeNavBarDropdown("i18n-navbar-resources", $options);
     }
 
     private function includeNavBarCalendarios(){
 
         $options = array(
-            array("text" => "Calendarios de la aplicación", "controller" => "CalendariosController", "action" => "search"),
+            array("textCode" => "i18n-calendarsSearch", "controller" => "CalendariosController", "action" => "search"),
         );
 
         if($_SESSION["TIPO_USUARIO"] === "ADMINISTRADOR"){
             array_push(
                 $options,
-                array("text" => "Nuevo calendario", "controller" => "CalendariosController", "action" => "addForm")
+                array("textCode" => "i18n-newCalendar", "controller" => "CalendariosController", "action" => "addForm")
             );
         }
 
-        $this->includeNavBarDropdown("Calendarios", $options);
+        $this->includeNavBarDropdown("i18n-navbar-calendars", $options);
     }
 
     private function includeNavBarUsuarios(){
         if($_SESSION["TIPO_USUARIO"] === "ADMINISTRADOR"){
             $options = array(
-                array("text" => "Usuarios de la aplicación", "controller" => "UsuariosController", "action" => "search"),
-                array("text" => "Nueva solicitud", "controller" => "UsuariosController", "action" => "addForm")
+                array("textCode" => "i18n-usersSearch", "controller" => "UsuariosController", "action" => "search"),
+                array("textCode" => "i18n-newUser", "controller" => "UsuariosController", "action" => "addForm")
             );
-            $this->includeNavBarDropdown("Usuarios", $options);
+            $this->includeNavBarDropdown("i18n-navbar-users", $options);
         }
     }
 
-    private function includeNavBarDropdown($title, $options){
+    private function includeNavBarDropdown($titleCode, $options){
         ?>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown">
-                    <span><?= $title?></span>
+                    <span class="<?= $titleCode?>"></span>
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
@@ -217,7 +220,7 @@ abstract class BaseView{
                         foreach ($options as $option) {
                             echo "<li>";
                                 $this->includeLink(
-                                    $option["text"],
+                                    $option["textCode"],
                                     "goTo" . $option["controller"] . $option["action"],
                                     "post",
                                     $option["controller"],
@@ -229,6 +232,15 @@ abstract class BaseView{
                 </ul>
             </li>
         <?php
+    }
+
+    private function includeLangSelection(){
+        $langs = array ("ES", "GA", "EN");
+        $toShow = '';
+        foreach ($langs as $lang) {
+            $toShow = $toShow . "<a onclick=\"setLang('$lang')\">$lang</a> | ";
+        }
+        echo "<div>" . substr($toShow,0,-3) ."</div>";
     }
 
     protected function includeButton($icon, $button_id, $method, $controller, $action, $object_data = null){
@@ -243,36 +255,37 @@ abstract class BaseView{
         echo '</form>';
     }
 
-    protected function includeLink($text, $name, $method, $controller, $action){
+    protected function includeLink($textCode, $name, $method, $controller, $action){
         ?>
             <form name="<?=$name?>" action="index.php" method="<?=$method?>">
-                <a onclick="sendForm(document.<?=$name?>, '<?=$controller?>', '<?=$action?>', true)"><?=$text?></a>
+                <a class="<?=$textCode?>" onclick="sendForm(document.<?=$name?>, '<?=$controller?>', '<?=$action?>', true)"></a>
             </form>
         <?php
     }
 
-    protected function includeTitle($title, $tag){
+    protected function includeTitle($titleCode, $tag){
         $valid_title_tags = array("h1","h2","h3","h4","h5","h6");
         if(in_array($tag, $valid_title_tags)){
-            echo "<$tag class='i18n'>$title</$tag>";
+            echo "<$tag class='$titleCode'></$tag>";
         }else{
-            echo "<h1 class='i18n'>$title</h1>";
+            echo "<h1 class='$titleCode'></h1>";
         }
     }
 
-    protected function includeShowInfo($title, $info){
+    protected function includeShowInfo($titleCode, $info){
         ?>
-            <p>
-                <strong><?= $title ?>:</strong>
-                <span><?= $info ?></span>
-            </p>
+            <p><strong class="<?= $titleCode ?>"></strong><span>: <?= $info ?></span></p>
         <?php
     }
 
-    protected function includeShowList($list, $title, $noneMsg, $name, $id = null){
-        echo "<p><strong>$title: <strong>";
+    protected function includeShowDate($titleCode, $date){
+        $this->includeShowInfo($titleCode, $this->formatDate($date));
+    }
+
+    protected function includeShowList($list, $titleCode, $noneMsgCode, $name, $id = null){
+        echo "<p><strong class='$titleCode'></strong>";
         if(!count($list)){
-            echo "<span>$noneMsg</span></p>";
+            echo "<span class='$noneMsgCode'></span></p>";
         }else{
             echo '</p>';
             echo '<ul>';
@@ -291,9 +304,9 @@ abstract class BaseView{
         echo "<input type='hidden' name='$atribute' value='$value'/>";
     }
 
-    protected function includeTextField($label, $atribute, $value = null){
+    protected function includeTextField($labelCode, $atribute, $value = null){
         $valueTag = ($value !== null) ? "value='$value'" : '';
-        ?><div class="form-group"><label for="<?=$atribute?>"><?=$label?></label><input type="text" name="<?=$atribute?>" <?=$valueTag?>/></div><?php
+        ?><div class="form-group"><label class="<?=$labelCode?>" for="<?=$atribute?>"></label><input type="text" name="<?=$atribute?>" <?=$valueTag?>/></div><?php
     }
 
     protected function includeReadOnlyField($label, $atribute, $value = null){
@@ -301,11 +314,11 @@ abstract class BaseView{
         ?><div class="form-group"><label for="<?=$atribute?>"><?=$label?></label><input type="text" name="<?=$atribute?>" <?=$valueTag?> readonly="readonly"/></div><?php
     }
 
-    protected function includePasswordField($label, $atribute, $value = null){
+    protected function includePasswordField($labelCode, $atribute, $value = null){
         $valueTag = ($value !== null) ? "value='$value'" : '';
         ?>
             <div class="form-group">
-                <label for="<?=$atribute?>"><?=$label?></label> 
+                <label class="<?=$labelCode?>" for="<?=$atribute?>"></label> 
                 <input type="password" name="<?=$atribute?>" <?=$valueTag?>/>
             </div>
         <?php
@@ -321,23 +334,23 @@ abstract class BaseView{
         <?php
     }
 
-    protected function includeDateField($label, $atribute, $useMinDateAsCurrent, $value = 'dd/mm/yyyy'){
+    protected function includeDateField($labelCode, $atribute, $useMinDateAsCurrent, $value = 'dd/mm/yyyy'){
         if($value !== 'dd/mm/yyyy') {
             $d = DateTime::createFromFormat('Y-m-d', $value);
             $value = date_format($d,'d/m/Y');
         }
-        $this->includeDatetimeField($label, $atribute, 'DD/MM/YYYY', $value, $useMinDateAsCurrent);
+        $this->includeDatetimeField($labelCode, $atribute, 'DD/MM/YYYY', $value, $useMinDateAsCurrent);
     }
     
-    protected function includeTimeField($label, $atribute, $value = 'hh:mm'){
-        $this->includeDatetimeField($label, $atribute, 'HH:00', $value);
+    protected function includeTimeField($labelCode, $atribute, $value = 'hh:mm'){
+        $this->includeDatetimeField($labelCode, $atribute, 'HH:00', $value);
     }
 
-    private function includeDatetimeField($label, $atribute, $format, $value, $useMinDateAsCurrent = false){
+    private function includeDatetimeField($labelCode, $atribute, $format, $value, $useMinDateAsCurrent = false){
         $icon = ($format === 'DD/MM/YYYY') ? 'fa fa-calendar' : 'fa fa-clock';
         $valueTag = ($value !== null) ? "value='$value'" : '';
         ?>
-            <label for="<?=$atribute?>"><?=$label?></label>
+            <label class="<?=$labelCode?>" for="<?=$atribute?>"></label>
             <div class='input-group date' id='<?=$atribute?>'>
                 <input type='text' class="form-control" name="<?=$atribute?>" <?=$valueTag?> readonly />
                 <span class="input-group-addon">
@@ -396,9 +409,9 @@ abstract class BaseView{
             // Headers
             echo "<tr>";
             foreach($this->data["atributeNames"] as $atribute){
-                echo "<th>" . $atribute . "</th>";
+                echo "<th class='i18n-$atribute'></th>";
             }
-            echo "<th>Opciones</th>";
+            echo "<th class='i18n-options'></th>";
             echo "</tr>";
 
             // Rows
@@ -406,9 +419,13 @@ abstract class BaseView{
                 echo "<tr>";
 
                     // Atribute columns
-                    foreach($row as $atribute){
+                    foreach($row as $atribute => $value){
                         $optionsData["row"] = $row;
-                        echo "<td>" . $atribute ."</td>";
+                        if (strpos($atribute, 'FECHA') !== false){ // Parse date to format
+                            $d = DateTime::createFromFormat('Y-m-d', $value);
+                            $value = date_format($d,'d/m/Y');
+                        }
+                        echo "<td>" . $value ."</td>";
                     }
 
                     $this->includeOptions($optionsData);

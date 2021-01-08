@@ -288,10 +288,10 @@ class BaseModel {
         $toExplore = in_array("*", static::$atributesForSearch) ? static::$atributeNames : static::$atributesForSearch;
 
         foreach($toExplore as $name){
-            $toReplace = array($entityName,"_");
-            $replacement = array("", " ");
+            $toReplace = array($entityName);
+            $replacement = array("");
             $name =  str_replace($toReplace, $replacement, $name);
-            //$name = substr($name,0,-1);
+            $name = strtolower(substr($name,0,-1));
             array_push($formatted, $name);
         }
 

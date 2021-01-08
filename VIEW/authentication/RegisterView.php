@@ -9,15 +9,15 @@ class RegisterView extends AuthenticationView{
         ?>
             <form name="registerForm" action="index.php" method="post">
                 <?php
-                $this->includeTextField("Login","LOGIN_USUARIO");
-                $this->includeTextField("Nombre","NOMBRE_USUARIO");
-                $this->includeTextField("Correo electrónico","EMAIL_USUARIO");
-                $this->includePasswordField("Contraseña","PASSWD_USUARIO");
+                $this->includeTextField("i18n-login","LOGIN_USUARIO");
+                $this->includeTextField("i18n-username","NOMBRE_USUARIO");
+                $this->includeTextField("i18n-email","EMAIL_USUARIO");
+                $this->includePasswordField("i18n-password","PASSWD_USUARIO");
                 ?>
                 <span class="<?=$this->icons["LOGIN"]?>" onclick="sendCredentialsForm(document.registerForm, 'AuthenticationController', 'register', true)"></span>
             </form>
         <?php
-        $this->includeLink("Iniciar sesión", "goToLogin", "post", "AuthenticationController", "loginForm");
+        $this->includeLink("i18n-goToLogin", "goToLogin", "post", "AuthenticationController", "loginForm");
     }
 }
 ?>

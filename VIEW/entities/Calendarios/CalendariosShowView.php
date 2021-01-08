@@ -11,16 +11,16 @@ class CalendariosShowView extends BaseView{
         
         $this->includeTitle("Detalles de calendario", "h1");
         echo "<div>";
-            $this->includeShowInfo("ID", $this->data["ID_CALENDARIO"]);
-            $this->includeShowInfo("Nombre", $this->data["NOMBRE_CALENDARIO"]);
-            $this->includeShowInfo("Fecha de inicio", $this->data["FECHA_INICIO_CALENDARIO"]);
-            $this->includeShowInfo("Fecha de fin", $this->data["FECHA_FIN_CALENDARIO"]);
-            $this->includeShowInfo("Hora de inicio", $this->data["HORA_INICIO_CALENDARIO"]);
-            $this->includeShowInfo("Hora de fin", $this->data["HORA_FIN_CALENDARIO"]);
+            $this->includeShowInfo("i18n-id", $this->data["ID_CALENDARIO"]);
+            $this->includeShowInfo("i18n-nombre", $this->data["NOMBRE_CALENDARIO"]);
+            $this->includeShowDate("i18n-fecha_inicio", $this->data["FECHA_INICIO_CALENDARIO"]);
+            $this->includeShowDate("i18n-fecha_fin", $this->data["FECHA_FIN_CALENDARIO"]);
+            $this->includeShowInfo("i18n-hora_inicio", $this->data["HORA_INICIO_CALENDARIO"]);
+            $this->includeShowInfo("i18n-hora_fin", $this->data["HORA_FIN_CALENDARIO"]);
         echo "</div>";
         echo "<div>";
-            $this->includeShowInfo("Descripción", $this->data["DESCRIPCION_CALENDARIO"]);
-            $this->includeShowList($this->data["resources"], "Recursos asociados", "Todavía no hay ningún recurso ascociado a este calendario.", "NOMBRE_RECURSO", "ID_RECURSO" );
+            $this->includeShowInfo("i18n-descripcion", $this->data["DESCRIPCION_CALENDARIO"]);
+            $this->includeShowList($this->data["resources"], "i18n-assocResources", "i18n-nonAssocResources", "NOMBRE_RECURSO", "ID_RECURSO" );
         echo "</div>";
     }
 }

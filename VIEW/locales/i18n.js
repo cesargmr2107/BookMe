@@ -1,5 +1,3 @@
-var translations;
-
 function setLang(lang = null) {
 
     // Check lang
@@ -17,34 +15,41 @@ function setLang(lang = null) {
     // Reset lang cookie
     setCookie('lang', lang, 1);
 
-    // Load translations
+    // Translate to lang
     switch (lang) {
-        case 'EN': translations = translations_en;
+        case 'EN': translate(translations_en);
             break;
 
         case 'GA':
             break;
     
-        default: translations = translations_es;
+        default: translate(translations_es);
             break;
     }
-
-    // Get elements to translate
-    translate(
-        document.getElementsByClassName("i18n")
-    );
-
 }
 
-function translate(toTranslate){
-    console.log("Call:")
-    console.log(toTranslate);
-    for(var i = 0; i < toTranslate.length; i++) {
-        if(toTranslate[i].hasChildNodes()){
-            translate(toTranslate[i].childNodes);
-        } else {
-            var newText = toTranslate[i].textContent;
-            toTranslate[i].textContent = translations[newText];
+function translate(translations){
+    
+    // Iterate over keys
+    for(var key in translations) {
+        
+        // Get by class
+        var elements = document.getElementsByClassName(key);
+
+        // Get inputs: placeholders need to be translated
+        var inputs = document.getElementsByTagName('input');
+
+        for (var elem in elements) {
+            // Se recorre el nuevo array y se colocan en el DOM los textos
+            elements[elem].innerHTML = translations[key];
+        }
+  
+        // Iterate over inputs and if necessary translate placeholder
+        for(var i = 0; i < inputs.length; i++){
+        
+            if(inputs[i].placeholder == key){
+                inputs[i].placeholder = translations[key];
+            }
         }
     }
 }
