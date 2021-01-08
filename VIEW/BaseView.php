@@ -70,8 +70,11 @@ abstract class BaseView{
                 <link href="./VIEW/libraries/fontawesome/font-awesome.min.css" rel="stylesheet"/>
                 <script src="./VIEW/libraries/fontawesome/ae3641038e.js" crossorigin="anonymous"></script>
         
-                <!-- My scripts -->
+                <!-- My scripts: common and locales -->
                 <script type="text/javascript" src="./VIEW/js/common.js"></script> 
+                <script type="text/javascript" src="./VIEW/locales/lang.js"></script> 
+                <script type="text/javascript" src="./VIEW/locales/lang_es.js"></script> 
+                <script type="text/javascript" src="./VIEW/locales/lang_en.js"></script> 
                 <?php
                     if($this->jsFiles){
                         foreach ($this->jsFiles as $file) {
@@ -90,7 +93,8 @@ abstract class BaseView{
                 ?>
         
             </head>
-            <body>
+
+            <body onload="setLang()">
         
         <?php
     }
@@ -250,9 +254,9 @@ abstract class BaseView{
     protected function includeTitle($title, $tag){
         $valid_title_tags = array("h1","h2","h3","h4","h5","h6");
         if(in_array($tag, $valid_title_tags)){
-            echo "<$tag>$title</$tag>";
+            echo "<$tag class='i18n'>$title</$tag>";
         }else{
-            echo "<h1>$title</h1>";
+            echo "<h1 class='i18n'>$title</h1>";
         }
     }
 

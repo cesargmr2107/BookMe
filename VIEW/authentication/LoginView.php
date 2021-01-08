@@ -5,7 +5,7 @@ include_once './VIEW/authentication/AuthenticationView.php';
 class LoginView extends AuthenticationView{
 
     protected function body(){
-        $this->includeTitle("Bienvenido a <span>BookMe</span>", "h1");
+        $this->includeTitle("<span>Bienvenido a </span><span>BookMe</span>", "h1");
         ?>
             <form name="loginForm" action="index.php" method="post">
                 <?php
