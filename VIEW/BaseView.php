@@ -70,8 +70,9 @@ abstract class BaseView{
                 <link href="./VIEW/libraries/fontawesome/font-awesome.min.css" rel="stylesheet"/>
                 <script src="./VIEW/libraries/fontawesome/ae3641038e.js" crossorigin="anonymous"></script>
         
-                <!-- My scripts: common and locales -->
+                <!-- My scripts: common, validation and locales -->
                 <script type="text/javascript" src="./VIEW/js/common.js"></script> 
+                <script type="text/javascript" src="./VIEW/js/validation.js"></script> 
                 <script type="text/javascript" src="./VIEW/locales/i18n.js"></script> 
                 <script type="text/javascript" src="./VIEW/locales/lang_es.js"></script> 
                 <script type="text/javascript" src="./VIEW/locales/lang_en.js"></script> 
@@ -301,17 +302,17 @@ abstract class BaseView{
     }
 
     protected function includeHiddenField($atribute, $value){
-        echo "<input type='hidden' name='$atribute' value='$value'/>";
+        echo "<input type='hidden' id='$atribute' name='$atribute' value='$value'/>";
     }
 
     protected function includeTextField($labelCode, $atribute, $value = null){
         $valueTag = ($value !== null) ? "value='$value'" : '';
-        ?><div class="form-group"><label class="<?=$labelCode?>" for="<?=$atribute?>"></label><input type="text" name="<?=$atribute?>" <?=$valueTag?>/></div><?php
+        ?><div class="form-group"><label class="<?=$labelCode?>" for="<?=$atribute?>"></label><input type="text" id="<?=$atribute?>" name="<?=$atribute?>" <?=$valueTag?>/></div><?php
     }
 
     protected function includeReadOnlyField($labelCode, $atribute, $value = null){
         $valueTag = ($value !== null) ? "value='$value'" : '';
-        ?><div class="form-group"><label class="<?=$labelCode?>" for="<?=$atribute?>"></label><input type="text" name="<?=$atribute?>" <?=$valueTag?> readonly="readonly"/></div><?php
+        ?><div class="form-group"><label class="<?=$labelCode?>" for="<?=$atribute?>"></label><input type="text" id="<?=$atribute?>" name="<?=$atribute?>" <?=$valueTag?> readonly="readonly"/></div><?php
     }
 
     protected function includePasswordField($labelCode, $atribute, $value = null){
@@ -319,7 +320,7 @@ abstract class BaseView{
         ?>
             <div class="form-group">
                 <label class="<?=$labelCode?>" for="<?=$atribute?>"></label> 
-                <input type="password" name="<?=$atribute?>" <?=$valueTag?>/>
+                <input type="password" id="<?=$atribute?>" name="<?=$atribute?>" <?=$valueTag?>/>
             </div>
         <?php
     }
@@ -329,7 +330,7 @@ abstract class BaseView{
         ?>
             <div class="form-group">
                 <label for="<?=$atribute?>"><?=$label?></label> 
-                <input type="number" name="<?=$atribute?>" <?=$valueTag?>/>
+                <input type="number" id="<?=$atribute?>" name="<?=$atribute?>" <?=$valueTag?>/>
             </div>
         <?php
     }
@@ -519,6 +520,30 @@ abstract class BaseView{
                     createCalendar(resource_events);
                 });
             </script>
+        <?php
+    }
+
+
+    protected function includeValidationModal(){
+        ?>
+            <div class="modal" id="validationModal">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                    
+                        <!-- Modal Header  -->
+                        <div class="modal-header">
+                            <h4 class="i18n-formError modal-title"></h4>
+                        </div>
+    
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <ul id="errorMsgs"></ul>
+                            <span class="<?= $this->icons["CANCEL"] ?>" onclick="closeModal()"></span>
+                        </div>
+    
+                    </div>
+                </div>
+            </div>
         <?php
     }
 }

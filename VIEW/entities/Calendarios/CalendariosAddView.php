@@ -16,9 +16,10 @@ class CalendariosAddView extends BaseView{
                     $this->includeTimeField("i18n-hora_inicio", 'HORA_INICIO_CALENDARIO');
                     $this->includeTimeField("i18n-hora_fin", 'HORA_FIN_CALENDARIO');
                 ?>
-                <span class="<?=$this->icons["ADD"]?>" onclick="sendForm(document.addForm, 'CalendariosController', 'add', true)"></span>
+                <span class="<?=$this->icons["ADD"]?>" onclick="sendForm(document.addForm, 'CalendariosController', 'add', checkCalendarAddForm())"></span>
             </form>
         <?php
+        $this->includeValidationModal();
     }
 
 }

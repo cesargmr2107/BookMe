@@ -101,15 +101,6 @@ function addBooking(){
             
     }
 
-    function formatDate($dateStr){
-        if($dateStr == undefined) {
-            return undefined;
-        }else{
-            var d = $dateStr.split("/");
-            return `${d[2]}-${d[1]}-${d[0]}`;
-        }
-    }
-
     function removeEvent(eventId){
         
         // Remove from view

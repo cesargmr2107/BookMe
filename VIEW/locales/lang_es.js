@@ -113,4 +113,29 @@ var translations_es = {
     "i18n-addInterval" : "Añade un intervalo a tu reserva",
 
 
+    /* VALIDATIONS */
+    
+    // Login and Register
+    "i18n-formError" : "El formulario tiene errores",
+    "i18n-emptyLogin" : "No has introducido tu login",
+    "i18n-emptyPassword" : "No has introducido tu contraseña",
+    "i18n-loginLength" : "El login debe tener entre 3 y 15 caracteres",
+    "i18n-loginRegex" : "El login sólo admite caracteres alfanuméricos y '_'",
+    "i18n-usernameLength" : "El nombre de usuario admite un máximo de 60 caracteres",
+    "i18n-usernameRegex" : "El nombre de usuario sólo puede tener letras y espacios",
+    "i18n-mailRegex" : "El email tiene un formato incorrecto",
+
+    // Comon
+
+    "i18n-nameLength" : "El nombre admite un máximo de 40 caracteres",
+    "i18n-nameRegex" : "El nombre sólo puede tener letras y espacios",
+    "i18n-descrLength" : "La descripción admite un máximo de 40 caracteres",
+    "i18n-descrRegex" : "La descripción sólo puede tener letras y espacios",
+    "i18n-noStartDate" : "Debes introducir la fecha de inicio",
+    "i18n-noEndDate" : "Debes introducir la fecha de fin",
+    "i18n-badDateRange" : "La fecha de fin debe ser igual o superior a la de inicio",
+    "i18n-noStartTime" : "Debes introducir la hora de inicio",
+    "i18n-noEndTime" : "Debes introducir la hora de fin",
+    "i18n-badTimeRange" : "La hora de fin debe ser superior a la de inicio",
+
 }
