@@ -46,7 +46,7 @@ var translations_es = {
 
     /* CALENDAR VIEWS */
     "i18n-assocResources" : "Recursos asociados:",
-    "i18n-nonAssocResources" : "Todavía no hay ningún recurso ascociado a este calendario.",
+    "i18n-nonAssocResources" : "Todavía no hay ningún recurso asociado a este calendario.",
     "i18n-editCalendar" : "Modificar información de calendario",
     "i18n-calendarInfo" : "Información de calendario",
 
@@ -101,6 +101,9 @@ var translations_es = {
     "i18n-requestedOn" : "Solicitud del ",
     "i18n-positiveConfirm" : "¿Quieres <strong>confirmar el uso</strong> de la reserva hecha por ",
     "i18n-negativeConfirm" : "¿Quieres <strong>confirmar el no uso</strong> de la reserva hecha por ",
+    "i18n-acceptConfirm" : "¿Quieres <strong>aceptar</strong> la reserva hecha por ",
+    "i18n-automaticReject" : "Se rechazarán automáticamente todas las reservas que coincidan con esta en el tiempo utilizando como motivo de rechazo el mensaje 'Tu reserva ha sido rechazada por solapamientos con otras'.",
+    "i18n-rejectConfirm" : "¿Quieres <strong>rechazar</strong> la reserva hecha por ",
     "i18n-of" : " de ",
     "i18n-for" : " para el ",
     "i18n-login_usuario" : "Usuario",
@@ -112,7 +115,6 @@ var translations_es = {
     "i18n-selectedResource" : "Recurso seleccionado",
     "i18n-addInterval" : "Añade un intervalo a tu reserva",
 
-
     /* VALIDATIONS */
     
     // Login and Register
@@ -123,9 +125,9 @@ var translations_es = {
     "i18n-loginRegex" : "El login sólo admite caracteres alfanuméricos y '_'",
     "i18n-usernameLength" : "El nombre de usuario admite un máximo de 60 caracteres",
     "i18n-usernameRegex" : "El nombre de usuario sólo puede tener letras y espacios",
-    "i18n-mailRegex" : "El email tiene un formato incorrecto",
+    "i18n-mailRegex" : "El correo electrónico tiene un formato incorrecto",
 
-    // Comon
+    // Common
 
     "i18n-nameLength" : "El nombre admite un máximo de 40 caracteres",
     "i18n-nameRegex" : "El nombre sólo puede tener letras y espacios",
@@ -137,6 +139,6 @@ var translations_es = {
     "i18n-noStartTime" : "Debes introducir la hora de inicio",
     "i18n-noEndTime" : "Debes introducir la hora de fin",
     "i18n-badTimeRange" : "La hora de fin debe ser superior a la de inicio",
-    "i18n-badPrice" : "La tarifa del recurso debe ser un valor numérico entre 0€ y 999€",
+    "i18n-badPrice" : "La tarifa del recurso debe ser un valor numérico entre 0€ y 999€"
 
 }

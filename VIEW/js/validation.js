@@ -314,3 +314,48 @@ function checkResourceStatsForm(){
     };
     return doChecks(form, toCheck);
 }
+
+function checkAddIntervalForm(){
+    var form = document.addIntervalForm;
+    var toCheck = {
+        FECHA_INICIO_SUBRESERVA: {
+            checkNotEmpty: {
+                args: {},
+                code: "i18n-noStartDate"
+            }
+        },
+        FECHA_FIN_SUBRESERVA: {
+            checkNotEmpty: {
+                args: {},
+                code: "i18n-noEndDate"
+            },
+            checkDateRange: {
+                args: {
+                    startDate: $('#FECHA_INICIO_SUBRESERVA').data('date'),
+                    endDate: $('#FECHA_FIN_SUBRESERVA').data('date')
+                },
+                code: "i18n-badDateRange"
+            }
+        },
+        HORA_INICIO_SUBRESERVA: {
+            checkNotEmpty: {
+                args: {},
+                code: "i18n-noStartTime"
+            }
+        },
+        HORA_FIN_SUBRESERVA: {
+            checkNotEmpty: {
+                args: {},
+                code: "i18n-noEndTime"
+            },
+            checkTimeRange: {
+                args: {
+                    startTime: $('#HORA_INICIO_SUBRESERVA').data('date'),
+                    endTime: $('#HORA_FIN_SUBRESERVA').data('date')
+                },
+                code: "i18n-badTimeRange"
+            }
+        }
+    };
+    return doChecks(form, toCheck);
+}

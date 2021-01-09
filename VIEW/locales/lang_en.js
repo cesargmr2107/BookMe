@@ -67,6 +67,7 @@ var translations_en = {
     "i18n-calendar" : "Availability calendar",
     "i18n-resourceInfo" : "Resource information",
     "i18n-resourceData" : "Resource-specific data",
+    "i18n-availability" : "Availability and Occupancy",
     "i18n-editResource" : "Edit resource information",
     "i18n-resourceStats" : "Resource stats",
     "i18n-resourceBookings" : "Resource bookings",
@@ -100,6 +101,9 @@ var translations_en = {
     "i18n-requestedOn" : "Requested on ",
     "i18n-positiveConfirm" : "Would you like to <strong>confirm the use</strong> of the booking made by ",
     "i18n-negativeConfirm" : "Would you like to <strong>confirm the unuse</strong> of the booking made by ",
+    "i18n-acceptConfirm" : "Would you like to <strong>accept</strong> the booking made by ",
+    "i18n-automaticReject" : "All overlapping pending bookings will be automatically rejected giving the reason 'Your booking has been rejected due to booking overlappings'.",
+    "i18n-rejectConfirm" : "Would you like to <strong>reject</strong> the booking made by ",
     "i18n-of" : " of ",
     "i18n-for" : " for the ",
     "i18n-login_usuario" : "User",
@@ -109,8 +113,32 @@ var translations_en = {
     "i18n-pendingBookingsByResource" : "Resource pending bookings",
     "i18n-cost" : "Cost:",
     "i18n-selectedResource" : "Selected resource",
+    "i18n-addInterval" : "Add an interval to your booking",
 
+    /* VALIDATIONS */
+    
+    // Login and Register
+    "i18n-formError" : "The form has errors",
+    "i18n-emptyLogin" : "Enter your login",
+    "i18n-emptyPassword" : "Enter your password",
+    "i18n-loginLength" : "The login must have between 3 and 15 characters",
+    "i18n-loginRegex" : "The login only admits '_' and alphanumeric characters.",
+    "i18n-usernameLength" : "The name admits a maximum of 60 characters",
+    "i18n-usernameRegex" : "The name only admits letters and spaces",
+    "i18n-mailRegex" : "The email has an invalid format",
 
+    // Common
 
+    "i18n-nameLength" : "The name admits a maximum of 40 characteres",
+    "i18n-nameRegex" : "The name can only have letters and spaces",
+    "i18n-descrLength" : "The description admits a maximum of 40 characteres",
+    "i18n-descrRegex" : "The description can only have letters and spaces",
+    "i18n-noStartDate" : "Enter the start date",
+    "i18n-noEndDate" : "Enter the end date",
+    "i18n-badDateRange" : "The end date must be greater or equal than the start date",
+    "i18n-noStartTime" : "Enter the start time",
+    "i18n-noEndTime" : "Enter the end time",
+    "i18n-badTimeRange" : "The end time must be greater or equal than the start time",
+    "i18n-badPrice" : "The resource price has to be a number between  0€ and 999€",
 
 }

@@ -49,7 +49,7 @@ class ReservasPendientesManageView extends BaseView{
 
     }
 
-    private function includeAcceptButtonAndModal($bookingId, $resourceId, $fechaSolicitud, $user){
+    private function includeAcceptButtonAndModal($bookingId, $resourceId, $date, $user){
         ?>
             <!-- Accept button -->
             <span class="<?= $this->icons["ACCEPT"]?>" data-toggle="modal" href="#acceptModal<?= $bookingId ?>"></span>
@@ -61,17 +61,20 @@ class ReservasPendientesManageView extends BaseView{
                     
                         <!-- Modal Header  -->
                         <div class="modal-header">
-                            <h4 class="modal-title">¿Estás seguro de que quieres aceptar la reserva de '<?= $user?>' para el <?= $fechaSolicitud?>?</h4>
+                        <span class="i18n-acceptConfirm"></span>
+                                <strong><?=$user?></strong>
+                                <span class="i18n-for"></span>
+                                <strong><?=$date?></strong>?
                         </div>
 
                         <!-- Modal body -->
                         <div class="modal-body">
-                            <p>Se rechazarán automáticamente todas las reservas que coincidan con esta en el tiempo utilizando como motivo de rechazo el mensaje "Tu reserva ha sido rechazada porque se solapaba en el tiempo con otra de mayor prioridad"</p>
+                            <p class="i18n-automaticReject"></p>
                             <span class="<?= $this->icons["CANCEL"] ?>" data-dismiss="modal"></span>
                             <?php
                                 $data = array(
                                     "ID_RESERVA" => $bookingId,
-                                    "ID_RECURSO" => $resourceId
+                                    "ID_RECURSO" => $resourceId,
                                 );
                                 $this->includeButton("ACCEPT", "acceptModal$bookingId", "post", "ReservasController", "acceptPending", $data)
                             ?>
@@ -83,7 +86,7 @@ class ReservasPendientesManageView extends BaseView{
         <?php
     }
 
-    private function includeRejectButtonAndModal($bookingId, $resourceId, $fechaSolicitud, $user){
+    private function includeRejectButtonAndModal($bookingId, $resourceId, $date, $user){
         ?>
             <!-- Reject button -->
             <span class="<?= $this->icons["CANCEL"]?>" data-toggle="modal" href="#rejectModal<?= $bookingId ?>"></span>
@@ -95,7 +98,12 @@ class ReservasPendientesManageView extends BaseView{
                     
                         <!-- Modal Header  -->
                         <div class="modal-header">
-                            <h4 class="modal-title">¿Estás seguro de que quieres aceptar la reserva de '<?= $user?>' para el <?= $fechaSolicitud?>?</h4>
+                            <h4 class="modal-title">
+                                <span class="i18n-rejectConfirm"></span>
+                                <strong><?=$user?></strong>
+                                <span class="i18n-for"></span>
+                                <strong><?=$date?></strong>?
+                            </h4>
                         </div>
 
                         <!-- Modal body -->
@@ -104,8 +112,9 @@ class ReservasPendientesManageView extends BaseView{
                                 <?php
                                     $this->includeHiddenField("ID_RESERVA", $bookingId);
                                     $this->includeHiddenField("ID_RECURSO", $resourceId);
-                                    $this->includeTextField("Motivo de rechazo", "MOTIVO_RECHAZO_RESERVA");
+                                    $this->includeTextField("i18n-bookingRejection", "MOTIVO_RECHAZO_RESERVA");
                                 ?>
+                                <p id="errorMsg"></p>
                                 <span class="<?= $this->icons["CANCEL"] ?>" data-dismiss="modal"></span>
                                 <span class="<?=$this->icons["ACCEPT"]?>" onclick="sendForm(document.rejectForm<?=$bookingId?>, 'ReservasController', 'rejectPending', true)"></span>
                             </form>
