@@ -18,7 +18,7 @@ function setLang(lang = null) {
         case 'EN': translations = translations_en;
             break;
 
-        case 'GL':
+        case 'GL': translations = translations_gl
             break;
     
         default: translations = translations_es;

@@ -76,6 +76,7 @@ abstract class BaseView{
                 <script type="text/javascript" src="./VIEW/locales/i18n.js"></script> 
                 <script type="text/javascript" src="./VIEW/locales/lang_es.js"></script> 
                 <script type="text/javascript" src="./VIEW/locales/lang_en.js"></script> 
+                <script type="text/javascript" src="./VIEW/locales/lang_gl.js"></script>
                 <?php
                     if($this->jsFiles){
                         foreach ($this->jsFiles as $file) {

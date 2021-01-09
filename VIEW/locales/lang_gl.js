@@ -1,4 +1,4 @@
-var translations_es = {
+var translations_gl = {
 
     /* COMMON FOR SEVERAL VIEWS */
     "i18n-login" : "Login",
