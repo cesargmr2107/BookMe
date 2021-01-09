@@ -27,14 +27,14 @@ class CalendariosModel extends BaseModel {
         parent::__construct();
         
         // Overwrite action codes
-        $this->actionMsgs[parent::ADD_SUCCESS]["code"] = "333";
-        $this->actionMsgs[parent::ADD_FAIL]["code"] = "333";
+        $this->actionCodes[parent::ADD_SUCCESS]["code"] = "AC111";
+        $this->actionCodes[parent::ADD_FAIL]["code"] = "AC011";
 
-        $this->actionMsgs[parent::EDIT_SUCCESS]["code"] = "333";
-        $this->actionMsgs[parent::EDIT_FAIL]["code"] = "333";
+        $this->actionCodes[parent::EDIT_SUCCESS]["code"] = "AC112";
+        $this->actionCodes[parent::EDIT_FAIL]["code"] = "AC012";
 
-        $this->actionMsgs[parent::DELETE_SUCCESS]["code"] = "333";
-        $this->actionMsgs[parent::EDIT_FAIL]["code"] = "333";
+        $this->actionCodes[parent::DELETE_SUCCESS]["code"] = "AC113";
+        $this->actionCodes[parent::EDIT_FAIL]["code"] = "AC013";
 
         // Define DB table
         $this->tableName = "CALENDARIOS_DE_USO";
@@ -46,29 +46,30 @@ class CalendariosModel extends BaseModel {
         // Subscribe atributes to validations                          
         $this->checks = array (
             "ID_CALENDARIO" => array(
-                "checkAutoKey" => array('ID_CALENDARIO', '222', 'El id del calendario (gestionado por el sistema) es un entero'),
+                "checkAutoKey" => array('ID_CALENDARIO', 'AT101'),
             ),
             "NOMBRE_CALENDARIO" => array(
-                "checkSize" => array('NOMBRE_CALENDARIO', 6, 40, '222', 'El nombre debe tener entre 6 y 40 caracteres'),
+                "checkSize" => array('NOMBRE_CALENDARIO', 6, 40, 'AT111'),
+                "checkRegex" => array('NOMBRE_CALENDARIO', '/^[a-zA-Z ]+$/', 'AT112')
             ),
             "DESCRIPCION_CALENDARIO" => array(
-                "checkSize" => array('NOMBRE_CALENDARIO', 10, 200, '222', 'La descripción debe tener entre 10 y 200 caracteres'),
+                "checkSize" => array('DESCRIPCION_CALENDARIO', 0, 100, 'AT121'),
+                "checkRegex" => array('DESCRIPCION_CALENDARIO', '/^[a-zA-Z ]+$/', 'AT122')
             ),
             "FECHA_INICIO_CALENDARIO" => array(
-                "checkDate" => array('FECHA_INICIO_CALENDARIO', '222', 'La fecha debe tener el formato dd-mm-yyyy')
+                "checkDate" => array('FECHA_INICIO_CALENDARIO', 'AT131')
             ),
             "FECHA_FIN_CALENDARIO" => array( 
-                "checkDate" => array('FECHA_FIN_CALENDARIO', '222', 'La fecha debe tener el formato dd-mm-yyyy'),
-                "checkDateInterval" => array('FECHA_INICIO_CALENDARIO', 'FECHA_FIN_CALENDARIO', '222', 'La fecha de inicio debe ser anterior a la fecha de fin')
+                "checkDate" => array('FECHA_FIN_CALENDARIO', 'AT141'),
+                "checkDateInterval" => array('FECHA_INICIO_CALENDARIO', 'FECHA_FIN_CALENDARIO', 'AT142')
             ),
             "HORA_INICIO_CALENDARIO" => array(
-                "checkTime" => array('HORA_INICIO_CALENDARIO', '222', 'La hora debe tener el formato hh:mm')
+                "checkTime" => array('HORA_INICIO_CALENDARIO', 'AT151')
             ),
             "HORA_FIN_CALENDARIO" => array( 
-                "checkTime" => array('HORA_FIN_CALENDARIO', '222', 'La hora debe tener el formato hh:mm')
+                "checkTime" => array('HORA_FIN_CALENDARIO', 'AT161')
             )
         );
-
 
         $this->checksForDelete = array(
             "ID_CALENDARIO" => array(

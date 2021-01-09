@@ -18,6 +18,10 @@ var translations_gl = {
     "i18n-welcome" : "Benvido a ",
     "i18n-goToLogin" : "Inicia sesión",
     "i18n-goToRegister" : "Crea unha conta",
+    
+    /* MESSAGE VIEW */
+    "i18n-systemMsgs" : "Mensaxes do sistema",
+    "i18n-atributeErrors" : "Erro(s) de atributo",
 
     /* NAVIGATION BAR AND TITLES */
 
@@ -129,9 +133,9 @@ var translations_gl = {
 
     // Common
 
-    "i18n-nameLength" : "O nome admite un máximo de 40 caracteres",
+    "i18n-nameLength" : "O nome debe ter entre 6 e 40 caracteres",
     "i18n-nameRegex" : "O nome só pode ter letras e espazos",
-    "i18n-descrLength" : "A descrición admite un máximo de 40 caracteres",
+    "i18n-descrLength" : "A descrición admite un máximo de 100 caracteres",
     "i18n-descrRegex" : "A descrición só pode ter letras e espazos",
     "i18n-noStartDate" : "Debes introducir a data de inicio",
     "i18n-noEndDate" : "Debes introducir a data de fin",

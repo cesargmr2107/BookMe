@@ -30,14 +30,14 @@ class UsuariosModel extends BaseModel {
                
         // Overwrite action codes
         
-        $this->actionMsgs[parent::ADD_SUCCESS]["code"] = "111";
-        $this->actionMsgs[parent::ADD_FAIL]["code"] = "111";
+        $this->actionCodes[parent::ADD_SUCCESS]["code"] = "AC161";
+        $this->actionCodes[parent::ADD_FAIL]["code"] = "AC061";
         
-        $this->actionMsgs[parent::EDIT_SUCCESS]["code"] = "111";
-        $this->actionMsgs[parent::EDIT_FAIL]["code"] = "111";
+        $this->actionCodes[parent::EDIT_SUCCESS]["code"] = "AC162";
+        $this->actionCodes[parent::EDIT_FAIL]["code"] = "AC062";
         
-        $this->actionMsgs[parent::DELETE_SUCCESS]["code"] = "111";
-        $this->actionMsgs[parent::EDIT_FAIL]["code"] = "111";
+        $this->actionCodes[parent::DELETE_SUCCESS]["code"] = "AC163";
+        $this->actionCodes[parent::EDIT_FAIL]["code"] = "AC063";
                 
         $this->tableName = "USUARIOS";      
           
@@ -49,24 +49,24 @@ class UsuariosModel extends BaseModel {
         // Subscribe atributes to validations
         $this->checks = array (
             "LOGIN_USUARIO" => array(
-                "checkSize" => array('LOGIN_USUARIO', 3, 15, '222', 'El login debe tener de 3 a 15 caracteres'),
-                "checkRegex" => array('LOGIN_USUARIO', '/^[a-z][a-z][a-z]+[0-9]*$/', '222', 'El login solo puede letras minúsculas y números, pero no puede empezar por números')
+                "checkSize" => array('LOGIN_USUARIO', 3, 15, 'AT601'),
+                "checkRegex" => array('LOGIN_USUARIO', '/^[a-zA-Z0-9_-]*$/', 'AT602')
             ),
             "PASSWD_USUARIO" => array(
-                "checkSize" => array('PASSWD_USUARIO', 32, 32, '222', 'La contraseña se debe guardar como un hash MD5')
+                "checkSize" => array('PASSWD_USUARIO', 32, 32, 'AT611')
             ),
             "NOMBRE_USUARIO" => array(
-                "checkSize" => array('NOMBRE_USUARIO', 8, 60, '222', 'El nombre debe tener entre 8 y 60 caracteres'),
-                "checkRegex" => array('NOMBRE_USUARIO', '/^[a-zA-Z ]+$/', '222', 'El nombre solo puede tener letras y espacios')
+                "checkSize" => array('NOMBRE_USUARIO', 6, 60, 'AT621'),
+                "checkRegex" => array('NOMBRE_USUARIO', '/^[a-zA-Z -]+$/', 'AT622')
             ),
             "EMAIL_USUARIO" => array(
-                "checkRegex" => array('EMAIL_USUARIO', '/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix', '222', 'El correo electrónico es incorrecto')
+                "checkRegex" => array('EMAIL_USUARIO', '/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix', 'AT631')
             ),
             "TIPO_USUARIO" => array(
-                "checkEnum" => array('TIPO_USUARIO', static::$userTypes, '222', 'El tipo de usuario no es válido')
+                "checkEnum" => array('TIPO_USUARIO', static::$userTypes, 'AT641')
             ),
             "ES_ACTIVO" => array(
-                "checkYesOrNo" => array('ES_ACTIVO', '222', 'El usuario solo puede ser SI o NO activo')
+                "checkYesOrNo" => array('ES_ACTIVO', 'AT651')
             )
         );
     }

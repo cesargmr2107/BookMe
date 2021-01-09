@@ -22,14 +22,14 @@ class SubreservasModel extends BaseModel {
                
         // Overwrite action codes
         
-        $this->actionMsgs[parent::ADD_SUCCESS]["code"] = "1111";
-        $this->actionMsgs[parent::ADD_FAIL]["code"] = "1111";
+        $this->actionCodes[parent::ADD_SUCCESS]["code"] = "AC151";
+        $this->actionCodes[parent::ADD_FAIL]["code"] = "AC051";
         
-        $this->actionMsgs[parent::EDIT_SUCCESS]["code"] = "1111";
-        $this->actionMsgs[parent::EDIT_FAIL]["code"] = "1111";
+        $this->actionCodes[parent::EDIT_SUCCESS]["code"] = "AC152";
+        $this->actionCodes[parent::EDIT_FAIL]["code"] = "AC052";
         
-        $this->actionMsgs[parent::DELETE_SUCCESS]["code"] = "1111";
-        $this->actionMsgs[parent::EDIT_FAIL]["code"] = "1111";
+        $this->actionCodes[parent::DELETE_SUCCESS]["code"] = "AC153";
+        $this->actionCodes[parent::EDIT_FAIL]["code"] = "AC053";
         
         $this->tableName = "SUBRESERVAS";      
                   
@@ -38,24 +38,24 @@ class SubreservasModel extends BaseModel {
         // Subscribe atributes to validations
         $this->checks = array (
             "ID_RESERVA" => array(
-                "checkIsForeignKey" => array('ID_RESERVA', 'ID_RESERVA', 'ReservasModel', '222', 'El id de la reserva es desconocido')
+                "checkIsForeignKey" => array('ID_RESERVA', 'ID_RESERVA', 'ReservasModel', '222')
             ),
             "FECHA_INICIO_SUBRESERVA" => array(
-                "checkDate" => array('FECHA_INICIO_SUBRESERVA', '222', 'La fecha debe tener el formato dd-mm-yyyy')
+                "checkDate" => array('FECHA_INICIO_SUBRESERVA', '222')
             ),
             "FECHA_FIN_SUBRESERVA" => array(
-                "checkDate" => array('FECHA_FIN_SUBRESERVA', '222', 'La fecha debe tener el formato dd-mm-yyyy'),
-                "checkDateInterval" => array('FECHA_INICIO_SUBRESERVA', 'FECHA_FIN_SUBRESERVA', '222', 'La fecha de fin debe ser posterior a la fecha de inicio'),
-                "checkNoOverlappings" => array('', '222', 'El intervalo de reserva coincide con una reserva existente')
+                "checkDate" => array('FECHA_FIN_SUBRESERVA', '222'),
+                "checkDateInterval" => array('FECHA_INICIO_SUBRESERVA', 'FECHA_FIN_SUBRESERVA', '222'),
+                "checkNoOverlappings" => array('', '222')
             ),
             "HORA_INICIO_SUBRESERVA" => array(
-                "checkTime" => array('HORA_INICIO_SUBRESERVA', '222', 'La hora debe tener el formato hh:mm')
+                "checkTime" => array('HORA_INICIO_SUBRESERVA', '222')
             ),
             "HORA_FIN_SUBRESERVA" => array(
-                "checkTime" => array('HORA_FIN_SUBRESERVA', '222', 'La hora debe tener el formato hh:mm')
+                "checkTime" => array('HORA_FIN_SUBRESERVA', '222')
             ),
             "COSTE_SUBRESERVA" => array(
-                "checkNumeric" => array('COSTE_SUBRESERVA', '222', 'El coste de la reserva debe ser un valor numérico'),
+                "checkNumeric" => array('COSTE_SUBRESERVA', '222'),
             )
         );
     }

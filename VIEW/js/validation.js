@@ -165,7 +165,7 @@ function checkCalendarForm(form){
         NOMBRE_CALENDARIO: {
             checkLength: {
                 args: {
-                    min: 0,
+                    min: 6,
                     max: 40
                 },
                 code: "i18n-nameLength"

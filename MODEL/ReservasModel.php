@@ -35,14 +35,14 @@ class ReservasModel extends BaseModel {
                
         // Overwrite action codes
         
-        $this->actionMsgs[parent::ADD_SUCCESS]["code"] = "999";
-        $this->actionMsgs[parent::ADD_FAIL]["code"] = "999";
+        $this->actionCodes[parent::ADD_SUCCESS]["code"] = "AC131";
+        $this->actionCodes[parent::ADD_FAIL]["code"] = "AC031";
         
-        $this->actionMsgs[parent::EDIT_SUCCESS]["code"] = "999";
-        $this->actionMsgs[parent::EDIT_FAIL]["code"] = "999";
+        $this->actionCodes[parent::EDIT_SUCCESS]["code"] = "AC132";
+        $this->actionCodes[parent::EDIT_FAIL]["code"] = "AC032";
         
-        $this->actionMsgs[parent::DELETE_SUCCESS]["code"] = "999";
-        $this->actionMsgs[parent::EDIT_FAIL]["code"] = "999";
+        $this->actionCodes[parent::DELETE_SUCCESS]["code"] = "AC133";
+        $this->actionCodes[parent::EDIT_FAIL]["code"] = "AC033";
         
         
         $this->tableName = "RESERVAS";
@@ -56,30 +56,30 @@ class ReservasModel extends BaseModel {
         // Subscribe atributes to validations
         $this->checks = array (
             "ID_RESERVA" => array(
-                "checkAutoKey" => array('ID_RESERVA', '222', 'El id de la reserva (gestionado por el sistema) es un entero'),
+                "checkAutoKey" => array('ID_RESERVA', '222'),
             ),
             "LOGIN_USUARIO" => array(
-                "checkIsForeignKey" => array('LOGIN_USUARIO', 'LOGIN_USUARIO', 'UsuariosModel', '222', 'El usuario es desconocido')
+                "checkIsForeignKey" => array('LOGIN_USUARIO', 'LOGIN_USUARIO', 'UsuariosModel', '222')
             ),
             "ID_RECURSO" => array(
-                "checkIsForeignKey" => array('ID_RECURSO', 'ID_RECURSO', 'RecursosModel', '222', 'El recurso es desconocido')
+                "checkIsForeignKey" => array('ID_RECURSO', 'ID_RECURSO', 'RecursosModel', '222')
             ),
             "FECHA_SOLICITUD_RESERVA" => array(
-                "checkDate" => array('FECHA_SOLICITUD_RESERVA', '222', 'La fecha debe tener el formato dd-mm-yyyy')
+                "checkDate" => array('FECHA_SOLICITUD_RESERVA', '222')
             ),
             "FECHA_RESPUESTA_RESERVA" => array( 
-                "checkDate" => array('FECHA_RESPUESTA_RESERVA', '222', 'La fecha debe tener el formato dd-mm-yyyy'),
-                /*"checkDateInterval" => array('FECHA_SOLICITUD_RESERVA', 'FECHA_RESPUESTA_RESERVA', '222', 'La fecha de respuesta debe ser posterior a la fecha de solicitud')*/
+                "checkDate" => array('FECHA_RESPUESTA_RESERVA', '222'),
+                "checkDateInterval" => array('FECHA_SOLICITUD_RESERVA', 'FECHA_RESPUESTA_RESERVA', '222')
             ),
             "MOTIVO_RECHAZO_RESERVA" => array(
-                "checkSize" => array('MOTIVO_RECHAZO_RESERVA', 0, 200, '222', 'El motivo de rechazo no puede superar los 200 caracteres'),
+                "checkSize" => array('MOTIVO_RECHAZO_RESERVA', 0, 200, '222'),
             ),
             "ESTADO_RESERVA" => array( 
-                "checkEnum" => array('ESTADO_RESERVA', static::$bookingStatus, '222', 'El estado de la reserva no es válido'),
-                "checkNoOverlappings" => array('222', 'El intervalo de reserva coincide con una reserva existente')
+                "checkEnum" => array('ESTADO_RESERVA', static::$bookingStatus, '222'),
+                "checkNoOverlappings" => array('222')
             ),
             "COSTE_RESERVA" => array(
-                "checkNumeric" => array('COSTE_RESERVA', '222', 'El coste de la reserva debe ser un valor numérico'),
+                "checkRange" => array('COSTE_RESERVA', 0.0, 9999.99, 'AT231')
             )
         );
     }
@@ -154,9 +154,9 @@ class ReservasModel extends BaseModel {
                     $subreserva->ADD();
                 }
             }
-            return $this->actionMsgs[self::ADD_SUCCESS];
+            return $this->actionCodes[self::ADD_SUCCESS];
         }else{
-            return $this->actionMsgs[self::ADD_FAIL];
+            return $this->actionCodes[self::ADD_FAIL];
         }
     }
 

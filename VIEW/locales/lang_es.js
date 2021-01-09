@@ -19,6 +19,10 @@ var translations_es = {
     "i18n-goToLogin" : "Inicia sesión",
     "i18n-goToRegister" : "Crea una cuenta",
 
+    /* MESSAGE VIEW */
+    "i18n-systemMsgs" : "Mensajes del sistema",
+    "i18n-atributeErrors" : "Error(es) de atributo",
+
     /* NAVIGATION BAR AND TITLES */
 
     // Bookings
@@ -129,7 +133,7 @@ var translations_es = {
 
     // Common
 
-    "i18n-nameLength" : "El nombre admite un máximo de 40 caracteres",
+    "i18n-nameLength" : "El nombre debe tener entre 6 y 40 caracteres",
     "i18n-nameRegex" : "El nombre sólo puede tener letras y espacios",
     "i18n-descrLength" : "La descripción admite un máximo de 40 caracteres",
     "i18n-descrRegex" : "La descripción sólo puede tener letras y espacios",
@@ -139,6 +143,72 @@ var translations_es = {
     "i18n-noStartTime" : "Debes introducir la hora de inicio",
     "i18n-noEndTime" : "Debes introducir la hora de fin",
     "i18n-badTimeRange" : "La hora de fin debe ser superior a la de inicio",
-    "i18n-badPrice" : "La tarifa del recurso debe ser un valor numérico entre 0€ y 999€"
+    "i18n-badPrice" : "La tarifa del recurso debe ser un valor numérico entre 0€ y 999€",
+
+    /* BACK */
+
+    // CalendariosModel
+    "i18n-AT101" : "El id del calendario (gestionado por el sistema) es un entero",
+    "i18n-AT111" : "El nombre debe tener entre 6 y 40 caracteres",
+    "i18n-AT112" : "El nombre sólo puede tener letras y espacios",
+    "i18n-AT121" : "La descripción admite un máximo de 100 caracteres",
+    "i18n-AT122" : "La descripción sólo puede tener letras y espacios",
+    "i18n-AT131" : "La fecha debe tener el formato dd/mm/yyyy",
+    "i18n-AT141" : "La fecha debe tener el formato dd/mm/yyyy",
+    "i18n-AT142" : "La fecha de fin debe ser igual o superior a la de inicio",
+    "i18n-AT151" : "La hora debe tener el formato hh:mm:ss",
+    "i18n-AT161" : "La hora debe tener el formato hh:mm:ss",
+
+    // RecursosModel
+    "i18n-AT201" : "El id del recurso (gestionado por el sistema) es un entero",
+    "i18n-AT211" : "El nombre debe tener entre 6 y 40 caracteres",
+    "i18n-AT212" : "El nombre sólo puede tener letras y espacios",
+    "i18n-AT221" : "La descripción admite un máximo de 100 caracteres",
+    "i18n-AT222" : "La descripción sólo puede tener letras y espacios",
+    "i18n-AT231" : "La tarifa del recurso debe ser un valor numérico entre 0€ y 999€",
+    "i18n-AT241" : "El rango de tarifa del recurso es desconocido",
+    "i18n-AT251" : "El id del calendario es desconocido",
+    "i18n-AT261" : "El usuario responsable es desconocido",
+    "i18n-AT271" : "Opción de borrado lógico desconocida",
+    
+    // ReservasModel
+    "i18n-AT301" : "El id de la reserva (gestionado por el sistema) es un entero",
+    "i18n-AT311" : "El usuario es desconocido",
+    "i18n-AT321" : "El recurso es desconocido",
+    "i18n-AT331" : "La fecha debe tener el formato dd/mm/yyyy",
+    "i18n-AT341" : "La fecha debe tener el formato dd/mm/yyyy",
+    "i18n-AT342" : "La fecha de respuesta debe ser igual o superior a la de solicitud",
+    "i18n-AT351" : "El motivo de rechazo no puede superar los 100 caracteres",
+    "i18n-AT361" : "El estado de la reserva es desconocido",
+    "i18n-AT362" : "La reserva coincide con un intervalo existente",
+    "i18n-AT371" : "El coste de la reserva debe ser un valor numérico entre 0.0 y 9999.99",
+
+    // ResponsablesModel
+    "i18n-AT371" : "El usuario es desconocido",
+    "i18n-AT371" : "La dirección debe tener entre 10 y 60 caracteres",
+    "i18n-AT371" : "La dirección sólo puede tener caracteres alfanuméricos, espacios '/&ºª'",
+    "i18n-AT371" : "Sólo se aceptan teléfonos españoles",
+
+    // SubreservasModel
+    "i18n-AT371" : "El id de la reserva es desconocido",
+    "i18n-AT371" : "La fecha debe tener el formato dd/mm/yyyy",
+    "i18n-AT371" : "La fecha debe tener el formato dd/mm/yyyy",
+    "i18n-AT371" : "La fecha debe tener el formato dd/mm/yyyy",
+    "i18n-AT371" : "La fecha de fin debe ser igual o superior a la de inicio",
+    "i18n-AT371" : "La subreserva coincide con una ya existente",
+    "i18n-AT371" : "La hora debe tener el formato hh:mm:ss",
+    "i18n-AT371" : "La hora debe tener el formato hh:mm:ss",
+    "i18n-AT371" : "El coste de la subreserva debe ser un valor numérico entre 0.0 y 9999.9",
+
+    // UsuariosModel
+    "i18n-AT371" : "El login debe tener entre 3 y 15 caracteres",
+    "i18n-AT371" : "El login sólo admite caracteres alfanuméricos y '_-'",
+    "i18n-AT371" : "El login sólo admite caracteres alfanuméricos y '_-'",
+    "i18n-AT371" : "La contraseña se debe guardar como un hash MD5",
+    "i18n-AT371" : "El nombre debe tener entre 6 y 60 caracteres",
+    "i18n-AT371" : "El nombre sólo puede tener letras, espacios y '-'",
+    "i18n-AT371" : "El correo electrónico tiene un formato incorrecto",
+    "i18n-AT371" : "El tipo de usuario es desconocido",
+    "i18n-AT371" : "Opción de actividad desconocida",
 
 }

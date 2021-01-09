@@ -18,14 +18,14 @@ class ResponsablesModel extends BaseModel {
                
         // Overwrite action codes
         
-        $this->actionMsgs[parent::ADD_SUCCESS]["code"] = "555";
-        $this->actionMsgs[parent::ADD_FAIL]["code"] = "555";
+        $this->actionCodes[parent::ADD_SUCCESS]["code"] = "AC141";
+        $this->actionCodes[parent::ADD_FAIL]["code"] = "AC041";
         
-        $this->actionMsgs[parent::EDIT_SUCCESS]["code"] = "555";
-        $this->actionMsgs[parent::EDIT_FAIL]["code"] = "555";
+        $this->actionCodes[parent::EDIT_SUCCESS]["code"] = "AC142";
+        $this->actionCodes[parent::EDIT_FAIL]["code"] = "AC042";
         
-        $this->actionMsgs[parent::DELETE_SUCCESS]["code"] = "555";
-        $this->actionMsgs[parent::EDIT_FAIL]["code"] = "555";
+        $this->actionCodes[parent::DELETE_SUCCESS]["code"] = "AC143";
+        $this->actionCodes[parent::EDIT_FAIL]["code"] = "AC043";
         
         $this->tableName = "RESPONSABLES_RECURSO";      
         
@@ -34,13 +34,14 @@ class ResponsablesModel extends BaseModel {
         // Subscribe atributes to validations
         $this->checks = array (
             "LOGIN_RESPONSABLE" => array(
-                "checkIsForeignKey" => array('LOGIN_RESPONSABLE', 'LOGIN_USUARIO', 'UsuariosModel', '222', 'El usuario responsable es desconocido')
+                "checkIsForeignKey" => array('LOGIN_RESPONSABLE', 'LOGIN_USUARIO', 'UsuariosModel', 'AT401')
             ),
             "DIRECCION_RESPONSABLE" => array(
-                "checkSize" => array('DIRECCION_RESPONSABLE', 10, 100, '222', 'La dirección debe tener entre 10 y 100 caracteres')
+                "checkSize" => array('DIRECCION_RESPONSABLE', 10, 60, 'AT411'),
+                "checkRegex" => array('DIRECCION_RESPONSABLE', '/^[a-zA-Z0-9/&ºª ]+$/', 'AT412')
             ),
             "TELEFONO_RESPONSABLE" => array(
-                "checkRegex" => array('TELEFONO_RESPONSABLE', '/^[6|7|8|9][0-9]{8}$/', '222', 'Solo se aceptan teléfonos españoles')
+                "checkRegex" => array('TELEFONO_RESPONSABLE', '/^[6|7|8|9][0-9]{8}$/', 'AT421')
             )
         );
 

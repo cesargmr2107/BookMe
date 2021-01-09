@@ -18,6 +18,10 @@ var translations_en = {
     "i18n-welcome" : "Welcome to ",
     "i18n-goToLogin" : "Sign in",
     "i18n-goToRegister" : "Sign up",
+
+    /* MESSAGE VIEW */
+    "i18n-systemMsgs" : "System messages",
+    "i18n-atributeErrors" : "Atribute error(s)",
     
     /* NAVIGATION BAR AND TITLES */
 
@@ -129,9 +133,9 @@ var translations_en = {
 
     // Common
 
-    "i18n-nameLength" : "The name admits a maximum of 40 characteres",
+    "i18n-nameLength" : "The name must have between 6 and 40 characters",
     "i18n-nameRegex" : "The name can only have letters and spaces",
-    "i18n-descrLength" : "The description admits a maximum of 40 characteres",
+    "i18n-descrLength" : "The description admits a maximum of 100 characteres",
     "i18n-descrRegex" : "The description can only have letters and spaces",
     "i18n-noStartDate" : "Enter the start date",
     "i18n-noEndDate" : "Enter the end date",

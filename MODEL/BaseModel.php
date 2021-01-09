@@ -36,15 +36,15 @@ class BaseModel {
 
         $this->nullAtributes = array();
 
-        $this->actionMsgs = array(
-            self::CANNOT_CONNECT => array("code" => "000", "msg" => "No se ha podido conectar a la base de datos"),
-            self::BAD_QUERY => array("code" => "000", "msg" => "Query a la base de datos incorrecta"),
-            self::ADD_FAIL => array( "code" => "000", "msg" => $entityName . " no añadido correctamente a la base de datos"),
-            self::EDIT_FAIL => array( "code" => "000", "msg" => $entityName . " no editado correctamente en la base de datos"),
-            self::DELETE_FAIL => array( "code" => "000", "msg" => $entityName . " no borrado correctamente de la base de datos"),
-            self::ADD_SUCCESS => array( "code" => "000", "msg" => $entityName . " añadido correctamente a la base de datos"),
-            self::EDIT_SUCCESS => array( "code" => "000", "msg" => $entityName . " editado correctamente en la base de datos"),
-            self::DELETE_SUCCESS => array( "code" => "000", "msg" => $entityName . " borrado correctamente de la base de datos")
+        $this->actionCodes = array(
+            self::CANNOT_CONNECT => array( "code" => "AC000" ),
+            self::BAD_QUERY => array( "code" => "AC001" ),
+            self::ADD_FAIL => array( "code" => "" ),
+            self::EDIT_FAIL => array( "code" => "" ),
+            self::DELETE_FAIL => array( "code" => "" ),
+            self::ADD_SUCCESS => array( "code" => "" ),
+            self::EDIT_SUCCESS => array( "code" => "" ),
+            self::DELETE_SUCCESS => array( "code" => "" )
         );
 
         // Initialize atributes to empty string
@@ -53,7 +53,7 @@ class BaseModel {
         }
 
         // DEBUG: See actionMsgs structure
-        // echo '<pre>' . var_export($this->actionMsgs, true) . '</pre>';
+        // echo '<pre>' . var_export($this->actionCodes, true) . '</pre>';
 
     }
 
@@ -115,16 +115,16 @@ class BaseModel {
         return $validations;
     }
 
-    public function checkAutoKey($key_atribute, $errorCode, $errorMsg){
+    public function checkAutoKey($key_atribute, $errorCode){
         $value = $this->atributes[$key_atribute];
         if (intval($value)) {
             return true;
         } else {
-            return array("code" => $errorCode, "msg" => $errorMsg);
+            return $errorCode;
         }
     }
 
-    public function checkIsForeignKey($foreignKeyThis, $foreignKeyOther, $otherModel, $errorCode, $errorMsg ){
+    public function checkIsForeignKey($foreignKeyThis, $foreignKeyOther, $otherModel, $errorCode ){
         include_once './MODEL/' . $otherModel . '.php';
         $atributesToSet = array($foreignKeyOther => $this->atributes[$foreignKeyThis]);
         $entity = new $otherModel();
@@ -133,71 +133,71 @@ class BaseModel {
         if($isForeignKey){
             return true;
         }else{
-            return array("code" => $errorCode, "msg" => $errorMsg);
+            return $errorCode;
         }
     }
 
-    public function checkNoAssoc($foreignKey, $otherModel, $errorCode, $errorMsg){
+    public function checkNoAssoc($foreignKey, $otherModel, $errorCode){
         $noAssoc = is_array($this->checkIsForeignKey($foreignKey,$foreignKey,$otherModel,"",""));
         if ($noAssoc){
             return true;
         }else{
-            return array("code" => $errorCode, "msg" => $errorMsg);
+            return $errorCode;
         }
     }
 
-    public function checkRegex($atribute, $regex, $errorCode, $errorMsg){
+    public function checkRegex($atribute, $regex, $errorCode){
         $value = $this->atributes[$atribute];
         if (preg_match($regex, $value)) {
             return true;
         }else{
-            return array("code" => $errorCode, "msg" => $errorMsg);
+            return $errorCode;
         }
     }
 
-    public function checkSize($atribute, $min, $max, $errorCode, $errorMsg){
+    public function checkSize($atribute, $min, $max, $errorCode){
         $value = $this->atributes[$atribute];
         $length = strlen($value);
         if($length >= $min && $length <= $max) {
             return true;
         }else{
-            return array("code" => $errorCode, "msg" => $errorMsg);
+            return $errorCode;
         }
     }
 
-    public function checkNumeric($atribute, $errorCode, $errorMsg){
+    public function checkNumeric($atribute, $errorCode){
         $value = $this->atributes[$atribute];
         if(doubleval($value)) {
             return true;
         }else{
-            return array("code" => $errorCode, "msg" => $errorMsg);
+            return $errorCode;
         }
     }
 
-    public function checkRange($atribute, $min, $max, $errorCode, $errorMsg){
+    public function checkRange($atribute, $min, $max, $errorCode){
         $value = doubleval($this->atributes[$atribute]);
         if($value > $min && $value < $max ) {
             return true;
         }else{
-            return array("code" => $errorCode, "msg" => $errorMsg);
+            return $errorCode;
         }
     }
 
-    public function checkEnum($atribute, $enumValues, $errorCode, $errorMsg){
+    public function checkEnum($atribute, $enumValues, $errorCode){
         $value = $this->atributes[$atribute];
         if(in_array($value, $enumValues)){
             return true;
         }else{
-            return array("code" => $errorCode, "msg" => $errorMsg);
+            return $errorCode;
         }
     }
 
-    public function checkYesOrNo($atribute, $errorCode, $errorMsg){
+    public function checkYesOrNo($atribute, $errorCode){
         $enum = array ("SI", "NO");
-        return $this->checkEnum($atribute, $enum, $errorCode, $errorMsg);
+        return $this->checkEnum($atribute, $enum, $errorCode);
     }
 
-    public function checkDateInterval($start_atribute, $end_atribute, $errorCode, $errorMsg){
+    public function checkDateInterval($start_atribute, $end_atribute, $errorCode){
         $start = $this->atributes[$start_atribute];
         $end = $this->atributes[$end_atribute];
         $format = 'Y-m-d';
@@ -210,28 +210,28 @@ class BaseModel {
                return true;
         }
 
-        return array("code" => $errorCode, "msg" => $errorMsg);
+        return $errorCode;
     }
 
-    public function checkDate($atribute, $errorCode, $errorMsg){
+    public function checkDate($atribute, $errorCode){
         $str_date = $this->atributes[$atribute];
         $format = 'Y-m-d';
         $d = DateTime::createFromFormat($format, $str_date);
         if($d && $d->format($format) === $str_date){
             return true;
         }else{
-            return array("code" => $errorCode, "msg" => $errorMsg);
+            return $errorCode;
         }
     }
 
-    public function checkTime($atribute, $errorCode, $errorMsg){
+    public function checkTime($atribute, $errorCode){
         $str_time = $this->atributes[$atribute];
         $format = 'H:i';
         $t = DateTime::createFromFormat($format, $str_time);
         if($t && $t->format($format) === $str_time){
             return true;
         }else{
-            return array("code" => $errorCode, "msg" => $errorMsg);
+            return $errorCode;
         }
     }
 
@@ -246,7 +246,7 @@ class BaseModel {
     protected function executeQuery($query){
         $isConnected = $this->openConnection();
         if (!$isConnected) {
-            return $this->actionMsgs[self::CANNOT_CONNECT];
+            return $this->actionCodes[self::CANNOT_CONNECT];
         } else {
             $response = array();
             $response["result"] = $this->connection->query($query);
@@ -386,12 +386,12 @@ class BaseModel {
             // echo "<br/>" . $insertQuery . "<br/>";
     
             if( $this->executeQuery($insertQuery)["result"] ) {
-                return $this->actionMsgs[self::ADD_SUCCESS];
+                return $this->actionCodes[self::ADD_SUCCESS];
             }
-            return $this->actionMsgs[self::ADD_FAIL];    
+            return $this->actionCodes[self::ADD_FAIL];    
 
         }else{
-            $response = $this->actionMsgs[self::ADD_FAIL];
+            $response = $this->actionCodes[self::ADD_FAIL];
             $response["atributeErrors"] = $validations;
             return $response;
         }
@@ -422,17 +422,17 @@ class BaseModel {
                 // echo "<br/>" . $updateQuery . "<br/>";
 
                 if($this->executeQuery($updateQuery)["affected_rows"] === 1){
-                    return $this->actionMsgs[self::EDIT_SUCCESS];
+                    return $this->actionCodes[self::EDIT_SUCCESS];
                 }
 
             }else{
-                $response = $this->actionMsgs[self::EDIT_FAIL];
+                $response = $this->actionCodes[self::EDIT_FAIL];
                 $response["atributeErrors"] = $validations;
                 return $response;
             }
         }
         
-        return $this->actionMsgs[self::EDIT_FAIL];
+        return $this->actionCodes[self::EDIT_FAIL];
     }
 
     public function DELETE(){
@@ -441,7 +441,7 @@ class BaseModel {
         if($this->checksForDelete){
             $validations = $this->checkAtributesForDelete();
             if(!$this->checkValidations($validations)){
-                $response = $this->actionMsgs[self::DELETE_FAIL];
+                $response = $this->actionCodes[self::DELETE_FAIL];
                     $response["atributeErrors"] = $validations;
                     return $response;
             }
@@ -459,11 +459,11 @@ class BaseModel {
             // echo "<br/>" . $deleteQuery . "<br/>";
 
             if($this->executeQuery($deleteQuery)["affected_rows"] === 1){
-                return $this->actionMsgs[self::DELETE_SUCCESS];
+                return $this->actionCodes[self::DELETE_SUCCESS];
             }
         }
 
-        return $this->actionMsgs[self::DELETE_FAIL];	   			
+        return $this->actionCodes[self::DELETE_FAIL];	   			
     }
 
     public function SEARCH($selectQuery = ""){
@@ -502,7 +502,7 @@ class BaseModel {
             }
             return $tuples;
         } else {
-            return $this->actionMsgs[self::BAD_QUERY];
+            return $this->actionCodes[self::BAD_QUERY];
         }
 
     }
@@ -526,7 +526,7 @@ class BaseModel {
         if($response !== false || count($response) > 1 ){
             return $response->fetch_assoc();
         } else {
-            return $this->actionMsgs[self::BAD_QUERY];
+            return $this->actionCodes[self::BAD_QUERY];
         }
     }
 

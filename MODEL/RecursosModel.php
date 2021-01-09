@@ -12,7 +12,8 @@ class RecursosModel extends BaseModel {
         "TARIFA_RECURSO",
         "RANGO_TARIFA_RECURSO",
         "ID_CALENDARIO",
-        "LOGIN_RESPONSABLE"
+        "LOGIN_RESPONSABLE",
+        "BORRADO_LOGICO"
     );
 
     // Define which atributes will be selected in search
@@ -31,42 +32,48 @@ class RecursosModel extends BaseModel {
                
         // Overwrite action codes
         
-        $this->actionMsgs[parent::ADD_SUCCESS]["code"] = "777";
-        $this->actionMsgs[parent::ADD_FAIL]["code"] = "777";
+        $this->actionCodes[parent::ADD_SUCCESS]["code"] = "AC121";
+        $this->actionCodes[parent::ADD_FAIL]["code"] = "AC021";
         
-        $this->actionMsgs[parent::EDIT_SUCCESS]["code"] = "777";
-        $this->actionMsgs[parent::EDIT_FAIL]["code"] = "777";
+        $this->actionCodes[parent::EDIT_SUCCESS]["code"] = "AC122";
+        $this->actionCodes[parent::EDIT_FAIL]["code"] = "AC022";
         
-        $this->actionMsgs[parent::DELETE_SUCCESS]["code"] = "777";
-        $this->actionMsgs[parent::EDIT_FAIL]["code"] = "777";
+        $this->actionCodes[parent::DELETE_SUCCESS]["code"] = "AC123";
+        $this->actionCodes[parent::EDIT_FAIL]["code"] = "AC023";
         
         $this->tableName = "RECURSOS";      
 
         $this->primary_key = "ID_RECURSO";
+
+        $this->defaultValues = array( "BORRADO_LOGICO" => "NO" );
         
         // Subscribe atributes to validations
         $this->checks = array (
             "ID_RECURSO" => array(
-                "checkAutoKey" => array('ID_RECURSO', '222', 'El id del recurso (gestionado por el sistema) es un entero'),
+                "checkAutoKey" => array('ID_RECURSO', 'AT201'),
             ),
             "NOMBRE_RECURSO" => array(
-                "checkSize" => array('NOMBRE_RECURSO', 4, 40, '222', 'El nombre del recurso debe tener entre 4 y 40 caracteres')
+                "checkSize" => array('NOMBRE_RECURSO', 4, 40, 'AT211'),
+                "checkRegex" => array('NOMBRE_RECURSO', '/^[a-zA-Z ]+$/', 'AT212')
             ),
             "DESCRIPCION_RECURSO" => array(
-                "checkSize" => array('DESCRIPCION_RECURSO', 10, 200, '222', 'La descripción debe tener entre 10 y 200 caracteres'),
+                "checkSize" => array('DESCRIPCION_RECURSO', 10, 200, 'AT221'),
+                "checkRegex" => array('DESCRIPCION_RECURSO', '/^[a-zA-Z ]+$/', 'AT222')
             ),
             "TARIFA_RECURSO" => array(
-                "checkNumeric" => array('TARIFA_RECURSO', '222', 'La tarifa del recurso debe ser un valor numérico'),
-                "checkRange" => array('TARIFA_RECURSO', 0, 1000, '222', 'La tarifa del recurso debe estar entre 0€ y 1000€')
+                "checkRange" => array('TARIFA_RECURSO', 0, 999, 'AT231')
             ),
             "RANGO_TARIFA_RECURSO" => array(
-                "checkEnum" => array('RANGO_TARIFA_RECURSO', static::$priceRanges, '222', 'El rango de tarifa del recurso no es válido')
+                "checkEnum" => array('RANGO_TARIFA_RECURSO', static::$priceRanges, 'AT241')
             ),
             "ID_CALENDARIO" => array(
-                "checkIsForeignKey" => array('ID_CALENDARIO', 'ID_CALENDARIO', 'CalendariosModel', '222', 'El id del calendario es desconocido')
+                "checkIsForeignKey" => array('ID_CALENDARIO', 'ID_CALENDARIO', 'CalendariosModel', 'AT251')
             ),
             "LOGIN_RESPONSABLE" => array(
-                "checkIsForeignKey" => array('LOGIN_RESPONSABLE', 'LOGIN_RESPONSABLE', 'ResponsablesModel', '222', 'El usuario responsable es desconocido')
+                "checkIsForeignKey" => array('LOGIN_RESPONSABLE', 'LOGIN_RESPONSABLE', 'ResponsablesModel', 'AT261')
+            ),
+            "BORRADO_LOGICO" => array(
+                "checkYesOrNo" => array('BORRADO_LOGICO', 'AT271')
             )
         );
 

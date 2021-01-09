@@ -8,12 +8,28 @@ class MessageView extends BaseView {
 
 		// DEBUG: Check result
 		// echo '<pre>' . var_export($this->data["result"], true) . '</pre>';
+		
+		// Get msg code
+		$code = $this->data["result"]["code"];
 
-		$this->includeTitle("Mensajes del sistema", "h1");
+		$this->includeTitle("i18n-systemMsgs", "h1");
 
-		$errorTitle = $this->data["result"]["code"] . " - " . $this->data["result"]["msg"];
-		$this->includeTitle($errorTitle, "h3");
+		echo "<h3>$code : <span class='i18n-$code'></span></h3>";
 
+		if(array_key_exists("atributeErrors", $this->data["result"])){
+			echo "<p class='i18n-atributeErrors'></p>";
+			echo "<ul>";
+			foreach ($this->data["result"]["atributeErrors"] as $atribute => $errors) {
+				echo "<li>" . $atribute . ":</li>";
+				echo "<ul>";
+				foreach ($errors as $check => $code) {
+					echo "<li>$code: <span class='i18n-$code'></span></li>";
+				}
+				echo "</ul>";
+			}
+			echo "</ul>";
+		}
+		
 		if (array_key_exists("link", $this->data)){
 			?>
 				<a href="<?= $this->data["link"]; ?>">
@@ -23,21 +39,6 @@ class MessageView extends BaseView {
 		} else {
 			$this->includeButton("BACK", "goBackForm", "post", $this->data["controller"], $this->data["action"]);
 		}
-
-		if(array_key_exists("atributeErrors", $this->data["result"])){
-			echo "<p>Error(es) de atributo</p>";
-			echo "<ul>";
-			foreach ($this->data["result"]["atributeErrors"] as $atribute => $errors) {
-				echo "<li>" . $atribute . ":</li>";
-				echo "<ul>";
-				foreach ($errors as $check => $info) {
-					echo "<li>" . $info["code"] . " - " .  $info["msg"] . "</li>";
-				}
-				echo "</ul>";
-			}
-			echo "</ul>";
-		}
-		
 	}
 
 	
