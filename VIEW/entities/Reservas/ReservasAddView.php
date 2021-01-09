@@ -13,13 +13,13 @@ class ReservasAddView extends BaseView{
     protected $cssFiles = array("./VIEW/libraries/fullcalendar-5.4.0/lib/main.css");
 
     protected function body(){
-        $this->includeTitle("Solicitar nueva reserva", "h1");
+        $this->includeTitle("i18n-newBooking", "h1");
 
         ?>
             <form id="searchResource" name="searchResource" action="index.php" method="post">
                 <?php
                     $id = (array_key_exists("resource_info", $this->data)) ? $this->data["resource_info"]["ID_RECURSO"] : null ;
-                    $this->includeSelectField("Recurso seleccionado", "ID_RECURSO", $this->data["resources"], true, $id);
+                    $this->includeSelectField("i18n-selectedResource", "ID_RECURSO", $this->data["resources"], true, $id);
                 ?>
                 <span class="<?=$this->icons["SEARCH"]?>" onclick="sendForm(document.searchResource, 'ReservasController', 'addForm', true)"></span>
             </form>
@@ -29,11 +29,11 @@ class ReservasAddView extends BaseView{
         ?>
             <div>
                 <?php
-                    $this->includeTitle("Añade un intervalo a tu reserva" , "h4");
-                    $this->includeDateField("Fecha de inicio", "FECHA_INICIO_SUBRESERVA", true);
-                    $this->includeDateField("Fecha de fin", "FECHA_FIN_SUBRESERVA", true);
-                    $this->includeTimeField("Hora de inicio", "HORA_INICIO_SUBRESERVA", true);
-                    $this->includeTimeField("Hora de fin", "HORA_FIN_SUBRESERVA", true);
+                    $this->includeTitle("i18n-addInterval" , "h4");
+                    $this->includeDateField("i18n-fecha_inicio", "FECHA_INICIO_SUBRESERVA", true);
+                    $this->includeDateField("i18n-fecha_fin", "FECHA_FIN_SUBRESERVA", true);
+                    $this->includeTimeField("i18n-hora_inicio", "HORA_INICIO_SUBRESERVA", true);
+                    $this->includeTimeField("i18n-hora_fin", "HORA_FIN_SUBRESERVA", true);
                 ?>
                 <span class="<?=$this->icons["ADD"]?>" onclick="addBooking()"></span>
             <div>

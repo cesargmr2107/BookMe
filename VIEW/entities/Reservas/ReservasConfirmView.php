@@ -9,10 +9,10 @@ class ReservasConfirmView extends BaseView{
         // DEBUG: Check data passed to view
         // echo '<pre>' . var_export($this->data, true) . '</pre>';
         
-        $this->includeTitle("Solicitudes con uso por confirmar", "h1");
+        $this->includeTitle("i18n-confirmBooking" , "h1");
         
         if(empty($this->data)){
-            $this->includeTitle("Todas las solicitudes están confirmadas", "h4");
+            $this->includeTitle("i18n-bookingAllConfirmed", "h4");
         } else {
             foreach($this->data as $booking){
                 $id = $booking["ID_RESERVA"];
@@ -20,10 +20,9 @@ class ReservasConfirmView extends BaseView{
                 $name = $booking["NOMBRE_RECURSO"];
                 $user = $booking["LOGIN_USUARIO"];
                 echo "<div>";
-                        $this->includeTitle("Solicitud del $date", "h4");
-                        echo "<p>$name - $user</p>";
-                        $this->includePositiveConfirmation($id,$date,$name,$user);
-                        $this->includeNegativeConfirmation($id,$date,$name,$user);
+                    echo "<h4><span class='i18n-requestedOn'></span>$date</h4>";
+                    $this->includePositiveConfirmation($id,$date,$name,$user);
+                    $this->includeNegativeConfirmation($id,$date,$name,$user);
                 echo "</div>";
             }
         }
@@ -42,7 +41,14 @@ class ReservasConfirmView extends BaseView{
                 
                     <!-- Modal Header  -->
                     <div class="modal-header">
-                        <h4 class="modal-title">¿Estás seguro de que quieres <strong>confirmar el uso</strong> de la reserva hecha por <?=$user?> de '<?=$name?>' para el <?=$date?> ?</h4>
+                        <h4 class="modal-title">
+                            <span class="i18n-positiveConfirm"></span>
+                            <strong><?=$user?></strong>
+                            <span class="i18n-of"></span>
+                            <strong><?=$name?></strong>
+                            <span class="i18n-for"></span>
+                            <strong><?=$date?></strong>?
+                        </h4>
                     </div>
 
                     <!-- Modal body -->
@@ -72,7 +78,14 @@ class ReservasConfirmView extends BaseView{
                 
                     <!-- Modal Header  -->
                     <div class="modal-header">
-                        <h4 class="modal-title">¿Estás seguro de que quieres <strong>confirmar el no uso</strong> de la reserva hecha por <?=$user?> de '<?=$name?>' para el <?=$date?> ?</h4>
+                        <h4 class="modal-title">
+                            <span class="i18n-negativeConfirm"></span>
+                            <strong><?=$user?></strong>
+                            <span class="i18n-of"></span>
+                            <strong><?=$name?></strong>
+                            <span class="i18n-for"></span>
+                            <strong><?=$date?></strong>?
+                        </h4>
                     </div>
 
                     <!-- Modal body -->

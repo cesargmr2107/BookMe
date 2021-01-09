@@ -116,7 +116,7 @@ abstract class BaseView{
             <nav class="navbar navbar-inverse">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                    <a class="navbar-brand" href="#">BookMe</a>
+                    <a class="navbar-brand" href="index.php">BookMe</a>
                     </div>
                     <ul class="nav navbar-nav">
                         <?php
@@ -234,7 +234,7 @@ abstract class BaseView{
         <?php
     }
 
-    private function includeLangSelection(){
+    protected function includeLangSelection(){
         $langs = array ("ES", "GL", "EN");
         $toShow = '';
         foreach ($langs as $lang) {
@@ -381,7 +381,7 @@ abstract class BaseView{
                 <?php
                 if($assocOptions){
                     if($value === null){
-                        echo "<option disabled='disabled' selected>Opciones</option>";
+                        echo "<option class='i18n-options' disabled='disabled' selected>Opciones</option>";
                     }
                     foreach ($options as $id => $text) {
                         if($value != $id){
@@ -465,7 +465,10 @@ abstract class BaseView{
                     
                         <!-- Modal Header  -->
                         <div class="modal-header">
-                            <h4 class="modal-title">¿Estás seguro de que quieres borrar '<?= $name?>'?</h4>
+                            <h4 class="modal-title">
+                                <span class="i18n-deleteConfirmation"></span>
+                                <strong>'<?=$name?>'</strong>?
+                            </h4>
                         </div>
     
                         <!-- Modal body -->

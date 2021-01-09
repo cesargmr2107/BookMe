@@ -12,7 +12,7 @@ class ReservasPendientesManageView extends BaseView{
         // DEBUG: Check data passed to view
         // echo '<pre>' . var_export($this->data, true) . '</pre>';
         
-        $this->includeTitle("Solicitudes pendientes", "h1");
+        $this->includeTitle("i18n-pendingBookingsByResource", "h1");
         if(empty($this->data["pending"])){
             $this->includeTitle("Ya se han procesado todas las solicitudes pendientes", "h4");
         }else{
@@ -39,7 +39,7 @@ class ReservasPendientesManageView extends BaseView{
                         $endTime = $subreserva["HORA_FIN_SUBRESERVA"];
                         echo "<li>" . $startDate . " - " . $endDate . ", " . $startTime . " - " . $endTime . "</li>";
                     }
-                    echo "<li><strong>Coste:</strong>" . $subreserva["COSTE_RESERVA"] . "€</li>";
+                    echo "<li><strong class='i18n-cost'></strong>" . $subreserva["COSTE_RESERVA"] . "€</li>";
                     $this->includeAcceptButtonAndModal($reserva[0]["ID_RESERVA"], $reserva[0]["ID_RECURSO"], $fechaSolicitud, $user);
                     $this->includeRejectButtonAndModal($reserva[0]["ID_RESERVA"], $reserva[0]["ID_RECURSO"], $fechaSolicitud, $user);
                     echo "</ul>";

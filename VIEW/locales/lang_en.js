@@ -12,6 +12,7 @@ var translations_en = {
     "i18n-fecha_fin" : "End Date",
     "i18n-hora_inicio" : "Start Time" ,
     "i18n-hora_fin" : "End Time",
+    "i18n-deleteConfirmation" : "Would you like to delete ",
 
     /* LOGIN AND REGISTER VIEWS */
     "i18n-welcome" : "Welcome to ",
@@ -76,7 +77,40 @@ var translations_en = {
     "i18n-nBookUsed" : "Bookings with used resource: ",
     "i18n-nBookNotUsed" : "Bookings with unused resource: ",
     "i18n-availableHours" : "Available hours",
-    "i18n-unavailableHours" : "Unavailable hours"
+    "i18n-unavailableHours" : "Unavailable hours",
+
+    /* BOOKING VIEWS */
+    "i18n-pending" : "Pending",
+    "i18n-accepted" : "Accepted",
+    "i18n-rejected" : "Rejected",
+    "i18n-canceled" : "Canceled",
+    "i18n-used" : "With used resource",
+    "i18n-unused" : "With unused resource",
+    "i18n-noBookings" : "There aren't any bookings",
+    "i18n-bookingInfo" : "Booking information",
+    "i18n-bookingUser" : "User information",
+    "i18n-bookingRequest" : "Request information",
+    "i18n-fecha_solicitud" : "Request date",
+    "i18n-bookingResponseDate" : "Response date",
+    "i18n-bookingNoResponse" : "There's no response yet",
+    "i18n-estado" : "Status",
+    "i18n-bookingRejection" : "Rejection reason",
+    "i18n-bookingTotalCost" : "Total cost: ",
+    "i18n-bookingAllConfirmed" : "All bookings are confirmed",
+    "i18n-requestedOn" : "Requested on ",
+    "i18n-positiveConfirm" : "Would you like to <strong>confirm the use</strong> of the booking made by ",
+    "i18n-negativeConfirm" : "Would you like to <strong>confirm the unuse</strong> of the booking made by ",
+    "i18n-of" : " of ",
+    "i18n-for" : " for the ",
+    "i18n-login_usuario" : "User",
+    "i18n-id_recurso" : "Resource",
+    "i18n-noPending" : "There aren't any resources which have pending bookings",
+    "i18n-pendingBookingsRes" : " pending bookings",
+    "i18n-pendingBookingsByResource" : "Resource pending bookings",
+    "i18n-cost" : "Cost:",
+    "i18n-selectedResource" : "Selected resource",
+
+
 
 
 }

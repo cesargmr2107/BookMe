@@ -12,6 +12,7 @@ var translations_es = {
     "i18n-fecha_fin" : "Fecha de fin",
     "i18n-hora_inicio" : "Hora de inicio" ,
     "i18n-hora_fin" : "Hora de fin",
+    "i18n-deleteConfirmation" : "¿Quieres borrar ",
 
     /* LOGIN AND REGISTER VIEWS */
     "i18n-welcome" : "Bienvenido a ",
@@ -77,7 +78,39 @@ var translations_es = {
     "i18n-nBookUsed" : "Reservas con recurso usado: ",
     "i18n-nBookNotUsed" : "Reservas con recurso no usado: ",
     "i18n-availableHours" : "Horas disponibles",
-    "i18n-unavailableHours" : "Horas ocupadas"
+    "i18n-unavailableHours" : "Horas ocupadas",
+
+    /* BOOKING VIEWS */
+    "i18n-pending" : "Pendientes",
+    "i18n-accepted" : "Aceptadas",
+    "i18n-rejected" : "Rechazadas",
+    "i18n-canceled" : "Canceladas",
+    "i18n-used" : "Con recurso usado",
+    "i18n-unused" : "Con recurso no usado",
+    "i18n-noBookings" : "No hay reservas",
+    "i18n-bookingInfo" : "Información de reserva",
+    "i18n-bookingUser" : "Información del usuario",
+    "i18n-bookingRequest" : "Información de la solicitud",
+    "i18n-fecha_solicitud" : "Fecha de solicitud",
+    "i18n-bookingResponseDate" : "Fecha de respuesta",
+    "i18n-bookingNoResponse" : "Todavía no hay respuesta",
+    "i18n-estado" : "Estado",
+    "i18n-bookingRejection" : "Motivo de rechazo",
+    "i18n-bookingTotalCost" : "Coste total: ",
+    "i18n-bookingAllConfirmed" : "Todas las solicitudes están confirmadas",
+    "i18n-requestedOn" : "Solicitud del ",
+    "i18n-positiveConfirm" : "¿Quieres <strong>confirmar el uso</strong> de la reserva hecha por ",
+    "i18n-negativeConfirm" : "¿Quieres <strong>confirmar el no uso</strong> de la reserva hecha por ",
+    "i18n-of" : " de ",
+    "i18n-for" : " para el ",
+    "i18n-login_usuario" : "Usuario",
+    "i18n-id_recurso" : "Recurso",
+    "i18n-noPending" : "No hay recursos con solicitudes pendientes",
+    "i18n-pendingBookingsRes" : " solicitudes pendientes",
+    "i18n-pendingBookingsByResource" : "Solicitudes pendientes de recurso",
+    "i18n-cost" : "Coste:",
+    "i18n-selectedResource" : "Recurso seleccionado",
+    "i18n-addInterval" : "Añade un intervalo a tu reserva",
 
 
 }

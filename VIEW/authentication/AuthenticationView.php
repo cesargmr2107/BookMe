@@ -8,6 +8,7 @@ abstract class AuthenticationView extends BaseView{
         $this->jsFiles = array("./VIEW/js/md5.js");
         $this->header();
         $this->body();
+        $this->includeLangSelection();
         $this->footer();
     }
 

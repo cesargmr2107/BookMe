@@ -6,13 +6,13 @@ class ReservasPendientesSearchView extends BaseView{
 
     protected function body(){
         
-        $this->includeTitle("Recursos con solicitudes pendientes", "h1");
+        $this->includeTitle("i18n-pendingBookings", "h1");
         
         // DEBUG: Check data passed to view
         // echo '<pre>' . var_export($this->data, true) . '</pre>';
 
         if(empty($this->data)){
-            $this->includeTitle("No hay recursos que tengan solicitudes pendientes", "h4");
+            $this->includeTitle("i18n-noPending", "h4");
         }else{
             foreach($this->data as $resource){
                 ?> 
@@ -22,7 +22,7 @@ class ReservasPendientesSearchView extends BaseView{
                             <strong><?=$resource["NOMBRE_RECURSO"]?></strong>
                             <p>
                                 <span><?=$resource["COUNT"]?></span>
-                                <span> solicitudes pendientes</span>
+                                <span class="i18n-pendingBookingsRes"></span>
                             </p>
                         </div>
                     </form>
