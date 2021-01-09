@@ -137,5 +137,6 @@ var translations_es = {
     "i18n-noStartTime" : "Debes introducir la hora de inicio",
     "i18n-noEndTime" : "Debes introducir la hora de fin",
     "i18n-badTimeRange" : "La hora de fin debe ser superior a la de inicio",
+    "i18n-badPrice" : "La tarifa del recurso debe ser un valor numérico entre 0€ y 999€",
 
 }

@@ -16,9 +16,10 @@ class RecursosAddView extends BaseView{
                     $this->includeSelectField("i18n-rango_tarifa", 'RANGO_TARIFA_RECURSO', $this->data["priceRanges"], false);
                     $this->includeSelectField("i18n-login_responsable", 'LOGIN_RESPONSABLE', $this->data["responsables"], true);
                 ?>
-                <span class="<?=$this->icons["ADD"]?>" onclick="sendForm(document.addForm, 'RecursosController', 'add', true)"></span>
+                <span class="<?=$this->icons["ADD"]?>" onclick="sendForm(document.addForm, 'RecursosController', 'add', checkResourceAddForm())"></span>
             </form>
         <?php
+        $this->includeValidationModal();
     }
 
 }

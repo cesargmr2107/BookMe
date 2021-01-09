@@ -61,7 +61,7 @@ var translations_en = {
     "i18n-userProfile" : "User profile",
 
     /* RESOURCE VIEWS */
-    "i18n-tarifa" : "Price",
+    "i18n-tarifa" : "Price (€)",
     "i18n-rango_tarifa" : "Rate",
     "i18n-login_responsable" : "Manager",
     "i18n-calendar" : "Availability calendar",

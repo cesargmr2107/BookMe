@@ -17,9 +17,10 @@ class RecursosEditView extends BaseView{
                     $this->includeSelectField("i18n-rango_tarifa", 'RANGO_TARIFA_RECURSO', $this->data["priceRanges"], false, $this->data["resource"]["RANGO_TARIFA_RECURSO"]);
                     $this->includeSelectField("i18n-login_responsable", 'LOGIN_RESPONSABLE', $this->data["responsables"], true, $this->data["resource"]["LOGIN_RESPONSABLE"]);
                 ?>
-                <span class="<?=$this->icons["EDIT"]?>" onclick="sendForm(document.editForm, 'RecursosController', 'edit', true)"></span>
+                <span class="<?=$this->icons["EDIT"]?>" onclick="sendForm(document.editForm, 'RecursosController', 'edit', checkResourceEditForm())"></span>
             </form>
         <?php
+        $this->includeValidationModal();
     }
 
 }

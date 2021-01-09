@@ -17,9 +17,10 @@ class CalendariosEditView extends BaseView{
                     $this->includeTimeField("i18n-hora_inicio", 'HORA_INICIO_CALENDARIO', $this->data["HORA_INICIO_CALENDARIO"]);
                     $this->includeTimeField("i18n-hora_fin", 'HORA_FIN_CALENDARIO', $this->data["HORA_FIN_CALENDARIO"]);
                 ?>
-                <span class="<?=$this->icons["EDIT"]?>" onclick="sendForm(document.editForm, 'CalendariosController', 'edit', true)"></span>
+                <span class="<?=$this->icons["EDIT"]?>" onclick="sendForm(document.editForm, 'CalendariosController', 'edit', checkCalendarEditForm())"></span>
             </form>
         <?php
+        $this->includeValidationModal();
     }
 
 }

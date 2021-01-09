@@ -32,14 +32,11 @@ function checkRegex(args){
     return args["regex"].test(args["value"]);
 }
 
-function checkDateRange(args){
-    if (args["startDate"] == undefined || args["startDate"] == undefined ) {
-        return false;
-    }
-    var start = formatDate(args["startDate"]);
-    var end = formatDate(args["endDate"]);
-    return new Date(start) <= new Date(end);
+function checkNumberRange(args){
+    var value = parseInt(args["value"]);
+    return !isNaN(value) && value <= args["max"] && value >= args["min"];
 }
+
 
 function checkDateRange(args){
     if (args["startDate"] == undefined || args["startDate"] == undefined ) {
@@ -51,15 +48,21 @@ function checkDateRange(args){
 }
 
 function checkTimeRange(args){
-    if (args["startTime"] == undefined || args["startTime"] == undefined ) {
+    if (args["startTime"] == undefined || args["endTime"] == undefined ) {
         return false;
     }
     var start = "1960-01-01T" + args["startTime"];
+    console.log(start);
     var end = "1960-01-01T" + args["endTime"];
+    console.log(end);
     return new Date(start) < new Date(end);
 }
 
 function doChecks(form, toCheck){
+    // Reset
+    document.getElementById('errorMsgs').innerHTML = '';
+
+    // Check
     var errorMsgs = [];
     for (var key in toCheck){
         document.getElementById(key).style.borderColor = "";
@@ -147,8 +150,17 @@ function checkRegisterForm(){
     return doChecks(form, toCheck);
 }
 
+function checkCalendarEditForm(){
+    var form = document.editForm;
+    return checkCalendarForm(form);
+}
+
 function checkCalendarAddForm(){
     var form = document.addForm;
+    return checkCalendarForm(form);
+}
+
+function checkCalendarForm(form){
     var toCheck = {
         NOMBRE_CALENDARIO: {
             checkLength: {
@@ -212,10 +224,91 @@ function checkCalendarAddForm(){
             },
             checkTimeRange: {
                 args: {
-                    startDate: $('#HORA_INICIO_CALENDARIO').data('date'),
-                    endDate: $('#HORA_FIN_CALENDARIO').data('date')
+                    startTime: $('#HORA_INICIO_CALENDARIO').data('date'),
+                    endTime: $('#HORA_FIN_CALENDARIO').data('date')
                 },
                 code: "i18n-badTimeRange"
+            }
+        }
+    };
+    return doChecks(form, toCheck);
+}
+
+function checkResourceEditForm(){
+    var form = document.editForm;
+    return checkResourceForm(form);
+}
+
+function checkResourceAddForm(){
+    var form = document.addForm;
+    return checkResourceForm(form);
+}
+
+function checkResourceForm(form){
+    var toCheck = {
+        NOMBRE_RECURSO: {
+            checkLength: {
+                args: {
+                    min: 0,
+                    max: 40
+                },
+                code: "i18n-nameLength"
+            },
+            checkRegex: {
+                args: {
+                    regex: /^[a-zA-Z ]+$/
+                },
+                code: "i18n-nameRegex"
+            }
+        },
+        DESCRIPCION_RECURSO: {
+            checkLength: {
+                args: {
+                    min: 0,
+                    max: 100
+                },
+                code: "i18n-descrLength"
+            },
+            checkRegex: {
+                args: {
+                    regex: /^[a-zA-Z ]+$/
+                },
+                code: "i18n-descrRegex"
+            }
+        },
+        TARIFA_RECURSO: {
+            checkNumberRange: {
+                args: {
+                    min: 0,
+                    max: 999
+                },
+                code: "i18n-badPrice"
+            }
+        }
+    };
+    return doChecks(form, toCheck);
+}
+
+function checkResourceStatsForm(){
+    var form = document.statsForm;
+    var toCheck = {
+        FECHA_INICIO_INFORME: {
+            checkNotEmpty: {
+                args: {},
+                code: "i18n-noStartDate"
+            }
+        },
+        FECHA_FIN_INFORME: {
+            checkNotEmpty: {
+                args: {},
+                code: "i18n-noEndDate"
+            },
+            checkDateRange: {
+                args: {
+                    startDate: $('#FECHA_INICIO_INFORME').data('date'),
+                    endDate: $('#FECHA_FIN_INFORME').data('date')
+                },
+                code: "i18n-badDateRange"
             }
         }
     };
