@@ -148,6 +148,13 @@ var translations_es = {
     /* BACK */
 
     // CalendariosModel
+    "i18n-AC111" : "El calendario se añadió correctamente",
+    "i18n-AC011" : "El calendario no se añadió correctamente",
+    "i18n-AC112" : "El calendario se editó correctamente",
+    "i18n-AC011" : "El calendario no se editó correctamente",
+    "i18n-AC113" : "El calendario se eliminó correctamente",
+    "i18n-AC013" : "El calendario no se eliminó correctamente",
+    
     "i18n-AT101" : "El id del calendario (gestionado por el sistema) es un entero",
     "i18n-AT111" : "El nombre debe tener entre 6 y 40 caracteres",
     "i18n-AT112" : "El nombre sólo puede tener letras y espacios",
@@ -160,6 +167,13 @@ var translations_es = {
     "i18n-AT161" : "La hora debe tener el formato hh:mm:ss",
 
     // RecursosModel
+    "i18n-AC121" : "El recurso se añadió correctamente",
+    "i18n-AC021" : "El recurso no se añadió correctamente",
+    "i18n-AC122" : "El recurso se editó correctamente",
+    "i18n-AC022" : "El recurso no se editó correctamente",
+    "i18n-AC123" : "El recurso se eliminó correctamente",
+    "i18n-AC023" : "El recurso no se eliminó correctamente",
+
     "i18n-AT201" : "El id del recurso (gestionado por el sistema) es un entero",
     "i18n-AT211" : "El nombre debe tener entre 6 y 40 caracteres",
     "i18n-AT212" : "El nombre sólo puede tener letras y espacios",
@@ -172,6 +186,13 @@ var translations_es = {
     "i18n-AT271" : "Opción de borrado lógico desconocida",
     
     // ReservasModel
+    "i18n-AC141" : "El responsable se añadió correctamente",
+    "i18n-AC041" : "El responsable no se añadió correctamente",
+    "i18n-AC142" : "El responsable se editó correctamente",
+    "i18n-AC042" : "El responsable no se editó correctamente",
+    "i18n-AC143" : "El responsable se eliminó correctamente",
+    "i18n-AC043" : "El responsable no se eliminó correctamente",
+    
     "i18n-AT301" : "El id de la reserva (gestionado por el sistema) es un entero",
     "i18n-AT311" : "El usuario es desconocido",
     "i18n-AT321" : "El recurso es desconocido",
@@ -184,12 +205,26 @@ var translations_es = {
     "i18n-AT371" : "El coste de la reserva debe ser un valor numérico entre 0.0 y 9999.99",
 
     // ResponsablesModel
+    "i18n-AC131" : "La reserva se añadió correctamente",
+    "i18n-AC031" : "La reserva no se añadió correctamente",
+    "i18n-AC132" : "La reserva se editó correctamente",
+    "i18n-AC032" : "La reserva no se editó correctamente",
+    "i18n-AC133" : "La reserva se eliminó correctamente",
+    "i18n-AC033" : "La reserva no se eliminó correctamente",
+
     "i18n-AT371" : "El usuario es desconocido",
     "i18n-AT371" : "La dirección debe tener entre 10 y 60 caracteres",
     "i18n-AT371" : "La dirección sólo puede tener caracteres alfanuméricos, espacios '/&ºª'",
     "i18n-AT371" : "Sólo se aceptan teléfonos españoles",
 
     // SubreservasModel
+    "i18n-AC151" : "La subreserva se añadió correctamente",
+    "i18n-AC051" : "La subreserva no se añadió correctamente",
+    "i18n-AC152" : "La subreserva se editó correctamente",
+    "i18n-AC052" : "La subreserva no se añadió correctamente",
+    "i18n-AC153" : "La subreserva se eliminó correctamente",
+    "i18n-AC053" : "La subreserva no se eliminó correctamente",
+    
     "i18n-AT371" : "El id de la reserva es desconocido",
     "i18n-AT371" : "La fecha debe tener el formato dd/mm/yyyy",
     "i18n-AT371" : "La fecha debe tener el formato dd/mm/yyyy",
@@ -201,6 +236,13 @@ var translations_es = {
     "i18n-AT371" : "El coste de la subreserva debe ser un valor numérico entre 0.0 y 9999.9",
 
     // UsuariosModel
+    "i18n-AC161" : "El usuario se añadió correctamente",
+    "i18n-AC061" : "El usuario no se añadió correctamente",
+    "i18n-AC162" : "El usuario se editó correctamente",
+    "i18n-AC062" : "El usuario no se añadió correctamente",
+    "i18n-AC163" : "El usuario se eliminó correctamente",
+    "i18n-AC063" : "El usuario no se eliminó correctamente",
+    
     "i18n-AT371" : "El login debe tener entre 3 y 15 caracteres",
     "i18n-AT371" : "El login sólo admite caracteres alfanuméricos y '_-'",
     "i18n-AT371" : "El login sólo admite caracteres alfanuméricos y '_-'",
