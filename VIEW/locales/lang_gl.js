@@ -127,8 +127,8 @@ var translations_gl = {
     "i18n-emptyPassword" : "Introduce a túa contraseña",
     "i18n-loginLength" : "O login debe ter entre 3 e 15 caracteres",
     "i18n-loginRegex" : "O login só admite caracteres alfanuméricos e '_-'",
-    "i18n-usernameLength" : "O nome de usuario admite un máximo de 60 caracteres",
-    "i18n-usernameRegex" : "O nome de usuario só pode ter letras e espazos",
+    "i18n-usernameLength" : "O nome de usuario debe ter entre 3 e 60 caracteres",
+    "i18n-usernameRegex" : "O nome de usuario só pode ter letras, espazos e '-'",
     "i18n-mailRegex" : "O correo electrónico ten un formato incorrecto",
 
     // Common

@@ -127,8 +127,8 @@ var translations_en = {
     "i18n-emptyPassword" : "Enter your password",
     "i18n-loginLength" : "The login must have between 3 and 15 characters",
     "i18n-loginRegex" : "The login only admits '_-' and alphanumeric characters.",
-    "i18n-usernameLength" : "The name admits a maximum of 60 characters",
-    "i18n-usernameRegex" : "The name only admits letters and spaces",
+    "i18n-usernameLength" : "The name admits between 3 and 60 characters",
+    "i18n-usernameRegex" : "The name only admits letters, spaces and '-'",
     "i18n-mailRegex" : "The email has an invalid format",
 
     // Common

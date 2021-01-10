@@ -133,7 +133,7 @@ function checkRegisterForm(){
             },
             checkRegex: {
                 args: {
-                    regex: /^[a-zA-Z ]+$/
+                    regex: /^[a-zA-Z -]+$/
                 },
                 code: "i18n-usernameRegex"
             }
@@ -382,7 +382,7 @@ function checkUsersAddForm() {
         NOMBRE_USUARIO: {
             checkLength: {
                 args: {
-                    min: 0,
+                    min: 3,
                     max: 60
                 },
                 code: "i18n-usernameLength"
