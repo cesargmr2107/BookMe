@@ -126,7 +126,7 @@ var translations_es = {
     "i18n-emptyLogin" : "No has introducido tu login",
     "i18n-emptyPassword" : "No has introducido tu contraseña",
     "i18n-loginLength" : "El login debe tener entre 3 y 15 caracteres",
-    "i18n-loginRegex" : "El login sólo admite caracteres alfanuméricos y '_'",
+    "i18n-loginRegex" : "El login sólo admite caracteres alfanuméricos y '_-'",
     "i18n-usernameLength" : "El nombre de usuario admite un máximo de 60 caracteres",
     "i18n-usernameRegex" : "El nombre de usuario sólo puede tener letras y espacios",
     "i18n-mailRegex" : "El correo electrónico tiene un formato incorrecto",
@@ -144,7 +144,10 @@ var translations_es = {
     "i18n-noEndTime" : "Debes introducir la hora de fin",
     "i18n-badTimeRange" : "La hora de fin debe ser superior a la de inicio",
     "i18n-badPrice" : "La tarifa del recurso debe ser un valor numérico entre 0€ y 999€",
-
+    "i18n-addressLength" : "La dirección debe tener entre 10 y 60 caracteres",
+    "i18n-addressRegex" : "La dirección sólo puede tener caracteres alfanuméricos, espacios y '/&ºª'",
+    "i18n-phoneRegex" : "Sólo se aceptan teléfonos españoles",
+    
     /* BACK */
 
     // CalendariosModel
@@ -214,7 +217,7 @@ var translations_es = {
 
     "i18n-AT371" : "El usuario es desconocido",
     "i18n-AT371" : "La dirección debe tener entre 10 y 60 caracteres",
-    "i18n-AT371" : "La dirección sólo puede tener caracteres alfanuméricos, espacios '/&ºª'",
+    "i18n-AT371" : "La dirección sólo puede tener caracteres alfanuméricos, espacios  y '/&ºª'",
     "i18n-AT371" : "Sólo se aceptan teléfonos españoles",
 
     // SubreservasModel

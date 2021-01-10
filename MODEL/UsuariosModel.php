@@ -102,7 +102,8 @@ class UsuariosModel extends BaseModel {
             $result["resp_info"] = $responsableInfo->SHOW();
         }
 
-        echo "<pre>" . var_export($result, true) . "</pre>";
+        // DEBUG
+        // echo "<pre>" . var_export($result, true) . "</pre>";
         return $result;
     }
 

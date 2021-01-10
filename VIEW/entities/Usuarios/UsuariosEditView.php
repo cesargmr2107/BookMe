@@ -21,9 +21,10 @@ class UsuariosEditView extends BaseView{
                         $this->includeTextField("i18n-phone", 'TELEFONO_RESPONSABLE', $this->data["resp_info"]["TELEFONO_RESPONSABLE"]);
                     }
                 ?>
-                <span class="<?=$this->icons["EDIT"]?>" onclick="sendCredentialsForm(document.editForm, 'UsuariosController', 'edit', true)"></span>
+                <span class="<?=$this->icons["EDIT"]?>" onclick="sendCredentialsForm(document.editForm, 'UsuariosController', 'edit', checkUsersEditForm())"></span>
             </form>
         <?php
+        $this->includeValidationModal();
     }
 
 }

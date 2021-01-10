@@ -126,7 +126,7 @@ var translations_gl = {
     "i18n-emptyLogin" : "Introduce o teu login",
     "i18n-emptyPassword" : "Introduce a túa contraseña",
     "i18n-loginLength" : "O login debe ter entre 3 e 15 caracteres",
-    "i18n-loginRegex" : "O login só admite caracteres alfanuméricos e '_'",
+    "i18n-loginRegex" : "O login só admite caracteres alfanuméricos e '_-'",
     "i18n-usernameLength" : "O nome de usuario admite un máximo de 60 caracteres",
     "i18n-usernameRegex" : "O nome de usuario só pode ter letras e espazos",
     "i18n-mailRegex" : "O correo electrónico ten un formato incorrecto",
@@ -143,6 +143,9 @@ var translations_gl = {
     "i18n-noStartTime" : "Debes introducir a hora de inicio",
     "i18n-noEndTime" : "Debes introducir a hora de fin",
     "i18n-badTimeRange" : "A hora de fin debe ser superior á de inicio",
-    "i18n-badPrice" : "A tarifa do recurso debe ser un valor numérico entre 0€ e 999€"
+    "i18n-badPrice" : "A tarifa do recurso debe ser un valor numérico entre 0€ e 999€",
+    "i18n-addressLength" : "A dirección debe ter entre 10 e 60 caracteres",
+    "i18n-addressRegex" : "A dirección só pode ter caracteres alfanuméricos, espazos e '/&ºª'",
+    "i18n-phoneRegex" : "Só se aceptan teléfonos españois"
 
 }

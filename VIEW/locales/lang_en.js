@@ -126,7 +126,7 @@ var translations_en = {
     "i18n-emptyLogin" : "Enter your login",
     "i18n-emptyPassword" : "Enter your password",
     "i18n-loginLength" : "The login must have between 3 and 15 characters",
-    "i18n-loginRegex" : "The login only admits '_' and alphanumeric characters.",
+    "i18n-loginRegex" : "The login only admits '_-' and alphanumeric characters.",
     "i18n-usernameLength" : "The name admits a maximum of 60 characters",
     "i18n-usernameRegex" : "The name only admits letters and spaces",
     "i18n-mailRegex" : "The email has an invalid format",
@@ -144,5 +144,7 @@ var translations_en = {
     "i18n-noEndTime" : "Enter the end time",
     "i18n-badTimeRange" : "The end time must be greater or equal than the start time",
     "i18n-badPrice" : "The resource price has to be a number between  0€ and 999€",
+    "i18n-addressLength" : "The address must have between 10 and 60 characters",
+    "i18n-phoneRegex" : "Only spanish phone numbers are accepted"
 
 }

@@ -118,7 +118,7 @@ function checkRegisterForm(){
             },
             checkRegex: {
                 args: {
-                    regex: /^[a-zA-Z0-9_]+$/
+                    regex: /^[a-zA-Z0-9_-]+$/
                 },
                 code: "i18n-loginRegex"
             }
@@ -359,3 +359,120 @@ function checkAddIntervalForm(){
     };
     return doChecks(form, toCheck);
 }
+
+function checkUsersAddForm() {
+    var form = document.addForm;
+    // Set normal cheks
+    var toCheck = {
+        LOGIN_USUARIO: {
+            checkLength: {
+                args: {
+                    min: 3,
+                    max: 15
+                },
+                code: "i18n-loginLength"
+            },
+            checkRegex: {
+                args: {
+                    regex: /^[a-zA-Z0-9_-]+$/
+                },
+                code: "i18n-loginRegex"
+            }
+        },
+        NOMBRE_USUARIO: {
+            checkLength: {
+                args: {
+                    min: 0,
+                    max: 60
+                },
+                code: "i18n-usernameLength"
+            },
+            checkRegex: {
+                args: {
+                    regex: /^[a-zA-Z -]+$/
+                },
+                code: "i18n-usernameRegex"
+            }
+        },
+        EMAIL_USUARIO: {
+            checkRegex: {
+                args: {
+                    regex: /^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/
+                },
+                code: "i18n-mailRegex"
+            }
+        },
+    };
+    // Set responsable checks if necessary
+    if (document.getElementById('TIPO_USUARIO').value == "RESPONSABLE"){
+        toCheck["DIRECCION_RESPONSABLE"] = {
+            checkLength : {
+                args: {
+                    min: 10,
+                    max: 60
+                },
+                code: "i18n-addressLength"
+            },
+            checkRegex: {
+                args: {
+                    regex: /^[a-zA-Z0-9/&ºª ]+$/
+                },
+                code: "i18n-addressRegex"
+            },
+        };
+        toCheck["TELEFONO_RESPONSABLE"] = {
+            checkRegex: {
+                args: {
+                    regex: /^[6|7|8|9][0-9]{8}$/
+                },
+                code: "i18n-phoneRegex"
+            },
+        };
+    }
+
+    return doChecks(form, toCheck);
+}
+
+function checkUsersEditForm() {
+    var form = document.editForm;
+    // Set normal cheks
+    var toCheck = {
+        EMAIL_USUARIO: {
+            checkRegex: {
+                args: {
+                    regex: /^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/
+                },
+                code: "i18n-mailRegex"
+            }
+        },
+    };
+    // Set responsable checks if necessary
+    if (document.getElementById('TIPO_USUARIO').value == "RESPONSABLE"){
+        toCheck["DIRECCION_RESPONSABLE"] = {
+            checkLength : {
+                args: {
+                    min: 10,
+                    max: 60
+                },
+                code: "i18n-addressLength"
+            },
+            checkRegex: {
+                args: {
+                    regex: /^[a-zA-Z0-9/&ºª ]+$/
+                },
+                code: "i18n-addressRegex"
+            },
+        };
+        toCheck["TELEFONO_RESPONSABLE"] = {
+            checkRegex: {
+                args: {
+                    regex: /^[6|7|8|9][0-9]{8}$/
+                },
+                code: "i18n-phoneRegex"
+            },
+        };
+    }
+
+    return doChecks(form, toCheck);
+}
+

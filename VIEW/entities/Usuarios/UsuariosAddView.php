@@ -12,7 +12,7 @@ class UsuariosAddView extends BaseView{
             <form id="addForm" name="addForm" action="index.php" method="post">
                 <?php
                     $this->includeTextField("i18n-login", 'LOGIN_USUARIO');
-                    $this->includeTextField("i18n-email", 'NOMBRE_USUARIO');
+                    $this->includeTextField("i18n-nombre", 'NOMBRE_USUARIO');
                     $this->includePasswordField("i18n-password", 'PASSWD_USUARIO');
                     $this->includeTextField("i18n-email", 'EMAIL_USUARIO');
                     $this->includeSelectField("i18n-type", 'TIPO_USUARIO', $this->data["userTypes"], false);
@@ -30,9 +30,10 @@ class UsuariosAddView extends BaseView{
                         setLang();
                     });          
                 </script>
-                <span class="<?=$this->icons["ADD"]?>" onclick="sendCredentialsForm(document.addForm, 'UsuariosController', 'add', true)"></span>
+                <span class="<?=$this->icons["ADD"]?>" onclick="sendCredentialsForm(document.addForm, 'UsuariosController', 'add', checkUsersAddForm())"></span>
             </form>
         <?php
+        $this->includeValidationModal();
     }
 
 }
