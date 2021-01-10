@@ -150,7 +150,8 @@ var translations_es = {
     "i18n-calendarNotSelected" : "Selecciona un calendario",
     "i18n-respNotSelected" : "Selecciona un responsable",
     "i18n-resourceNotSelected" : "Selecciona un recurso",
-    
+    "i18n-overlapping" : "El intervalo seleccionado se solapa con uno ya existente",
+
     /* BACK */
 
     // CalendariosModel
@@ -207,7 +208,7 @@ var translations_es = {
     "i18n-AT342" : "La fecha de respuesta debe ser igual o superior a la de solicitud",
     "i18n-AT351" : "El motivo de rechazo no puede superar los 100 caracteres",
     "i18n-AT361" : "El estado de la reserva es desconocido",
-    "i18n-AT362" : "La reserva coincide con un intervalo existente",
+    "i18n-AT362" : "La reserva se solapa con una existente",
     "i18n-AT371" : "El coste de la reserva debe ser un valor numérico entre 0.0 y 9999.99",
 
     // ResponsablesModel
@@ -236,7 +237,7 @@ var translations_es = {
     "i18n-AT371" : "La fecha debe tener el formato dd/mm/yyyy",
     "i18n-AT371" : "La fecha debe tener el formato dd/mm/yyyy",
     "i18n-AT371" : "La fecha de fin debe ser igual o superior a la de inicio",
-    "i18n-AT371" : "La subreserva coincide con una ya existente",
+    "i18n-AT371" : "La subreserva se solapa con una existente",
     "i18n-AT371" : "La hora debe tener el formato hh:mm:ss",
     "i18n-AT371" : "La hora debe tener el formato hh:mm:ss",
     "i18n-AT371" : "El coste de la subreserva debe ser un valor numérico entre 0.0 y 9999.9",

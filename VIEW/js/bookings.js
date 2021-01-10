@@ -1,9 +1,9 @@
 
 var calendar;
-var events;
+var resource_events;
 
 function createCalendar(resource_events){
-    events = resource_events;
+    resource_events = resource_events;
     var calendarEl = document.getElementById('calendar');
     calendarEl.innerHTML = "";
     calendar = new FullCalendar.Calendar(calendarEl, {
@@ -97,7 +97,17 @@ function addBooking(){
                 });
                 d1.setDate(d1.getDate() + 1);
                 d2.setDate(d2.getDate() + 1);
-            }                                      
+            }
+            
+            // Add event to list sent from back
+            resource_events.push(
+                {
+                    startRecur: new Date(startDate),
+                    endRecur: new Date(endDate),
+                    startTime: startTime,
+                    endTime: endTime
+                }
+            );
             
     }
 

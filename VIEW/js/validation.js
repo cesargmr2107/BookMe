@@ -52,9 +52,9 @@ function checkTimeRange(args){
         return false;
     }
     var start = "1960-01-01T" + args["startTime"];
-    console.log(start);
+    //console.log(start);
     var end = "1960-01-01T" + args["endTime"];
-    console.log(end);
+    //console.log(end);
     return new Date(start) < new Date(end);
 }
 
@@ -346,6 +346,14 @@ function checkSearchResource(){
 
 function checkAddIntervalForm(){
     var form = document.addIntervalForm;
+
+    // Get from pickers
+    var startDate = $('#FECHA_INICIO_SUBRESERVA').data('date');
+    var endDate = $('#FECHA_FIN_SUBRESERVA').data('date');
+    var startTime = $('#HORA_INICIO_SUBRESERVA').data('date');
+    var endTime = $('#HORA_FIN_SUBRESERVA').data('date');
+    
+    // Check formats
     var toCheck = {
         FECHA_INICIO_SUBRESERVA: {
             checkNotEmpty: {
@@ -360,8 +368,8 @@ function checkAddIntervalForm(){
             },
             checkDateRange: {
                 args: {
-                    startDate: $('#FECHA_INICIO_SUBRESERVA').data('date'),
-                    endDate: $('#FECHA_FIN_SUBRESERVA').data('date')
+                    startDate: startDate,
+                    endDate: endDate
                 },
                 code: "i18n-badDateRange"
             }
@@ -379,14 +387,40 @@ function checkAddIntervalForm(){
             },
             checkTimeRange: {
                 args: {
-                    startTime: $('#HORA_INICIO_SUBRESERVA').data('date'),
-                    endTime: $('#HORA_FIN_SUBRESERVA').data('date')
+                    startTime: startTime,
+                    endTime: endTime
                 },
                 code: "i18n-badTimeRange"
             }
         }
     };
-    return doChecks(form, toCheck);
+
+    // If there's a format problem, false; else check overlappings
+    return !doChecks(form, toCheck) ? false : checkOverlappings(startDate, endDate, startTime, endTime);
+}
+
+function checkOverlappings(startDate, endDate, startTime, endTime){
+    var startDate = new Date (`${formatDate(startDate)}T00:00:00`);
+    var endDate = new Date (`${formatDate(endDate)}T00:00:00`);
+    var startTime = new Date (`1960-01-01T${startTime}`);
+    var endTime = new Date (`1960-01-01T${endTime}`);
+
+
+    for(var i = 0; i < resource_events.length; i++){
+        var event = resource_events[i];
+        var eventStartTime = new Date (`1960-01-01T${event.startTime}`)
+        var eventEndTime = new Date (`1960-01-01T${event.endTime}`)
+        if ( ((event.startRecur >= startDate && event.startRecur <= endDate) ||
+             (event.endRecur >= startDate && event.endRecur <= endDate) ) &&
+             ((eventStartTime >= startTime && eventStartTime <= endTime) ||
+             (eventEndTime >= startTime && eventEndTime <= endTime) )){
+                addMsgsToModal(["i18n-overlapping"]);
+                openModal();
+                return false;
+        }
+    }
+
+    return true;
 }
 
 function checkUsersAddForm() {

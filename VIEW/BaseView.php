@@ -500,7 +500,7 @@ abstract class BaseView{
                 $event_string = $event_string .
                                 "{" .
                                 $title .
-                                "startRecur: '" . $event["FECHA_INICIO_SUBRESERVA"] . "'," .
+                                "startRecur: new Date ('" . $event["FECHA_INICIO_SUBRESERVA"] . "')," .
                                 "endRecur: new Date ('" . $event["FECHA_FIN_SUBRESERVA"] . "')," .
                                 "startTime: '" . $event["HORA_INICIO_SUBRESERVA"] . "'," .
                                 "endTime: '" . $event["HORA_FIN_SUBRESERVA"] . "'," .
