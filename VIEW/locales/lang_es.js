@@ -147,6 +147,9 @@ var translations_es = {
     "i18n-addressLength" : "La dirección debe tener entre 10 y 60 caracteres",
     "i18n-addressRegex" : "La dirección sólo puede tener caracteres alfanuméricos, espacios y '/&ºª'",
     "i18n-phoneRegex" : "Sólo se aceptan teléfonos españoles",
+    "i18n-calendarNotSelected" : "Selecciona un calendario",
+    "i18n-respNotSelected" : "Selecciona un responsable",
+    "i18n-resourceNotSelected" : "Selecciona un recurso",
     
     /* BACK */
 

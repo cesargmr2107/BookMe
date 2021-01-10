@@ -14,6 +14,7 @@ class ReservasAddView extends BaseView{
 
     protected function body(){
         $this->includeTitle("i18n-newBooking", "h1");
+        $this->includeValidationModal();
 
         ?>
             <form id="searchResource" name="searchResource" action="index.php" method="post">
@@ -21,12 +22,11 @@ class ReservasAddView extends BaseView{
                     $id = (array_key_exists("resource_info", $this->data)) ? $this->data["resource_info"]["ID_RECURSO"] : null ;
                     $this->includeSelectField("i18n-selectedResource", "ID_RECURSO", $this->data["resources"], true, $id);
                 ?>
-                <span class="<?=$this->icons["SEARCH"]?>" onclick="sendForm(document.searchResource, 'ReservasController', 'addForm', true)"></span>
+                <span class="<?=$this->icons["SEARCH"]?>" onclick="sendForm(document.searchResource, 'ReservasController', 'addForm', checkSearchResource())"></span>
             </form>
         
         <?php
             if(array_key_exists("resource_info", $this->data)){
-                $this->includeValidationModal();
         ?>
             <div>
                 <form name="addIntervalForm">

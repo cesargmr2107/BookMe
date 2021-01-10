@@ -383,7 +383,7 @@ abstract class BaseView{
                 <?php
                 if($assocOptions){
                     if($value === null){
-                        echo "<option class='i18n-options' disabled='disabled' selected>Opciones</option>";
+                        echo "<option class='i18n-options' disabled='disabled' selected></option>";
                     }
                     foreach ($options as $id => $text) {
                         if($value != $id){

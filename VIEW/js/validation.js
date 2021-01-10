@@ -58,6 +58,10 @@ function checkTimeRange(args){
     return new Date(start) < new Date(end);
 }
 
+function checkSelected(args){
+    return args["value"] != translations["i18n-options"];
+}
+
 function doChecks(form, toCheck){
     // Reset
     document.getElementById('errorMsgs').innerHTML = '';
@@ -276,6 +280,12 @@ function checkResourceForm(form){
                 code: "i18n-descrRegex"
             }
         },
+        ID_CALENDARIO: {
+            checkSelected: {
+                args: {},
+                code: "i18n-calendarNotSelected"
+            },
+        },
         TARIFA_RECURSO: {
             checkNumberRange: {
                 args: {
@@ -284,6 +294,12 @@ function checkResourceForm(form){
                 },
                 code: "i18n-badPrice"
             }
+        },
+        LOGIN_RESPONSABLE: {
+            checkSelected: {
+                args: {},
+                code: "i18n-resourceNotSelected"
+            },
         }
     };
     return doChecks(form, toCheck);
@@ -312,6 +328,19 @@ function checkResourceStatsForm(){
             }
         }
     };
+    return doChecks(form, toCheck);
+}
+
+function checkSearchResource(){
+    var form = document.searchResource;
+    var toCheck = {
+        ID_RECURSO: {
+            checkSelected: {
+                args: {},
+                code: "i18n-resourceNotSelected"
+            }
+        }
+    }
     return doChecks(form, toCheck);
 }
 
