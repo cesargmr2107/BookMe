@@ -34,8 +34,8 @@ class ReservasAddView extends BaseView{
                         $this->includeTitle("i18n-addInterval" , "h4");
                         $this->includeDateField("i18n-fecha_inicio", "FECHA_INICIO_SUBRESERVA", true);
                         $this->includeDateField("i18n-fecha_fin", "FECHA_FIN_SUBRESERVA", true);
-                        $this->includeTimeField("i18n-hora_inicio", "HORA_INICIO_SUBRESERVA", true);
-                        $this->includeTimeField("i18n-hora_fin", "HORA_FIN_SUBRESERVA", true);
+                        $this->includeTimeField("i18n-hora_inicio", "HORA_INICIO_SUBRESERVA");
+                        $this->includeTimeField("i18n-hora_fin", "HORA_FIN_SUBRESERVA");
                     ?>
                 </form>
                 <span class="<?=$this->icons["ADD"]?>" onclick="if(checkAddIntervalForm()) addBooking()"></span>
