@@ -87,7 +87,7 @@ function addBooking(){
             divInterval.appendChild(ul);
             divIntervals.appendChild(divInterval);
 
-            // Add event to calendar
+            // Add event to calendar and move to startdate
             var d1 = new Date (`${startDate}T${startTime}`);
             var d2 = new Date (`${startDate}T${endTime}`);
             var end = new Date (`${endDate}T${startTime}`);
@@ -104,6 +104,7 @@ function addBooking(){
                 d1.setDate(d1.getDate() + 1);
                 d2.setDate(d2.getDate() + 1);
             }
+            calendar.gotoDate(startDate);
             
             // Add event to list sent from back
             resource_events.push({
@@ -155,6 +156,7 @@ function addBooking(){
         // Build Date objects
         var startDate = new Date(startDate);
         var endDate = new Date(endDate);
+        endDate.setDate(endDate.getDate() + 1);
         var startTime = new Date(`1960-01-01T${startTime}`);
         var endTime = new Date(`1960-01-01T${endTime}`);
         
@@ -166,9 +168,7 @@ function addBooking(){
         var numberOf = (endDate - startDate) / factors[range];
 
         if(range == 'HORA'){
-            numberOf = (numberOf + 1) * (endTime - startTime) / (3.6e+6);
-        }else if(range == 'DIA'){
-            numberOf++;
+            numberOf *= (endTime - startTime) / (3.6e+6);
         }
 
         var newCost = numberOf * price;
