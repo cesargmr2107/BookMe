@@ -38,29 +38,29 @@ class SubreservasModel extends BaseModel {
         // Subscribe atributes to validations
         $this->checks = array (
             "ID_RESERVA" => array(
-                "checkIsForeignKey" => array('ID_RESERVA', 'ID_RESERVA', 'ReservasModel', '222')
+                "checkIsForeignKey" => array('ID_RESERVA', 'ID_RESERVA', 'ReservasModel', 'AT501')
             ),
             "FECHA_INICIO_SUBRESERVA" => array(
-                "checkDate" => array('FECHA_INICIO_SUBRESERVA', '222')
+                "checkDate" => array('FECHA_INICIO_SUBRESERVA', 'AT521')
             ),
             "FECHA_FIN_SUBRESERVA" => array(
-                "checkDate" => array('FECHA_FIN_SUBRESERVA', '222'),
-                "checkDateInterval" => array('FECHA_INICIO_SUBRESERVA', 'FECHA_FIN_SUBRESERVA', '222'),
-                "checkNoOverlappings" => array('', '222')
+                "checkDate" => array('FECHA_FIN_SUBRESERVA', 'AT531'),
+                "checkDateInterval" => array('FECHA_INICIO_SUBRESERVA', 'FECHA_FIN_SUBRESERVA', 'AT532'),
+                "checkNoOverlappings" => array('', 'AT533')
             ),
             "HORA_INICIO_SUBRESERVA" => array(
-                "checkTime" => array('HORA_INICIO_SUBRESERVA', '222')
+                "checkTime" => array('HORA_INICIO_SUBRESERVA', 'AT541')
             ),
             "HORA_FIN_SUBRESERVA" => array(
-                "checkTime" => array('HORA_FIN_SUBRESERVA', '222')
+                "checkTime" => array('HORA_FIN_SUBRESERVA', 'AT551')
             ),
             "COSTE_SUBRESERVA" => array(
-                "checkNumeric" => array('COSTE_SUBRESERVA', '222'),
+                "checkNumeric" => array('COSTE_SUBRESERVA', 'AT561'),
             )
         );
     }
 
-    public function checkNoOverlappings($id_recurso, $errorCode, $errorMsg){
+    public function checkNoOverlappings($id_recurso, $errorCode){
         
         if($id_recurso == NULL){
             // Get resource id
@@ -94,7 +94,7 @@ class SubreservasModel extends BaseModel {
         if($noOverlappings){
             return true;
         }else{
-            return array("code" => $errorCode, "msg" => $errorMsg); 
+            return array("code" => $errorCode); 
         }
     }
 

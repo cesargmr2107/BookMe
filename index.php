@@ -14,8 +14,8 @@ if (isAuthenticated() === false){
 
 	include_once './CONTROLLER/AuthenticationController.php';
 	$authController = new AuthenticationController();
-
-	if (!($_POST)){
+	$authMethods = get_class_methods("AuthenticationController");
+	if (!($_POST) || !in_array($_POST['action'], $authMethods)){
 		$authController->loginForm();
 	} else{
 		$action = $_POST['action'];

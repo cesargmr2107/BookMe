@@ -15,7 +15,7 @@ class ReservasAddView extends BaseView{
     protected function body(){
         $this->includeTitle("i18n-newBooking", "h1");
         $this->includeValidationModal();
-
+      
         ?>
             <form id="searchResource" name="searchResource" action="index.php" method="post">
                 <?php
@@ -26,12 +26,26 @@ class ReservasAddView extends BaseView{
             </form>
         
         <?php
-            if(array_key_exists("resource_info", $this->data)){
+
+        if(array_key_exists("resource_info", $this->data)){
+            $this->includeResourceInfo($this->data["resource_info"]);
+            $this->includeAddForm();
+            $this->includeCalendar($this->data["resource_info"]["events"], false);
+        }
+    }
+
+    protected function includeResourceInfo($info){
+        $this->includeTitle('i18n-resourceInfo', 'h4');
+        $this->includeShowInfo('i18n-tarifa', $info['TARIFA_RECURSO'], 'TARIFA_RECURSO');
+        $this->includeShowInfo('i18n-rango_tarifa', $info['RANGO_TARIFA_RECURSO'], 'RANGO_TARIFA_RECURSO');
+    }
+
+    protected function includeAddForm(){
+        $this->includeTitle("i18n-addInterval" , "h4");
         ?>
             <div>
                 <form name="addIntervalForm">
                     <?php
-                        $this->includeTitle("i18n-addInterval" , "h4");
                         $this->includeDateField("i18n-fecha_inicio", "FECHA_INICIO_SUBRESERVA", true);
                         $this->includeDateField("i18n-fecha_fin", "FECHA_FIN_SUBRESERVA", true);
                         $this->includeTimeField("i18n-hora_inicio", "HORA_INICIO_SUBRESERVA");
@@ -39,29 +53,16 @@ class ReservasAddView extends BaseView{
                     ?>
                 </form>
                 <span class="<?=$this->icons["ADD"]?>" onclick="if(checkAddIntervalForm()) addBooking()"></span>
-            <div>
-
-            <div id="intervals">
-                
             </div>
 
             <form id="addForm" name="addForm" action="index.php" method="post">
+                <?php $this->includeReadOnlyField("i18n-bookingTotalCost", "COSTE_RESERVA", "0.00")?>
                 <?php $this->includeHiddenField("ID_RECURSO", $this->data["resource_info"]["ID_RECURSO"])?>
-                <?php $this->includeHiddenField("COSTE_RESERVA", "5")?>
                 <?php $this->includeHiddenField("INFO_SUBRESERVAS","{ \"subreservas\" : {} }")?>
+                <div id="intervals"></div>
                 <span class="<?=$this->icons["BOOKING"]?>" onclick="sendForm(document.addForm, 'ReservasController', 'add', true)"></span>
             </form>
-            <?php
-            
-            $events = (array_key_exists("resource_info", $this->data)) ? $this->data["resource_info"]["events"] : array() ;
-
-            // DEBUG: Check    
-            // echo '<pre>' . var_export($events, true) . '</pre>';
-
-            $this->includeCalendar($events, false);
-
-        }
-
+        <?php
     }
 
 }

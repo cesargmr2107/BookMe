@@ -56,30 +56,30 @@ class ReservasModel extends BaseModel {
         // Subscribe atributes to validations
         $this->checks = array (
             "ID_RESERVA" => array(
-                "checkAutoKey" => array('ID_RESERVA', '222'),
+                "checkAutoKey" => array('ID_RESERVA', 'AT301'),
             ),
             "LOGIN_USUARIO" => array(
-                "checkIsForeignKey" => array('LOGIN_USUARIO', 'LOGIN_USUARIO', 'UsuariosModel', '222')
+                "checkIsForeignKey" => array('LOGIN_USUARIO', 'LOGIN_USUARIO', 'UsuariosModel', 'AT311')
             ),
             "ID_RECURSO" => array(
-                "checkIsForeignKey" => array('ID_RECURSO', 'ID_RECURSO', 'RecursosModel', '222')
+                "checkIsForeignKey" => array('ID_RECURSO', 'ID_RECURSO', 'RecursosModel', 'AT321')
             ),
             "FECHA_SOLICITUD_RESERVA" => array(
-                "checkDate" => array('FECHA_SOLICITUD_RESERVA', '222')
+                "checkDate" => array('FECHA_SOLICITUD_RESERVA', 'AT331')
             ),
             "FECHA_RESPUESTA_RESERVA" => array( 
-                "checkDate" => array('FECHA_RESPUESTA_RESERVA', '222'),
-                "checkDateInterval" => array('FECHA_SOLICITUD_RESERVA', 'FECHA_RESPUESTA_RESERVA', '222')
+                "checkDate" => array('FECHA_RESPUESTA_RESERVA', 'AT341'),
+                "checkDateInterval" => array('FECHA_SOLICITUD_RESERVA', 'FECHA_RESPUESTA_RESERVA', 'AT342')
             ),
             "MOTIVO_RECHAZO_RESERVA" => array(
-                "checkSize" => array('MOTIVO_RECHAZO_RESERVA', 0, 200, '222'),
+                "checkSize" => array('MOTIVO_RECHAZO_RESERVA', 0, 200, 'AT351'),
             ),
             "ESTADO_RESERVA" => array( 
-                "checkEnum" => array('ESTADO_RESERVA', static::$bookingStatus, '222'),
-                "checkNoOverlappings" => array('222')
+                "checkEnum" => array('ESTADO_RESERVA', static::$bookingStatus, 'AT361'),
+                "checkNoOverlappings" => array('AT362')
             ),
             "COSTE_RESERVA" => array(
-                "checkRange" => array('COSTE_RESERVA', 0.0, 9999.99, 'AT231')
+                "checkRange" => array('COSTE_RESERVA', 0.0, 9999.99, 'AT371')
             )
         );
     }
@@ -92,7 +92,7 @@ class ReservasModel extends BaseModel {
         return true;
     }
 
-    public function checkNoOverlappings($errorCode, $errorMsg){
+    public function checkNoOverlappings($errorCode){
 
         if($this->atributes["ESTADO_RESERVA"] == "ACEPTADA"){
 
@@ -108,13 +108,13 @@ class ReservasModel extends BaseModel {
 
             foreach($subreservas as $sr){
                 $subreserva->setAtributes($sr);
-                $check = $subreserva->checkNoOverlappings($this->atributes["ID_RECURSO"], "", "");
+                $check = $subreserva->checkNoOverlappings($this->atributes["ID_RECURSO"], "");
                 
                 // DEBUG: Check result
                 // echo '<pre>' . var_export($check, true) . '</pre>';
 
                 if(is_array($check)){
-                    return array("code" => $errorCode, "msg" => $errorMsg);
+                    return array("code" => $errorCode);
                 }
             }
         }

@@ -274,10 +274,9 @@ abstract class BaseView{
         }
     }
 
-    protected function includeShowInfo($titleCode, $info){
-        ?>
-            <p><strong class="<?= $titleCode ?>"></strong><span>: <?= $info ?></span></p>
-        <?php
+    protected function includeShowInfo($titleCode, $info, $id = null){
+        $id = ($id != null) ? "id='$id'" : "";
+        echo "<p><strong class='$titleCode'></strong><span>: </span><span $id>$info</span>";
     }
 
     protected function includeShowDate($titleCode, $date){

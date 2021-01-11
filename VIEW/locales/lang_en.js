@@ -83,6 +83,7 @@ var translations_en = {
     "i18n-nBookNotUsed" : "Bookings with unused resource: ",
     "i18n-availableHours" : "Available hours",
     "i18n-unavailableHours" : "Unavailable hours",
+    "i18n-hours" : "Hours: ",
 
     /* BOOKING VIEWS */
     "i18n-pending" : "Pending",
@@ -100,7 +101,7 @@ var translations_en = {
     "i18n-bookingNoResponse" : "There's no response yet",
     "i18n-estado" : "Status",
     "i18n-bookingRejection" : "Rejection reason",
-    "i18n-bookingTotalCost" : "Total cost: ",
+    "i18n-bookingTotalCost" : "Total cost (€): ",
     "i18n-bookingAllConfirmed" : "All bookings are confirmed",
     "i18n-requestedOn" : "Requested on ",
     "i18n-positiveConfirm" : "Would you like to <strong>confirm the use</strong> of the booking made by ",
@@ -115,7 +116,7 @@ var translations_en = {
     "i18n-noPending" : "There aren't any resources which have pending bookings",
     "i18n-pendingBookingsRes" : " pending bookings",
     "i18n-pendingBookingsByResource" : "Resource pending bookings",
-    "i18n-cost" : "Cost:",
+    "i18n-cost" : "Cost (€): ",
     "i18n-selectedResource" : "Selected resource",
     "i18n-addInterval" : "Add an interval to your booking",
 
@@ -145,6 +146,9 @@ var translations_en = {
     "i18n-badTimeRange" : "The end time must be greater or equal than the start time",
     "i18n-badPrice" : "The resource price has to be a number between  0€ and 999€",
     "i18n-addressLength" : "The address must have between 10 and 60 characters",
-    "i18n-phoneRegex" : "Only spanish phone numbers are accepted"
-
+    "i18n-phoneRegex" : "Only spanish phone numbers are accepted",
+    "i18n-calendarNotSelected" : "Choose a calendar",
+    "i18n-respNotSelected" : "Choose a manager",
+    "i18n-resourceNotSelected" : "Choose a resource",
+    "i18n-overlapping" : "The chosen interval overlaps with an existing one",
 }

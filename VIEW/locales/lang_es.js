@@ -83,6 +83,7 @@ var translations_es = {
     "i18n-nBookNotUsed" : "Reservas con recurso no usado: ",
     "i18n-availableHours" : "Horas disponibles",
     "i18n-unavailableHours" : "Horas ocupadas",
+    "i18n-hours" : "Horas: ",
 
     /* BOOKING VIEWS */
     "i18n-pending" : "Pendientes",
@@ -100,7 +101,7 @@ var translations_es = {
     "i18n-bookingNoResponse" : "Todavía no hay respuesta",
     "i18n-estado" : "Estado",
     "i18n-bookingRejection" : "Motivo de rechazo",
-    "i18n-bookingTotalCost" : "Coste total: ",
+    "i18n-bookingTotalCost" : "Coste total (€): ",
     "i18n-bookingAllConfirmed" : "Todas las solicitudes están confirmadas",
     "i18n-requestedOn" : "Solicitud del ",
     "i18n-positiveConfirm" : "¿Quieres <strong>confirmar el uso</strong> de la reserva hecha por ",
@@ -115,7 +116,7 @@ var translations_es = {
     "i18n-noPending" : "No hay recursos con solicitudes pendientes",
     "i18n-pendingBookingsRes" : " solicitudes pendientes",
     "i18n-pendingBookingsByResource" : "Solicitudes pendientes de recurso",
-    "i18n-cost" : "Coste:",
+    "i18n-cost" : "Coste (€): ",
     "i18n-selectedResource" : "Recurso seleccionado",
     "i18n-addInterval" : "Añade un intervalo a tu reserva",
 

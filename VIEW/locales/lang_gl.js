@@ -83,9 +83,10 @@ var translations_gl = {
     "i18n-nBookNotUsed" : "Reservas con recurso non usado: ",
     "i18n-availableHours" : "Horas dispoñibles",
     "i18n-unavailableHours" : "Horas ocupadas",
+    "i18n-hours" : "Horas: ",
 
     /* BOOKING VIEWS */
-    "i18n-pending" : "Pendeentes",
+    "i18n-pending" : "Pendentes",
     "i18n-accepted" : "Aceptadas",
     "i18n-rejected" : "Rexeitadas",
     "i18n-canceled" : "Canceladas",
@@ -100,7 +101,7 @@ var translations_gl = {
     "i18n-bookingNoResponse" : "Aínda non hai resposta",
     "i18n-estado" : "Estado",
     "i18n-bookingRejection" : "Motivo de rexeitamento",
-    "i18n-bookingTotalCost" : "Costo total: ",
+    "i18n-bookingTotalCost" : "Costo total (€): ",
     "i18n-bookingAllConfirmed" : "Tódalas solicitudes están confirmadas",
     "i18n-requestedOn" : "Solicitude do ",
     "i18n-negativeConfirm" : "¿Queres <strong>confirmar o non uso</strong> da reserva feita por ",
@@ -115,7 +116,7 @@ var translations_gl = {
     "i18n-noPending" : "Non hai recursos con solicitudes pendentes",
     "i18n-pendingBookingsRes" : " solicitudes pendentes",
     "i18n-pendingBookingsByResource" : "Solicitudes pendentes de recurso",
-    "i18n-cost" : "Costo:",
+    "i18n-cost" : "Costo (€): ",
     "i18n-selectedResource" : "Recurso seleccionado",
     "i18n-addInterval" : "Engade un intervalo á túa reserva",
 
@@ -146,6 +147,9 @@ var translations_gl = {
     "i18n-badPrice" : "A tarifa do recurso debe ser un valor numérico entre 0€ e 999€",
     "i18n-addressLength" : "A dirección debe ter entre 10 e 60 caracteres",
     "i18n-addressRegex" : "A dirección só pode ter caracteres alfanuméricos, espazos e '/&ºª'",
-    "i18n-phoneRegex" : "Só se aceptan teléfonos españois"
-
+    "i18n-phoneRegex" : "Só se aceptan teléfonos españois",
+    "i18n-calendarNotSelected" : "Selecciona un calendario",
+    "i18n-respNotSelected" : "Selecciona un responsable",
+    "i18n-resourceNotSelected" : "Selecciona un recurso",
+    "i18n-overlapping" : "O intervalo seleccionado solápase con un xa existente",
 }

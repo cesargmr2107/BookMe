@@ -400,8 +400,8 @@ function checkAddIntervalForm(){
 }
 
 function checkOverlappings(startDate, endDate, startTime, endTime){
-    var startDate = new Date (`${formatDate(startDate)}T00:00:00`);
-    var endDate = new Date (`${formatDate(endDate)}T00:00:00`);
+    var startDate = new Date (`${formatDate(startDate)}`);
+    var endDate = new Date (`${formatDate(endDate)}`);
     var startTime = new Date (`1960-01-01T${startTime}`);
     var endTime = new Date (`1960-01-01T${endTime}`);
 
