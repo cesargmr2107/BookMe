@@ -193,12 +193,12 @@ var translations_es = {
     "i18n-AT271" : "Opción de borrado lógico desconocida",
     
     // ReservasModel
-    "i18n-AC141" : "El responsable se añadió correctamente",
-    "i18n-AC041" : "El responsable no se añadió correctamente",
-    "i18n-AC142" : "El responsable se editó correctamente",
-    "i18n-AC042" : "El responsable no se editó correctamente",
-    "i18n-AC143" : "El responsable se eliminó correctamente",
-    "i18n-AC043" : "El responsable no se eliminó correctamente",
+    "i18n-AC131" : "La reserva se añadió correctamente",
+    "i18n-AC031" : "La reserva no se añadió correctamente",
+    "i18n-AC132" : "La reserva se editó correctamente",
+    "i18n-AC032" : "La reserva no se editó correctamente",
+    "i18n-AC133" : "La reserva se eliminó correctamente",
+    "i18n-AC033" : "La reserva no se eliminó correctamente",
     
     "i18n-AT301" : "El id de la reserva (gestionado por el sistema) es un entero",
     "i18n-AT311" : "El usuario es desconocido",
@@ -212,17 +212,17 @@ var translations_es = {
     "i18n-AT371" : "El coste de la reserva debe ser un valor numérico entre 0.0 y 9999.99",
 
     // ResponsablesModel
-    "i18n-AC131" : "La reserva se añadió correctamente",
-    "i18n-AC031" : "La reserva no se añadió correctamente",
-    "i18n-AC132" : "La reserva se editó correctamente",
-    "i18n-AC032" : "La reserva no se editó correctamente",
-    "i18n-AC133" : "La reserva se eliminó correctamente",
-    "i18n-AC033" : "La reserva no se eliminó correctamente",
+    "i18n-AC141" : "El responsable se añadió correctamente",
+    "i18n-AC041" : "El responsable no se añadió correctamente",
+    "i18n-AC142" : "El responsable se editó correctamente",
+    "i18n-AC042" : "El responsable no se editó correctamente",
+    "i18n-AC143" : "El responsable se eliminó correctamente",
+    "i18n-AC043" : "El responsable no se eliminó correctamente",
 
-    "i18n-AT371" : "El usuario es desconocido",
-    "i18n-AT371" : "La dirección debe tener entre 10 y 60 caracteres",
-    "i18n-AT371" : "La dirección sólo puede tener caracteres alfanuméricos, espacios  y '/&ºª'",
-    "i18n-AT371" : "Sólo se aceptan teléfonos españoles",
+    "i18n-AT401" : "El usuario es desconocido",
+    "i18n-AT411" : "La dirección debe tener entre 10 y 60 caracteres",
+    "i18n-AT412" : "La dirección sólo puede tener caracteres alfanuméricos, espacios  y '/&ºª'",
+    "i18n-AT421" : "Sólo se aceptan teléfonos españoles",
 
     // SubreservasModel
     "i18n-AC151" : "La subreserva se añadió correctamente",
@@ -232,15 +232,14 @@ var translations_es = {
     "i18n-AC153" : "La subreserva se eliminó correctamente",
     "i18n-AC053" : "La subreserva no se eliminó correctamente",
     
-    "i18n-AT371" : "El id de la reserva es desconocido",
-    "i18n-AT371" : "La fecha debe tener el formato dd/mm/yyyy",
-    "i18n-AT371" : "La fecha debe tener el formato dd/mm/yyyy",
-    "i18n-AT371" : "La fecha debe tener el formato dd/mm/yyyy",
-    "i18n-AT371" : "La fecha de fin debe ser igual o superior a la de inicio",
-    "i18n-AT371" : "La subreserva se solapa con una existente",
-    "i18n-AT371" : "La hora debe tener el formato hh:mm:ss",
-    "i18n-AT371" : "La hora debe tener el formato hh:mm:ss",
-    "i18n-AT371" : "El coste de la subreserva debe ser un valor numérico entre 0.0 y 9999.9",
+    "i18n-AT501" : "El id de la reserva es desconocido",
+    "i18n-AT521" : "La fecha debe tener el formato dd/mm/yyyy",
+    "i18n-AT531" : "La fecha debe tener el formato dd/mm/yyyy",
+    "i18n-AT532" : "La fecha de fin debe ser igual o superior a la de inicio",
+    "i18n-AT533" : "La subreserva se solapa con una existente",
+    "i18n-AT541" : "La hora debe tener el formato hh:mm:ss",
+    "i18n-AT551" : "La hora debe tener el formato hh:mm:ss",
+    "i18n-AT561" : "El coste de la subreserva debe ser un valor numérico entre 0.0 y 9999.9",
 
     // UsuariosModel
     "i18n-AC161" : "El usuario se añadió correctamente",
@@ -250,14 +249,13 @@ var translations_es = {
     "i18n-AC163" : "El usuario se eliminó correctamente",
     "i18n-AC063" : "El usuario no se eliminó correctamente",
     
-    "i18n-AT371" : "El login debe tener entre 3 y 15 caracteres",
-    "i18n-AT371" : "El login sólo admite caracteres alfanuméricos y '_-'",
-    "i18n-AT371" : "El login sólo admite caracteres alfanuméricos y '_-'",
-    "i18n-AT371" : "La contraseña se debe guardar como un hash MD5",
-    "i18n-AT371" : "El nombre debe tener entre 6 y 60 caracteres",
-    "i18n-AT371" : "El nombre sólo puede tener letras, espacios y '-'",
-    "i18n-AT371" : "El correo electrónico tiene un formato incorrecto",
-    "i18n-AT371" : "El tipo de usuario es desconocido",
-    "i18n-AT371" : "Opción de actividad desconocida",
+    "i18n-AT601" : "El login debe tener entre 3 y 15 caracteres",
+    "i18n-AT602" : "El login sólo admite caracteres alfanuméricos y '_-'",
+    "i18n-AT611" : "La contraseña se debe guardar como un hash MD5",
+    "i18n-AT621" : "El nombre debe tener entre 6 y 60 caracteres",
+    "i18n-AT622" : "El nombre sólo puede tener letras, espacios y '-'",
+    "i18n-AT631" : "El correo electrónico tiene un formato incorrecto",
+    "i18n-AT641" : "El tipo de usuario es desconocido",
+    "i18n-AT651" : "Opción de actividad desconocida",
 
 }
