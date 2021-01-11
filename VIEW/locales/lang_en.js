@@ -55,7 +55,7 @@ var translations_en = {
     "i18n-calendarInfo" : "Calendar information",
 
     /* USER VIEWS */
-    "i18n-type" : "Type",
+    "i18n-tipo" : "Type",
     "i18n-active" : "Active",
     "i18n-address" : "Address",
     "i18n-phone" : "Phone",

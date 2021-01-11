@@ -15,7 +15,7 @@ class UsuariosAddView extends BaseView{
                     $this->includeTextField("i18n-nombre", 'NOMBRE_USUARIO');
                     $this->includePasswordField("i18n-password", 'PASSWD_USUARIO');
                     $this->includeTextField("i18n-email", 'EMAIL_USUARIO');
-                    $this->includeSelectField("i18n-type", 'TIPO_USUARIO', $this->data["userTypes"], false);
+                    $this->includeSelectField("i18n-tipo", 'TIPO_USUARIO', $this->data["userTypes"], false);
                 ?>
                 <div id="respAtributes"></div>
                 <script>

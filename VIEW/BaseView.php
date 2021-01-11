@@ -407,7 +407,7 @@ abstract class BaseView{
     }
 
     protected function includeCrudTable($optionsData){
-        echo "<table>";
+        echo "<table class='table'>";
             // Headers
             echo "<tr>";
             foreach($this->data["atributeNames"] as $atribute){

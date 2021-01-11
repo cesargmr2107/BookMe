@@ -15,7 +15,7 @@ class UsuariosShowView extends BaseView{
             $this->includeShowInfo("i18n-login", $this->data["normal_info"]["LOGIN_USUARIO"]);
             $this->includeShowInfo("i18n-nombre", $this->data["normal_info"]["NOMBRE_USUARIO"]);
             $this->includeShowInfo("i18n-email", $this->data["normal_info"]["EMAIL_USUARIO"]);
-            $this->includeShowInfo("i18n-type", $this->data["normal_info"]["TIPO_USUARIO"]);
+            $this->includeShowInfo("i18n-tipo", $this->data["normal_info"]["TIPO_USUARIO"]);
             $this->includeShowInfo("i18n-active", $this->data["normal_info"]["ES_ACTIVO"]);
             if($this->data["normal_info"]["TIPO_USUARIO"] === "RESPONSABLE"){
                 $this->includeShowInfo("i18n-address", $this->data["resp_info"]["DIRECCION_RESPONSABLE"]);
