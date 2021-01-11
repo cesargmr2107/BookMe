@@ -231,7 +231,7 @@ class BaseModel {
 
     public function checkTime($atribute, $errorCode){
         $str_time = $this->atributes[$atribute];
-        $format = 'H:i';
+        $format = 'H:i:00';
         $t = DateTime::createFromFormat($format, $str_time);
         if($t && $t->format($format) === $str_time){
             return true;

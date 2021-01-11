@@ -345,8 +345,8 @@ abstract class BaseView{
         $this->includeDatetimeField($labelCode, $atribute, 'DD/MM/YYYY', $value, $useMinDateAsCurrent);
     }
     
-    protected function includeTimeField($labelCode, $atribute, $value = 'hh:mm'){
-        $this->includeDatetimeField($labelCode, $atribute, 'HH:00', $value);
+    protected function includeTimeField($labelCode, $atribute, $value = 'hh:mm:ss'){
+        $this->includeDatetimeField($labelCode, $atribute, 'HH:00:00', $value);
     }
 
     private function includeDatetimeField($labelCode, $atribute, $format, $value, $useMinDateAsCurrent = false){
