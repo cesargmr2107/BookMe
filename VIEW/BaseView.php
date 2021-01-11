@@ -37,7 +37,9 @@ abstract class BaseView{
 
     protected function render(){
         $this->header();
-        $this->includeNavigationBar();
+        if(array_key_exists("LOGIN_USUARIO", $_SESSION)){
+            $this->includeNavigationBar();
+        }
         $this->body();
         $this->footer();
     }

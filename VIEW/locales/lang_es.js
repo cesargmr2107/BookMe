@@ -155,6 +155,11 @@ var translations_es = {
 
     /* BACK */
 
+    // General
+    "i18n-AC000" : "No se ha podido acceder a la base de datos",
+    "i18n-AC001" : "Error en una consulta a la base de datos",
+    "i18n-AC002" : "Credenciales de usuario incorrectas",
+
     // CalendariosModel
     "i18n-AC111" : "El calendario se añadió correctamente",
     "i18n-AC011" : "El calendario no se añadió correctamente",

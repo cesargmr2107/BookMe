@@ -38,6 +38,8 @@ class UsuariosModel extends BaseModel {
         
         $this->actionCodes[parent::DELETE_SUCCESS]["code"] = "AC163";
         $this->actionCodes[parent::EDIT_FAIL]["code"] = "AC063";
+
+        $this->actionCodes["bad_credentials"] = array("code" => "AC002");
                 
         $this->tableName = "USUARIOS";      
           
@@ -72,17 +74,15 @@ class UsuariosModel extends BaseModel {
     }
 
     public function checkCredentials(){
-
-        $error = array("code" => '222', "msg" => 'Credenciales de usuario incorrectas');
         
         if($this->atributes["LOGIN_USUARIO"] == ""){
-            return $error;
+            return $this->actionCodes["bad_credentials"];
         }
         
         $userSearch= $this->SEARCH();
         
         if(!count($userSearch)){
-            return $error;
+            return $this->actionCodes["bad_credentials"];
         }
 
         $this->atributes = $userSearch[0];

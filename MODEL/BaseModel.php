@@ -57,6 +57,11 @@ class BaseModel {
 
     }
 
+    public function getCode($action, $result){
+        $key = $action . "_" . $result;
+        return $this->actionCodes[$key];
+    }
+
     public function checkValidations($validations){
         foreach($validations as $atribute => $checks){
             foreach($checks as $check => $result){

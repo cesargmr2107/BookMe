@@ -15,15 +15,16 @@ class UsuariosController extends BaseController{
         $user = new UsuariosModel();
         $user->patchEntity();
         $data["result"] = $user->ADD();
-        if($data["result"]["code"] === "111" && $user->get("TIPO_USUARIO") === "RESPONSABLE"){
-            include_once './MODEL/ResponsablesModel.php';
-            $responsable = new ResponsablesModel();
-            $responsable->patchEntity();
-            $responsable->setAtributes(array("LOGIN_RESPONSABLE" => $user->get("LOGIN_USUARIO")));
-            $data["result"] = $responsable->ADD();
-            if($data["result"]["code"] !== "555"){
-                $user->DELETE();
-            }
+        if( $data["result"]["code"] === $user->getCode("add", "success") &&
+            $user->get("TIPO_USUARIO") === "RESPONSABLE"){
+                include_once './MODEL/ResponsablesModel.php';
+                $responsable = new ResponsablesModel();
+                $responsable->patchEntity();
+                $responsable->setAtributes(array("LOGIN_RESPONSABLE" => $user->get("LOGIN_USUARIO")));
+                $data["result"] = $responsable->ADD();
+                if($data["result"]["code"] !== $responsable->getCode("add", "success")){
+                    $user->DELETE();
+                }
         }
 		$data["controller"] = $this->controller;
 		$data["action"] = "search";
@@ -42,7 +43,7 @@ class UsuariosController extends BaseController{
         $user = new UsuariosModel();
         $user->patchEntity();
         $data["result"] = $user->EDIT();
-        if($data["result"]["code"] === "111" && $user->get("TIPO_USUARIO") === "RESPONSABLE"){
+        if($data["result"]["code"] === $user->getCode("edit", "success") && $user->get("TIPO_USUARIO") === "RESPONSABLE"){
             include_once './MODEL/ResponsablesModel.php';
             $responsable = new ResponsablesModel();
             $responsable->patchEntity();

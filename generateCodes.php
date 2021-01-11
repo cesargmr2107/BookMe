@@ -20,6 +20,7 @@ echo "<h1>General action codes</h1>";
 echo "<ul>";
 echo "<li>Can't access DB: AC000</li>"; 
 echo "<li>Bad query to DB: AC001</li>";
+echo "<li>Bad credentials: AC002</li>";
 echo "</ul>";
 
 foreach($models as $i => $model){
