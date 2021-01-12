@@ -46,7 +46,8 @@ class ReservasController extends BaseController{
                 
 		$data["result"] = $reserva->ADD();
 		$data["controller"] = $this->controller;
-		$data["action"] = "searchOwn";
+        $data["action"] = "searchOwn";
+        
         $this->redirectToMsg($data);
     }
 

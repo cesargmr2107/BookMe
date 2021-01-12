@@ -11,8 +11,8 @@ class MessagesController {
 
         // If possible, decrypt
         if( array_key_exists("token", $_GET) && $_GET["token"] != '' && 
-            array_key_exists("iv", $_SESSION["iv"]) &&
-            array_key_exists("tag", $_SESSION["tag"]) ){
+            array_key_exists("iv", $_SESSION) &&
+            array_key_exists("tag", $_SESSION) ){
                 // Get token, iv and tag
                 $token = str_replace(" ", "+", $_GET["token"]);
                 $iv = $_SESSION["iv"];

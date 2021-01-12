@@ -57,7 +57,7 @@ class BaseModel {
 
     public function getCode($action, $result){
         $key = $action . "_" . $result;
-        return $this->actionCodes[$key];
+        return $this->actionCodes[$key]["code"];
     }
 
     public function checkValidations($validations){
@@ -345,8 +345,7 @@ class BaseModel {
         return $result;
     }
 
-    public function ADD(){
-
+    protected function initialAddSettings(){
         // Set default values
         if($this->defaultValues){
             foreach($this->defaultValues as $atribute => $defValue){
@@ -366,6 +365,11 @@ class BaseModel {
             unset($this->atributes[$this->primary_key]);
             unset($this->checks[$this->primary_key]);
         }
+    }
+
+    public function ADD(){
+
+        $this->initialAddSettings();
 
         $validations = $this->checkAtributesForAdd();
 

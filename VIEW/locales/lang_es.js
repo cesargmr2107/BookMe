@@ -215,7 +215,6 @@ var translations_es = {
     "i18n-AT342" : "La fecha de respuesta debe ser igual o superior a la de solicitud",
     "i18n-AT351" : "El motivo de rechazo no puede superar los 100 caracteres",
     "i18n-AT361" : "El estado de la reserva es desconocido",
-    "i18n-AT362" : "La reserva se solapa con una existente",
     "i18n-AT371" : "El coste de la reserva debe ser un valor numérico entre 0.0 y 9999.99",
 
     // ResponsablesModel
@@ -240,10 +239,10 @@ var translations_es = {
     "i18n-AC053" : "La subreserva no se eliminó correctamente",
     
     "i18n-AT501" : "El id de la reserva es desconocido",
+    "i18n-AT502" : "La subreserva se solapa con una existente",
     "i18n-AT521" : "La fecha debe tener el formato dd/mm/yyyy",
     "i18n-AT531" : "La fecha debe tener el formato dd/mm/yyyy",
     "i18n-AT532" : "La fecha de fin debe ser igual o superior a la de inicio",
-    "i18n-AT533" : "La subreserva se solapa con una existente",
     "i18n-AT541" : "La hora debe tener el formato hh:mm:ss",
     "i18n-AT551" : "La hora debe tener el formato hh:mm:ss",
     "i18n-AT561" : "El coste de la subreserva debe ser un valor numérico entre 0.0 y 9999.9",

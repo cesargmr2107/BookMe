@@ -38,15 +38,15 @@ class SubreservasModel extends BaseModel {
         // Subscribe atributes to validations
         $this->checks = array (
             "ID_RESERVA" => array(
-                "checkIsForeignKey" => array('ID_RESERVA', 'ID_RESERVA', 'ReservasModel', 'AT501')
+                "checkIsForeignKey" => array('ID_RESERVA', 'ID_RESERVA', 'ReservasModel', 'AT501'),
+                "checkNoOverlappings" => array('', 'AT502')
             ),
             "FECHA_INICIO_SUBRESERVA" => array(
                 "checkDate" => array('FECHA_INICIO_SUBRESERVA', 'AT521')
             ),
             "FECHA_FIN_SUBRESERVA" => array(
                 "checkDate" => array('FECHA_FIN_SUBRESERVA', 'AT531'),
-                "checkDateInterval" => array('FECHA_INICIO_SUBRESERVA', 'FECHA_FIN_SUBRESERVA', 'AT532'),
-                "checkNoOverlappings" => array('', 'AT533')
+                "checkDateInterval" => array('FECHA_INICIO_SUBRESERVA', 'FECHA_FIN_SUBRESERVA', 'AT532')
             ),
             "HORA_INICIO_SUBRESERVA" => array(
                 "checkTime" => array('HORA_INICIO_SUBRESERVA', 'AT541')
@@ -79,10 +79,10 @@ class SubreservasModel extends BaseModel {
         $query = "SELECT * FROM RESERVAS R, SUBRESERVAS S " .
                  "WHERE R.ID_RESERVA = S.ID_RESERVA AND R.ID_RECURSO = $id_recurso " . 
                  "AND ( R.ESTADO_RESERVA = 'ACEPTADA' OR R.ID_RESERVA = " . $this->atributes["ID_RESERVA"]. ") AND (" .
-                 "( S.FECHA_INICIO_SUBRESERVA BETWEEN '" . $fechaInicio . "' AND '" . $fechaFin . "' ) OR " .
-                 "( S.FECHA_FIN_SUBRESERVA BETWEEN '" . $fechaInicio . "' AND '" . $fechaFin . "' ) ) AND ( " .
-                 "( S.HORA_INICIO_SUBRESERVA > '" . $horaInicio . "' AND S.HORA_INICIO_SUBRESERVA < '" . $horaFin . "' ) OR " .
-                 "( S.HORA_FIN_SUBRESERVA > '" . $horaInicio . "' AND S.HORA_FIN_SUBRESERVA < '" . $horaFin . "' ) )";
+                 "( S.FECHA_INICIO_SUBRESERVA >= '" . $fechaInicio . "' AND S.FECHA_INICIO_SUBRESERVA <= '" . $fechaFin . "' ) OR " .
+                 "( S.FECHA_FIN_SUBRESERVA >= '" . $fechaInicio . "' AND S.FECHA_FIN_SUBRESERVA <='" . $fechaFin . "' ) ) AND ( " .
+                 "( S.HORA_INICIO_SUBRESERVA >= '" . $horaInicio . "' AND S.HORA_INICIO_SUBRESERVA <= '" . $horaFin . "' ) OR " .
+                 "( S.HORA_FIN_SUBRESERVA >= '" . $horaInicio . "' AND S.HORA_FIN_SUBRESERVA <= '" . $horaFin . "' ) )";
 
         // DEBUG: Check query and result
         // echo "<p>" . $query . "</p>";
@@ -90,11 +90,11 @@ class SubreservasModel extends BaseModel {
 
 
         // Do check
-        $noOverlappings = !count($this->SEARCH($query));
+        $noOverlappings = empty($this->SEARCH($query));
         if($noOverlappings){
             return true;
         }else{
-            return array("code" => $errorCode); 
+            return $errorCode; 
         }
     }
 

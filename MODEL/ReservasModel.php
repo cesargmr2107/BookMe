@@ -76,7 +76,6 @@ class ReservasModel extends BaseModel {
             ),
             "ESTADO_RESERVA" => array( 
                 "checkEnum" => array('ESTADO_RESERVA', static::$bookingStatus, 'AT361'),
-                "checkNoOverlappings" => array('AT362')
             ),
             "COSTE_RESERVA" => array(
                 "checkRange" => array('COSTE_RESERVA', 0.0, 9999.99, 'AT371')
@@ -92,41 +91,13 @@ class ReservasModel extends BaseModel {
         return true;
     }
 
-    public function checkNoOverlappings($errorCode){
-
-        if($this->atributes["ESTADO_RESERVA"] == "ACEPTADA"){
-
-            // Get booking intervals
-            include_once './MODEL/SubreservasModel.php';
-            $atributesToSet = array ("ID_RESERVA" => $this->atributes["ID_RESERVA"]);
-            $subreserva = new SubreservasModel();
-            $subreserva->setAtributes($atributesToSet);
-            $subreservas = $subreserva->SEARCH();
-
-            // DEBUG: Check result
-            // echo '<pre>' . var_export($subreservas, true) . '</pre>';
-
-            foreach($subreservas as $sr){
-                $subreserva->setAtributes($sr);
-                $check = $subreserva->checkNoOverlappings($this->atributes["ID_RECURSO"], "");
-                
-                // DEBUG: Check result
-                // echo '<pre>' . var_export($check, true) . '</pre>';
-
-                if(is_array($check)){
-                    return array("code" => $errorCode);
-                }
-            }
-        }
-        
-        return true;
-    }
-
     public function ADD(){
 
-        $validations = $this->checkValidBooking();
+        $this->initialAddSettings();
 
-        if($validations === true){
+        $validations = $this->checkAtributesForAdd();
+
+        if($this->checkValidations( $validations )){
 
             // Build the insert query
             $insertQuery = "INSERT INTO RESERVAS (LOGIN_USUARIO, ID_RECURSO, FECHA_SOLICITUD_RESERVA, COSTE_RESERVA ) " .
@@ -145,18 +116,35 @@ class ReservasModel extends BaseModel {
 
             if($exec["result"] === true){
 
-                include_once './MODEL/SubreservasModel.php';
+                $id_reserva = $exec["last_insert_id"];
 
-                foreach($this->infoSubreservas as $intervalId => $info){
-                    $info["ID_RESERVA"] = $exec["last_insert_id"];
-                    $subreserva = new SubreservasModel();
-                    $subreserva->setAtributes($info);
-                    $subreserva->ADD();
-                }
+                    include_once './MODEL/SubreservasModel.php';
+                    
+                    //echo '<pre>' . var_export($this, true) . "</pre>";
+                    
+                    foreach($this->infoSubreservas as $intervalId => $info){
+                        $info["ID_RESERVA"] = $id_reserva;
+                        $subreserva = new SubreservasModel();
+                        $subreserva->setAtributes($info);
+                        $result = $subreserva->ADD();
+                        if($result["code"] === $subreserva->getCode("add", "fail")){
+
+                            // Clean DB
+                            $this->executeQuery("DELETE FROM SUBRESERVAS WHERE ID_RESERVA = $id_reserva");
+                            $this->executeQuery("DELETE FROM RESERVAS WHERE ID_RESERVA = $id_reserva");
+
+                            // Build and return response
+                            $response = $this->actionCodes[self::ADD_FAIL];
+                            $response["atributeErrors"] = $result["atributeErrors"];
+                            return $response;
+                        }
+                    }
+                    return $this->actionCodes[self::ADD_SUCCESS];
             }
-            return $this->actionCodes[self::ADD_SUCCESS];
         }else{
-            return $this->actionCodes[self::ADD_FAIL];
+            $response = $this->actionCodes[self::ADD_FAIL];
+            $response["atributeErrors"] = $validations;
+            return $response;
         }
     }
 
