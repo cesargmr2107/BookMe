@@ -151,5 +151,5 @@ var translations_gl = {
     "i18n-calendarNotSelected" : "Selecciona un calendario",
     "i18n-respNotSelected" : "Selecciona un responsable",
     "i18n-resourceNotSelected" : "Selecciona un recurso",
-    "i18n-overlapping" : "O intervalo seleccionado solápase con un xa existente",
+    "i18n-overlapping" : "O intervalo seleccionado solápase con un xa existente"
 }

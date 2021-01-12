@@ -150,5 +150,5 @@ var translations_en = {
     "i18n-calendarNotSelected" : "Choose a calendar",
     "i18n-respNotSelected" : "Choose a manager",
     "i18n-resourceNotSelected" : "Choose a resource",
-    "i18n-overlapping" : "The chosen interval overlaps with an existing one",
+    "i18n-overlapping" : "The chosen interval overlaps with an existing one"
 }

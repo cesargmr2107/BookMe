@@ -159,6 +159,7 @@ var translations_es = {
     "i18n-AC000" : "No se ha podido acceder a la base de datos",
     "i18n-AC001" : "Error en una consulta a la base de datos",
     "i18n-AC002" : "Credenciales de usuario incorrectas",
+    "i18n-AC003" : "Token inválido",
 
     // CalendariosModel
     "i18n-AC111" : "El calendario se añadió correctamente",
@@ -262,6 +263,6 @@ var translations_es = {
     "i18n-AT622" : "El nombre sólo puede tener letras, espacios y '-'",
     "i18n-AT631" : "El correo electrónico tiene un formato incorrecto",
     "i18n-AT641" : "El tipo de usuario es desconocido",
-    "i18n-AT651" : "Opción de actividad desconocida",
+    "i18n-AT651" : "Opción de actividad desconocida"
 
 }

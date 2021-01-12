@@ -31,9 +31,7 @@ class BaseModel {
     public $checksForDelete;
 
     function __construct() {
-
-        $entityName = substr(get_class($this), 0, -6);
-
+        
         $this->nullAtributes = array();
 
         $this->actionCodes = array(
