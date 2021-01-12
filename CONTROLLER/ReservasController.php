@@ -47,7 +47,7 @@ class ReservasController extends BaseController{
 		$data["result"] = $reserva->ADD();
 		$data["controller"] = $this->controller;
 		$data["action"] = "searchOwn";
-		new MessageView($data);
+        $this->redirectToMsg($data);
     }
 
     function managePendingForm(){

@@ -28,7 +28,7 @@ class UsuariosController extends BaseController{
         }
 		$data["controller"] = $this->controller;
 		$data["action"] = "search";
-		new MessageView($data);
+        $this->redirectToMsg($data);
     }
     
     // Overriding addForm method
@@ -52,7 +52,7 @@ class UsuariosController extends BaseController{
         }
 		$data["controller"] = $this->controller;
 		$data["action"] = "search";
-		new MessageView($data);
+        $this->redirectToMsg($data);
     }
 
 }

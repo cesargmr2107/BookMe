@@ -6,6 +6,24 @@ class AuthenticationController {
 		include './MODEL/UsuariosModel.php';
 	}
 
+	function redirectToMsg($data){
+
+		// Encode data to JSON
+		$jsonString = json_encode($data);
+
+		// Encrypt JSON into token
+		$ivlen = openssl_cipher_iv_length(self::$cipherMethod);
+		$iv = openssl_random_pseudo_bytes($ivlen);
+		$token = openssl_encrypt($jsonString, self::$cipherMethod, self::$cipherKey, $options = 0, $iv, $tag);
+
+		// Store iv and tag for decryption later
+		$_SESSION["iv"] = $iv;
+		$_SESSION["tag"] = $tag;
+
+		// Redirect
+		header("Location: index.php?token=$token");
+	}
+
 	function loginForm(){
 		include './VIEW/authentication/LoginView.php';
 		new LoginView();
@@ -24,10 +42,9 @@ class AuthenticationController {
 			header('location: index.php');
 		}
 		else{
-			include './VIEW/MessageView.php';
 			$data["result"] = $result;
 			$data["link"] = 'index.php';
-			new MessageView($data);
+			$this->redirectToMsg($data);
 		}
 		
     }
@@ -50,10 +67,9 @@ class AuthenticationController {
 			header('location: index.php');
 		}
 		else{
-			include './VIEW/MessageView.php';
 			$data["result"] = $result;
 			$data["link"] = 'index.php';
-			new MessageView($data);
+			$this->redirectToMsg($data);
 		}
 		
     }

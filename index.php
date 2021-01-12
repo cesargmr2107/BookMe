@@ -24,21 +24,35 @@ if (isAuthenticated() === false){
 
 } else {
 
-	// DEBUG: Check SESSION variable
-	// echo '<pre>' . var_export($_SESSION, true) . '</pre>';
 
-	// Get and include controller
-	$controller = isset($_REQUEST['controller']) ? $_REQUEST['controller'] : 'ReservasController'; 
-	include_once './CONTROLLER/'. $controller . '.php';
-	
-	// Get action
-	$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : 'confirm'; 
+	if( isset($_GET) && array_key_exists("token", $_GET)){
+		include_once './CONTROLLER/MessageController.php';
+		(new MessagesController())->render();
+	}else{
+		
+		$default = array(
+			"ADMINISTRADOR" => array("controller" => "RecursosController" , "action" => "search"),
+			"RESPONSABLE" => array("controller" => "ReservasController" , "action" => "searchPending"),
+			"NORMAL" => array("controller" => "ReservasController" , "action" => "searchOwn"),
+		);
 
-	// DEBUG: Check values
-	// echo $controller.' - '.$action;
+		$userType = $_SESSION["TIPO_USUARIO"];
 
-	$controllerObject = new $controller();
-	$controllerObject->$action();
+		// Get and include controller
+		$controller = isset($_REQUEST['controller']) ? $_REQUEST['controller'] : $default[$userType]["controller"]; 
+		include_once './CONTROLLER/'. $controller . '.php';
+		
+		// Get action
+		$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : $default[$userType]["action"]; 
+
+		// DEBUG: Check values
+		// echo $controller.' - '.$action;
+
+		$controllerObject = new $controller();
+		$controllerObject->$action();
+	}
+
+
 
 }
 
