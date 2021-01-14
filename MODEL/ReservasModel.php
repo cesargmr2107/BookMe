@@ -87,13 +87,51 @@ class ReservasModel extends BaseModel {
         $this->infoSubreservas = json_decode($jsonString, true)["subreservas"];
     }
     
-    public function checkValidBooking(){
-        return true;
+    public function calculateCosts(){
+
+        // Get resource info: price and range
+        include_once './MODEL/RecursosModel.php';
+        $resourcesSearch = new RecursosModel();
+        $resourcesSearch->setAtributes(
+            "ID_RECURSO"
+        );
+        $query = "SELECT TARIFA_RECURSO, RANGO_TARIFA_RECURSO FROM RECURSOS " .
+                 "WHERE ID_RECURSO = " . $this->atributes["ID_RECURSO"];
+        $result = $resourcesSearch->SEARCH($query)[0];
+        $price = $result["TARIFA_RECURSO"];
+        $range = $result["RANGO_TARIFA_RECURSO"];
+        
+        // Calculate cost for each interval
+        $factors = array ('HORA' => 8.64e+4, 'DIA' => 8.64e+4, 'SEMANA' => 6.048e+5, 'MES' => 2.628e+6);
+        $totalCost = 0.0;
+        foreach ($this->infoSubreservas as $intervalId => $info) {
+
+            // Build dates and times
+            $startDate = strtotime($info["FECHA_INICIO_SUBRESERVA"]);
+            $endDate = strtotime($info["FECHA_FIN_SUBRESERVA"] . " + 1 day");
+
+            // Calculate numberOf unit
+            $numberOf = ($endDate - $startDate) / $factors[$range];
+
+            if($range === 'HORA'){
+                $startTime = strtotime($info["HORA_INICIO_SUBRESERVA"]);
+                $endTime = strtotime($info["HORA_FIN_SUBRESERVA"]);
+                $numberOf *= ($endTime - $startTime) / (3.6e+3);
+            }
+            
+            $intervalCost = $numberOf * $price;
+            $info["COSTE_SUBRESERVA"] = $intervalCost;
+            $totalCost += $intervalCost;
+        }
+
+        $this->atributes["COSTE_RESERVA"] = $totalCost;
     }
 
     public function ADD(){
 
         $this->initialAddSettings();
+
+        $this->calculateCosts();
 
         $validations = $this->checkAtributesForAdd();
 
@@ -118,28 +156,28 @@ class ReservasModel extends BaseModel {
 
                 $id_reserva = $exec["last_insert_id"];
 
-                    include_once './MODEL/SubreservasModel.php';
-                    
-                    //echo '<pre>' . var_export($this, true) . "</pre>";
-                    
-                    foreach($this->infoSubreservas as $intervalId => $info){
-                        $info["ID_RESERVA"] = $id_reserva;
-                        $subreserva = new SubreservasModel();
-                        $subreserva->setAtributes($info);
-                        $result = $subreserva->ADD();
-                        if($result["code"] === $subreserva->getCode("add", "fail")){
+                include_once './MODEL/SubreservasModel.php';
+                
+                //echo '<pre>' . var_export($this, true) . "</pre>";
+                
+                foreach($this->infoSubreservas as $intervalId => $info){
+                    $info["ID_RESERVA"] = $id_reserva;
+                    $subreserva = new SubreservasModel();
+                    $subreserva->setAtributes($info);
+                    $result = $subreserva->ADD();
+                    if($result["code"] === $subreserva->getCode("add", "fail")){
 
-                            // Clean DB
-                            $this->executeQuery("DELETE FROM SUBRESERVAS WHERE ID_RESERVA = $id_reserva");
-                            $this->executeQuery("DELETE FROM RESERVAS WHERE ID_RESERVA = $id_reserva");
+                        // Clean DB
+                        $this->executeQuery("DELETE FROM SUBRESERVAS WHERE ID_RESERVA = $id_reserva");
+                        $this->executeQuery("DELETE FROM RESERVAS WHERE ID_RESERVA = $id_reserva");
 
-                            // Build and return response
-                            $response = $this->actionCodes[self::ADD_FAIL];
-                            $response["atributeErrors"] = $result["atributeErrors"];
-                            return $response;
-                        }
+                        // Build and return response
+                        $response = $this->actionCodes[self::ADD_FAIL];
+                        $response["atributeErrors"] = $result["atributeErrors"];
+                        return $response;
                     }
-                    return $this->actionCodes[self::ADD_SUCCESS];
+                }
+                return $this->actionCodes[self::ADD_SUCCESS];
             }
         }else{
             $response = $this->actionCodes[self::ADD_FAIL];

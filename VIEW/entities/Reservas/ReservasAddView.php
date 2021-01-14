@@ -55,11 +55,14 @@ class ReservasAddView extends BaseView{
                 <span class="<?=$this->icons["ADD"]?>" onclick="if(checkAddIntervalForm()) addBooking()"></span>
             </div>
 
+            <h4>
+                <span class="i18n-bookingTotalCost"></span>
+                <span id="totalCost">0.00</span>
+            </h4>
+            <div id="intervals"></div>
             <form id="addForm" name="addForm" action="index.php" method="post">
-                <?php $this->includeReadOnlyField("i18n-bookingTotalCost", "COSTE_RESERVA", "0.00")?>
                 <?php $this->includeHiddenField("ID_RECURSO", $this->data["resource_info"]["ID_RECURSO"])?>
                 <?php $this->includeHiddenField("INFO_SUBRESERVAS","{ \"subreservas\" : {} }")?>
-                <div id="intervals"></div>
                 <span class="<?=$this->icons["BOOKING"]?>" onclick="sendForm(document.addForm, 'ReservasController', 'add', true)"></span>
             </form>
         <?php

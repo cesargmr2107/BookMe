@@ -37,8 +37,7 @@ class ReservasController extends BaseController{
         $atributesToSet = array(
             "LOGIN_USUARIO" => $_SESSION["LOGIN_USUARIO"],
             "ID_RECURSO" => $_POST["ID_RECURSO"],
-            "FECHA_SOLICITUD_RESERVA" => date_format(new DateTime(), 'Y-m-d'),
-            "COSTE_RESERVA" => $_POST["COSTE_RESERVA"]
+            "FECHA_SOLICITUD_RESERVA" => date_format(new DateTime(), 'Y-m-d')
         );
 
         $reserva->setAtributes($atributesToSet);

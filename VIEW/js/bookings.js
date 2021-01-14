@@ -146,8 +146,8 @@ function addBooking(){
         resource_events.splice(i, 1);
 
         // Update total cost
-        var totalCost = parseFloat(document.getElementById('COSTE_RESERVA').value);
-        document.getElementById('COSTE_RESERVA').value = (totalCost - cost).toFixed(2);
+        var totalCost = parseFloat(document.getElementById('totalCost').innerHTML);
+        document.getElementById('totalCost').innerHTML = (totalCost - cost).toFixed(2);
 
     }
 
@@ -174,8 +174,8 @@ function addBooking(){
         var newCost = numberOf * price;
 
         // Update total cost
-        var totalCost = parseFloat(document.getElementById('COSTE_RESERVA').value);
-        document.getElementById('COSTE_RESERVA').value = (totalCost + newCost).toFixed(2);
+        var totalCost = parseFloat(document.getElementById('totalCost').innerHTML);
+        document.getElementById('totalCost').innerHTML = (totalCost + newCost).toFixed(2);
         
         return (numberOf * price).toFixed(2);
     }
