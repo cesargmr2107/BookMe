@@ -5,8 +5,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-
-include './COMMON/FuncionesGenerales.php';
+include_once './COMMON/utils.php';
 
 session_start();
 
@@ -24,10 +23,11 @@ if (isAuthenticated() === false){
 
 } else {
 
-
 	if( isset($_GET) && array_key_exists("token", $_GET)){
+
 		include_once './CONTROLLER/MessageController.php';
 		(new MessagesController())->render();
+		
 	}else{
 		
 		$default = array(

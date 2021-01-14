@@ -1,5 +1,7 @@
 <?php
 
+include_once './COMMON/utils.php';
+
 abstract class BaseView{
 
     // FONTAWESOME ICONS
@@ -153,13 +155,13 @@ abstract class BaseView{
             array("textCode" => "i18n-newBooking", "controller" => "ReservasController", "action" => "addForm")
         );
 
-        if($_SESSION["TIPO_USUARIO"] !== "NORMAL"){
+        if(!isNormalUser()){
             array_push(
                 $options,
                 array("textCode" => "i18n-pendingBookings", "controller" => "ReservasController", "action" => "searchPending"),
                 array("textCode" => "i18n-confirmBooking", "controller" => "ReservasController", "action" => "confirm")
             );
-            if($_SESSION["TIPO_USUARIO"] === "ADMINISTRADOR"){
+            if(isAdminUser()){
                 array_push(
                     $options,
                     array("textCode" => "i18n-bookingHistory", "controller" => "ReservasController", "action" => "search")
@@ -176,7 +178,7 @@ abstract class BaseView{
             array("textCode" => "i18n-resourcesSearch", "controller" => "RecursosController", "action" => "search")
         );
 
-        if($_SESSION["TIPO_USUARIO"] === "ADMINISTRADOR"){
+        if(isAdminUser()){
             array_push(
                 $options,
                 array("textCode" => "i18n-newResource", "controller" => "RecursosController", "action" => "addForm")
@@ -192,7 +194,7 @@ abstract class BaseView{
             array("textCode" => "i18n-calendarsSearch", "controller" => "CalendariosController", "action" => "search"),
         );
 
-        if($_SESSION["TIPO_USUARIO"] === "ADMINISTRADOR"){
+        if(isAdminUser()){
             array_push(
                 $options,
                 array("textCode" => "i18n-newCalendar", "controller" => "CalendariosController", "action" => "addForm")
@@ -203,7 +205,7 @@ abstract class BaseView{
     }
 
     private function includeNavBarUsuarios(){
-        if($_SESSION["TIPO_USUARIO"] === "ADMINISTRADOR"){
+        if(isAdminUser()){
             $options = array(
                 array("textCode" => "i18n-usersSearch", "controller" => "UsuariosController", "action" => "search"),
                 array("textCode" => "i18n-newUser", "controller" => "UsuariosController", "action" => "addForm")
@@ -449,7 +451,7 @@ abstract class BaseView{
 
         echo "<td>";
             $this->includeButton("SHOW", "goToShow$id", "post", $controller, "show", array ($idAtribute => $id) );
-            if($_SESSION["TIPO_USUARIO"] === "ADMINISTRADOR"){
+            if(isAdminUser()){
                 $this->includeButton("EDIT", "editBt$id", "post", $controller, "editForm", array ($idAtribute => $id));
                 $this->includeDeleteButtonAndModal($idAtribute, $id, $name, $controller);
             }

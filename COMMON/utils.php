@@ -11,4 +11,16 @@ function isAuthenticated(){
 	return isset($_SESSION['LOGIN_USUARIO']) && $_SESSION['LOGIN_USUARIO'] != '';	
 }
 
+function isAdminUser(){
+	return $_SESSION["TIPO_USUARIO"] === "ADMINISTRADOR";
+}
+
+function isNormalUser(){
+	return $_SESSION["TIPO_USUARIO"] === "NORMAL";
+}
+
+function isRespUser(){
+	return $_SESSION["TIPO_USUARIO"] === "RESPONSABLE";
+}
+
 ?>
