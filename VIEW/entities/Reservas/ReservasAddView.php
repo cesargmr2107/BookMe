@@ -10,7 +10,7 @@ class ReservasAddView extends BaseView{
         "./VIEW/webroot/js/bookings.js"
     );
     
-    protected $cssFiles = array("./VIEW/libraries/fullcalendar-5.4.0/lib/main.css");
+    protected $cssFiles = array("./VIEW/webroot/libraries/fullcalendar-5.4.0/lib/main.css");
 
     protected function body(){
         $this->includeTitle("i18n-newBooking", "h1");

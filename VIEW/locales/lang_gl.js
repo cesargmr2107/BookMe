@@ -6,7 +6,7 @@ var translations_gl = {
     "i18n-password" : "Contraseña",
     "i18n-options" : "Opcións",
     "i18n-id" : "ID",
-    "i18n-nome" : "Nome",
+    "i18n-nombre" : "Nome",
     "i18n-descripcion" : "Descrición" ,
     "i18n-fecha_inicio" : "Data de inicio" ,
     "i18n-fecha_fin" : "Data de fin",

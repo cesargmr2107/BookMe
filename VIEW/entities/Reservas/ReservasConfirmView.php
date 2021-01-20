@@ -19,10 +19,13 @@ class ReservasConfirmView extends BaseView{
                 $date = $this->formatDate($booking["FECHA_SOLICITUD_RESERVA"]);
                 $name = $booking["NOMBRE_RECURSO"];
                 $user = $booking["LOGIN_USUARIO"];
-                echo "<div>";
-                    echo "<h4><span class='i18n-requestedOn'></span>$date</h4>";
-                    $this->includePositiveConfirmation($id,$date,$name,$user);
-                    $this->includeNegativeConfirmation($id,$date,$name,$user);
+                echo "<div class='confirm-use'>";
+                    echo "<strong><span class='i18n-requestedOn'></span>$date</strong>";
+                    echo "<div>$name, $user</div>";
+                    echo "<div id='options'>";
+                        $this->includePositiveConfirmation($id,$date,$name,$user);
+                        $this->includeNegativeConfirmation($id,$date,$name,$user);
+                    echo "</div>";
                 echo "</div>";
             }
         }
@@ -32,7 +35,7 @@ class ReservasConfirmView extends BaseView{
     protected function includePositiveConfirmation($id, $date, $name, $user){
         ?>
         <!-- Button -->
-        <span class="<?= $this->icons["ACCEPT"]?>" data-toggle="modal" href="#usedModal<?=$id?>"></span>
+        <span class="<?= $this->icons["ACCEPT"]?> accept" data-toggle="modal" href="#usedModal<?=$id?>"></span>
 
         <!-- Modal -->
         <div class="modal" id="usedModal<?=$id?>">
@@ -69,7 +72,7 @@ class ReservasConfirmView extends BaseView{
     protected function includeNegativeConfirmation($id, $date, $name, $user){
         ?>
         <!-- Button -->
-        <span class="<?= $this->icons["CANCEL"]?>" data-toggle="modal" href="#notUsedModal<?=$id?>"></span>
+        <span class="<?= $this->icons["CANCEL"]?> cancel" data-toggle="modal" href="#notUsedModal<?=$id?>"></span>
 
         <!-- Modal -->
         <div class="modal" id="notUsedModal<?=$id?>">

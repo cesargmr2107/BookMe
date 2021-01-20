@@ -19,6 +19,7 @@
     --important-color-3: #192140;
 
     --danger-color: #ED4A4A;
+    --accept-color: #32CD32;
 
     --grey-0: #F2F2F2;
     --grey-1: #D9D9D9;
@@ -49,12 +50,18 @@ a {
 
     a:hover {
         cursor: pointer;
-        color: var(--important-color-1);
+        color: white;
     }
+
+
+.bootstrap-datetimepicker-widget a, #calendar a {
+    color: var(--grey-2);
+}
 
 /* Icons */
 
 .fa, .fas, .far {
+    font-size: 15pt;
     margin: 0px 5px;
     cursor: pointer;
 }
@@ -89,14 +96,28 @@ modal-header {
         color: black;
     }
 
+/* Forms */
+
+label {
+    display: block;
+}
+
+input {
+    padding: 8px;
+}
+
+
+
+
 /* Navigation bar */
 
 .navbar {
     position: fixed;
     min-width: 100%;
-    min-height: 10vh;
+    min-height: 70px;
     display: flex;
     align-items: center;
+    border: none;
     border-radius: 0%;
     background-color: var(--important-color-3);
     color: white;
@@ -113,24 +134,59 @@ modal-header {
 }
 
 #navbar-container {
+    height: 70px;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-around;
     font-size: 12pt;
+    font-family: Raleway;
 }
 
-    #navbar-container li {
-        margin-left: 10px;
+    #navbar-container .dropdown {
+        border: 3px solid var(--important-color-3);
+        display: flex;
+        align-items: center;
+        height: 100%;
+        margin: 0px 5px;
     }
 
+    #navbar-container .dropdown:focus-within, #navbar-container .dropdown:hover{
+        border-top: 3px solid white;
+    }
 
+    #navbar-container .dropdown-toggle:hover,
+    .nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
+        color: white;
+        background-color: var(--important-color-3);
+    }
+
+    #navbar-container .dropdown-menu {
+        padding: 0px;
+    }
+
+    #navbar-container .dropdown-menu li {
+        padding: 10px;
+    }
+
+    #navbar-container .dropdown-menu li:hover {
+        background-color: var(--grey-0);
+    }
+
+    #navbar-container .dropdown-menu a{
+        color: black;
+    }
+
+    #navbar-container .dropdown-menu a:hover{
+        text-decoration: none;
+    }
 
 /* Body container */
 
 #container {
     display: flex;
     flex-direction: column;
+    padding: 90px 20px 0px;
 }
 
 /* CRUD table */
@@ -140,7 +196,7 @@ modal-header {
     align-self: center;
 }
 
-    .crud-table td, th {
+    .crud-table td, .crud-table th {
         text-align: center;
         vertical-align: middle;
         padding: 15px !important;
@@ -165,7 +221,6 @@ modal-header {
 
 #welcome-title {
     color: white;
-    margin-bottom: 30px;
     text-align: center;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
@@ -202,11 +257,12 @@ form[name="loginForm"], form[name="registerForm"]{
     align-items: center;
     background: #FFFFFF;
     padding: 20px;
+    margin-bottom: 20px;
     border: 1px solid #DDDDDD;
     box-sizing: border-box;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 11px;
-    min-width: 20vw;
+    min-width: 300px;
     min-height: 30vh;
 }
 
@@ -217,6 +273,61 @@ form[name="loginForm"], form[name="registerForm"]{
         border-radius: 5px;
     }
 
-label {
-    display: block;
+/* SOLICITUDES PENDIENTES */
+
+.go-to-pending {
+    width: max-content;
+    padding: 15px;
+    background: var(--important-color-2);
+    mix-blend-mode: normal;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
 }
+
+.go-to-pending strong {
+    display: block;
+    text-align: center;
+    cursor: pointer;
+}
+
+.go-to-pending p {
+    margin: 0px;
+    display: inline;
+    cursor: pointer;
+}
+
+/* CONFIRMAR USO */
+
+.confirm-use {
+    width: max-content;
+    padding: 15px;
+    background: #F5F5F5;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+
+.confirm-use strong {
+    display: block;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.confirm-use #options {
+    display: flex;
+    margin-top: 10px;
+    justify-content: center;
+}
+
+    .confirm-use #options  {
+        display: flex;
+        margin-top: 10px;
+        justify-content: center;
+    }
+
+    .confirm-use .accept:hover {
+        color: var(--accept-color);
+    }
+
+    .confirm-use .cancel:hover {
+        color: var(--danger-color);
+    }
