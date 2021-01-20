@@ -4,8 +4,8 @@ include_once './VIEW/BaseView.php';
 
 class ReservasPendientesManageView extends BaseView{
 
-    protected $jsFiles = array("./VIEW/libraries/fullcalendar-5.4.0/lib/main.js" , "./VIEW/js/bookings.js");
-    protected $cssFiles = array("./VIEW/libraries/fullcalendar-5.4.0/lib/main.css");
+    protected $jsFiles = array("./VIEW/webroot/libraries/fullcalendar-5.4.0/lib/main.js" , "./VIEW/webroot/js/bookings.js");
+    protected $cssFiles = array("./VIEW/webroot/libraries/fullcalendar-5.4.0/lib/main.css");
 
     protected function body(){
         

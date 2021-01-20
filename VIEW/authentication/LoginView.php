@@ -7,11 +7,12 @@ class LoginView extends AuthenticationView{
     protected function body(){
         $this->includeValidationModal();
         ?>
-            <h1>
+            <h1 id="welcome-title">
                 <span class='i18n-welcome'></span>
                 <span>BookMe</span>
             </h1>
             <form name="loginForm" action="index.php" method="post">
+                <h3 class="i18n-goToLogin"></h3>
                 <?php
                 $this->includeTextField("i18n-login","LOGIN_USUARIO");
                 $this->includePasswordField("i18n-password","PASSWD_USUARIO");

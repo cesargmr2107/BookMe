@@ -4,7 +4,7 @@ include_once './VIEW/BaseView.php';
 
 class RecursosStatsView extends BaseView{
 
-    protected $jsFiles = array("./VIEW/libraries/chart.js-2.9.4/dist/Chart.js");
+    protected $jsFiles = array("./VIEW/webroot/libraries/chart.js-2.9.4/dist/Chart.js");
 
     protected function body(){
         

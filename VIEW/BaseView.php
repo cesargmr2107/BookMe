@@ -42,7 +42,9 @@ abstract class BaseView{
         if(array_key_exists("LOGIN_USUARIO", $_SESSION)){
             $this->includeNavigationBar();
         }
+        echo "<div id='container'>";
         $this->body();
+        echo "</div>";
         $this->footer();
     }
 
@@ -63,20 +65,23 @@ abstract class BaseView{
                 <link rel="shortcut icon" href="./favicon.png">
 
                 <!-- Bootstrap and Datetime pickers -->
-                <link href="./VIEW/libraries/bootstrap/bootstrap.min.css" rel="stylesheet"/>
-                <link href="./VIEW/libraries/bootstrap/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
-                <script src="./VIEW/libraries/bootstrap/jquery.min.js"></script>
-                <script src="./VIEW/libraries/bootstrap/bootstrap.min.js"></script>
-                <script src="./VIEW/libraries/bootstrap/moment.min.js"></script>
-                <script src="./VIEW/libraries/bootstrap/bootstrap-datetimepicker.min.js"></script>
+                <link href="./VIEW/webroot/libraries/bootstrap/bootstrap.min.css" rel="stylesheet"/>
+                <link href="./VIEW/webroot/libraries/bootstrap/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
+                <script src="./VIEW/webroot/libraries/bootstrap/jquery.min.js"></script>
+                <script src="./VIEW/webroot/libraries/bootstrap/bootstrap.min.js"></script>
+                <script src="./VIEW/webroot/libraries/bootstrap/moment.min.js"></script>
+                <script src="./VIEW/webroot/libraries/bootstrap/bootstrap-datetimepicker.min.js"></script>
                 
                 <!-- Font awesome icons -->
-                <link href="./VIEW/libraries/fontawesome/font-awesome.min.css" rel="stylesheet"/>
-                <script src="./VIEW/libraries/fontawesome/ae3641038e.js" crossorigin="anonymous"></script>
-        
+                <link href="./VIEW/webroot/libraries/fontawesome/font-awesome.min.css" rel="stylesheet"/>
+                <script src="./VIEW/webroot/libraries/fontawesome/ae3641038e.js" crossorigin="anonymous"></script>
+
+                <!-- My style --> 
+                <link href="./VIEW/webroot/css/style.css" rel="stylesheet"/>
+
                 <!-- My scripts: common, validation and locales -->
-                <script type="text/javascript" src="./VIEW/js/common.js"></script> 
-                <script type="text/javascript" src="./VIEW/js/validation.js"></script> 
+                <script type="text/javascript" src="./VIEW/webroot/js/common.js"></script> 
+                <script type="text/javascript" src="./VIEW/webroot/js/validation.js"></script> 
                 <script type="text/javascript" src="./VIEW/locales/i18n.js"></script> 
                 <script type="text/javascript" src="./VIEW/locales/lang_es.js"></script> 
                 <script type="text/javascript" src="./VIEW/locales/lang_en.js"></script> 
@@ -119,24 +124,24 @@ abstract class BaseView{
 
     protected function includeNavigationBar(){
         ?>
-            <nav class="navbar navbar-inverse">
-                <div class="container-fluid">
-                    <div class="navbar-header">
+            <nav class="navbar">
+                <div class="navbar-header">
                     <a class="navbar-brand" href="index.php">BookMe</a>
-                    </div>
+                </div>
+                <div id="navbar-container">
                     <ul class="nav navbar-nav">
                         <?php
-                            // Navegación de solicitudes
-                            $this->includeNavBarSolicitudes();
-
-                            // Navegación de recursos
-                            $this->includeNavBarRecursos();
-
-                            // Navegación de calendarios
-                            $this->includeNavBarCalendarios();
-
-                            // Navegación de usuarios
-                            $this->includeNavBarUsuarios();
+                        // Navegación de solicitudes
+                        $this->includeNavBarSolicitudes();
+                        
+                        // Navegación de recursos
+                        $this->includeNavBarRecursos();
+                        
+                        // Navegación de calendarios
+                        $this->includeNavBarCalendarios();
+                        
+                        // Navegación de usuarios
+                        $this->includeNavBarUsuarios();
                         ?>
                     </ul>
                     <?php
@@ -410,7 +415,7 @@ abstract class BaseView{
     }
 
     protected function includeCrudTable($optionsData){
-        echo "<table class='table'>";
+        echo "<table class='table crud-table'>";
             // Headers
             echo "<tr>";
             foreach($this->data["atributeNames"] as $atribute){
@@ -449,7 +454,7 @@ abstract class BaseView{
         $name = $optionsData["row"][$nameAtribute];
         $controller = $optionsData["controller"];
 
-        echo "<td>";
+        echo "<td id='row-options'>";
             $this->includeButton("SHOW", "goToShow$id", "post", $controller, "show", array ($idAtribute => $id) );
             if(isAdminUser()){
                 $this->includeButton("EDIT", "editBt$id", "post", $controller, "editForm", array ($idAtribute => $id));
@@ -537,12 +542,12 @@ abstract class BaseView{
                         <!-- Modal Header  -->
                         <div class="modal-header">
                             <h4 class="i18n-formError modal-title"></h4>
+                            <span class="<?= $this->icons["CANCEL"] ?> close" onclick="closeModal()"></span>
                         </div>
     
                         <!-- Modal body -->
                         <div class="modal-body">
                             <ul id="errorMsgs"></ul>
-                            <span class="<?= $this->icons["CANCEL"] ?>" onclick="closeModal()"></span>
                         </div>
     
                     </div>
@@ -550,5 +555,13 @@ abstract class BaseView{
             </div>
         <?php
     }
+
+    protected function includeBackgroundVideo($id, $srcVideo, $srcPoster){
+        ?>
+            <video playsinline autoplay muted loop poster="<?=$srcPoster?>" id="<?=$id?>">
+                <source src="<?=$srcVideo?>" type="video/mp4"/>        
+            </video>
+        <?php
+    } 
 }
 ?>

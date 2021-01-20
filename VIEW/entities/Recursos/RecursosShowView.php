@@ -5,9 +5,9 @@ include_once './VIEW/BaseView.php';
 class RecursosShowView extends BaseView{
 
     protected $jsFiles = array(
-        "./VIEW/libraries/fullcalendar-5.4.0/lib/main.min.js",
-        "./VIEW/libraries/fullcalendar-5.4.0/lib/locales-all.min.js",
-        "./VIEW/js/bookings.js"
+        "./VIEW/webroot/libraries/fullcalendar-5.4.0/lib/main.min.js",
+        "./VIEW/webroot/libraries/fullcalendar-5.4.0/lib/locales-all.min.js",
+        "./VIEW/webroot/js/bookings.js"
     );
     protected $cssFiles = array("./VIEW/libraries/fullcalendar-5.4.0/lib/main.css");
 
