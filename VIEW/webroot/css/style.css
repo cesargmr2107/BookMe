@@ -35,6 +35,7 @@ body {
 .centered-flex {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 /* Titles */
@@ -145,6 +146,7 @@ textarea {
 
 .navbar {
     position: fixed;
+    z-index: 100;
     min-width: 100%;
     min-height: 70px;
     display: flex;
@@ -219,6 +221,7 @@ textarea {
     display: flex;
     flex-direction: column;
     padding: 90px 20px 0px;
+    height: 100%;
 }
 
 /* CRUD table */
@@ -310,6 +313,7 @@ form[name="loginForm"], form[name="registerForm"]{
 .category-info {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .booking-info {
@@ -331,6 +335,76 @@ form[name="loginForm"], form[name="registerForm"]{
     margin: 0px;
 }
 
+
+/* NEW BOOKING */
+
+#searchResource span {
+    margin-top: 25px;
+    height: 30%;
+}
+
+#booking-container {
+    display: flex;
+    height: 100%;
+}
+
+#calendar-container, #add-form-container {
+    width: 50%;
+    height: 100%;
+    padding: 20px;
+}
+
+#resource-info {
+    margin-bottom: 20px;
+}
+
+.add-booking-title h4 {
+    display: inline;
+}
+
+h2.fc-toolbar-title {
+    font-size: 16pt !important;
+}
+
+#intervals {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-height: 30vh;
+    overflow-y: auto;
+    margin: 20px;
+}
+
+#intervals > div {
+    background: #F5F5F5;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.interval-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 0.5px solid var(--grey-2);
+    padding: 3px;
+    margin-bottom: 5px;
+}
+
+.interval-title p {
+    display: inline;
+    margin: 0px;
+}
+
+.interval-title span {
+    margin: 0px;
+}
+
+#intervals ul {
+    padding: 5px 10px 0px 20px;
+}
+
 /* BOOKING DETAILS */
 
 #booking-details {
@@ -350,6 +424,7 @@ form[name="loginForm"], form[name="registerForm"]{
     align-items: center;
     justify-content: center;
     align-self: center;
+    flex-wrap: wrap;
     width: 60vw;
 }
 
@@ -370,8 +445,6 @@ form[name="loginForm"], form[name="registerForm"]{
     }
 
 /* SOLICITUDES PENDIENTES */
-
-
 
 .go-to-pending {
     width: max-content;

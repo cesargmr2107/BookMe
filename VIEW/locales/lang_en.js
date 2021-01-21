@@ -120,6 +120,7 @@ var translations_en = {
     "i18n-cost" : "Cost (€): ",
     "i18n-selectedResource" : "Selected resource",
     "i18n-addInterval" : "Add an interval to your booking",
+    "i18n-selectedIntervals" : "Selected intervals",
 
     /* VALIDATIONS */
     

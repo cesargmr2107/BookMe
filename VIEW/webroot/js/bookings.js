@@ -10,6 +10,7 @@ function createCalendar(resource_events){
         locale: 'es',
         allDaySlot : false,
         nowIndicator: true,
+        slotMinTime: '05:00:00',
         initialView: 'timeGridWeek',
         slotLabelFormat :{
             hour: '2-digit',
@@ -64,6 +65,7 @@ function addBooking(){
             var divIntervals = document.getElementById('intervals');
             var divInterval = document.createElement('div');
             var divTitle = document.createElement('div');
+            divTitle.classList.add("interval-title");
             var icon = document.createElement('span');
             var p = document.createElement('p');
             var ul = document.createElement('ul');

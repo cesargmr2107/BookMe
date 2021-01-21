@@ -120,6 +120,7 @@ var translations_gl = {
     "i18n-cost" : "Costo (€): ",
     "i18n-selectedResource" : "Recurso seleccionado",
     "i18n-addInterval" : "Engade un intervalo á túa reserva",
+    "i18n-selectedIntervals" : "Intervalos seleccionados",
 
     /* VALIDATIONS */
     
