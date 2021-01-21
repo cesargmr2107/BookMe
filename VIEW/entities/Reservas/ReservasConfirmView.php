@@ -14,6 +14,7 @@ class ReservasConfirmView extends BaseView{
         if(empty($this->data)){
             $this->includeTitle("i18n-bookingAllConfirmed", "h4");
         } else {
+            echo "<div class='centered-flex'>";
             foreach($this->data as $booking){
                 $id = $booking["ID_RESERVA"];
                 $date = $this->formatDate($booking["FECHA_SOLICITUD_RESERVA"]);
@@ -28,6 +29,7 @@ class ReservasConfirmView extends BaseView{
                     echo "</div>";
                 echo "</div>";
             }
+            echo "</div>";
         }
         
     }

@@ -100,6 +100,7 @@ var translations_gl = {
     "i18n-bookingResponseDate" : "Data de resposta",
     "i18n-bookingNoResponse" : "Aínda non hai resposta",
     "i18n-estado" : "Estado",
+    "i18n-bookingIntervals" : "Intervalos da reserva",
     "i18n-bookingRejection" : "Motivo de rexeitamento",
     "i18n-bookingTotalCost" : "Costo total (€): ",
     "i18n-bookingAllConfirmed" : "Tódalas solicitudes están confirmadas",

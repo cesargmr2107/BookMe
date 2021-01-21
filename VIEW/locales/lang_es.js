@@ -100,6 +100,7 @@ var translations_es = {
     "i18n-bookingResponseDate" : "Fecha de respuesta",
     "i18n-bookingNoResponse" : "Todavía no hay respuesta",
     "i18n-estado" : "Estado",
+    "i18n-bookingIntervals" : "Intervalos de la reserva",
     "i18n-bookingRejection" : "Motivo de rechazo",
     "i18n-bookingTotalCost" : "Coste total (€): ",
     "i18n-bookingAllConfirmed" : "Todas las solicitudes están confirmadas",
@@ -136,7 +137,7 @@ var translations_es = {
 
     "i18n-nameLength" : "El nombre debe tener entre 6 y 40 caracteres",
     "i18n-nameRegex" : "El nombre sólo puede tener letras y espacios",
-    "i18n-descrLength" : "La descripción admite un máximo de 40 caracteres",
+    "i18n-descrLength" : "La descripción admite un máximo de 100 caracteres",
     "i18n-descrRegex" : "La descripción sólo puede tener letras y espacios",
     "i18n-noStartDate" : "Debes introducir la fecha de inicio",
     "i18n-noEndDate" : "Debes introducir la fecha de fin",

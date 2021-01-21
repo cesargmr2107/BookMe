@@ -30,8 +30,11 @@ body {
     font-family: Roboto;
 }
 
-form {
-    margin: 0px;
+/* Flex containers */
+
+.centered-flex {
+    display: flex;
+    justify-content: center;
 }
 
 /* Titles */
@@ -40,6 +43,7 @@ h1, h2, h3, h4, h5, h6 {
     font-family: Raleway;
     font-weight: 400;
     margin-bottom: 20px;
+    align-self: center;
 }
 
 /* Links */
@@ -71,6 +75,10 @@ a {
         color: var(--important-color-0);
     }
 
+    span.fa, span.far, span.fas {
+        align-self: center;
+    }
+
 /* Validation modal */
 
 .modal-dialog {
@@ -98,16 +106,40 @@ modal-header {
 
 /* Forms */
 
+form {
+    display: flex;
+    align-self: center;
+    margin: 0px;
+}
+
+form > div {
+    margin: 10px;
+}
+
 label {
     display: block;
 }
 
-input {
+input, select, textarea {
+    background: var(--grey-0);
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
     padding: 8px;
+    width: 100%;
 }
 
+input, select{
+    height: 34px;
+}
 
+option {
+    background-color: white;
+}
 
+textarea {
+    resize: none;
+}
 
 /* Navigation bar */
 
@@ -273,15 +305,80 @@ form[name="loginForm"], form[name="registerForm"]{
         border-radius: 5px;
     }
 
-/* SOLICITUDES PENDIENTES */
+/* SOLICITUDES PROPIAS */
 
-.go-to-pending {
+.category-info {
+    display: flex;
+    align-items: center;
+}
+
+.booking-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
     width: max-content;
-    padding: 15px;
+    padding: 10px;
+    margin: 10px;
     background: var(--important-color-2);
     mix-blend-mode: normal;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
+}
+
+.booking-info p {
+    margin: 0px;
+}
+
+/* BOOKING DETAILS */
+
+#booking-details {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70vw;
+    align-self: center;
+}
+
+    #booking-details div {
+        margin: 10px;
+    }
+
+#booking-intervals {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    width: 60vw;
+}
+
+.booking-interval {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: max-content;
+    padding: 10px;
+    margin: 10px;
+    background: #B2BAD9;
+    border-radius: 5px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+    .booking-interval p {
+        margin: 2px;
+    }
+
+/* SOLICITUDES PENDIENTES */
+
+
+
+.go-to-pending {
+    width: max-content;
+    padding: 15px;
+    background: #F5F5F5;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
 }
 
 .go-to-pending strong {
@@ -331,3 +428,18 @@ form[name="loginForm"], form[name="registerForm"]{
     .confirm-use .cancel:hover {
         color: var(--danger-color);
     }
+
+
+/* CALENDAR INFO */
+
+#calendar-details {
+    display: flex;
+    justify-content: center;
+}
+
+#calendar-details div {
+    max-width: 20vw;
+    margin: 20px;
+}
+
+

@@ -10,17 +10,19 @@ class CalendariosShowView extends BaseView{
         // echo '<pre>' . var_export($this->data, true) . '</pre>';
         
         $this->includeTitle("i18n-calendarInfo", "h1");
-        echo "<div>";
-            $this->includeShowInfo("i18n-id", $this->data["ID_CALENDARIO"]);
-            $this->includeShowInfo("i18n-nombre", $this->data["NOMBRE_CALENDARIO"]);
-            $this->includeShowDate("i18n-fecha_inicio", $this->data["FECHA_INICIO_CALENDARIO"]);
-            $this->includeShowDate("i18n-fecha_fin", $this->data["FECHA_FIN_CALENDARIO"]);
-            $this->includeShowInfo("i18n-hora_inicio", $this->data["HORA_INICIO_CALENDARIO"]);
-            $this->includeShowInfo("i18n-hora_fin", $this->data["HORA_FIN_CALENDARIO"]);
-        echo "</div>";
-        echo "<div>";
-            $this->includeShowInfo("i18n-descripcion", $this->data["DESCRIPCION_CALENDARIO"]);
-            $this->includeShowList($this->data["resources"], "i18n-assocResources", "i18n-nonAssocResources", "NOMBRE_RECURSO", "ID_RECURSO" );
+        echo "<div id='calendar-details'>";
+            echo "<div>";
+                $this->includeShowInfo("i18n-id", $this->data["ID_CALENDARIO"]);
+                $this->includeShowInfo("i18n-nombre", $this->data["NOMBRE_CALENDARIO"]);
+                $this->includeShowDate("i18n-fecha_inicio", $this->data["FECHA_INICIO_CALENDARIO"]);
+                $this->includeShowDate("i18n-fecha_fin", $this->data["FECHA_FIN_CALENDARIO"]);
+                $this->includeShowInfo("i18n-hora_inicio", $this->data["HORA_INICIO_CALENDARIO"]);
+                $this->includeShowInfo("i18n-hora_fin", $this->data["HORA_FIN_CALENDARIO"]);
+            echo "</div>";
+            echo "<div>";
+                $this->includeShowInfo("i18n-descripcion", $this->data["DESCRIPCION_CALENDARIO"]);
+                $this->includeShowList($this->data["resources"], "i18n-assocResources", "i18n-nonAssocResources", "NOMBRE_RECURSO", "ID_RECURSO" );
+            echo "</div>";
         echo "</div>";
     }
 }

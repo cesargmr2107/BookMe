@@ -8,6 +8,8 @@ class ReservasPropiasView extends BaseView{
         
         $this->includeTitle("i18n-myBookings", "h1");
         
+        echo "<div id='my-bookings-container'>";
+        
         $this->includeButton("BOOKING", "goToAddForm", "post", "ReservasController", "addForm");
 
         $titleCodes = array(
@@ -21,22 +23,26 @@ class ReservasPropiasView extends BaseView{
         
         foreach($this->data as $category => $bookings){
             $this->includeTitle($titleCodes[$category], "h3");
+            echo "<div class='category-info'>";
             if(count($bookings)){
                 foreach ($bookings as $booking) {
                     $this->includeBookingInfo($booking);
                 }
             }else{
-                $this->includeTitle("i18n-noBookings", "h6");
+                echo "<p class='i18n-noBookings'></p>";
             }
+            echo "</div>";
         }
+
+        echo "</div>";
     }
 
     protected function includeBookingInfo($booking){
         ?>
-            <div>
+            <div class="booking-info" >
                 <strong><?=$booking["NOMBRE_RECURSO"]?></strong>
-                <?= $this->includeButton("SHOW", "goToShow" . $booking["ID_RESERVA"], "post", "ReservasController", "show", array( "ID_RESERVA" => $booking["ID_RESERVA"] )) ?>
                 <p><?= $this->formatDate($booking["FECHA_SOLICITUD_RESERVA"]) ?></p>
+                <?= $this->includeButton("SHOW", "goToShow" . $booking["ID_RESERVA"], "post", "ReservasController", "show", array( "ID_RESERVA" => $booking["ID_RESERVA"] )) ?>
             </div>
         <?php
     }

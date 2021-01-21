@@ -319,6 +319,15 @@ abstract class BaseView{
         ?><div class="form-group"><label class="<?=$labelCode?>" for="<?=$atribute?>"></label><input type="text" id="<?=$atribute?>" name="<?=$atribute?>" <?=$valueTag?>/></div><?php
     }
 
+    protected function includeTextArea($labelCode, $atribute, $value = null){
+        ?>
+            <div class="form-group">
+                <label class="<?=$labelCode?>" for="<?=$atribute?>"></label>
+                <textarea id="<?=$atribute?>" name="<?=$atribute?>" rows="4" cols="25" maxlength="100"><?=$value?></textarea>
+            </div>
+        <?php
+    }
+
     protected function includeReadOnlyField($labelCode, $atribute, $value = null){
         $valueTag = ($value !== null) ? "value='$value'" : '';
         ?><div class="form-group"><label class="<?=$labelCode?>" for="<?=$atribute?>"></label><input type="text" id="<?=$atribute?>" name="<?=$atribute?>" <?=$valueTag?> readonly="readonly"/></div><?php
@@ -360,67 +369,71 @@ abstract class BaseView{
         $icon = ($format === 'DD/MM/YYYY') ? 'fa fa-calendar' : 'fa fa-clock';
         $valueTag = ($value !== null) ? "value='$value'" : '';
         ?>
-            <label class="<?=$labelCode?>" for="<?=$atribute?>"></label>
-            <div class='input-group date' id='<?=$atribute?>'>
-                <input type='text' class="form-control" name="<?=$atribute?>" <?=$valueTag?> readonly />
-                <span class="input-group-addon">
-                    <span class="<?= $icon ?>"></span>
-                </span>
+            <div class="form-group">
+                <label class="<?=$labelCode?>" for="<?=$atribute?>"></label>
+                <div class='input-group date' id='<?=$atribute?>'>
+                    <input type='text' class="form-control" name="<?=$atribute?>" <?=$valueTag?> readonly />
+                    <span class="input-group-addon">
+                        <span class="<?= $icon ?>"></span>
+                    </span>
+                </div>
+                <script type="text/javascript">
+                    $(function () {
+                        $('#<?=$atribute?>').datetimepicker(
+                            {
+                                <?php
+                                    if($format === 'DD/MM/YYYY' && $useMinDateAsCurrent === true)
+                                    echo 'minDate: new Date(),';
+                                ?>
+                                format: '<?=$format?>',
+                                ignoreReadonly: true
+                            }
+                        );
+                    });
+                </script>
             </div>
-            <script type="text/javascript">
-                $(function () {
-                    $('#<?=$atribute?>').datetimepicker(
-                        {
-                            <?php
-                                if($format === 'DD/MM/YYYY' && $useMinDateAsCurrent === true)
-                                echo 'minDate: new Date(),';
-                            ?>
-                            format: '<?=$format?>',
-                            ignoreReadonly: true
-                        }
-                    );
-                });
-            </script>
         <?php
     }
 
     protected function includeSelectField($labelCode, $atribute, $options, $assocOptions, $value = null){
         ?>
-            <label class="<?=$labelCode?>" for="<?=$atribute?>"></label>
-            <select name="<?=$atribute?>" id="<?=$atribute?>" class="custom-select">
-                <?php
-                if($assocOptions){
-                    if($value === null){
-                        echo "<option class='i18n-options' disabled='disabled' selected></option>";
+            <div class="form-group">
+                <label class="<?=$labelCode?>" for="<?=$atribute?>"></label>
+                <select name="<?=$atribute?>" id="<?=$atribute?>" class="custom-select">
+                    <?php
+                    if($assocOptions){
+                        if($value === null){
+                            echo "<option class='i18n-options' disabled='disabled' selected></option>";
+                        }
+                        foreach ($options as $id => $text) {
+                            if($value != $id){
+                                echo "<option value='$id'>$text</option>";
+                            }else {
+                                echo "<option value='$id' selected='selected'>$text</option>";
+                            }                      
+                        }
+                    }else{
+                        foreach ($options as $text) {
+                            if($value != $text){
+                                echo "<option value='$text'>$text</option>";
+                            }else{
+                                echo "<option value='$text' selected='selected'>$text</option>";
+                            }                      
+                        }
                     }
-                    foreach ($options as $id => $text) {
-                        if($value != $id){
-                            echo "<option value='$id'>$text</option>";
-                        }else {
-                            echo "<option value='$id' selected='selected'>$text</option>";
-                        }                      
-                    }
-                }else{
-                    foreach ($options as $text) {
-                        if($value != $text){
-                            echo "<option value='$text'>$text</option>";
-                        }else{
-                            echo "<option value='$text' selected='selected'>$text</option>";
-                        }                      
-                    }
-                }
-                ?>
-            </select>
-        <?php
+                    ?>
+                </select>
+            </div>
+            <?php
     }
-
+    
     protected function includeCrudTable($optionsData){
         echo "<table class='table crud-table'>";
-            // Headers
-            echo "<tr>";
-            foreach($this->data["atributeNames"] as $atribute){
-                echo "<th class='i18n-$atribute'></th>";
-            }
+        // Headers
+        echo "<tr>";
+        foreach($this->data["atributeNames"] as $atribute){
+            echo "<th class='i18n-$atribute'></th>";
+        }
             echo "<th class='i18n-options'></th>";
             echo "</tr>";
 

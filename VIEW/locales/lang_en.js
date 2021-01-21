@@ -100,6 +100,7 @@ var translations_en = {
     "i18n-bookingResponseDate" : "Response date",
     "i18n-bookingNoResponse" : "There's no response yet",
     "i18n-estado" : "Status",
+    "i18n-bookingIntervals" : "Booking intervals",
     "i18n-bookingRejection" : "Rejection reason",
     "i18n-bookingTotalCost" : "Total cost (€): ",
     "i18n-bookingAllConfirmed" : "All bookings are confirmed",

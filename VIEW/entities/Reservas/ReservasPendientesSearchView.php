@@ -14,6 +14,7 @@ class ReservasPendientesSearchView extends BaseView{
         if(empty($this->data)){
             $this->includeTitle("i18n-noPending", "h4");
         }else{
+            echo "<div class='centered-flex'>";
             foreach($this->data as $resource){
                 ?> 
                     <form class="go-to-pending" name="goToManage<?=$resource["ID_RECURSO"]?>" action="index.php" method="post">
@@ -28,6 +29,7 @@ class ReservasPendientesSearchView extends BaseView{
                     </form>
                 <?php
             }
+            echo "</div>";
         }
     }
 }
