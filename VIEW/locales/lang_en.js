@@ -84,6 +84,7 @@ var translations_en = {
     "i18n-availableHours" : "Available hours",
     "i18n-unavailableHours" : "Unavailable hours",
     "i18n-hours" : "Hours: ",
+    "i18n-statsInterval" : "Stats interval",
 
     /* BOOKING VIEWS */
     "i18n-pending" : "Pending",
@@ -111,12 +112,14 @@ var translations_en = {
     "i18n-automaticReject" : "All overlapping pending bookings will be automatically rejected giving the reason 'Your booking has been rejected due to booking overlappings'.",
     "i18n-rejectConfirm" : "Would you like to <strong>reject</strong> the booking made by ",
     "i18n-of" : " of ",
+    "i18n-by" : " by ",
     "i18n-for" : " for the ",
     "i18n-login_usuario" : "User",
     "i18n-id_recurso" : "Resource",
     "i18n-noPending" : "There aren't any resources which have pending bookings",
     "i18n-pendingBookingsRes" : " pending bookings",
     "i18n-pendingBookingsByResource" : "Resource pending bookings",
+    "i18n-pendingList" : "Booking list",
     "i18n-cost" : "Cost (€): ",
     "i18n-selectedResource" : "Selected resource",
     "i18n-addInterval" : "Add an interval to your booking",

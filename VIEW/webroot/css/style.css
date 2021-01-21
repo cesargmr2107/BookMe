@@ -310,6 +310,10 @@ form[name="loginForm"], form[name="registerForm"]{
 
 /* SOLICITUDES PROPIAS */
 
+#my-bookings-container {
+    margin: 0px 40px;
+}
+
 .category-info {
     display: flex;
     align-items: center;
@@ -345,11 +349,20 @@ form[name="loginForm"], form[name="registerForm"]{
 
 #booking-container {
     display: flex;
+    justify-content: center;
     height: 100%;
 }
 
 #calendar-container, #add-form-container {
-    width: 50%;
+    margin: 0px 30px;
+}
+
+#add-form-container .form-group {
+    margin: 10px 0px; 
+}
+
+#calendar-container {
+    width: 900px;
     height: 100%;
     padding: 20px;
 }
@@ -369,10 +382,10 @@ h2.fc-toolbar-title {
 #intervals {
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
-    max-height: 30vh;
+    width: 500px;
+    max-height: 200px;
     overflow-y: auto;
-    margin: 20px;
+    margin: 20px 0px;
 }
 
 #intervals > div {
@@ -503,6 +516,60 @@ h2.fc-toolbar-title {
     }
 
 
+/* PENDING BOOKINGS */
+
+#pending-container {
+    display: flex;
+}
+
+#colored-calendar-container, #pending-list-container {
+    width: 50%;
+    height: 100%;
+    padding: 20px;
+}
+
+#pending-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    max-height: 70%;
+    overflow-y: auto;
+}
+
+#pending-list-container h3 {
+    text-align: center;
+}
+
+.pending-booking {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+    padding: 15px;
+    background: #F5F5F5;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.pending-booking ul {
+    padding: 0px;
+}
+
+.pending-booking li {
+    list-style-type: none;
+}
+
+.pending-booking #options .fa-check-circle:hover {
+    color: var(--accept-color);
+}
+
+.pending-booking #options .fa-times-circle:hover {
+    color: var(--danger-color);
+}
+
 /* CALENDAR INFO */
 
 #calendar-details {
@@ -516,3 +583,44 @@ h2.fc-toolbar-title {
 }
 
 
+/* RESOURCE INFO */
+
+#resource-info-container {
+    display: flex;
+    justify-content: center;
+}
+
+#resource-info-container #calendar-container,
+#resource-info-container #resource-info {
+    padding: 0px 20px;
+    margin: 0px 30px;
+}
+
+/* RESOURCE STATS */
+
+form[name="statsForm"] .fa-search {
+    margin-top: 23px;
+}
+
+#stats-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#stats-container h4 {
+    margin-top: 30px;
+    text-align: center;
+}
+
+#stats-container #statsChart {
+    height: 300px;
+}
+
+/* USER PROFILE */
+
+#user-info-container {
+    margin-top: 20px;
+    align-self: center;
+}

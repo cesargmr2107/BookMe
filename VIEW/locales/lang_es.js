@@ -84,6 +84,7 @@ var translations_es = {
     "i18n-availableHours" : "Horas disponibles",
     "i18n-unavailableHours" : "Horas ocupadas",
     "i18n-hours" : "Horas: ",
+    "i18n-statsInterval" : "Intervalo de las estadísticas",
 
     /* BOOKING VIEWS */
     "i18n-pending" : "Pendientes",
@@ -111,12 +112,14 @@ var translations_es = {
     "i18n-automaticReject" : "Se rechazarán automáticamente todas las reservas que coincidan con esta en el tiempo utilizando como motivo de rechazo el mensaje 'Tu reserva ha sido rechazada por solapamientos con otras'.",
     "i18n-rejectConfirm" : "¿Quieres <strong>rechazar</strong> la reserva hecha por ",
     "i18n-of" : " de ",
+    "i18n-by" : " de ",
     "i18n-for" : " para el ",
     "i18n-login_usuario" : "Usuario",
     "i18n-id_recurso" : "Recurso",
     "i18n-noPending" : "No hay recursos con solicitudes pendientes",
     "i18n-pendingBookingsRes" : " solicitudes pendientes",
     "i18n-pendingBookingsByResource" : "Solicitudes pendientes de recurso",
+    "i18n-pendingList" : "Lista de solicitudes",
     "i18n-cost" : "Coste (€): ",
     "i18n-selectedResource" : "Recurso seleccionado",
     "i18n-addInterval" : "Añade un intervalo a tu reserva",

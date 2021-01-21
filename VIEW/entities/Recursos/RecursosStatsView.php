@@ -18,6 +18,7 @@ class RecursosStatsView extends BaseView{
     }
 
     protected function includeStatsForm(){
+        $this->includeTitle("i18n-statsInterval", "h4");
         ?>
             <form id="statsForm" name="statsForm" action="index.php" method="post">
                 <?= $this->includeHiddenField("ID_RECURSO", $this->data["id"])?>
@@ -31,8 +32,9 @@ class RecursosStatsView extends BaseView{
 
     protected function includeStats(){
         ?>
+        <div id="stats-container">
             <div>
-                <?= $this->includeTitle("i18n-resourceBookings", "h3") ?>
+                <?= $this->includeTitle("i18n-resourceBookings", "h4") ?>
                 <ul>
                     <li>
                         <strong class="i18n-nBookAccepted"></strong>
@@ -62,6 +64,7 @@ class RecursosStatsView extends BaseView{
             </div>
 
             <div id="graph">
+                <?= $this->includeTitle("i18n-availability", "h4") ?>
                 <canvas id="statsChart"></canvas>
             </div>
 
@@ -90,6 +93,7 @@ class RecursosStatsView extends BaseView{
                 });
 
             </script>
+        </div>
         <?php
     }
 }

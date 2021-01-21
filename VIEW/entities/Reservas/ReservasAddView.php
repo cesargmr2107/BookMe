@@ -17,26 +17,41 @@ class ReservasAddView extends BaseView{
         $this->includeValidationModal();
       
         ?>
-            <form id="searchResource" name="searchResource" action="index.php" method="post">
+        <div id='booking-container'>
+            <div id='add-form-container'>
+                <form id="searchResource" name="searchResource" action="index.php" method="post">
+                    <?php
+                        $id = (array_key_exists("resource_info", $this->data)) ? $this->data["resource_info"]["ID_RECURSO"] : null ;
+                        $this->includeSelectField("i18n-selectedResource", "ID_RECURSO", $this->data["resources"], true, $id);
+                    ?>
+                    <span class="<?=$this->icons["SEARCH"]?>" onclick="sendForm(document.searchResource, 'ReservasController', 'addForm', checkSearchResource())"></span>
+                </form>
                 <?php
-                    $id = (array_key_exists("resource_info", $this->data)) ? $this->data["resource_info"]["ID_RECURSO"] : null ;
-                    $this->includeSelectField("i18n-selectedResource", "ID_RECURSO", $this->data["resources"], true, $id);
+                    if(array_key_exists("resource_info", $this->data)){
+                        $this->includeResourceInfo($this->data["resource_info"]);
+                        $this->includeAddForm();
+                    }
                 ?>
-                <span class="<?=$this->icons["SEARCH"]?>" onclick="sendForm(document.searchResource, 'ReservasController', 'addForm', checkSearchResource())"></span>
-            </form>  
+            </div>
+            <?php
+                if(array_key_exists("resource_info", $this->data)){
+                    echo "<div id='calendar-container'>";
+                        $this->includeCalendar($this->data["resource_info"]["events"], false);
+                    echo "</div>";
+                }
+            ?>
+        </div>
         <?php
-
+/*
         if(array_key_exists("resource_info", $this->data)){
             echo "<div id='booking-container'>";
-                echo "<div id='calendar-container'>";
-                    $this->includeCalendar($this->data["resource_info"]["events"], false);
-                echo "</div>";
+                
                 echo "<div id='add-form-container'>";
                     $this->includeResourceInfo($this->data["resource_info"]);
                     $this->includeAddForm();
                 echo "</div>";
             echo "</div>";
-        }
+        }*/
     }
 
     protected function includeResourceInfo($info){

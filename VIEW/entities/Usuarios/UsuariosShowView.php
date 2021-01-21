@@ -11,7 +11,7 @@ class UsuariosShowView extends BaseView{
         
         $this->includeTitle("i18n-userProfile", "h1");
 
-        echo "<div>";
+        echo "<div id='user-info-container'>";
             $this->includeShowInfo("i18n-login", $this->data["normal_info"]["LOGIN_USUARIO"]);
             $this->includeShowInfo("i18n-nombre", $this->data["normal_info"]["NOMBRE_USUARIO"]);
             $this->includeShowInfo("i18n-email", $this->data["normal_info"]["EMAIL_USUARIO"]);

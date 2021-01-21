@@ -16,21 +16,37 @@ class ReservasPendientesManageView extends BaseView{
         if(empty($this->data["pending"])){
             $this->includeTitle("Ya se han procesado todas las solicitudes pendientes", "h4");
         }else{
-            $this->includePendingList();
-            $this->includeColoredCalendar();
+            ?>
+                <div id='pending-container'>
+                    <div id='colored-calendar-container'>
+                        <?= $this->includeColoredCalendar() ?>
+                    </div>
+                    <div id='pending-list-container'>
+                        <?= $this->includeTitle("i18n-pendingList", "h3") ?>
+                        <div id='pending-list'>
+                            <?= $this->includePendingList() ?>
+                        </div>
+                    </div>
+                </div>
+            <?php
         }
 
     }
 
     private function includePendingList(){
-        $this->includeTitle("Lista de solicitudes", "h4");
-
         foreach($this->data["pending"] as $reserva){
             if($reserva[0]["ESTADO_RESERVA"] === "PENDIENTE"){
-                echo "<div>";
+                echo "<div class='pending-booking'>";
                     $fechaSolicitud = $this->formatDate($reserva[0]["FECHA_SOLICITUD_RESERVA"]);
                     $user = $reserva[0]["LOGIN_USUARIO"];
-                    $this->includeTitle("Solicitud del $fechaSolicitud de $user", "h5");
+                    ?>
+                        <h4>
+                            <span class="i18n-requestedOn"></span>
+                            <span><?=$fechaSolicitud?></span>
+                            <span class="i18n-by"></span>
+                            <strong><?=$user?></strong>
+                        </h4>
+                    <?php
                     echo "<ul>";
                     foreach ($reserva as $subreserva) {
                         $startDate = $this->formatDate($subreserva["FECHA_INICIO_SUBRESERVA"]);
@@ -39,10 +55,12 @@ class ReservasPendientesManageView extends BaseView{
                         $endTime = $subreserva["HORA_FIN_SUBRESERVA"];
                         echo "<li>" . $startDate . " - " . $endDate . ", " . $startTime . " - " . $endTime . "</li>";
                     }
-                    echo "<li><strong class='i18n-cost'></strong>" . $subreserva["COSTE_RESERVA"] . "€</li>";
-                    $this->includeAcceptButtonAndModal($reserva[0]["ID_RESERVA"], $reserva[0]["ID_RECURSO"], $fechaSolicitud, $user);
-                    $this->includeRejectButtonAndModal($reserva[0]["ID_RESERVA"], $reserva[0]["ID_RECURSO"], $fechaSolicitud, $user);
                     echo "</ul>";
+                    echo "<p><strong class='i18n-cost'></strong>" . $subreserva["COSTE_RESERVA"] . "€</p>";
+                    echo "<div id='options'>";
+                        $this->includeAcceptButtonAndModal($reserva[0]["ID_RESERVA"], $reserva[0]["ID_RECURSO"], $fechaSolicitud, $user);
+                        $this->includeRejectButtonAndModal($reserva[0]["ID_RESERVA"], $reserva[0]["ID_RECURSO"], $fechaSolicitud, $user);
+                    echo "</div>";
                 echo "</div>";
             }
         }
