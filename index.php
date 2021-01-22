@@ -9,7 +9,12 @@ include_once './COMMON/utils.php';
 
 session_start();
 
-if (isAuthenticated() === false){
+if( isset($_GET) && array_key_exists("token", $_GET)){
+
+	include_once './CONTROLLER/MessageController.php';
+	(new MessagesController())->render();
+	
+}else if (isAuthenticated() === false){
 
 	include_once './CONTROLLER/AuthenticationController.php';
 	$authController = new AuthenticationController();
@@ -22,37 +27,27 @@ if (isAuthenticated() === false){
 	}
 
 } else {
-
-	if( isset($_GET) && array_key_exists("token", $_GET)){
-
-		include_once './CONTROLLER/MessageController.php';
-		(new MessagesController())->render();
 		
-	}else{
-		
-		$default = array(
-			"ADMINISTRADOR" => array("controller" => "RecursosController" , "action" => "search"),
-			"RESPONSABLE" => array("controller" => "ReservasController" , "action" => "searchPending"),
-			"NORMAL" => array("controller" => "ReservasController" , "action" => "searchOwn"),
-		);
+	$default = array(
+		"ADMINISTRADOR" => array("controller" => "RecursosController" , "action" => "search"),
+		"RESPONSABLE" => array("controller" => "ReservasController" , "action" => "searchPending"),
+		"NORMAL" => array("controller" => "ReservasController" , "action" => "searchOwn"),
+	);
 
-		$userType = $_SESSION["TIPO_USUARIO"];
+	$userType = $_SESSION["TIPO_USUARIO"];
 
-		// Get and include controller
-		$controller = isset($_REQUEST['controller']) ? $_REQUEST['controller'] : $default[$userType]["controller"]; 
-		include_once './CONTROLLER/'. $controller . '.php';
-		
-		// Get action
-		$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : $default[$userType]["action"]; 
+	// Get and include controller
+	$controller = isset($_REQUEST['controller']) ? $_REQUEST['controller'] : $default[$userType]["controller"]; 
+	include_once './CONTROLLER/'. $controller . '.php';
+	
+	// Get action
+	$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : $default[$userType]["action"]; 
 
-		// DEBUG: Check values
-		// echo $controller.' - '.$action;
+	// DEBUG: Check values
+	// echo $controller.' - '.$action;
 
-		$controllerObject = new $controller();
-		$controllerObject->$action();
-	}
-
-
+	$controllerObject = new $controller();
+	$controllerObject->$action();
 
 }
 

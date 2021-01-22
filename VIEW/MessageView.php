@@ -32,7 +32,7 @@ class MessageView extends BaseView {
 		
 		if (array_key_exists("link", $this->data)){
 			?>
-				<a href="<?= $this->data["link"]; ?>">
+				<a id="goBackLink" href="<?= $this->data["link"]; ?>">
 					<span class="<?=$this->icons["BACK"]?>"></span>
 				</a>
 			<?php

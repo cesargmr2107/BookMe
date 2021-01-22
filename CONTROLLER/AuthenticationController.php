@@ -1,5 +1,7 @@
 <?php
 
+include_once './COMMON/utils.php';
+
 class AuthenticationController {	
 	
 	function __construct(){
@@ -7,20 +9,9 @@ class AuthenticationController {
 	}
 
 	function redirectToMsg($data){
-
-		// Encode data to JSON
+		// Encode data to JSON, encrypt into token and redirect
 		$jsonString = json_encode($data);
-
-		// Encrypt JSON into token
-		$ivlen = openssl_cipher_iv_length(self::$cipherMethod);
-		$iv = openssl_random_pseudo_bytes($ivlen);
-		$token = openssl_encrypt($jsonString, self::$cipherMethod, self::$cipherKey, $options = 0, $iv, $tag);
-
-		// Store iv and tag for decryption later
-		$_SESSION["iv"] = $iv;
-		$_SESSION["tag"] = $tag;
-
-		// Redirect
+		$token = encrypt($jsonString);
 		header("Location: index.php?token=$token");
 	}
 

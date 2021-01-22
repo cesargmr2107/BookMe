@@ -79,6 +79,15 @@ a {
     span.fa, span.far, span.fas {
         align-self: center;
     }
+    
+    #goBackLink {
+        align-self: center;
+        max-width: max-content;
+    }
+    
+    .fa-arrow-left {
+        color: black;
+    }
 
 /* Validation modal */
 
