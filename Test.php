@@ -26,6 +26,9 @@ class Test extends BaseView{
         "UsuariosModel"
     ];
 
+    private $passedTests = 0;
+    private $totalTests = 0;
+
     protected function render(){
         $this->header();
         $this->body();
@@ -33,18 +36,28 @@ class Test extends BaseView{
     }
 
     protected function body(){
-        echo "<h1>Test de modelos</h1>";
         foreach (self::$models as $model) {
             $results = call_user_func_array([$this,"test$model"],[]);
             $this->showResults($model, $results);
         }
+        ?>
+            <div id='brief'>
+                <h2>Resumen de los tests</h2>
+                <ul>
+                    <li><strong>Tests superados:</strong> <?=$this->passedTests?></li>
+                    <li><strong>Tests fallidos:</strong> <?=$this->totalTests - $this->passedTests?></li>
+                    <li><strong>Tests totales:</strong> <?=$this->totalTests?></li>
+                    <li><strong>Porcentaje de superación:</strong> <?=100*($this->passedTests/$this->totalTests)?>%</li>
+                </ul>
+            </div>
+        <?php
     }
 
     private function showResults($model, $results){
+        echo "<div class='atribute-tests'>";
         echo "<h2>Test de entidad: $model</h2>";
         echo "<h3>Test de acción</h3>";
         echo "<h3>Test de atributos</h3>";
-        echo "<div id='atribute-tests'>";
         foreach($results as $atribute => $tests){
             ?>
                 <table class="table">
@@ -77,9 +90,11 @@ class Test extends BaseView{
                             }
                             if ($test["expected"] === $test["obtained"] || $test["expected"] === $test["obtained"][0]) {
                                 echo "<td class='test-result ok'>OK</td>";
+                                $this->passedTests++;
                             } else {
                                 echo "<td class='test-result not-ok'>NOT OK</td>";
                             }
+                            $this->totalTests++;
                             echo "</tr>";
                         }
                     ?>

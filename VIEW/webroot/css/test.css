@@ -1,17 +1,31 @@
 
 body {
     padding: 50px;
+    display: flex;
+    flex-wrap: wrap;
 }
 
-h1, h3 {
+#brief {
+    order: -1;
+    display: flex;
+    flex-direction: column;
+    font-size: medium;
+}
+
+h3 {
     text-align: center;
 }
 
-#atribute-tests {
+.atribute-tests {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+}
+
+.atribute-tests h2 {
+    align-self: flex-start;
 }
 
 table {
