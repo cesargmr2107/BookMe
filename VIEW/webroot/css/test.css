@@ -1,0 +1,32 @@
+
+body {
+    padding: 50px;
+}
+
+table td, table th {
+    text-align: center;
+}
+
+table th {
+    background-color: #D9D9D9;
+}
+
+table td {
+    border: 1px solid #D9D9D9;
+}
+
+.value, .expected, .obtained {
+    width: 30%;
+}
+
+.test-result {
+    width: 10%;
+}
+
+.ok {
+    background-color: #32CD32;
+}
+
+.not-ok {
+    background-color: #ED4A4A;
+}

@@ -60,6 +60,24 @@ class BaseModel {
         return $this->actionCodes[$key]["code"];
     }
 
+    public function doAtributeChecks($atribute, $value){
+        $class = get_class($this);
+        $object = new $class();
+        $object->setAtributes([$atribute => $value]);
+        $toRet = [];
+        foreach ($object->checks[$atribute] as $check => $params) {
+            $result = call_user_func_array([$object,$check],$params);
+            if($result !== true){
+                array_push($toRet,$result);
+            }
+        }
+        if(empty($toRet)){
+            return "true";
+        }else{
+            return $toRet;
+        }
+    }
+
     public function checkValidations($validations){
         foreach($validations as $atribute => $checks){
             foreach($checks as $check => $result){
