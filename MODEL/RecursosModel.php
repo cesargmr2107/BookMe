@@ -54,11 +54,11 @@ class RecursosModel extends BaseModel {
             ),
             "NOMBRE_RECURSO" => array(
                 "checkSize" => array('NOMBRE_RECURSO', 4, 40, 'AT211'),
-                "checkRegex" => array('NOMBRE_RECURSO', '/^[a-zA-Z ]+$/', 'AT212')
+                "checkRegex" => array('NOMBRE_RECURSO', '/^[ÁÉÍÓÚÜáéíóúüÑña-zA-Z ]+$/', 'AT212')
             ),
             "DESCRIPCION_RECURSO" => array(
                 "checkSize" => array('DESCRIPCION_RECURSO', 10, 200, 'AT221'),
-                "checkRegex" => array('DESCRIPCION_RECURSO', '/^[a-zA-Z ]+$/', 'AT222')
+                "checkRegex" => array('DESCRIPCION_RECURSO', '/^[ÁÉÍÓÚÜáéíóúüÑña-zA-Z ]+$/', 'AT222')
             ),
             "TARIFA_RECURSO" => array(
                 "checkRange" => array('TARIFA_RECURSO', 0, 999, 'AT231')

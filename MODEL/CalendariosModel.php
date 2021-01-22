@@ -50,11 +50,11 @@ class CalendariosModel extends BaseModel {
             ),
             "NOMBRE_CALENDARIO" => array(
                 "checkSize" => array('NOMBRE_CALENDARIO', 6, 40, 'AT111'),
-                "checkRegex" => array('NOMBRE_CALENDARIO', '/^[a-zA-Z ]+$/', 'AT112')
+                "checkRegex" => array('NOMBRE_CALENDARIO', '/^[ÁÉÍÓÚÜáéíóúüÑña-zA-Z ]+$/', 'AT112')
             ),
             "DESCRIPCION_CALENDARIO" => array(
                 "checkSize" => array('DESCRIPCION_CALENDARIO', 0, 100, 'AT121'),
-                "checkRegex" => array('DESCRIPCION_CALENDARIO', '/^[a-zA-Z ]+$/', 'AT122')
+                "checkRegex" => array('DESCRIPCION_CALENDARIO', '/^[ÁÉÍÓÚÜáéíóúüÑña-zA-Z ]+$/', 'AT122')
             ),
             "FECHA_INICIO_CALENDARIO" => array(
                 "checkDate" => array('FECHA_INICIO_CALENDARIO', 'AT131')

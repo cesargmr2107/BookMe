@@ -64,17 +64,23 @@ class BaseModel {
         $class = get_class($this);
         $object = new $class();
         $object->setAtributes([$atribute => $value]);
-        $toRet = [];
+        $errors = [];
         foreach ($object->checks[$atribute] as $check => $params) {
-            $result = call_user_func_array([$object,$check],$params);
-            if($result !== true){
-                array_push($toRet,$result);
+            if($check != "checkDateInterval"){
+                $result = call_user_func_array([$object,$check],$params);
+                if($result !== true){
+                    array_push($errors,$result);
+                }
             }
         }
-        if(empty($toRet)){
+        if(empty($errors)){
             return "true";
         }else{
-            return $toRet;
+            $str = "";
+            foreach($errors as $error){
+                $str = "$str $error";
+            }
+            return trim($str);
         }
     }
 

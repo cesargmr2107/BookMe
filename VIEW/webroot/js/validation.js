@@ -137,7 +137,7 @@ function checkRegisterForm(){
             },
             checkRegex: {
                 args: {
-                    regex: /^[a-zA-Z -]+$/
+                    regex: /^[ÁÉÍÓÚÜáéíóúüÑña-zA-Z -]+$/
                 },
                 code: "i18n-usernameRegex"
             }
@@ -176,7 +176,7 @@ function checkCalendarForm(form){
             },
             checkRegex: {
                 args: {
-                    regex: /^[a-zA-Z ]+$/
+                    regex: /^[ÁÉÍÓÚÜáéíóúüÑña-zA-Z ]+$/
                 },
                 code: "i18n-nameRegex"
             }
@@ -191,7 +191,7 @@ function checkCalendarForm(form){
             },
             checkRegex: {
                 args: {
-                    regex: /^[a-zA-Z ]+$/
+                    regex: /^[ÁÉÍÓÚÜáéíóúüÑña-zA-Z ]+$/
                 },
                 code: "i18n-descrRegex"
             }
@@ -260,7 +260,7 @@ function checkResourceForm(form){
             },
             checkRegex: {
                 args: {
-                    regex: /^[a-zA-Z ]+$/
+                    regex: /^[ÁÉÍÓÚÜáéíóúüÑña-zA-Z ]+$/
                 },
                 code: "i18n-nameRegex"
             }
@@ -275,7 +275,7 @@ function checkResourceForm(form){
             },
             checkRegex: {
                 args: {
-                    regex: /^[a-zA-Z ]+$/
+                    regex: /^[ÁÉÍÓÚÜáéíóúüÑña-zA-Z ]+$/
                 },
                 code: "i18n-descrRegex"
             }
@@ -452,7 +452,7 @@ function checkUsersAddForm() {
             },
             checkRegex: {
                 args: {
-                    regex: /^[a-zA-Z -]+$/
+                    regex: /^[ÁÉÍÓÚÜáéíóúüÑña-zA-Z -]+$/
                 },
                 code: "i18n-usernameRegex"
             }

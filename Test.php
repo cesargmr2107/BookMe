@@ -41,48 +41,59 @@ class Test extends BaseView{
     }
 
     private function showResults($model, $results){
-        ?>
-            <h3>Test de entidad: <?=$model?></h3>
-            <h4>Test de atributos</h4>
-        <?php
-            foreach($results as $atribute => $tests){
-                ?>
-                    <table class="table">
-                        <tr>
-                            <th colspan="4"><?=$atribute?></th>
-                        </tr>
-                        <tr>
-                            <th class="value">Valor</th>
-                            <th class="expected">Esperado</th>
-                            <th class="obtained">Obtenido</th> 
-                            <th class="test-result">Resultado</th> 
-                        </tr>
-                        <?php
-                            foreach($tests as $test){
-                                echo "<tr>";
-                                echo "<td class='value'>" . $test["value"] . "</td>";
-                                if ($test["expected"] === "true") {
-                                    echo "<td class='expected'>true</td>";
-                                    echo "<td class='obtained'>" . $test["obtained"] . "</td>";
-                                } else {
-                                    echo "<td class='expected'>" . $test["expected"] . " - <span class='i18n-" . $test["expected"] . "'></span></td>";
-                                    echo "<td class='obtained'>" . $test["obtained"] . " - <span class='i18n-" . $test["obtained"] . "'></span></td>";
-                                }
-                                if ($test["expected"] === $test["obtained"]) {
-                                    echo "<td class='test-result ok'>OK</td>";
-                                } else {
-                                    echo "<td class='test-result not-ok'>NOT OK</td>";
-                                }
-                                echo "</tr>";
+        echo "<h2>Test de entidad: $model</h2>";
+        echo "<h3>Test de acción</h3>";
+        echo "<h3>Test de atributos</h3>";
+        echo "<div id='atribute-tests'>";
+        foreach($results as $atribute => $tests){
+            ?>
+                <table class="table">
+                    <tr>
+                        <th colspan="4"><?=$atribute?></th>
+                    </tr>
+                    <tr>
+                        <th class="value">Valor</th>
+                        <th class="expected">Esperado</th>
+                        <th class="obtained">Obtenido</th> 
+                        <th class="test-result">Resultado</th> 
+                    </tr>
+                    <?php
+                        foreach($tests as $test){
+                            echo "<tr>";
+                            echo "<td class='value'>" . $test["value"] . "</td>";
+                            if ($test["expected"] === "true") {
+                                echo "<td class='expected'>true</td>";
+                            } else {
+                                echo "<td class='expected'>" . $test["expected"] . " - <span class='i18n-" . $test["expected"] . "'></span></td>";
                             }
-                        ?>
-                    </table>
-                <?php
+                            if($test["obtained"] === "true"){
+                                echo "<td class='obtained'>true</td>";
+                            }else{
+                                echo "<td class='obtained'>" . $test["obtained"] . " - <span class='i18n-" . $test["obtained"] . "'></span></td>";
+                            }
+                            if ($test["expected"] === $test["obtained"]) {
+                                echo "<td class='test-result ok'>OK</td>";
+                            } else {
+                                echo "<td class='test-result not-ok'>NOT OK</td>";
+                            }
+                            echo "</tr>";
+                        }
+                    ?>
+                </table>
+            <?php
+        }
+        echo "<div>";
+    }
+
+    private function doAtributesTest($modelFile, $checks){
+        $model = new $modelFile();
+        foreach ($checks as $atribute => $tests) {
+            foreach ($tests as $index => $test) {
+                $result = $model->doAtributeChecks($atribute, $test["value"]);
+                $checks[$atribute][$index]["obtained"] = $result;
             }
-        ?>
-            
-        <?php
-        echo "<h4>Test de acción</h4>";
+        }
+        return $checks;
     }
 
     private function testUsuariosModel(){
@@ -92,25 +103,48 @@ class Test extends BaseView{
     private function testCalendariosModel(){
         
         $checks = [
+            "ID_CALENDARIO" => [
+                ["value" => "1", "expected" => "true"],
+                ["value" => "cal1", "expected" => "AT101"],
+            ],
             "NOMBRE_CALENDARIO" => [
                 ["value" => "Calendario de verano", "expected" => "true"],
                 ["value" => "Corto", "expected" => "AT111"],
                 ["value" => "Un nombre demasiado largo para el calendario", "expected" => "AT111"],
                 ["value" => "Calendario*_1", "expected" => "AT112"],
+            ],
+            "DESCRIPCION_CALENDARIO" => [
+                ["value" => "Esta es una descripción correcta de calendario", "expected" => "true"],
+                ["value" => "Esta es una descripción incorrecta de calendario porque es demasiado larga ya que supera el máximo de caracteres", "expected" => "AT121"],
+                ["value" => "Esta / es + una * descripción 12 incorrecta & de % calendario", "expected" => "AT122"],
+            ],
+            "FECHA_INICIO_CALENDARIO" => [
+                ["value" => "21/07/1999", "expected" => "true"],
+                ["value" => "1999-07-21", "expected" => "AT131"],
+                ["value" => "21-07-1999", "expected" => "AT131"],
+                ["value" => "Esto no es una fecha", "expected" => "AT131"],
+            ],
+            "FECHA_FIN_CALENDARIO" => [
+                ["value" => "21/07/1999", "expected" => "true"],
+                ["value" => "1999-07-21", "expected" => "AT141"],
+                ["value" => "21-07-1999", "expected" => "AT141"],
+                ["value" => "Esto no es una fecha", "expected" => "AT141"],
+            ],
+            "HORA_INICIO_CALENDARIO" => [
+                ["value" => "10:00:00", "expected" => "true"],
+                ["value" => "11:30:00", "expected" => "AT151"],
+                ["value" => "14:37", "expected" => "AT151"],
+                ["value" => "Esto no es una hora", "expected" => "AT151"],
+            ],
+            "HORA_FIN_CALENDARIO" => [
+                ["value" => "10:00:00", "expected" => "true"],
+                ["value" => "11:30:00", "expected" => "AT161"],
+                ["value" => "14:37", "expected" => "AT161"],
+                ["value" => "Esto no es una hora", "expected" => "AT161"],
             ]
         ];
-            
-        $calendar = new CalendariosModel();
-        foreach ($checks as $atribute => $tests) {
-            foreach ($tests as $index => $test) {
-                $result = $calendar->doAtributeChecks($atribute, $test["value"]);
-                $checks[$atribute][$index]["obtained"] = $result;
-            }
-        }
 
-        echo "<pre>" . var_export($checks, true) . "</pre>";
-
-        return $checks;
+        return $this->doAtributesTest("CalendariosModel", $checks);
     }
 
     private function testResponsablesModel(){

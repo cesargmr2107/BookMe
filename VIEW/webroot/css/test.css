@@ -3,8 +3,25 @@ body {
     padding: 50px;
 }
 
+h1 {
+    text-align: center;
+}
+
+#atribute-tests {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+table {
+    max-width: 40% !important;
+    margin: 20px;
+}
+
 table td, table th {
     text-align: center;
+    vertical-align: middle !important;
 }
 
 table th {

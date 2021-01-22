@@ -59,7 +59,7 @@ class UsuariosModel extends BaseModel {
             ),
             "NOMBRE_USUARIO" => array(
                 "checkSize" => array('NOMBRE_USUARIO', 3, 60, 'AT621'),
-                "checkRegex" => array('NOMBRE_USUARIO', '/^[a-zA-Z -]+$/', 'AT622')
+                "checkRegex" => array('NOMBRE_USUARIO', '/^[ÁÉÍÓÚÜáéíóúüÑña-zA-Z -]+$/', 'AT622')
             ),
             "EMAIL_USUARIO" => array(
                 "checkRegex" => array('EMAIL_USUARIO', '/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix', 'AT631')
