@@ -130,7 +130,7 @@ var translations_gl = {
     // Login and Register
     "i18n-formError" : "O formulario ten erros",
     "i18n-emptyLogin" : "Introduce o teu login",
-    "i18n-emptyPassword" : "Introduce a túa contraseña",
+    "i18n-emptyPassword" : "Introduce o contrasinal",
     "i18n-loginLength" : "O login debe ter entre 3 e 15 caracteres",
     "i18n-loginRegex" : "O login só admite caracteres alfanuméricos e '_-'",
     "i18n-usernameLength" : "O nome de usuario debe ter entre 3 e 60 caracteres",

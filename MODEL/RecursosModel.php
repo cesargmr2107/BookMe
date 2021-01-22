@@ -39,7 +39,7 @@ class RecursosModel extends BaseModel {
         $this->actionCodes[parent::EDIT_FAIL]["code"] = "AC022";
         
         $this->actionCodes[parent::DELETE_SUCCESS]["code"] = "AC123";
-        $this->actionCodes[parent::EDIT_FAIL]["code"] = "AC023";
+        $this->actionCodes[parent::DELETE_FAIL]["code"] = "AC023";
         
         $this->tableName = "RECURSOS";      
 
@@ -61,7 +61,7 @@ class RecursosModel extends BaseModel {
                 "checkRegex" => array('DESCRIPCION_RECURSO', '/^[ÁÉÍÓÚÜáéíóúüÑña-zA-Z ]+$/', 'AT222')
             ),
             "TARIFA_RECURSO" => array(
-                "checkRegex" => array('COSTE_RESERVA', '/^[0-9]+$/', 'AT231'),
+                "checkRegex" => array('TARIFA_RECURSO', '/^[0-9]+$/', 'AT231'),
                 "checkRange" => array('TARIFA_RECURSO', 0, 999, 'AT232')
             ),
             "RANGO_TARIFA_RECURSO" => array(

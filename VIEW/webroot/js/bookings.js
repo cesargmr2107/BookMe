@@ -53,11 +53,10 @@ function addBooking(){
             var jsonString = document.addForm["INFO_SUBRESERVAS"].value;
             var jsonObject = JSON.parse(jsonString);
             jsonObject["subreservas"][eventId] =  {
-                                                    FECHA_INICIO_SUBRESERVA: startDate,
-                                                    FECHA_FIN_SUBRESERVA: endDate,
+                                                    FECHA_INICIO_SUBRESERVA: `${$('#FECHA_INICIO_SUBRESERVA').data('date')}`,
+                                                    FECHA_FIN_SUBRESERVA: `${$('#FECHA_FIN_SUBRESERVA').data('date')}`,
                                                     HORA_INICIO_SUBRESERVA: startTime,
-                                                    HORA_FIN_SUBRESERVA: endTime,
-                                                    COSTE_SUBRESERVA: cost
+                                                    HORA_FIN_SUBRESERVA: endTime
                                                   }
             document.addForm["INFO_SUBRESERVAS"].value = JSON.stringify(jsonObject);          
 

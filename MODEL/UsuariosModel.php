@@ -37,7 +37,7 @@ class UsuariosModel extends BaseModel {
         $this->actionCodes[parent::EDIT_FAIL]["code"] = "AC062";
         
         $this->actionCodes[parent::DELETE_SUCCESS]["code"] = "AC163";
-        $this->actionCodes[parent::EDIT_FAIL]["code"] = "AC063";
+        $this->actionCodes[parent::DELETE_FAIL]["code"] = "AC063";
 
         $this->actionCodes["bad_credentials"] = array("code" => "AC002");
                 

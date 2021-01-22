@@ -206,7 +206,7 @@ class BaseModel {
 
     public function checkRange($atribute, $min, $max, $errorCode){
         $value = doubleval($this->atributes[$atribute]);
-        if($value > $min && $value < $max ) {
+        if($value >= $min && $value <= $max ) {
             return true;
         }else{
             return $errorCode;
@@ -287,8 +287,9 @@ class BaseModel {
         return $response;
     }
 
-    public function parseDateToDB($date){
-        return "STR_TO_DATE('$date','%d/%m/%Y')";
+    public function parseDate($date){
+        $dateArray = explode("/", $date);
+        return $dateArray[2] . "-" . $dateArray[1] . "-" . $dateArray[0];
     }
 
     public function patchEntity(){
@@ -332,8 +333,9 @@ class BaseModel {
     }
 
     public function setAtributes($atributesToSet) {
-        foreach($this->atributes as $key => $value) {
-            if(array_key_exists($key, $atributesToSet)) {
+        
+        foreach($atributesToSet as $key => $value) {
+            if(array_key_exists($key, $this->atributes)) {
                 $this->atributes[$key] = $atributesToSet[$key];
             }
         }
@@ -410,12 +412,10 @@ class BaseModel {
                 if( !$canBeNull || $value != "" ){
                     // Parse dates to BD format
                     if (strpos($key, 'FECHA') !== false){ 
-                        $value = $this->parseDateToDB($value);
-                    }else{
-                        $value = " '" . $value . "'";
+                        $value = $this->parseDate($value);
                     }
                     $insertQuery = $insertQuery . $key . ", ";
-                    $values = $values . $value . ",";
+                    $values = $values . " '" . $value . "',";
                 }
             }
             $insertQuery = substr($insertQuery, 0, -2);
@@ -454,11 +454,9 @@ class BaseModel {
                     if ($key != $this->primary_key && $value != "") {
                         // Parse dates to BD format
                         if (strpos($key, 'FECHA') !== false){ 
-                            $value = $this->parseDateToDB($value);
-                        } else {
-                            $value = " '" . $value . "'";
+                            $value = $this->parseDate($value);
                         }
-                        $updateQuery = $updateQuery . $key . " = " . $value . ", " ;
+                        $updateQuery = $updateQuery . $key . " = '" . $value . "', " ;
                     }
                 }
                 $updateQuery = substr($updateQuery, 0, -2);

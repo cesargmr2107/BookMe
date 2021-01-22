@@ -293,7 +293,7 @@ abstract class BaseView{
     }
 
     protected function includeShowList($list, $titleCode, $noneMsgCode, $name, $id = null){
-        echo "<p><strong class='$titleCode'></strong>";
+        echo "<p><strong class='$titleCode'></strong>: ";
         if(!count($list)){
             echo "<span class='$noneMsgCode'></span></p>";
         }else{

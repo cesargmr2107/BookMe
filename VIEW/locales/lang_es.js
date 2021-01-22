@@ -130,7 +130,7 @@ var translations_es = {
     // Login and Register
     "i18n-formError" : "El formulario tiene errores",
     "i18n-emptyLogin" : "No has introducido tu login",
-    "i18n-emptyPassword" : "No has introducido tu contraseña",
+    "i18n-emptyPassword" : "No has introducido la contraseña",
     "i18n-loginLength" : "El login debe tener entre 3 y 15 caracteres",
     "i18n-loginRegex" : "El login sólo admite caracteres alfanuméricos y '_-'",
     "i18n-usernameLength" : "El nombre de usuario tiene que tener entre 3 y 60 caracteres",
@@ -247,7 +247,7 @@ var translations_es = {
     "i18n-AC053" : "La subreserva no se eliminó correctamente",
     
     "i18n-AT501" : "El id de la reserva es desconocido",
-    "i18n-AT502" : "La subreserva se solapa con una existente",
+    "i18n-AT502" : "Una subreserva se solapa con una existente",
     "i18n-AT521" : "La fecha debe tener el formato dd/mm/yyyy",
     "i18n-AT531" : "La fecha debe tener el formato dd/mm/yyyy",
     "i18n-AT532" : "La fecha de fin debe ser igual o superior a la de inicio",
@@ -260,7 +260,7 @@ var translations_es = {
     "i18n-AC161" : "El usuario se añadió correctamente",
     "i18n-AC061" : "El usuario no se añadió correctamente",
     "i18n-AC162" : "El usuario se editó correctamente",
-    "i18n-AC062" : "El usuario no se añadió correctamente",
+    "i18n-AC062" : "El usuario no se editó correctamente",
     "i18n-AC163" : "El usuario se eliminó correctamente",
     "i18n-AC063" : "El usuario no se eliminó correctamente",
     

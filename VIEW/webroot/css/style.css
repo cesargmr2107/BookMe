@@ -134,6 +134,10 @@ input, select{
     height: 34px;
 }
 
+input[readonly="readonly"] {
+    font-style: italic;
+}
+
 option {
     background-color: white;
 }

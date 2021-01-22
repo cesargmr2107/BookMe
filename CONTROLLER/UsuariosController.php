@@ -43,7 +43,7 @@ class UsuariosController extends BaseController{
         $user = new UsuariosModel();
         $user->patchEntity();
         $data["result"] = $user->EDIT();
-        if($data["result"]["code"] === $user->getCode("edit", "success") && $user->get("TIPO_USUARIO") === "RESPONSABLE"){
+        if($user->get("TIPO_USUARIO") === "RESPONSABLE"){
             include_once './MODEL/ResponsablesModel.php';
             $responsable = new ResponsablesModel();
             $responsable->patchEntity();

@@ -25,7 +25,7 @@ class ResponsablesModel extends BaseModel {
         $this->actionCodes[parent::EDIT_FAIL]["code"] = "AC042";
         
         $this->actionCodes[parent::DELETE_SUCCESS]["code"] = "AC143";
-        $this->actionCodes[parent::EDIT_FAIL]["code"] = "AC043";
+        $this->actionCodes[parent::DELETE_FAIL]["code"] = "AC043";
         
         $this->tableName = "RESPONSABLES_RECURSO";      
         

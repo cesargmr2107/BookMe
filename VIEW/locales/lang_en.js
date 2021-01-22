@@ -130,7 +130,7 @@ var translations_en = {
     // Login and Register
     "i18n-formError" : "The form has errors",
     "i18n-emptyLogin" : "Enter your login",
-    "i18n-emptyPassword" : "Enter your password",
+    "i18n-emptyPassword" : "Enter the password",
     "i18n-loginLength" : "The login must have between 3 and 15 characters",
     "i18n-loginRegex" : "The login only admits '_-' and alphanumeric characters.",
     "i18n-usernameLength" : "The name admits between 3 and 60 characters",

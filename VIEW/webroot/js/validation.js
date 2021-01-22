@@ -442,6 +442,12 @@ function checkUsersAddForm() {
                 code: "i18n-loginRegex"
             }
         },
+        PASSWD_USUARIO: {
+            checkNotEmpty : {
+                args: {},
+                code: "i18n-emptyPassword"
+            }
+        },
         NOMBRE_USUARIO: {
             checkLength: {
                 args: {
@@ -478,7 +484,7 @@ function checkUsersAddForm() {
             },
             checkRegex: {
                 args: {
-                    regex: /^[a-zA-Z0-9/&ºª ]+$/
+                    regex: /^[ÁÉÍÓÚÜáéíóúüÑña-zA-Z0-9/&ºª ]+$/
                 },
                 code: "i18n-addressRegex"
             },
@@ -521,7 +527,7 @@ function checkUsersEditForm() {
             },
             checkRegex: {
                 args: {
-                    regex: /^[a-zA-Z0-9/&ºª ]+$/
+                    regex: /^[ÁÉÍÓÚÜáéíóúüÑña-zA-Z0-9/&ºª ]+$/
                 },
                 code: "i18n-addressRegex"
             },

@@ -42,7 +42,7 @@ class ReservasModel extends BaseModel {
         $this->actionCodes[parent::EDIT_FAIL]["code"] = "AC032";
         
         $this->actionCodes[parent::DELETE_SUCCESS]["code"] = "AC133";
-        $this->actionCodes[parent::EDIT_FAIL]["code"] = "AC033";
+        $this->actionCodes[parent::DELETE_FAIL]["code"] = "AC033";
         
         
         $this->tableName = "RESERVAS";
@@ -94,9 +94,6 @@ class ReservasModel extends BaseModel {
         // Get resource info: price and range
         include_once './MODEL/RecursosModel.php';
         $resourcesSearch = new RecursosModel();
-        $resourcesSearch->setAtributes(
-            "ID_RECURSO"
-        );
         $query = "SELECT TARIFA_RECURSO, RANGO_TARIFA_RECURSO FROM RECURSOS " .
                  "WHERE ID_RECURSO = " . $this->atributes["ID_RECURSO"];
         $result = $resourcesSearch->SEARCH($query)[0];
@@ -109,8 +106,8 @@ class ReservasModel extends BaseModel {
         foreach ($this->infoSubreservas as $intervalId => $info) {
 
             // Build dates and times
-            $startDate = strtotime($info["FECHA_INICIO_SUBRESERVA"]);
-            $endDate = strtotime($info["FECHA_FIN_SUBRESERVA"] . " + 1 day");
+            $startDate = strtotime($this->parseDate($info["FECHA_INICIO_SUBRESERVA"]));
+            $endDate = strtotime($this->parseDate($info["FECHA_FIN_SUBRESERVA"]) . " + 1 day");
 
             // Calculate numberOf unit
             $numberOf = ($endDate - $startDate) / $factors[$range];
@@ -122,11 +119,11 @@ class ReservasModel extends BaseModel {
             }
             
             $intervalCost = $numberOf * $price;
-            $info["COSTE_SUBRESERVA"] = $intervalCost;
+            $this->infoSubreservas[$intervalId]["COSTE_SUBRESERVA"] = sprintf("%.2f", $intervalCost);
             $totalCost += $intervalCost;
         }
 
-        $this->atributes["COSTE_RESERVA"] = $totalCost;
+        $this->atributes["COSTE_RESERVA"] = sprintf("%.2f", $totalCost);
     }
 
     public function ADD(){
@@ -144,7 +141,7 @@ class ReservasModel extends BaseModel {
                            "VALUES ('" . 
                                 $this->atributes["LOGIN_USUARIO"] . "', '" .
                                 $this->atributes["ID_RECURSO"] . "', '" .
-                                $this->atributes["FECHA_SOLICITUD_RESERVA"] . "', '" .
+                                $this->parseDate($this->atributes["FECHA_SOLICITUD_RESERVA"]) . "', '" .
                                 $this->atributes["COSTE_RESERVA"] . "'" .
                             ")";
 
@@ -160,7 +157,7 @@ class ReservasModel extends BaseModel {
 
                 include_once './MODEL/SubreservasModel.php';
                 
-                //echo '<pre>' . var_export($this, true) . "</pre>";
+                // echo '<pre>' . var_export($this, true) . "</pre>";
                 
                 foreach($this->infoSubreservas as $intervalId => $info){
                     $info["ID_RESERVA"] = $id_reserva;

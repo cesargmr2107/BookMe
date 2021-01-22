@@ -29,7 +29,7 @@ class SubreservasModel extends BaseModel {
         $this->actionCodes[parent::EDIT_FAIL]["code"] = "AC052";
         
         $this->actionCodes[parent::DELETE_SUCCESS]["code"] = "AC153";
-        $this->actionCodes[parent::EDIT_FAIL]["code"] = "AC053";
+        $this->actionCodes[parent::DELETE_FAIL]["code"] = "AC053";
         
         $this->tableName = "SUBRESERVAS";      
                   
@@ -73,8 +73,8 @@ class SubreservasModel extends BaseModel {
         }
         
         // Build query
-        $fechaInicio = $this->atributes["FECHA_INICIO_SUBRESERVA"];
-        $fechaFin = $this->atributes["FECHA_FIN_SUBRESERVA"];
+        $fechaInicio = $this->parseDate($this->atributes["FECHA_INICIO_SUBRESERVA"]);
+        $fechaFin = $this->parseDate($this->atributes["FECHA_FIN_SUBRESERVA"]);
         $horaInicio = $this->atributes["HORA_INICIO_SUBRESERVA"];
         $horaFin = $this->atributes["HORA_FIN_SUBRESERVA"];
         $query = "SELECT * FROM RESERVAS R, SUBRESERVAS S " .

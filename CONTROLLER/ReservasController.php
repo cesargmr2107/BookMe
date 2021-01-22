@@ -37,7 +37,7 @@ class ReservasController extends BaseController{
         $atributesToSet = array(
             "LOGIN_USUARIO" => $_SESSION["LOGIN_USUARIO"],
             "ID_RECURSO" => $_POST["ID_RECURSO"],
-            "FECHA_SOLICITUD_RESERVA" => date_format(new DateTime(), 'Y-m-d')
+            "FECHA_SOLICITUD_RESERVA" => date_format(new DateTime(), 'd/m/Y')
         );
 
         $reserva->setAtributes($atributesToSet);
@@ -66,7 +66,7 @@ class ReservasController extends BaseController{
                 "ID_RESERVA" => $_POST["ID_RESERVA"],
                 "ID_RECURSO" => $_POST["ID_RECURSO"],
                 "ESTADO_RESERVA" => 'ACEPTADA',
-                "FECHA_RESPUESTA_RESERVA" => date_format(new DateTime(), 'Y-m-d'),
+                "FECHA_RESPUESTA_RESERVA" => date_format(new DateTime(), 'd/m/Y'),
             )
         );
         $data["accept"] = $reserva->ACCEPT_PENDING();
@@ -90,7 +90,7 @@ class ReservasController extends BaseController{
                "ID_RECURSO" => $_POST["ID_RECURSO"],
                "MOTIVO_RECHAZO_RESERVA" => $_POST["MOTIVO_RECHAZO_RESERVA"],
                "ESTADO_RESERVA" => 'RECHAZADA',
-               "FECHA_RESPUESTA_RESERVA" => date_format(new DateTime(), 'Y-m-d'),
+               "FECHA_RESPUESTA_RESERVA" => date_format(new DateTime(), 'd/m/Y'),
            )
        );
        $data["reject"] = $reserva->EDIT();

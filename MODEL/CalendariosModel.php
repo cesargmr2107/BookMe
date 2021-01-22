@@ -34,7 +34,7 @@ class CalendariosModel extends BaseModel {
         $this->actionCodes[parent::EDIT_FAIL]["code"] = "AC012";
 
         $this->actionCodes[parent::DELETE_SUCCESS]["code"] = "AC113";
-        $this->actionCodes[parent::EDIT_FAIL]["code"] = "AC013";
+        $this->actionCodes[parent::DELETE_FAIL]["code"] = "AC013";
 
         // Define DB table
         $this->tableName = "CALENDARIOS_DE_USO";
