@@ -3,7 +3,7 @@ body {
     padding: 50px;
 }
 
-h1 {
+h1, h3 {
     text-align: center;
 }
 
@@ -15,7 +15,7 @@ h1 {
 }
 
 table {
-    max-width: 40% !important;
+    max-width: 80% !important;
     margin: 20px;
 }
 

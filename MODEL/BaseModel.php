@@ -61,26 +61,29 @@ class BaseModel {
     }
 
     public function doAtributeChecks($atribute, $value){
+
+        if(!in_array($atribute, static::$atributeNames)){
+            return false;
+        }
+
         $class = get_class($this);
         $object = new $class();
         $object->setAtributes([$atribute => $value]);
         $errors = [];
+
         foreach ($object->checks[$atribute] as $check => $params) {
-            if($check != "checkDateInterval"){
+            if($check != "checkDateInterval" && $check != "checkNoOverlappings"){
                 $result = call_user_func_array([$object,$check],$params);
                 if($result !== true){
                     array_push($errors,$result);
                 }
             }
         }
+
         if(empty($errors)){
-            return "true";
+            return true;
         }else{
-            $str = "";
-            foreach($errors as $error){
-                $str = "$str $error";
-            }
-            return trim($str);
+            return $errors;
         }
     }
 

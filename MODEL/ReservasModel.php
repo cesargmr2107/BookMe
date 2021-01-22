@@ -78,7 +78,7 @@ class ReservasModel extends BaseModel {
                 "checkEnum" => array('ESTADO_RESERVA', static::$bookingStatus, 'AT361'),
             ),
             "COSTE_RESERVA" => array(
-                "checkRange" => array('COSTE_RESERVA', 0.0, 9999.99, 'AT371')
+                "checkRange" => array('COSTE_RESERVA', 0.00, 9999.99, 'AT371')
             )
         );
     }
