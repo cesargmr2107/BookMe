@@ -47,7 +47,7 @@ class Test extends BaseView{
                     <li><strong>Tests superados:</strong> <?=$this->passedTests?></li>
                     <li><strong>Tests fallidos:</strong> <?=$this->totalTests - $this->passedTests?></li>
                     <li><strong>Tests totales:</strong> <?=$this->totalTests?></li>
-                    <li><strong>Porcentaje de superación:</strong> <?=100*($this->passedTests/$this->totalTests)?>%</li>
+                    <li><strong>Porcentaje de superación:</strong> <?=round(100*($this->passedTests/$this->totalTests),2)?>%</li>
                 </ul>
             </div>
         <?php
@@ -88,7 +88,7 @@ class Test extends BaseView{
                                     }
                                 echo "</td>";
                             }
-                            if ($test["expected"] === $test["obtained"] || $test["expected"] === $test["obtained"][0]) {
+                            if ($test["expected"] === $test["obtained"] || (is_array($test["obtained"]) && in_array($test["expected"], $test["obtained"]))) {
                                 echo "<td class='test-result ok'>OK</td>";
                                 $this->passedTests++;
                             } else {
@@ -226,8 +226,8 @@ class Test extends BaseView{
             ],
             "LOGIN_USUARIO" => [
                 ["value" => "admin", "expected" => true],
-                ["value" => "resp25", "expected" => "AT321"],
-                ["value" => "pepito-grillo", "expected" => "AT321"],
+                ["value" => "resp25", "expected" => "AT311"],
+                ["value" => "pepito-grillo", "expected" => "AT311"],
             ],
             "ID_RECURSO" => [
                 ["value" => "1", "expected" => true],
@@ -249,7 +249,7 @@ class Test extends BaseView{
             "MOTIVO_RECHAZO_RESERVA" => [
                 ["value" => "Este es un motivo de rechazo correcto para la reserva", "expected" => true],
                 ["value" => "Este es un motivo de rechazo incorrecto para la reserva porque es demasiado larga ya que supera el máximo de caracteres", "expected" => "AT351"],
-                ["value" => "Este / es + un * motivo de rechazo 12 incorrecto & para la % reserva", "expected" => "AT351"],
+                ["value" => "Este / es + un * motivo de rechazo 12 incorrecto & para la % reserva", "expected" => "AT352"],
             ],
             "ESTADO_RESERVA" => [
                 ["value" => "PENDIENTE", "expected" => true],
@@ -262,11 +262,12 @@ class Test extends BaseView{
                 ["value" => "14", "expected" => "AT361"],
             ],
             "COSTE_RESERVA" => [
-                ["value" => "25.0", "expected" => true],
-                ["value" => "10000.00", "expected" => "AT371"],
-                ["value" => "-10000.00", "expected" => "AT371"],
+                ["value" => "25.00", "expected" => true],
+                ["value" => "25.50", "expected" => true],
                 ["value" => "50", "expected" => "AT371"],
                 ["value" => "Coste inválido", "expected" => "AT371"],
+                ["value" => "-25.50", "expected" => "AT372"],
+                ["value" => "10000.10", "expected" => "AT372"],
             ]
         ];
 
@@ -329,11 +330,12 @@ class Test extends BaseView{
                 ["value" => "Esto no es una hora", "expected" => "AT551"],
             ],
             "COSTE_SUBRESERVA" => [
-                ["value" => "25.0", "expected" => "AT561"],
-                ["value" => "10000.00", "expected" => "AT561"],
-                ["value" => "-10000.00", "expected" => "AT561"],
+                ["value" => "25.00", "expected" => true],
+                ["value" => "25.50", "expected" => true],
                 ["value" => "50", "expected" => "AT561"],
                 ["value" => "Coste inválido", "expected" => "AT561"],
+                ["value" => "-25.50", "expected" => "AT562"],
+                ["value" => "10000.10", "expected" => "AT562"],
             ]
         ];
 
@@ -345,7 +347,7 @@ class Test extends BaseView{
             "LOGIN_USUARIO" => [
                 ["value" => "cesarino", "expected" => true],
                 ["value" => "login_demasiado_largo", "expected" => "AT601"],
-                ["value" => "login /extraño*", "expected" => "AT602"],
+                ["value" => "weird*login/", "expected" => "AT602"],
             ],
             "PASSWD_USUARIO" => [
                 ["value" => "f9e2ede9ed5b31ffb5a9694ed3b02968", "expected" => true],
@@ -355,7 +357,7 @@ class Test extends BaseView{
             "NOMBRE_USUARIO" => [
                 ["value" => "Pepito Grillo-Fáñez", "expected" => true],
                 ["value" => "A", "expected" => "AT621"],
-                ["value" => "Un Nombre Demasiado Largo Que De Ninguna Manera Nadie Tiene En El Mundo", "expected" => "AT622"],
+                ["value" => "Un Nombre Demasiado Largo Que De Ninguna Manera Nadie Tiene En El Mundo", "expected" => "AT621"],
                 ["value" => "Pepito Grillo-Fáñez 25", "expected" => "AT622"],
             ],
             "EMAIL_USUARIO" => [

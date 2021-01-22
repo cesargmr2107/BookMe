@@ -198,7 +198,8 @@ var translations_es = {
     "i18n-AT212" : "El nombre sólo puede tener letras y espacios",
     "i18n-AT221" : "La descripción admite un máximo de 100 caracteres",
     "i18n-AT222" : "La descripción sólo puede tener letras y espacios",
-    "i18n-AT231" : "La tarifa del recurso debe ser un valor numérico entre 0€ y 999€",
+    "i18n-AT231" : "La tarifa del recurso debe ser un número entero",
+    "i18n-AT232" : "La tarifa del recurso debe estar entre 0€ y 999€",
     "i18n-AT241" : "El rango de tarifa del recurso es desconocido",
     "i18n-AT251" : "El id del calendario es desconocido",
     "i18n-AT261" : "El usuario responsable es desconocido",
@@ -219,9 +220,11 @@ var translations_es = {
     "i18n-AT341" : "La fecha debe tener el formato dd/mm/yyyy",
     "i18n-AT342" : "La fecha de respuesta debe ser igual o superior a la de solicitud",
     "i18n-AT351" : "El motivo de rechazo no puede superar los 100 caracteres",
+    "i18n-AT352" : "El motivo de rechazo sólo puede tener letras y espacios",
     "i18n-AT361" : "El estado de la reserva es desconocido",
-    "i18n-AT371" : "El coste de la reserva debe ser un valor numérico entre 0.0 y 9999.99",
-
+    "i18n-AT371" : "El coste de la reserva debe ser un valor decimal",
+    "i18n-AT372" : "El coste de la reserva debe estar entre 0.0€ y 9999.9€",
+    
     // ResponsablesModel
     "i18n-AC141" : "El responsable se añadió correctamente",
     "i18n-AC041" : "El responsable no se añadió correctamente",
@@ -250,7 +253,8 @@ var translations_es = {
     "i18n-AT532" : "La fecha de fin debe ser igual o superior a la de inicio",
     "i18n-AT541" : "La hora debe tener el formato hh:mm:ss",
     "i18n-AT551" : "La hora debe tener el formato hh:mm:ss",
-    "i18n-AT561" : "El coste de la subreserva debe ser un valor numérico entre 0.0 y 9999.9",
+    "i18n-AT561" : "El coste de la subreserva debe ser un valor decimal",
+    "i18n-AT562" : "El coste de la subreserva debe estar entre 0.0€ y 9999.9€",
 
     // UsuariosModel
     "i18n-AC161" : "El usuario se añadió correctamente",

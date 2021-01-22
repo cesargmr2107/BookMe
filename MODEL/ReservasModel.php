@@ -72,13 +72,15 @@ class ReservasModel extends BaseModel {
                 "checkDateInterval" => array('FECHA_SOLICITUD_RESERVA', 'FECHA_RESPUESTA_RESERVA', 'AT342')
             ),
             "MOTIVO_RECHAZO_RESERVA" => array(
-                "checkSize" => array('MOTIVO_RECHAZO_RESERVA', 0, 200, 'AT351'),
+                "checkSize" => array('MOTIVO_RECHAZO_RESERVA', 0, 100, 'AT351'),
+                "checkRegex" => array('MOTIVO_RECHAZO_RESERVA', '/^[ÁÉÍÓÚÜáéíóúüÑña-zA-Z ]+$/', 'AT352')
             ),
             "ESTADO_RESERVA" => array( 
                 "checkEnum" => array('ESTADO_RESERVA', static::$bookingStatus, 'AT361'),
             ),
             "COSTE_RESERVA" => array(
-                "checkRange" => array('COSTE_RESERVA', 0.00, 9999.99, 'AT371')
+                "checkRegex" => array('COSTE_RESERVA', '/^[0-9]+\.[0-9]+$/', 'AT371'),
+                "checkRange" => array('COSTE_RESERVA', 0.00, 9999.99, 'AT372')
             )
         );
     }

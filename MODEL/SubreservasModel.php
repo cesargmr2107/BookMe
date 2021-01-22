@@ -55,7 +55,8 @@ class SubreservasModel extends BaseModel {
                 "checkTime" => array('HORA_FIN_SUBRESERVA', 'AT551')
             ),
             "COSTE_SUBRESERVA" => array(
-                "checkNumeric" => array('COSTE_SUBRESERVA', 'AT561'),
+                "checkRegex" => array('COSTE_SUBRESERVA', '/^[0-9]+\.[0-9]+$/', 'AT561'),
+                "checkRange" => array('COSTE_SUBRESERVA', 0.00, 9999.99, 'AT562')
             )
         );
     }

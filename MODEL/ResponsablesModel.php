@@ -38,7 +38,7 @@ class ResponsablesModel extends BaseModel {
             ),
             "DIRECCION_RESPONSABLE" => array(
                 "checkSize" => array('DIRECCION_RESPONSABLE', 10, 60, 'AT411'),
-                "checkRegex" => array('DIRECCION_RESPONSABLE', '/^[a-zA-Z0-9\/&ºª ]+$/', 'AT412')
+                "checkRegex" => array('DIRECCION_RESPONSABLE', '/^[ÁÉÍÓÚÜáéíóúüÑña-zA-Z0-9\/&ºª ]+$/', 'AT412')
             ),
             "TELEFONO_RESPONSABLE" => array(
                 "checkRegex" => array('TELEFONO_RESPONSABLE', '/^[6|7|8|9][0-9]{8}$/', 'AT421')

@@ -230,7 +230,7 @@ class BaseModel {
     public function checkDateInterval($start_atribute, $end_atribute, $errorCode){
         $start = $this->atributes[$start_atribute];
         $end = $this->atributes[$end_atribute];
-        $format = 'Y-m-d';
+        $format = 'd/m/Y';
         $dStart = DateTime::createFromFormat($format, $start);
         $dEnd = DateTime::createFromFormat($format, $end);
     
@@ -245,7 +245,7 @@ class BaseModel {
 
     public function checkDate($atribute, $errorCode){
         $str_date = $this->atributes[$atribute];
-        $format = 'Y-m-d';
+        $format = 'd/m/Y';
         $d = DateTime::createFromFormat($format, $str_date);
         if($d && $d->format($format) === $str_date){
             return true;
@@ -287,14 +287,14 @@ class BaseModel {
         return $response;
     }
 
+    public function parseDateToDB($date){
+        return "STR_TO_DATE('$date','%d/%m/%Y')";
+    }
+
     public function patchEntity(){
         foreach($_REQUEST as $key => $value){
             if(in_array($key,static::$atributeNames)) {
-                if (strpos($key, 'FECHA') !== false){ // Parse date to format
-                    $d = DateTime::createFromFormat('d/m/Y', $value);
-                    $this->atributes[$key] = date_format($d,'Y-m-d');
-                }
-                else if($key !== "controller" && $key !== "action"){
+                if($key !== "controller" && $key !== "action"){
                     $this->atributes[$key] = $value;    
                 }
             }
@@ -408,8 +408,14 @@ class BaseModel {
             foreach ($this->atributes as $key => $value) {
                 $canBeNull = in_array($key, $this->nullAtributes);
                 if( !$canBeNull || $value != "" ){
+                    // Parse dates to BD format
+                    if (strpos($key, 'FECHA') !== false){ 
+                        $value = $this->parseDateToDB($value);
+                    }else{
+                        $value = " '" . $value . "'";
+                    }
                     $insertQuery = $insertQuery . $key . ", ";
-                    $values = $values . " '" . $value . "' ,";
+                    $values = $values . $value . ",";
                 }
             }
             $insertQuery = substr($insertQuery, 0, -2);
@@ -446,7 +452,13 @@ class BaseModel {
                 $updateQuery = "UPDATE ". $this->tableName . " SET ";
                 foreach ($this->atributes as $key => $value) {
                     if ($key != $this->primary_key && $value != "") {
-                        $updateQuery = $updateQuery . $key . " = '" . $value . "', " ;
+                        // Parse dates to BD format
+                        if (strpos($key, 'FECHA') !== false){ 
+                            $value = $this->parseDateToDB($value);
+                        } else {
+                            $value = " '" . $value . "'";
+                        }
+                        $updateQuery = $updateQuery . $key . " = " . $value . ", " ;
                     }
                 }
                 $updateQuery = substr($updateQuery, 0, -2);
