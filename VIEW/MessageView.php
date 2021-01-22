@@ -17,17 +17,19 @@ class MessageView extends BaseView {
 		echo "<h3>$code : <span class='i18n-$code'></span></h3>";
 
 		if(array_key_exists("atributeErrors", $this->data["result"])){
-			echo "<p class='i18n-atributeErrors'></p>";
-			echo "<ul>";
-			foreach ($this->data["result"]["atributeErrors"] as $atribute => $errors) {
-				echo "<li>" . $atribute . ":</li>";
+			echo "<div id='atribute-errors-msgs'>";
+				echo "<p class='i18n-atributeErrors'></p>";
 				echo "<ul>";
-				foreach ($errors as $check => $code) {
-					echo "<li>$code: <span class='i18n-$code'></span></li>";
+				foreach ($this->data["result"]["atributeErrors"] as $atribute => $errors) {
+					echo "<li>" . $atribute . ":</li>";
+					echo "<ul>";
+					foreach ($errors as $check => $code) {
+						echo "<li>$code: <span class='i18n-$code'></span></li>";
+					}
+					echo "</ul>";
 				}
 				echo "</ul>";
-			}
-			echo "</ul>";
+			echo "</div>";
 		}
 		
 		if (array_key_exists("link", $this->data)){

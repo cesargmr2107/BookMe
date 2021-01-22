@@ -79,15 +79,6 @@ a {
     span.fa, span.far, span.fas {
         align-self: center;
     }
-    
-    #goBackLink {
-        align-self: center;
-        max-width: max-content;
-    }
-    
-    .fa-arrow-left {
-        color: black;
-    }
 
 /* Validation modal */
 
@@ -632,4 +623,21 @@ form[name="statsForm"] .fa-search {
 #user-info-container {
     margin-top: 20px;
     align-self: center;
+}
+
+/* MESSAGE VIEW */
+
+#goBackLink {
+    align-self: center;
+    max-width: max-content;
+}
+
+.fa-arrow-left {
+    color: black;
+}
+
+#atribute-errors-msgs {
+    width: max-content;
+    align-self: center;
+    margin: 20px 0px;
 }
