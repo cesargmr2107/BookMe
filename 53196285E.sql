@@ -35,8 +35,6 @@ CREATE DATABASE IF NOT EXISTS `53196285E` DEFAULT CHARACTER SET utf8 COLLATE utf
 
 USE `53196285E`;
 
-grant all privileges on 53196285E.* to pma@localhost identified by "iu";
-
 -- --------------------------------------------------------
 --
 -- Estructura de tabla para la tabla `USUARIOS`
@@ -78,6 +76,7 @@ CREATE TABLE `CALENDARIOS_DE_USO` (
   `FECHA_FIN_CALENDARIO`    date          NOT NULL,
   `HORA_INICIO_CALENDARIO`  time          NOT NULL COMMENT 'HORA DE COMIENZO DE CUALQUIER DIA DEL CALENDARIO',
   `HORA_FIN_CALENDARIO`     time          NOT NULL COMMENT 'HORA DE FIN DE CUALQUIER DIA DEL CALENDARIO',
+  `BORRADO_LOGICO`         enum('SI', 'NO') COLLATE utf8_spanish_ci NOT NULL COMMENT 'BORRADO LOGICO DE LA TUPLA',
 
   PRIMARY KEY(`ID_CALENDARIO`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_spanish_ci;
@@ -152,7 +151,6 @@ CREATE TABLE `SUBRESERVAS` (
    FOREIGN KEY(`ID_RESERVA`) REFERENCES `RESERVAS` (`ID_RESERVA`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_spanish_ci;
 
-
 /* SENTENCIAS DE INSERCIÓN DE DATOS */
 
 -- Para tabla 'USUARIOS'
@@ -160,6 +158,7 @@ INSERT INTO `USUARIOS` (`LOGIN_USUARIO`, `PASSWD_USUARIO`, `NOMBRE_USUARIO`, `EM
 ('admin', '21232f297a57a5a743894a0e4a801fc3', 'César Gabriel Márquez Rodríguez', 'cmrodriguez17@esei.uvigo.es', 'ADMINISTRADOR', 'SI'),
 ('resp1', 'a1866c1e61653fd2a77033750c72c90c', 'Eliana Patricia Aray Cappello', 'eacappello17@esei.uvigo.es', 'RESPONSABLE', 'SI'),
 ('resp2', 'bb1797702574859ad9bab93694ed779d', 'Iria Martínez Álvarez', 'imalvarez17@esei.uvigo.es', 'RESPONSABLE', 'SI'),
+('resp3', '6ae899e50b6df45e52866e3ac8c2ba65', 'Samuel Jesús Márquez Rodríguez', 'sjmarquez20@esei.uvigo.es', 'RESPONSABLE', 'SI'),
 ('emmolina15', 'e8820d56d6d910a7b39e48e3e1cef30d', 'Edgard Orlando Márquez Molina', 'emmolina15@esei.uvigo.es', 'NORMAL', 'SI');
 
 -- Para tabla 'RESPONSABLES_RECURSO'
@@ -213,6 +212,7 @@ INSERT INTO `SUBRESERVAS` (`ID_RESERVA`, `ID_SUBRESERVA`, `FECHA_INICIO_SUBRESER
 ('8', '1', STR_TO_DATE('05/01/2021','%d/%m/%Y'),  STR_TO_DATE('05/02/2021','%d/%m/%Y'), '15:00', '17:00', '50'),
 ('8', '2', STR_TO_DATE('10/02/2021','%d/%m/%Y'),  STR_TO_DATE('10/03/2021','%d/%m/%Y'), '15:00', '17:00', '50');
 
+grant all privileges on 53196285E.* to pma@localhost identified by "iu";
 
 COMMIT;
 

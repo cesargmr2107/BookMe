@@ -8,28 +8,28 @@ body {
 #brief {
     order: -1;
     display: flex;
+    align-items: center;
     flex-direction: column;
-    font-size: medium;
+    font-size: large;
+    width: 100%;
 }
 
 h3 {
     text-align: center;
 }
 
-.atribute-tests {
+.tests-container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    align-self: center;
     justify-content: center;
     flex-wrap: wrap;
-}
-
-.atribute-tests h2 {
-    align-self: flex-start;
+    width: 100%;
 }
 
 table {
-    max-width: 80% !important;
+    max-width: 60% !important;
     margin: 20px;
 }
 
@@ -60,4 +60,58 @@ table td {
 
 .not-ok {
     background-color: #ED4A4A;
+}
+
+table.action-tests * {
+    text-align: start;
+}
+
+.action-tests td {
+    padding: 15px !important;
+}
+
+.action-tests p {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.action-tests .action-tests{
+    width: 30%;
+}
+
+.action-tests pre {
+    max-width: 300px;
+}
+
+.action-tests .expected {
+    width: 15%;
+}
+
+.action-tests .obtained {
+    width: 40%;
+}
+
+.action-tests .test-result {
+    width: 10%;
+}
+
+.action-tests .obtained ul {
+    padding: 0px;
+    margin-top: 10px;
+}
+
+.action-tests .obtained ul li {
+    margin-left: 20px;
+}
+
+.action-tests .test-result {
+    text-align: center !important;
+}
+
+.action-tests th {
+    text-align: center !important;
+}
+
+.action-tests .atributes {
+    max-width: max-content;
 }

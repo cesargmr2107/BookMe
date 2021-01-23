@@ -12,7 +12,7 @@ class BaseModel {
 
     private $connection;
 
-    public $actionMsgs;
+    public $actionCodes;
     
     public const CANNOT_CONNECT = "cannot_connect";
     public const BAD_QUERY = "bad_query";
@@ -50,9 +50,15 @@ class BaseModel {
             $this->atributes[$atribute]  = "";
         }
 
-        // DEBUG: See actionMsgs structure
+        // DEBUG: See actionCodes structure
         // echo '<pre>' . var_export($this->actionCodes, true) . '</pre>';
 
+    }
+
+    public function clear(){
+        foreach(static::$atributeNames as $atribute){
+            $this->atributes[$atribute] = "";
+        }
     }
 
     public function getCode($action, $result){

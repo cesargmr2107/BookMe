@@ -170,7 +170,7 @@ var translations_gl = {
     "i18n-AC111" : "O calendario engadiuse correctamente",
     "i18n-AC011" : "O calendario non se engadiu correctamente",
     "i18n-AC112" : "O calendario editouse correctamente",
-    "i18n-AC011" : "O calendario non se editou correctamente",
+    "i18n-AC012" : "O calendario non se editou correctamente",
     "i18n-AC113" : "O calendario eliminouse correctamente",
     "i18n-AC013" : "O calendario non se eliminou correctamente",
     

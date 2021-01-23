@@ -21,9 +21,9 @@ class Test extends BaseView{
         "CalendariosModel",
         "RecursosModel",
         "ReservasModel",
-        "ResponsablesModel",
         "SubreservasModel",
-        "UsuariosModel"
+        "UsuariosModel",
+        "ResponsablesModel"
     ];
 
     private $passedTests = 0;
@@ -44,9 +44,11 @@ class Test extends BaseView{
             <div id='brief'>
                 <h2>Resumen de los tests</h2>
                 <ul>
-                    <li><strong>Tests superados:</strong> <?=$this->passedTests?></li>
-                    <li><strong>Tests fallidos:</strong> <?=$this->totalTests - $this->passedTests?></li>
                     <li><strong>Tests totales:</strong> <?=$this->totalTests?></li>
+                    <ul>
+                        <li><strong>Tests superados:</strong> <?=$this->passedTests?></li>
+                        <li><strong>Tests fallidos:</strong> <?=$this->totalTests - $this->passedTests?></li>
+                    </ul>
                     <li><strong>Porcentaje de superación:</strong> <?=round(100*($this->passedTests/$this->totalTests),2)?>%</li>
                 </ul>
             </div>
@@ -54,9 +56,78 @@ class Test extends BaseView{
     }
 
     private function showResults($model, $results){
-        echo "<div class='atribute-tests'>";
+        echo "<div class='tests-container'>";
         echo "<h2>Test de entidad: $model</h2>";
+        if(array_key_exists("actionResults", $results)){
+            $this->showActionResults($results["actionResults"]);
+        }
+        if(array_key_exists("atributeResults", $results)){
+            $this->showAtributeResults($results["atributeResults"]);
+        }
+        echo "</div>";
+    }
+
+    private function showActionResults($results){
+        //echo "<pre>" . var_export($results, true) . "</pre>";
         echo "<h3>Test de acción</h3>";
+        foreach($results as $action => $tests){
+            ?>
+                <table class="table action-tests">
+                    <tr>
+                        <th colspan="4"><?=$action?></th>
+                    </tr>
+                    <tr>
+                        <th class="atributes">Atributos</th>
+                        <th class="expected">Esperado</th>
+                        <th class="obtained">Obtenido</th> 
+                        <th class="test-result">Resultado</th> 
+                    </tr>
+                    <?php
+                        foreach($tests as $test){
+                            ?>
+                                <tr>
+                                    <td class="atributes">
+                                        <pre><?=var_export($test["atributes"])?></pre>
+                                    </td>
+                                    <td class="expected">
+                                        <strong><?=$test["expected"]?> : </strong>
+                                        <span class="i18n-<?=$test["expected"]?>"></span>
+                                    </td>
+                                    <td class="obtained">
+                                        <strong><?=$test["obtained"]["code"]?> : </strong>
+                                        <span class="i18n-<?=$test["obtained"]["code"]?>"></span>
+                                        <?php
+                                            if(array_key_exists("atributeErrors", $test["obtained"])){
+                                                echo "<ul>";
+                                                echo "<p>Errores de atributo:</p>";
+                                                foreach ($test["obtained"]["atributeErrors"] as $atribute => $checks) {
+                                                    foreach ($checks as $check => $error){
+                                                        echo "<li><strong>$error : </strong><span class='i18n-$error'></span></li>";
+                                                    }
+                                                }
+                                                echo "</ul>";
+                                            }
+                                        ?>
+                                    </td>
+                                    <?php
+                                        if ($test["expected"] === $test["obtained"]["code"]){
+                                            echo "<td class='test-result ok'>OK</td>";
+                                            $this->passedTests++;
+                                        } else {
+                                            echo "<td class='test-result not-ok'>NOT OK</td>";
+                                        }
+                                        $this->totalTests++;
+                                    ?>
+                                </tr>
+                            <?php
+                        }
+                    ?>
+                </table>
+            <?php
+        }
+    }
+
+    private function showAtributeResults($results){
         echo "<h3>Test de atributos</h3>";
         foreach($results as $atribute => $tests){
             ?>
@@ -101,7 +172,6 @@ class Test extends BaseView{
                 </table>
             <?php
         }
-        echo "</div>";
     }
 
     private function doAtributesTest($modelFile, $checks){
@@ -115,7 +185,90 @@ class Test extends BaseView{
         return $checks;
     }
 
+    private function doActionsTest($modelFile, $actions){
+        $model = new $modelFile();
+        foreach ($actions as $action => $tests) {
+            foreach ($tests as $index => $test) {
+                $model->setAtributes($test["atributes"]);
+                if($modelFile === "ReservasModel" && $action === "ADD"){
+                    $model->setInfoSubreservas(json_encode($test["atributes"]["infoSubreservas"], true));
+                }
+                $result = $model->$action();
+                $actions[$action][$index]["obtained"] = $result;
+                $model->clear();
+            }
+        }
+        return $actions;
+    }
+
     private function testCalendariosModel(){
+
+        $result = [];
+
+        // Action tests
+
+        $actions =  [
+            "ADD" => [
+                [
+                    "atributes" => [
+                        "NOMBRE_CALENDARIO" => "Calendario del curso",
+                        "DESCRIPCION_CALENDARIO" => "Este es el calendario para el curso académico",
+                        "FECHA_INICIO_CALENDARIO" => "21/09/2020",
+                        "FECHA_FIN_CALENDARIO" => "21/06/2021",
+                        "HORA_INICIO_CALENDARIO" => "08:00:00", 
+                        "HORA_FIN_CALENDARIO" => "22:00:00"
+                    ],
+                    "expected" => "AC111"
+                ],
+                [
+                    "atributes" => [
+                        "NOMBRE_CALENDARIO" => "",
+                        "DESCRIPCION_CALENDARIO" => "",
+                        "FECHA_INICIO_CALENDARIO" => "",
+                        "FECHA_FIN_CALENDARIO" => "",
+                        "HORA_INICIO_CALENDARIO" => "", 
+                        "HORA_FIN_CALENDARIO" => ""
+                    ],
+                    "expected" => "AC011"
+                ],
+            ],
+            "EDIT" => [
+                [
+                    "atributes" => [
+                        "ID_CALENDARIO" => "1",
+                        "FECHA_INICIO_CALENDARIO" => "21/09/2020",
+                        "FECHA_FIN_CALENDARIO" => "21/06/2021"
+                    ],
+                    "expected" => "AC112"
+                ],
+                [
+                    "atributes" => [
+                        "ID_CALENDARIO" => "1000",
+                        "FECHA_INICIO_CALENDARIO" => "21/09/2020",
+                        "FECHA_FIN_CALENDARIO" => "21/06/2021"
+                    ],
+                    "expected" => "AC012"
+                ],
+            ],
+            "DELETE" => [
+                [
+                    "atributes" => [
+                        "ID_CALENDARIO" => "5"
+                    ],
+                    "expected" => "AC113"
+                ],
+                [
+                    "atributes" => [
+                        "ID_CALENDARIO" => "1"
+                    ],
+                    "expected" => "AC013"
+                ],
+            ]
+        ];
+
+        $result["actionResults"] = $this->doActionsTest("CalendariosModel", $actions);
+
+        // Atribute tests
         
         $checks = [
             "ID_CALENDARIO" => [
@@ -159,11 +312,78 @@ class Test extends BaseView{
             ]
         ];
 
-        return $this->doAtributesTest("CalendariosModel", $checks);
+        $result["atributeResults"] = $this->doAtributesTest("CalendariosModel", $checks);
+
+        return $result;
     }
 
     private function testRecursosModel(){
         
+        $result = [];
+
+        // Action tests
+
+        $actions =  [
+            "ADD" => [
+                [
+                    "atributes" => [
+                        "NOMBRE_RECURSO" => "Nuevo recurso",
+                        "DESCRIPCION_RECURSO" => "Este es un nuevo recurso",
+                        "TARIFA_RECURSO" => "10",
+                        "RANGO_TARIFA_RECURSO" => "SEMANA",
+                        "ID_CALENDARIO" => "1",
+                        "LOGIN_RESPONSABLE" => "resp1"
+                    ],
+                    "expected" => "AC121"
+                ],
+                [
+                    "atributes" => [
+                        "NOMBRE_RECURSO" => "",
+                        "DESCRIPCION_RECURSO" => "",
+                        "TARIFA_RECURSO" => "",
+                        "RANGO_TARIFA_RECURSO" => "",
+                        "ID_CALENDARIO" => "",
+                        "LOGIN_RESPONSABLE" => ""
+                    ],
+                    "expected" => "AC021"
+                ],
+            ],
+            "EDIT" => [
+                [
+                    "atributes" => [
+                        "ID_RECURSO" => "1",
+                        "TARIFA_RECURSO" => "100"
+                    ],
+                    "expected" => "AC122"
+                ],
+                [
+                    "atributes" => [
+                        "ID_RECURSO" => "1000",
+                        "TARIFA_RECURSO" => "100"
+                    ],
+                    "expected" => "AC022"
+                ],
+            ],
+            "DELETE" => [
+                [
+                    "atributes" => [
+                        "ID_RECURSO" => "7"
+                    ],
+                    "expected" => "AC123"
+                ],
+                [
+                    "atributes" => [
+                        "ID_RECURSO" => "1"
+                    ],
+                    "expected" => "AC023"
+                ],
+            ]
+        ];
+
+        $result["actionResults"] = $this->doActionsTest("RecursosModel", $actions);
+
+        // Atribute tests
+
         $checks = [
             "ID_RECURSO" => [
                 ["value" => "1", "expected" => true],
@@ -182,7 +402,7 @@ class Test extends BaseView{
             ],
             "TARIFA_RECURSO" => [
                 ["value" => "25", "expected" => true],
-                ["value" => "10000", "expected" => "AT231"],
+                ["value" => "10000.0", "expected" => "AT231"],
                 ["value" => "-10000", "expected" => "AT231"],
                 ["value" => "50.5", "expected" => "AT231"],
                 ["value" => "Tarifa inválida", "expected" => "AT231"],
@@ -214,10 +434,90 @@ class Test extends BaseView{
             ]
         ];
 
-        return $this->doAtributesTest("RecursosModel", $checks);
+        $result["atributeResults"] = $this->doAtributesTest("RecursosModel", $checks);
+
+        return $result;
     }
     
     private function testReservasModel(){
+
+        $result = [];
+
+        // Action tests
+
+        $actions =  [
+            "ADD" => [
+                [
+                    "atributes" => [
+                        "LOGIN_USUARIO" => "emmolina15",
+                        "ID_RECURSO" => "1",
+                        "FECHA_SOLICITUD_RESERVA" => "25/01/2021",
+                        "infoSubreservas" => [ 
+                            "subreservas" => [
+                                "subreserva-0" => [
+                                    "FECHA_INICIO_SUBRESERVA" => "28/01/2021",
+                                    "FECHA_FIN_SUBRESERVA" => "31/01/2021",
+                                    "HORA_INICIO_SUBRESERVA" => "17:00:00",
+                                    "HORA_FIN_SUBRESERVA" => "18:00:00"
+                                ],
+                                "subreserva-1" => [
+                                    "FECHA_INICIO_SUBRESERVA" => "10/02/2021",
+                                    "FECHA_FIN_SUBRESERVA" => "23/02/2021",
+                                    "HORA_INICIO_SUBRESERVA" => "17:00:00",
+                                    "HORA_FIN_SUBRESERVA" => "18:00:00"
+                                ]
+                            ]
+                        ]
+                    ],
+                    "expected" => "AC131"
+                ],
+                [
+                    "atributes" => [
+                        "LOGIN_USUARIO" => "emmolina15",
+                        "ID_RECURSO" => "1",
+                        "FECHA_SOLICITUD_RESERVA" => "25/01/2021",
+                        "COSTE_RESERVA" => "5",
+                        "infoSubreservas" => [ 
+                            "subreservas" => [
+                                "subreserva-0" => [
+                                    "FECHA_INICIO_SUBRESERVA" => "28/01/2021",
+                                    "FECHA_FIN_SUBRESERVA" => "31/01/2021",
+                                    "HORA_INICIO_SUBRESERVA" => "17:00:00",
+                                    "HORA_FIN_SUBRESERVA" => "18:00:00"
+                                ],
+                                "subreserva-1" => [
+                                    "FECHA_INICIO_SUBRESERVA" => "28/01/2021",
+                                    "FECHA_FIN_SUBRESERVA" => "31/01/2021",
+                                    "HORA_INICIO_SUBRESERVA" => "17:00:00",
+                                    "HORA_FIN_SUBRESERVA" => "18:00:00"
+                                ]
+                            ]
+                        ]
+                    ],
+                    "expected" => "AC031"
+                ]
+            ],
+            "EDIT" => [
+                [
+                    "atributes" => [
+                        "ID_RESERVA" => "1",
+                        "ESTADO_RESERVA" => "RECURSO_USADO"
+                    ],
+                    "expected" => "AC132"
+                ],
+                [
+                    "atributes" => [
+                        "ID_RESERVA" => "10000",
+                        "ESTADO_RESERVA" => "RECURSO_USADO"
+                    ],
+                    "expected" => "AC032"
+                ]
+            ]
+        ];
+
+        $result["actionResults"] = $this->doActionsTest("ReservasModel", $actions);
+
+        // Atribute tests
 
         $checks = [
             "ID_RESERVA" => [
@@ -271,34 +571,11 @@ class Test extends BaseView{
             ]
         ];
 
-        return $this->doAtributesTest("ReservasModel", $checks);
-    }
-    
-    private function testResponsablesModel(){
-        
-        $checks = [
-            "LOGIN_RESPONSABLE" => [
-                ["value" => "resp1", "expected" => true],
-                ["value" => "pepito-grillo", "expected" => "AT401"],
-            ],
-            "DIRECCION_RESPONSABLE" => [
-                ["value" => "Avenida Eduardo Fáñez Rodríguez 3ºA 32004", "expected" => true],
-                ["value" => "Corta", "expected" => "AT411"],
-                ["value" => "Calle Dirección exageradamente larga e inexistente Nº 26 555555A", "expected" => "AT411"],
-                ["value" => "Dirección con % caracteres # extraños", "expected" => "AT412"],
-            ],
-            "TELEFONO_RESPONSABLE" => [
-                ["value" => "666555444", "expected" => true],
-                ["value" => "999888666", "expected" => true],
-                ["value" => "12345", "expected" => "AT421"],
-                ["value" => "123456789", "expected" => "AT421"],
-                ["value" => "Teléfono inválido", "expected" => "AT421"],
-            ],
-        ];
+        $result["atributeResults"] = $this->doAtributesTest("ReservasModel", $checks);
 
-        return $this->doAtributesTest("ResponsablesModel", $checks);
+        return $result;
     }
-    
+        
     private function testSubreservasModel(){
         $checks = [
             "ID_RESERVA" => [
@@ -339,10 +616,64 @@ class Test extends BaseView{
             ]
         ];
 
-        return $this->doAtributesTest("SubreservasModel", $checks);
+        $result["atributeResults"] = $this->doAtributesTest("SubreservasModel", $checks);
+
+        return $result;
     }
 
     private function testUsuariosModel(){
+
+        $result = [];
+
+        // Action tests
+
+        $actions =  [
+            "ADD" => [
+                [
+                    "atributes" => [
+                        "LOGIN_USUARIO" => "newuser",
+                        "PASSWD_USUARIO" => "0354d89c28ec399c00d3cb2d094cf093",
+                        "NOMBRE_USUARIO" => "New User",
+                        "EMAIL_USUARIO" => "newuser@mail.com",
+                        "TIPO_USUARIO" => "NORMAL",
+                        "ES_ACTIVO" => "SI"
+                    ],
+                    "expected" => "AC161"
+                ],
+                [
+                    "atributes" => [
+                        "LOGIN_USUARIO" => "",
+                        "PASSWD_USUARIO" => "",
+                        "NOMBRE_USUARIO" => "",
+                        "EMAIL_USUARIO" => "",
+                        "TIPO_USUARIO" => "",
+                        "ES_ACTIVO" => ""
+                    ],
+                    "expected" => "AC061"
+                ]
+            ],
+            "EDIT" => [
+                [
+                    "atributes" => [
+                        "LOGIN_USUARIO" => "newuser",
+                        "EMAIL_USUARIO" => "newemail@mail.com"
+                    ],
+                    "expected" => "AC162"
+                ],
+                [
+                    "atributes" => [
+                        "LOGIN_USUARIO" => "unknown_user",
+                        "EMAIL_USUARIO" => "newemail@mail.com",
+                    ],
+                    "expected" => "AC062"
+                ]
+            ]
+        ];
+
+        $result["actionResults"] = $this->doActionsTest("UsuariosModel", $actions);
+
+        // Atribute tests
+
         $checks = [
             "LOGIN_USUARIO" => [
                 ["value" => "cesarino", "expected" => true],
@@ -380,10 +711,103 @@ class Test extends BaseView{
             ]
         ];
 
-        return $this->doAtributesTest("UsuariosModel", $checks);
+        $result["atributeResults"] = $this->doAtributesTest("UsuariosModel", $checks);
+
+        return $result;
     }
 
+    private function testResponsablesModel(){
+        
+        $result = [];
+
+        // Action tests
+
+        $actions =  [
+            "ADD" => [
+                [
+                    "atributes" => [
+                        "LOGIN_RESPONSABLE" => "resp3",
+                        "DIRECCION_RESPONSABLE" => "Avenida Castelao 15 3A 36209 Vigo",
+                        "TELEFONO_RESPONSABLE" => "666555111"
+                    ],
+                    "expected" => "AC141"
+                ],
+                [
+                    "atributes" => [
+                        "LOGIN_RESPONSABLE" => "resp3",
+                        "DIRECCION_RESPONSABLE" => "Avenida Castelao 15 3A 36209 Vigo",
+                        "TELEFONO_RESPONSABLE" => "666555111"
+                    ],
+                    "expected" => "AC041"
+                ],
+                [
+                    "atributes" => [
+                        "LOGIN_RESPONSABLE" => "",
+                        "DIRECCION_RESPONSABLE" => "Avenida Castelao 15 3A 36209 Vigo",
+                        "TELEFONO_RESPONSABLE" => "666555111"
+                    ],
+                    "expected" => "AC041"
+                ],
+            ],
+            "EDIT" => [
+                [
+                    "atributes" => [
+                        "LOGIN_RESPONSABLE" => "resp3",
+                        "DIRECCION_RESPONSABLE" => "Avenida Otero Pedrayo 16 5A 32004 Ourense",
+                        "TELEFONO_RESPONSABLE" => "999888777"
+                    ],
+                    "expected" => "AC142"
+                ],
+                [
+                    "atributes" => [
+                        "LOGIN_RESPONSABLE" => "",
+                        "DIRECCION_RESPONSABLE" => "",
+                        "TELEFONO_RESPONSABLE" => ""
+                    ],
+                    "expected" => "AC042"
+                ]
+            ]
+        ];
+
+        $result["actionResults"] = $this->doActionsTest("ResponsablesModel", $actions);
+
+        // Atribute tests
+
+        $checks = [
+            "LOGIN_RESPONSABLE" => [
+                ["value" => "resp1", "expected" => true],
+                ["value" => "pepito-grillo", "expected" => "AT401"],
+            ],
+            "DIRECCION_RESPONSABLE" => [
+                ["value" => "Avenida Eduardo Fáñez Rodríguez 3ºA 32004", "expected" => true],
+                ["value" => "Corta", "expected" => "AT411"],
+                ["value" => "Calle Dirección exageradamente larga e inexistente Nº 26 555555A", "expected" => "AT411"],
+                ["value" => "Dirección con % caracteres # extraños", "expected" => "AT412"],
+            ],
+            "TELEFONO_RESPONSABLE" => [
+                ["value" => "666555444", "expected" => true],
+                ["value" => "999888666", "expected" => true],
+                ["value" => "12345", "expected" => "AT421"],
+                ["value" => "123456789", "expected" => "AT421"],
+                ["value" => "Teléfono inválido", "expected" => "AT421"],
+            ],
+        ];
+
+        $result["atributeResults"] = $this->doAtributesTest("ResponsablesModel", $checks);
+
+        return $result;
+    }
 }
+
+// Restore DB
+$mysql = new mysqli('localhost', 'pma', 'iu');
+$DBScript = file_get_contents("./53196285E.sql");
+if($mysql->multi_query($DBScript)) {
+    do{
+        $mysql->next_result();
+    }while($mysql->more_results());
+}
+$mysql->close();
 
 new Test();
 

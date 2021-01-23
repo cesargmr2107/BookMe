@@ -169,7 +169,7 @@ var translations_en = {
     "i18n-AC111" : "The calendar was correctly added",
     "i18n-AC011" : "The calendar was not correctly added",
     "i18n-AC112" : "The calendar was correctly edited",
-    "i18n-AC011" : "The calendar was not properly edited",
+    "i18n-AC012" : "The calendar was not properly edited",
     "i18n-AC113" : "The calendar was correctly deleted",
     "i18n-AC013" : "The calendar was not correctly deleted",
 
