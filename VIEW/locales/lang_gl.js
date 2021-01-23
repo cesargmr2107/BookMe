@@ -156,5 +156,120 @@ var translations_gl = {
     "i18n-calendarNotSelected" : "Selecciona un calendario",
     "i18n-respNotSelected" : "Selecciona un responsable",
     "i18n-resourceNotSelected" : "Selecciona un recurso",
-    "i18n-overlapping" : "O intervalo seleccionado solápase con un xa existente"
+    "i18n-overlapping" : "O intervalo seleccionado solápase con un xa existente",
+
+    /* BACK */
+
+    // General
+    "i18n-AC000" : "Non se puido acceder á base de datos",
+    "i18n-AC001" : "Erro nunha consulta á base de datos",
+    "i18n-AC002" : "Credenciais de usuario incorrectas",
+    "i18n-AC003" : "Token inválido",
+
+    // CalendariosModel
+    "i18n-AC111" : "O calendario engadiuse correctamente",
+    "i18n-AC011" : "O calendario non se engadiu correctamente",
+    "i18n-AC112" : "O calendario editouse correctamente",
+    "i18n-AC011" : "O calendario non se editou correctamente",
+    "i18n-AC113" : "O calendario eliminouse correctamente",
+    "i18n-AC013" : "O calendario non se eliminou correctamente",
+    
+    "i18n-AT101" : "O id do calendario (xestionado polo sistema) é un enteiro",
+    "i18n-AT111" : "O nome debe ter entre 6 e 40 caracteres",
+    "i18n-AT112" : "O nome só pode ter letras e espazos",
+    "i18n-AT121" : "A descrición admite un máximo de 100 caracteres",
+    "i18n-AT122" : "A descrición só pode ter letras e espazos",
+    "i18n-AT131" : "A data debe ter o formato dd/mm/yyyy",
+    "i18n-AT141" : "A data debe ter o formato dd/mm/yyyy",
+    "i18n-AT142" : "A data de fin debe ser igual ou superior á de inicio",
+    "i18n-AT151" : "A hora debe ter o formato hh:mm:ss",
+    "i18n-AT161" : "A hora debe ter o formato hh:mm:ss",
+
+    // RecursosModel
+    "i18n-AC121" : "O recurso engadiuse correctamente",
+    "i18n-AC021" : "O recurso non se engadiu correctamente",
+    "i18n-AC122" : "O recurso editouse correctamente",
+    "i18n-AC022" : "O recurso non se editou correctamente",
+    "i18n-AC123" : "O recurso eliminouse correctamente",
+    "i18n-AC023" : "O recurso non se eliminou correctamente",
+
+    "i18n-AT201" : "O id do recurso (xestionado polo sistema) é un enteiro",
+    "i18n-AT211" : "O nome debe ter entre 6 e 40 caracteres",
+    "i18n-AT212" : "O nome só pode ter letras e espazos",
+    "i18n-AT221" : "A descrición admite un máximo de 100 caracteres",
+    "i18n-AT222" : "A descrición só pode ter letras e espazos",
+    "i18n-AT231" : "A tarifa do recurso debe ser un número enteiro",
+    "i18n-AT232" : "A tarifa do recurso debe estar entre 0€ e 999€",
+    "i18n-AT241" : "O rango de tarifa do recurso é descoñecido",
+    "i18n-AT251" : "O ide do calendario é descoñecido",
+    "i18n-AT261" : "O usuario responsable é descoñecido",
+    "i18n-AT271" : "Opción de borrado lóxico descoñecida",
+    
+    // ReservasModel
+    "i18n-AC131" : "A reserva engadiuse correctamente",
+    "i18n-AC031" : "A reserva non se engadiu correctamente",
+    "i18n-AC132" : "A reserva editouse correctamente",
+    "i18n-AC032" : "A reserva non se editou correctamente",
+    "i18n-AC133" : "A reserva eliminouse correctamente",
+    "i18n-AC033" : "A reserva non se eliminou correctamente",
+    
+    "i18n-AT301" : "O id da reserva (xestionado polo sistema) é un enteiro",
+    "i18n-AT311" : "O usuario é descoñecido",
+    "i18n-AT321" : "O recurso é descoñecido",
+    "i18n-AT331" : "A data debe ter o formato dd/mm/yyyy",
+    "i18n-AT341" : "A data debe ter o formato dd/mm/yyyy",
+    "i18n-AT342" : "A data de resposta debe ser igual ou superior á de solicitude",
+    "i18n-AT351" : "O motivo de rexeitamento non pode superar os 100 caracteres",
+    "i18n-AT352" : "O motivo de rexeitamento só pode ter letras e espazos",
+    "i18n-AT361" : "O estado da reserva é descoñecido",
+    "i18n-AT371" : "O custo da reserva debe ser un valor decimal",
+    "i18n-AT372" : "O custo da reserva debe estar entre 0.0€ e 9999.9€",
+    
+    // ResponsablesModel
+    "i18n-AC141" : "O responsable engadiuse correctamente",
+    "i18n-AC041" : "O responsable non se engadiu correctamente",
+    "i18n-AC142" : "O responsable editouse correctamente",
+    "i18n-AC042" : "O responsable non se editou correctamente",
+    "i18n-AC143" : "O responsable eliminouse correctamente",
+    "i18n-AC043" : "O responsable non se eliminou correctamente",
+
+    "i18n-AT401" : "O usuario é descoñecido",
+    "i18n-AT411" : "A dirección debe ter entre 10 e 60 caracteres",
+    "i18n-AT412" : "A dirección só pode ter caracteres alfanuméricos, espazos  e '/&ºª'",
+    "i18n-AT421" : "Só se aceptan teléfonos españois",
+
+    // SubreservasModel
+    "i18n-AC151" : "A subreserva engadiuse correctamente",
+    "i18n-AC051" : "A subreserva non se engadiu correctamente",
+    "i18n-AC152" : "A subreserva editouse correctamente",
+    "i18n-AC052" : "A subreserva non se engadiu correctamente",
+    "i18n-AC153" : "A subreserva eliminouse correctamente",
+    "i18n-AC053" : "A subreserva non se eliminou correctamente",
+    
+    "i18n-AT501" : "O ide da reserva é descoñecido",
+    "i18n-AT502" : "Unha subreserva se solapa cunha existente",
+    "i18n-AT521" : "A data debe ter o formato dd/mm/yyyy",
+    "i18n-AT531" : "A data debe ter o formato dd/mm/yyyy",
+    "i18n-AT532" : "A data de fin debe ser igual ou superior á de inicio",
+    "i18n-AT541" : "A hora debe ter o formato hh:mm:ss",
+    "i18n-AT551" : "A hora debe ter o formato hh:mm:ss",
+    "i18n-AT561" : "O custo da subreserva debe ser un valor decimal",
+    "i18n-AT562" : "O custo da subreserva debe estar entre 0.0€ e 9999.9€",
+
+    // UsuariosModel
+    "i18n-AC161" : "O usuario engadiuse correctamente",
+    "i18n-AC061" : "O usuario non se engadiu correctamente",
+    "i18n-AC162" : "O usuario editouse correctamente",
+    "i18n-AC062" : "O usuario non se editou correctamente",
+    "i18n-AC163" : "O usuario eliminouse correctamente",
+    "i18n-AC063" : "O usuario non se eliminou correctamente",
+    
+    "i18n-AT601" : "O login debe ter entre 3 e 15 caracteres",
+    "i18n-AT602" : "O login só admite caracteres alfanuméricos e '_-'",
+    "i18n-AT611" : "O contrasinal débese gardar como un hash MD5",
+    "i18n-AT621" : "O nome debe ter entre 6 e 60 caracteres",
+    "i18n-AT622" : "O nome só pode ter letras, espazos e '-'",
+    "i18n-AT631" : "O correo electrónico ten un formato incorrecto",
+    "i18n-AT641" : "O tipo de usuario é descoñecido",
+    "i18n-AT651" : "Opción de actividade descoñecida"
 }
