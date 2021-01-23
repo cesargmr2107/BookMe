@@ -68,8 +68,7 @@ class ReservasModel extends BaseModel {
                 "checkDate" => array('FECHA_SOLICITUD_RESERVA', 'AT331')
             ),
             "FECHA_RESPUESTA_RESERVA" => array( 
-                "checkDate" => array('FECHA_RESPUESTA_RESERVA', 'AT341'),
-                "checkDateInterval" => array('FECHA_SOLICITUD_RESERVA', 'FECHA_RESPUESTA_RESERVA', 'AT342')
+                "checkDate" => array('FECHA_RESPUESTA_RESERVA', 'AT341')
             ),
             "MOTIVO_RECHAZO_RESERVA" => array(
                 "checkSize" => array('MOTIVO_RECHAZO_RESERVA', 0, 100, 'AT351'),
@@ -198,18 +197,20 @@ class ReservasModel extends BaseModel {
 
         $result["subreservas"] = $subreservasSearch->SEARCH();
 
-        // Resource info
-        include_once './MODEL/RecursosModel.php';
-        $resourcesSearch = new RecursosModel();
-        
-        $resourcesSearch->setAtributes(
-            array("ID_RECURSO" => $result["ID_RECURSO"])
-        );
+        if(array_key_exists("ID_RECURSO", $result)){
+            // Resource info
+            include_once './MODEL/RecursosModel.php';
+            $resourcesSearch = new RecursosModel();
+            
+            $resourcesSearch->setAtributes(
+                array("ID_RECURSO" => $result["ID_RECURSO"])
+            );
 
-        $result["resource"] = $resourcesSearch->SEARCH()[0];
+            $result["resource"] = $resourcesSearch->SEARCH()[0];
+        }
 
         // User info if necessary
-        if($_SESSION["LOGIN_USUARIO"] !== $result["LOGIN_USUARIO"]){
+        if(array_key_exists("LOGIN_USUARIO", $result) && $_SESSION["LOGIN_USUARIO"] !== $result["LOGIN_USUARIO"]){
             include_once './MODEL/UsuariosModel.php';
             $usersSearch = new UsuariosModel();
             $usersSearch->setAtributes(
@@ -305,7 +306,8 @@ class ReservasModel extends BaseModel {
 
         foreach ($subreservas as $subreserva) {
 
-            $fechaRespuesta = $this->atributes["FECHA_RESPUESTA_RESERVA"];
+            $idRecurso = $this->atributes["ID_RECURSO"];
+            $fechaRespuesta = $this->parseDate($this->atributes["FECHA_RESPUESTA_RESERVA"]);
             $fechaInicio = $subreserva["FECHA_INICIO_SUBRESERVA"];
             $fechaFin = $subreserva["FECHA_FIN_SUBRESERVA"];
             $horaInicio = $subreserva["HORA_INICIO_SUBRESERVA"];
@@ -315,7 +317,7 @@ class ReservasModel extends BaseModel {
             $query = "UPDATE RESERVAS R, SUBRESERVAS S " .
                  "SET R.ID_RESERVA = S.ID_RESERVA, R.ESTADO_RESERVA = 'RECHAZADA', " .
                  "R.MOTIVO_RECHAZO_RESERVA = '$defaultRejectMsg', R.FECHA_RESPUESTA_RESERVA = '$fechaRespuesta'" .
-                 "WHERE R.ID_RESERVA = S.ID_RESERVA AND " .
+                 "WHERE R.ID_RESERVA = S.ID_RESERVA AND R.ID_RECURSO = $idRecurso AND " .
                  "R.ESTADO_RESERVA = 'PENDIENTE' AND (" .
                  "( S.FECHA_INICIO_SUBRESERVA >= '" . $fechaInicio . "' AND S.FECHA_INICIO_SUBRESERVA <= '" . $fechaFin . "' ) OR " .
                  "( S.FECHA_FIN_SUBRESERVA >= '" . $fechaInicio . "' AND S.FECHA_FIN_SUBRESERVA <= '" . $fechaFin . "' ) ) AND ( " .
@@ -323,7 +325,7 @@ class ReservasModel extends BaseModel {
                  "( S.HORA_FIN_SUBRESERVA >= '" . $horaInicio . "' AND S.HORA_FIN_SUBRESERVA <= '" . $horaFin . "' ) )";
 
             // DEBUG: Check query    
-            echo '<p>' . $query . '</p>';
+            // echo '<p>' . $query . '</p>';
 
             $this->executeQuery($query);
         }

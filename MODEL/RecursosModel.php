@@ -45,6 +45,7 @@ class RecursosModel extends BaseModel {
 
         $this->primary_key = "ID_RECURSO";
 
+        $this->deleteAtribute = "BORRADO_LOGICO";
         $this->defaultValues = array( "BORRADO_LOGICO" => "NO" );
         
         // Subscribe atributes to validations
@@ -80,12 +81,12 @@ class RecursosModel extends BaseModel {
 
         $this->checksForDelete = array(
             "ID_RECURSO" => array(
-                "checkNoReservas" => array('222', 'No se pueden borrar recursos con reservas activas asociadas')
+                "checkNoReservas" => array('AT202')
             )
         );
     }
 
-    public function checkNoReservas($errorCode, $errorMsg){
+    public function checkNoReservas($errorCode){
         include_once './MODEL/ReservasModel.php';
         $booking = new ReservasModel();
         $query = "SELECT * FROM RESERVAS WHERE ID_RECURSO = " . $this->atributes["ID_RECURSO"] .
@@ -94,7 +95,7 @@ class RecursosModel extends BaseModel {
         if($hasNoAssoc){
             return true;
         }else{
-            return array("code" => $errorCode, "msg" => $errorMsg);
+            return $errorCode;
         }
     }
 

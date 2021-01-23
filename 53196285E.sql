@@ -167,11 +167,11 @@ INSERT INTO `RESPONSABLES_RECURSO` (`LOGIN_RESPONSABLE`, `DIRECCION_RESPONSABLE`
 ('resp2', 'Avda Buenos Aires 156 2ºC, 32004 Ourense', '666333444');
 
 -- Para tabla 'CALENDARIOS_DE_USO'
-INSERT INTO `CALENDARIOS_DE_USO` (`NOMBRE_CALENDARIO`, `DESCRIPCION_CALENDARIO`, `FECHA_INICIO_CALENDARIO`, `FECHA_FIN_CALENDARIO`, `HORA_INICIO_CALENDARIO`, `HORA_FIN_CALENDARIO`) VALUES
-('Calendario de invierno 20/21', 'Este es el calendario de invierno, que va desde el 21 de diciembre hasta el 20 de marzo. Horario: 9:00 a 21:00.', '2020-12-21', '2021-03-20', '09:00:00', '21:00:00'),
-('Calendario de primavera 20/21', 'Este es el calendario de primavera, que va desde el 21 de marzo hasta el 20 de junio. Horario: 10:00 a 21:00.', '2021-03-21', '2021-06-20', '10:00:00', '21:00:00'),
-('Calendario de verano 20/21', 'Este es el calendario de verano, que va desde el 21 de junio hasta el 20 de septiembre. Horario: 9:00 a 21:00.', '2021-06-21', '2021-09-20', '10:00:00', '14:00:00'),
-('Calendario de otoño 20/21', 'Este es el calendario de otoño, que va desde el 21 de septiembre hasta el 20 de diciembre. Horario: 9:00 a 22:00.', '2021-09-21', '2021-12-21', '09:00:00', '22:00:00');
+INSERT INTO `CALENDARIOS_DE_USO` (`NOMBRE_CALENDARIO`, `DESCRIPCION_CALENDARIO`, `FECHA_INICIO_CALENDARIO`, `FECHA_FIN_CALENDARIO`, `HORA_INICIO_CALENDARIO`, `HORA_FIN_CALENDARIO`, `BORRADO_LOGICO`) VALUES
+('Calendario de invierno 20/21', 'Este es el calendario de invierno, que va desde el 21 de diciembre hasta el 20 de marzo. Horario: 9:00 a 21:00.', '2020-12-21', '2021-03-20', '09:00:00', '21:00:00', 'NO'),
+('Calendario de primavera 20/21', 'Este es el calendario de primavera, que va desde el 21 de marzo hasta el 20 de junio. Horario: 10:00 a 21:00.', '2021-03-21', '2021-06-20', '10:00:00', '21:00:00', 'NO'),
+('Calendario de verano 20/21', 'Este es el calendario de verano, que va desde el 21 de junio hasta el 20 de septiembre. Horario: 9:00 a 21:00.', '2021-06-21', '2021-09-20', '10:00:00', '14:00:00', 'NO'),
+('Calendario de otoño 20/21', 'Este es el calendario de otoño, que va desde el 21 de septiembre hasta el 20 de diciembre. Horario: 9:00 a 22:00.', '2021-09-21', '2021-12-21', '09:00:00', '22:00:00', 'NO');
 
 -- Para tabla 'RECURSOS'
 INSERT INTO `RECURSOS` (`NOMBRE_RECURSO`, `DESCRIPCION_RECURSO`, `TARIFA_RECURSO`, `RANGO_TARIFA_RECURSO`, `ID_CALENDARIO`, `LOGIN_RESPONSABLE`, `BORRADO_LOGICO`) VALUES

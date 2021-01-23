@@ -12,7 +12,8 @@ class CalendariosModel extends BaseModel {
         "FECHA_INICIO_CALENDARIO",
         "FECHA_FIN_CALENDARIO",
         "HORA_INICIO_CALENDARIO", 
-        "HORA_FIN_CALENDARIO"
+        "HORA_FIN_CALENDARIO",
+        "BORRADO_LOGICO",
     );
 
     // Define which atributes will be selected in search
@@ -42,6 +43,9 @@ class CalendariosModel extends BaseModel {
         // Define primary key
         $this->primary_key = "ID_CALENDARIO";
 
+        $this->defaultValues = array( "BORRADO_LOGICO" => "NO" );
+
+        $this->deleteAtribute = "BORRADO_LOGICO";
 
         // Subscribe atributes to validations                          
         $this->checks = array (
@@ -68,12 +72,15 @@ class CalendariosModel extends BaseModel {
             ),
             "HORA_FIN_CALENDARIO" => array( 
                 "checkTime" => array('HORA_FIN_CALENDARIO', 'AT161')
+            ),
+            "BORRADO_LOGICO" => array(
+                "checkYesOrNo" => array('BORRADO_LOGICO', 'AT171')
             )
         );
 
         $this->checksForDelete = array(
             "ID_CALENDARIO" => array(
-                "checkNoAssoc" => array('ID_CALENDARIO', "RecursosModel", '222', 'No se puede borrar un calendario con recursos asociados')
+                "checkNoAssoc" => array('ID_CALENDARIO', "RecursosModel", 'AT102')
             )
         );
         

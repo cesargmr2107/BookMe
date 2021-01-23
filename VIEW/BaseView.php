@@ -495,9 +495,9 @@ abstract class BaseView{
                         </div>
     
                         <!-- Modal body -->
-                        <div class="modal-body">
-                            <span class="<?= $this->icons["CANCEL"] ?>" data-dismiss="modal"></span>
+                        <div class="modal-body options">
                             <?= $this->includeButton("ACCEPT", "deleteForm$id", "post", $controller, "delete", array($atribute => $id)) ?>
+                            <span class="<?= $this->icons["CANCEL"] ?>" data-dismiss="modal"></span>
                         </div>
     
                     </div>

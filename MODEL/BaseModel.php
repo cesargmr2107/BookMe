@@ -10,6 +10,9 @@ class BaseModel {
     protected $nullAtributes;
     protected $defaultValues;
 
+    protected $deleteAtribute;
+    protected $deleteOptions = ["BORRADO_LOGICO" => "SI", "ES_ACTIVO" => "NO"];
+
     private $connection;
 
     public $actionCodes;
@@ -174,8 +177,8 @@ class BaseModel {
     }
 
     public function checkNoAssoc($foreignKey, $otherModel, $errorCode){
-        $noAssoc = is_array($this->checkIsForeignKey($foreignKey,$foreignKey,$otherModel,"",""));
-        if ($noAssoc){
+        $checkFK = $this->checkIsForeignKey($foreignKey,$foreignKey,$otherModel,"");
+        if ($checkFK !== true){
             return true;
         }else{
             return $errorCode;
@@ -492,8 +495,19 @@ class BaseModel {
             $validations = $this->checkAtributesForDelete();
             if(!$this->checkValidations($validations)){
                 $response = $this->actionCodes[self::DELETE_FAIL];
-                    $response["atributeErrors"] = $validations;
-                    return $response;
+                $response["atributeErrors"] = $validations;
+                return $response;
+            }
+        }
+
+        // If logic delete, only edit logic delete atribute
+        if(isset($this->deleteAtribute)){
+            $this->atributes[$this->deleteAtribute] = $this->deleteOptions[$this->deleteAtribute];
+            $resultCode = $this->EDIT()["code"];
+            if($resultCode === $this->getCode("edit","success")){
+                return $this->actionCodes[self::DELETE_SUCCESS];
+            }else{
+                return $this->actionCodes[self::DELETE_FAIL];	   			
             }
         }
 
@@ -535,6 +549,14 @@ class BaseModel {
                 }
             }        
             $selectQuery = substr($selectQuery, 0, -4);
+            
+            // Add filter for logically deleted if necessary
+            if(isset($this->deleteAtribute)){
+                $atr = $this->deleteAtribute;
+                $opt = $this->deleteOptions[$atr];
+                $selectQuery = $selectQuery . " and ( $atr != '$opt' ) "; 
+            }
+
             $selectQuery =  $selectQuery . ")";
         }
        

@@ -104,7 +104,7 @@ var translations_en = {
     "i18n-bookingIntervals" : "Booking intervals",
     "i18n-bookingRejection" : "Rejection reason",
     "i18n-bookingTotalCost" : "Total cost (€): ",
-    "i18n-bookingAllConfirmed" : "All bookings are confirmed",
+    "i18n-bookingAllConfirmed" : "There are no bookings which need to be confirmed",
     "i18n-requestedOn" : "Requested on ",
     "i18n-positiveConfirm" : "Would you like to <strong>confirm the use</strong> of the booking made by ",
     "i18n-negativeConfirm" : "Would you like to <strong>confirm the unuse</strong> of the booking made by ",
@@ -113,10 +113,11 @@ var translations_en = {
     "i18n-rejectConfirm" : "Would you like to <strong>reject</strong> the booking made by ",
     "i18n-of" : " of ",
     "i18n-by" : " by ",
-    "i18n-for" : " for the ",
+    "i18n-the" : " the ",
     "i18n-login_usuario" : "User",
     "i18n-id_recurso" : "Resource",
     "i18n-noPending" : "There aren't any resources which have pending bookings",
+    "i18n-allPendingManaged" : "All pending bookings have been managed",
     "i18n-pendingBookingsRes" : " pending bookings",
     "i18n-pendingBookingsByResource" : "Resource pending bookings",
     "i18n-pendingList" : "Booking list",
@@ -174,6 +175,7 @@ var translations_en = {
     "i18n-AC013" : "The calendar was not correctly deleted",
 
     "i18n-AT101" : "Calendar id (managed by the system) is an integer",
+    "i18n-AT102" : "A calendar with associated resources cannot be deleted",
     "i18n-AT111" : "The name must have between 6 and 40 characters",
     "i18n-AT112" : "The name can only have letters and spaces",
     "i18n-AT121" : "Description supports a maximum of 100 characters",
@@ -183,6 +185,7 @@ var translations_en = {
     "i18n-AT142" : "The end date must be equal to or greater than the start date",
     "i18n-AT151" : "The time must be in the format hh:mm:ss",
     "i18n-AT161" : "The time must be in the format hh:mm:ss",
+    "i18n-AT171" : "Unknown logical deletion option",
 
     // RecursosModel
     "i18n-AC121" : "The resource was correctly added",
@@ -193,6 +196,7 @@ var translations_en = {
     "i18n-AC023" : "The resource was not removed correctly",
 
     "i18n-AT201" : "The resource id (managed by the system) is an integer",
+    "i18n-AT202" : "Resources with associated accepted or pendign bookings cannot be deleted",
     "i18n-AT211" : "The name must have between 6 and 40 characters",
     "i18n-AT212" : "The name can only have letters and spaces",
     "i18n-AT221" : "Description supports a maximum of 100 characters",
@@ -217,7 +221,6 @@ var translations_en = {
     "i18n-AT321" : "The resource is unknown",
     "i18n-AT331" : "The date must have the format dd/mm/yyyy",
     "i18n-AT341" : "The date must have the format dd/mm/yyyy",
-    "i18n-AT342" : "The date of reply must be equal to or greater than the date of application",
     "i18n-AT351" : "The reason for refusal cannot exceed 100 characters",
     "i18n-AT352" : "The reason for rejection may only have letters and spaces",
     "i18n-AT361" : "The status of the reservation is unknown",
@@ -233,6 +236,7 @@ var translations_en = {
     "i18n-AC043" : "The controller was not removed correctly",
 
     "i18n-AT401" : "User is unknown",
+    "i18n-AT402" : "Managers with associated resources cannot be deleted",
     "i18n-AT411" : "The address must be between 10 and 60 characters long",
     "i18n-AT412" : "The address can only have alphanumeric characters, spaces and '/&ºª'",
     "i18n-AT421" : "Only Spanish telephones are accepted",

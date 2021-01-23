@@ -47,7 +47,7 @@ class ResponsablesModel extends BaseModel {
 
         $this->checksForDelete = array(
             "LOGIN_RESPONSABLE" => array(
-                "checkNoAssoc" => array('LOGIN_RESPONSABLE', "RecursosModel", '222', 'No se puede borrar un responsable con recursos asociados')
+                "checkNoAssoc" => array('LOGIN_RESPONSABLE', "RecursosModel", 'AT402')
             )
         );
     }
@@ -62,6 +62,17 @@ class ResponsablesModel extends BaseModel {
         $result["resources"] = $resourcesSearch->SEARCH($query);
 
         return $result;
+    }
+
+    public function DELETE(){
+        $validations = $this->checkAtributesForDelete();
+        if(!$this->checkValidations($validations)){
+            $response = $this->actionCodes[self::DELETE_FAIL];
+            $response["atributeErrors"] = $validations;
+            return $response;
+        }else{
+            return $this->actionCodes[self::DELETE_SUCCESS];
+        }
     }
 }
 

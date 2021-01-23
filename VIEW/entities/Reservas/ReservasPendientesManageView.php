@@ -14,7 +14,7 @@ class ReservasPendientesManageView extends BaseView{
         
         $this->includeTitle("i18n-pendingBookingsByResource", "h1");
         if(empty($this->data["pending"])){
-            $this->includeTitle("Ya se han procesado todas las solicitudes pendientes", "h4");
+            $this->includeTitle("i18n-allPendingManaged", "h4");
         }else{
             ?>
                 <div id='pending-container'>
@@ -81,21 +81,23 @@ class ReservasPendientesManageView extends BaseView{
                         <div class="modal-header">
                         <span class="i18n-acceptConfirm"></span>
                                 <strong><?=$user?></strong>
-                                <span class="i18n-for"></span>
+                                <span class="i18n-the"></span>
                                 <strong><?=$date?></strong>?
                         </div>
 
                         <!-- Modal body -->
                         <div class="modal-body">
                             <p class="i18n-automaticReject"></p>
-                            <span class="<?= $this->icons["CANCEL"] ?>" data-dismiss="modal"></span>
-                            <?php
-                                $data = array(
-                                    "ID_RESERVA" => $bookingId,
-                                    "ID_RECURSO" => $resourceId,
-                                );
-                                $this->includeButton("ACCEPT", "acceptModal$bookingId", "post", "ReservasController", "acceptPending", $data)
-                            ?>
+                            <div class="options">
+                                <?php
+                                    $data = array(
+                                        "ID_RESERVA" => $bookingId,
+                                        "ID_RECURSO" => $resourceId,
+                                    );
+                                    $this->includeButton("ACCEPT", "acceptModal$bookingId", "post", "ReservasController", "acceptPending", $data)
+                                ?>
+                                <span class="<?= $this->icons["CANCEL"] ?>" data-dismiss="modal"></span>
+                            </div>
                         </div>
 
                     </div>
@@ -119,22 +121,23 @@ class ReservasPendientesManageView extends BaseView{
                             <h4 class="modal-title">
                                 <span class="i18n-rejectConfirm"></span>
                                 <strong><?=$user?></strong>
-                                <span class="i18n-for"></span>
+                                <span class="i18n-the"></span>
                                 <strong><?=$date?></strong>?
                             </h4>
                         </div>
 
                         <!-- Modal body -->
                         <div class="modal-body">
-                            <form id='rejectForm<?=$bookingId?>' name='rejectForm<?=$bookingId?>' action='index.php' method='post'>
+                            <form class='reject-form' name='rejectForm<?=$bookingId?>' action='index.php' method='post'>
                                 <?php
                                     $this->includeHiddenField("ID_RESERVA", $bookingId);
                                     $this->includeHiddenField("ID_RECURSO", $resourceId);
-                                    $this->includeTextField("i18n-bookingRejection", "MOTIVO_RECHAZO_RESERVA");
+                                    $this->includeTextArea("i18n-bookingRejection", "MOTIVO_RECHAZO_RESERVA");
                                 ?>
-                                <p id="errorMsg"></p>
-                                <span class="<?= $this->icons["CANCEL"] ?>" data-dismiss="modal"></span>
-                                <span class="<?=$this->icons["ACCEPT"]?>" onclick="sendForm(document.rejectForm<?=$bookingId?>, 'ReservasController', 'rejectPending', true)"></span>
+                                <div class="options">
+                                    <span class="<?=$this->icons["ACCEPT"]?>" onclick="sendForm(document.rejectForm<?=$bookingId?>, 'ReservasController', 'rejectPending', true)"></span>
+                                    <span class="<?= $this->icons["CANCEL"] ?>" data-dismiss="modal"></span>
+                                </div>
                             </form>
                         </div>
 

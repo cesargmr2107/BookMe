@@ -47,6 +47,7 @@ class UsuariosModel extends BaseModel {
 
         $this->defaultValues = array( "TIPO_USUARIO" => "NORMAL" , "ES_ACTIVO" => "SI");
 
+        $this->deleteAtribute = "ES_ACTIVO";
 
         // Subscribe atributes to validations
         $this->checks = array (

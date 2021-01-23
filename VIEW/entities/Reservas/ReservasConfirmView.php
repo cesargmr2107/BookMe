@@ -51,7 +51,7 @@ class ReservasConfirmView extends BaseView{
                             <strong><?=$user?></strong>
                             <span class="i18n-of"></span>
                             <strong><?=$name?></strong>
-                            <span class="i18n-for"></span>
+                            <span class="i18n-the"></span>
                             <strong><?=$date?></strong>?
                         </h4>
                     </div>
@@ -88,18 +88,18 @@ class ReservasConfirmView extends BaseView{
                             <strong><?=$user?></strong>
                             <span class="i18n-of"></span>
                             <strong><?=$name?></strong>
-                            <span class="i18n-for"></span>
+                            <span class="i18n-the"></span>
                             <strong><?=$date?></strong>?
                         </h4>
                     </div>
 
                     <!-- Modal body -->
-                    <div class="modal-body">
-                        <span class="<?= $this->icons["CANCEL"] ?>" data-dismiss="modal"></span>
+                    <div class="modal-body options">
                         <?php
                             $data = array("ID_RESERVA" => $id);
                             $this->includeButton("ACCEPT", "notUsedModal$id","post", "ReservasController", "confirmNoUse", $data)
                         ?>
+                        <span class="<?= $this->icons["CANCEL"] ?>" data-dismiss="modal"></span>
                     </div>
 
                 </div>

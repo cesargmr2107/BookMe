@@ -104,7 +104,7 @@ var translations_es = {
     "i18n-bookingIntervals" : "Intervalos de la reserva",
     "i18n-bookingRejection" : "Motivo de rechazo",
     "i18n-bookingTotalCost" : "Coste total (€): ",
-    "i18n-bookingAllConfirmed" : "Todas las solicitudes están confirmadas",
+    "i18n-bookingAllConfirmed" : "No quedan solicitudes por confirmar",
     "i18n-requestedOn" : "Solicitud del ",
     "i18n-positiveConfirm" : "¿Quieres <strong>confirmar el uso</strong> de la reserva hecha por ",
     "i18n-negativeConfirm" : "¿Quieres <strong>confirmar el no uso</strong> de la reserva hecha por ",
@@ -113,10 +113,11 @@ var translations_es = {
     "i18n-rejectConfirm" : "¿Quieres <strong>rechazar</strong> la reserva hecha por ",
     "i18n-of" : " de ",
     "i18n-by" : " de ",
-    "i18n-for" : " para el ",
+    "i18n-the" : " el ",
     "i18n-login_usuario" : "Usuario",
     "i18n-id_recurso" : "Recurso",
     "i18n-noPending" : "No hay recursos con solicitudes pendientes",
+    "i18n-allPendingManaged" : "Ya se han procesado todas las solicitudes pendientes",
     "i18n-pendingBookingsRes" : " solicitudes pendientes",
     "i18n-pendingBookingsByResource" : "Solicitudes pendientes de recurso",
     "i18n-pendingList" : "Lista de solicitudes",
@@ -175,6 +176,7 @@ var translations_es = {
     "i18n-AC013" : "El calendario no se eliminó correctamente",
     
     "i18n-AT101" : "El id del calendario (gestionado por el sistema) es un entero",
+    "i18n-AT102" : "No se puede borrar un calendario con recursos asociados",
     "i18n-AT111" : "El nombre debe tener entre 6 y 40 caracteres",
     "i18n-AT112" : "El nombre sólo puede tener letras y espacios",
     "i18n-AT121" : "La descripción admite un máximo de 100 caracteres",
@@ -184,6 +186,7 @@ var translations_es = {
     "i18n-AT142" : "La fecha de fin debe ser igual o superior a la de inicio",
     "i18n-AT151" : "La hora debe tener el formato hh:mm:ss",
     "i18n-AT161" : "La hora debe tener el formato hh:mm:ss",
+    "i18n-AT171" : "Opción de borrado lógico desconocida",
 
     // RecursosModel
     "i18n-AC121" : "El recurso se añadió correctamente",
@@ -194,6 +197,7 @@ var translations_es = {
     "i18n-AC023" : "El recurso no se eliminó correctamente",
 
     "i18n-AT201" : "El id del recurso (gestionado por el sistema) es un entero",
+    "i18n-AT202" : "No se pueden borrar recursos con reservas asociadas que estén aceptadas o pendientes",
     "i18n-AT211" : "El nombre debe tener entre 6 y 40 caracteres",
     "i18n-AT212" : "El nombre sólo puede tener letras y espacios",
     "i18n-AT221" : "La descripción admite un máximo de 100 caracteres",
@@ -218,7 +222,6 @@ var translations_es = {
     "i18n-AT321" : "El recurso es desconocido",
     "i18n-AT331" : "La fecha debe tener el formato dd/mm/yyyy",
     "i18n-AT341" : "La fecha debe tener el formato dd/mm/yyyy",
-    "i18n-AT342" : "La fecha de respuesta debe ser igual o superior a la de solicitud",
     "i18n-AT351" : "El motivo de rechazo no puede superar los 100 caracteres",
     "i18n-AT352" : "El motivo de rechazo sólo puede tener letras y espacios",
     "i18n-AT361" : "El estado de la reserva es desconocido",
@@ -234,6 +237,7 @@ var translations_es = {
     "i18n-AC043" : "El responsable no se eliminó correctamente",
 
     "i18n-AT401" : "El usuario es desconocido",
+    "i18n-AT402" : "No se puede borrar un responsable con recursos asociados",
     "i18n-AT411" : "La dirección debe tener entre 10 y 60 caracteres",
     "i18n-AT412" : "La dirección sólo puede tener caracteres alfanuméricos, espacios  y '/&ºª'",
     "i18n-AT421" : "Sólo se aceptan teléfonos españoles",

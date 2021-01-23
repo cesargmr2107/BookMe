@@ -55,5 +55,25 @@ class UsuariosController extends BaseController{
         $this->redirectToMsg($data);
     }
 
+    function delete(){
+        $user = new UsuariosModel();
+        $user->patchEntity();
+        if($user->SHOW()["normal_info"]["TIPO_USUARIO"] === "RESPONSABLE"){
+            include_once './MODEL/ResponsablesModel.php';
+            $responsable = new ResponsablesModel();
+            $responsable->patchEntity();
+            $responsable->setAtributes(array("LOGIN_RESPONSABLE" => $user->get("LOGIN_USUARIO")));
+            $data["result"] = $responsable->DELETE();
+            if($data["result"]["code"] === $responsable->getCode("delete","success")){
+                $user->DELETE();
+            }
+        }else{
+            $data["result"] = $user->DELETE();
+        }
+        $data["controller"] = $this->controller;
+        $data["action"] = "search";
+        $this->redirectToMsg($data);
+	}
+
 }
 ?>

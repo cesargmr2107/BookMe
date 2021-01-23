@@ -309,6 +309,12 @@ class Test extends BaseView{
                 ["value" => "11:30:00", "expected" => "AT161"],
                 ["value" => "14:37", "expected" => "AT161"],
                 ["value" => "Esto no es una hora", "expected" => "AT161"],
+            ],
+            "BORRADO_LOGICO" => [
+                ["value" => "SI", "expected" => true],
+                ["value" => "NO", "expected" => true],
+                ["value" => "TAL_VEZ", "expected" => "AT171"],
+                ["value" => "", "expected" => "AT171"],
             ]
         ];
 
@@ -451,7 +457,7 @@ class Test extends BaseView{
                     "atributes" => [
                         "LOGIN_USUARIO" => "emmolina15",
                         "ID_RECURSO" => "1",
-                        "FECHA_SOLICITUD_RESERVA" => "25/01/2021",
+                        "FECHA_SOLICITUD_RESERVA" => "20/01/2021",
                         "infoSubreservas" => [ 
                             "subreservas" => [
                                 "subreserva-0" => [
@@ -475,7 +481,7 @@ class Test extends BaseView{
                     "atributes" => [
                         "LOGIN_USUARIO" => "emmolina15",
                         "ID_RECURSO" => "1",
-                        "FECHA_SOLICITUD_RESERVA" => "25/01/2021",
+                        "FECHA_SOLICITUD_RESERVA" => "20/01/2021",
                         "COSTE_RESERVA" => "5",
                         "infoSubreservas" => [ 
                             "subreservas" => [
