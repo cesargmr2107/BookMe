@@ -80,13 +80,11 @@ class SubreservasModel extends BaseModel {
         $query = "SELECT * FROM RESERVAS R, SUBRESERVAS S " .
                  "WHERE R.ID_RESERVA = S.ID_RESERVA AND R.ID_RECURSO = $id_recurso " . 
                  "AND ( R.ESTADO_RESERVA = 'ACEPTADA' OR R.ID_RESERVA = " . $this->atributes["ID_RESERVA"]. ") AND (" .
-                 "( S.FECHA_INICIO_SUBRESERVA >= '" . $fechaInicio . "' AND S.FECHA_INICIO_SUBRESERVA <= '" . $fechaFin . "' ) OR " .
-                 "( S.FECHA_FIN_SUBRESERVA >= '" . $fechaInicio . "' AND S.FECHA_FIN_SUBRESERVA <='" . $fechaFin . "' ) ) AND ( " .
-                 "( S.HORA_INICIO_SUBRESERVA >= '" . $horaInicio . "' AND S.HORA_INICIO_SUBRESERVA <= '" . $horaFin . "' ) OR " .
-                 "( S.HORA_FIN_SUBRESERVA >= '" . $horaInicio . "' AND S.HORA_FIN_SUBRESERVA <= '" . $horaFin . "' ) )";
+                 "( S.FECHA_INICIO_SUBRESERVA <= '" . $fechaFin . "' AND S.FECHA_FIN_SUBRESERVA >= '" . $fechaInicio . "' ) AND " .
+                 "( S.HORA_INICIO_SUBRESERVA < '" . $horaFin . "' AND S.HORA_FIN_SUBRESERVA > '" . $horaInicio . "' ) )";
 
         // DEBUG: Check query and result
-        // echo "<p>" . $query . "</p>";
+        echo "<p>" . $query . "</p>";
         // echo '<pre style="color:red">' . var_export($this->SEARCH($query), true) . '</pre>';
 
 

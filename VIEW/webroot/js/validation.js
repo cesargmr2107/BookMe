@@ -409,10 +409,8 @@ function checkOverlappings(startDate, endDate, startTime, endTime){
         var event = resource_events[i];
         var eventStartTime = new Date (`1960-01-01T${event.startTime}`)
         var eventEndTime = new Date (`1960-01-01T${event.endTime}`)
-        if ( ((event.startRecur >= startDate && event.startRecur <= endDate) ||
-             (event.endRecur >= startDate && event.endRecur <= endDate) ) &&
-             ((eventStartTime >= startTime && eventStartTime <= endTime) ||
-             (eventEndTime >= startTime && eventEndTime <= endTime) )){
+        if ( ( startDate <= event.endRecur  && endDate >= event.startRecur ) &&
+             ( startTime < eventEndTime && endTime > eventStartTime) ){
                 addMsgsToModal(["i18n-overlapping"]);
                 openModal();
                 return false;
