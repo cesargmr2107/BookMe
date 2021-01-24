@@ -350,11 +350,9 @@ class ReservasModel extends BaseModel {
                  "SET R.ID_RESERVA = S.ID_RESERVA, R.ESTADO_RESERVA = 'RECHAZADA', " .
                  "R.MOTIVO_RECHAZO_RESERVA = '$defaultRejectMsg', R.FECHA_RESPUESTA_RESERVA = '$fechaRespuesta'" .
                  "WHERE R.ID_RESERVA = S.ID_RESERVA AND R.ID_RECURSO = $idRecurso AND " .
-                 "R.ESTADO_RESERVA = 'PENDIENTE' AND (" .
-                 "( S.FECHA_INICIO_SUBRESERVA >= '" . $fechaInicio . "' AND S.FECHA_INICIO_SUBRESERVA <= '" . $fechaFin . "' ) OR " .
-                 "( S.FECHA_FIN_SUBRESERVA >= '" . $fechaInicio . "' AND S.FECHA_FIN_SUBRESERVA <= '" . $fechaFin . "' ) ) AND ( " .
-                 "( S.HORA_INICIO_SUBRESERVA >= '" . $horaInicio . "' AND S.HORA_INICIO_SUBRESERVA <= '" . $horaFin . "' ) OR " .
-                 "( S.HORA_FIN_SUBRESERVA >= '" . $horaInicio . "' AND S.HORA_FIN_SUBRESERVA <= '" . $horaFin . "' ) )";
+                 "R.ESTADO_RESERVA = 'PENDIENTE' AND " .
+                 "( S.FECHA_INICIO_SUBRESERVA <= '" . $fechaFin . "' AND S.FECHA_FIN_SUBRESERVA >= '" . $fechaInicio . "' ) AND " .
+                 "( S.HORA_INICIO_SUBRESERVA < '" . $horaFin . "' AND S.HORA_FIN_SUBRESERVA > '" . $horaInicio . "' ) )";
 
             // DEBUG: Check query    
             // echo '<p>' . $query . '</p>';
