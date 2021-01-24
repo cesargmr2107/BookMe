@@ -428,34 +428,40 @@ abstract class BaseView{
     }
     
     protected function includeCrudTable($optionsData){
-        echo "<table class='table crud-table'>";
-        // Headers
-        echo "<tr>";
-        foreach($this->data["atributeNames"] as $atribute){
-            echo "<th class='i18n-$atribute'></th>";
-        }
-            echo "<th class='i18n-options'></th>";
-            echo "</tr>";
 
-            // Rows
-            foreach($this->data["result"]as $row){
-                echo "<tr>";
-
-                    // Atribute columns
-                    foreach($row as $atribute => $value){
-                        $optionsData["row"] = $row;
-                        if (strpos($atribute, 'FECHA') !== false){ // Parse date to format
-                            $d = DateTime::createFromFormat('Y-m-d', $value);
-                            $value = date_format($d,'d/m/Y');
-                        }
-                        echo "<td>" . $value ."</td>";
-                    }
-
-                    $this->includeOptions($optionsData);
-
-                echo "</tr>";
+        if(empty($this->data["result"])){
+            echo "<h3 class='i18n-noResults'></h3>";
+        } else {
+            echo "<table class='table crud-table'>";
+            // Headers
+            echo "<tr>";
+            foreach($this->data["atributeNames"] as $atribute){
+                echo "<th class='i18n-$atribute'></th>";
             }
-        echo '</table>';
+                echo "<th class='i18n-options'></th>";
+                echo "</tr>";
+
+                // Rows
+                foreach($this->data["result"]as $row){
+                    echo "<tr>";
+
+                        // Atribute columns
+                        foreach($row as $atribute => $value){
+                            $optionsData["row"] = $row;
+                            if (strpos($atribute, 'FECHA') !== false){ // Parse date to format
+                                $d = DateTime::createFromFormat('Y-m-d', $value);
+                                $value = date_format($d,'d/m/Y');
+                            }
+                            echo "<td>" . $value ."</td>";
+                        }
+
+                        $this->includeOptions($optionsData);
+
+                    echo "</tr>";
+                }
+            echo '</table>';
+        }
+
     }
 
     protected function includeOptions($optionsData){
@@ -575,6 +581,43 @@ abstract class BaseView{
                 <source src="<?=$srcVideo?>" type="video/mp4"/>        
             </video>
         <?php
-    } 
+    }
+
+    protected function includeSearchBar($atribute, $placeholderCode, $controller){
+        ?>
+            <form name="searchForm" method="post" action="index.php">
+                <input id="search-input" class="<?=$placeholderCode?>" type="text" name="<?=$atribute?>" />
+                <span class="<?=$this->icons["SEARCH"]?>" onclick="sendForm(document.searchForm, '<?=$controller?>', 'search', true)"></span>
+            </form>
+        <?php
+    }
+
+    protected function includeFilters($default){
+        ?>
+            <div id="filters">
+                <?php
+                    foreach($this->data["atributeNames"] as $index => $code){
+                        $atr = $this->data["atributesForSearch"][$index];
+                        echo "<div>";
+                        if($default === $code){
+                            echo "<input type='radio' name='filter' value='$atr' checked/>";
+                        } else {
+                            echo "<input type='radio' name='filter' value='$atr'/>";
+                        }
+                        echo "<label class='i18n-$code' for='$code'></label>";
+                        echo "</div>";
+                    }
+                ?>
+                <script>
+                    $('input[type=radio][name=filter]').change(function() {
+                        var searchInput = document.getElementById("search-input");
+                        searchInput.name = this.value;
+                        searchInput.className = `i18n-searchBy${this.value}`;
+                        searchInput.placeholder = translations[`i18n-searchBy${this.value}`];
+                    });
+                </script>
+            </div>
+        <?php
+    }
 }
 ?>

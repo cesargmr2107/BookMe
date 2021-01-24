@@ -13,6 +13,8 @@ var translations_gl = {
     "i18n-hora_inicio" : "Hora de inicio" ,
     "i18n-hora_fin" : "Hora de fin",
     "i18n-deleteConfirmation" : "Queres borrar ",
+    "i18n-searchByName" : "Búsqueda por nome",
+    "i18n-searchByLogin" : "Búsqueda por login",
 
     /* LOGIN AND REGISTER VIEWS */
     "i18n-welcome" : "Benvido a ",
@@ -47,6 +49,28 @@ var translations_gl = {
     "i18n-navbar-users" : "Usuarios",
     "i18n-usersSearch" : "Listado de usuarios",
     "i18n-newUser" : "Novo usuario",
+
+    /* SEARCH BAR */
+    "i18n-noResults" : "Non se atoparon resultados...",
+    "i18n-searchByNOMBRE_USUARIO" : "Búsqueda por nome",
+    "i18n-searchByLOGIN_USUARIO" : "Búsqueda por login",
+    "i18n-searchByEMAIL_USUARIO" : "Búsqueda por correo electrónico",
+    "i18n-searchByTIPO_USUARIO" : "Búsqueda por tipo",
+
+    "i18n-searchByID_CALENDARIO" : "Búsqueda por id",
+    "i18n-searchByNOMBRE_CALENDARIO" : "Búsqueda por nome",
+    "i18n-searchByFECHA_INICIO_CALENDARIO" : "Búsqueda por data de inicio (dd/mm/yyyy)",
+    "i18n-searchByFECHA_FIN_CALENDARIO" : "Búsqueda por data de fin (dd/mm/yyyy)",
+
+    "i18n-searchByID_RECURSO" : "Búsqueda por id de recurso",
+    "i18n-searchByNOMBRE_RECURSO" : "Búsqueda por nome",
+    "i18n-searchByTARIFA_RECURSO" : "Búsqueda por tarifa",
+    "i18n-searchByRANGO_TARIFA_RECURSO" : "Búsqueda por rango de tarifa",
+    "i18n-searchByLOGIN_RESPONSABLE" : "Búsqueda por responsable",
+
+    "i18n-searchByID_RESERVA" : "Búsqueda por id de reserva",
+    "i18n-searchByFECHA_SOLICITUD_RESERVA" : "Búsqueda por data de solicitude (dd/mm/yyyy)",
+    "i18n-searchByESTADO_RESERVA" : "Búsqueda por estado",
 
     /* CALENDAR VIEWS */
     "i18n-assocResources" : "Recursos asociados:",

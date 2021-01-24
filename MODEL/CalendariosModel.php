@@ -17,7 +17,7 @@ class CalendariosModel extends BaseModel {
     );
 
     // Define which atributes will be selected in search
-    protected static $atributesForSearch = array (  "ID_CALENDARIO",
+    public static $atributesForSearch = array (  "ID_CALENDARIO",
                                                     "NOMBRE_CALENDARIO",
                                                     "FECHA_INICIO_CALENDARIO",
                                                     "FECHA_FIN_CALENDARIO");

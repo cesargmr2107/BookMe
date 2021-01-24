@@ -51,22 +51,16 @@ function translate(translations){
         // Get by class
         var elements = document.getElementsByClassName(key);
 
-        // Get inputs: placeholders need to be translated
-        var inputs = document.getElementsByTagName('input');
-
+        // Iterate over elements and set translations (placeholders or others)
         for (var elem in elements) {
-            // Se recorre el nuevo array y se colocan en el DOM los textos
-            elements[elem].innerHTML = translations[key];
-        }
-  
-        // Iterate over inputs and if necessary translate placeholder
-        for(var i = 0; i < inputs.length; i++){
-        
-            if(inputs[i].placeholder == key){
-                inputs[i].placeholder = translations[key];
+            if(elements[elem].tagName === "INPUT") {
+                elements[elem].placeholder = translations[key];
+            } else {
+                elements[elem].innerHTML = translations[key];
             }
         }
     }
+    
 }
 
 function setCookie(name,value,days) {

@@ -17,7 +17,7 @@ class ReservasModel extends BaseModel {
     );
 
     // Define which atributes will be selected in search
-    protected static $atributesForSearch = array (  "ID_RESERVA",
+    public static $atributesForSearch = array (  "ID_RESERVA",
                                                     "LOGIN_USUARIO",
                                                     "ID_RECURSO",
                                                     "FECHA_SOLICITUD_RESERVA",

@@ -42,6 +42,7 @@ class BaseController {
 		$entity = new $this->model();
 		$entity->patchEntity();
 		$data["atributeNames"] = $this->model::getFormattedAtributeNames();
+		$data["atributesForSearch"] = $this->model::$atributesForSearch;
 		$data["result"] = $entity->SEARCH();
         new $this->searchView($data);
 	}

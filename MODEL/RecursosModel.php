@@ -17,7 +17,7 @@ class RecursosModel extends BaseModel {
     );
 
     // Define which atributes will be selected in search
-    protected static $atributesForSearch = array (  "ID_RECURSO",
+    public static $atributesForSearch = array (  "ID_RECURSO",
                                                     "NOMBRE_RECURSO",
                                                     "TARIFA_RECURSO",
                                                     "RANGO_TARIFA_RECURSO",

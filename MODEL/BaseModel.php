@@ -3,7 +3,7 @@
 class BaseModel {
 
     public static $atributeNames;
-    protected static $atributesForSearch = array("*");
+    public static $atributesForSearch = array("*");
     protected $tableName;
     protected $primary_key;
     protected $atributes;
@@ -545,6 +545,9 @@ class BaseModel {
             foreach($this->atributes as $key => $value){
                 $canBeNull = in_array($key, $this->nullAtributes);
                 if( !$canBeNull || $this->atributes[$key] != "" ){
+                    if (strpos($key, 'FECHA') !== false && strpos($this->atributes[$key],'/')){ 
+                        $value = $this->parseDate($value);
+                    }
                     $selectQuery = $selectQuery . "( " . $key . " LIKE '%" . $value . "%' ) and ";
                 }
             }        

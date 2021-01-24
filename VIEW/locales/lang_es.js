@@ -48,6 +48,28 @@ var translations_es = {
     "i18n-usersSearch" : "Lista de usuarios",
     "i18n-newUser" : "Nuevo usuario",
 
+    /* SEARCH BAR */
+    "i18n-noResults" : "No se han encontrado resultados...",
+    "i18n-searchByNOMBRE_USUARIO" : "Búsqueda por nombre",
+    "i18n-searchByLOGIN_USUARIO" : "Búsqueda por login",
+    "i18n-searchByEMAIL_USUARIO" : "Búsqueda por correo electrónico",
+    "i18n-searchByTIPO_USUARIO" : "Búsqueda por tipo",
+
+    "i18n-searchByID_CALENDARIO" : "Búsqueda por id de calendario",
+    "i18n-searchByNOMBRE_CALENDARIO" : "Búsqueda por nombre",
+    "i18n-searchByFECHA_INICIO_CALENDARIO" : "Búsqueda por fecha de inicio (dd/mm/yyyy)",
+    "i18n-searchByFECHA_FIN_CALENDARIO" : "Búsqueda por fecha de fin (dd/mm/yyyy)",
+
+    "i18n-searchByID_RECURSO" : "Búsqueda por id de recurso",
+    "i18n-searchByNOMBRE_RECURSO" : "Búsqueda por nombre",
+    "i18n-searchByTARIFA_RECURSO" : "Búsqueda por tarifa",
+    "i18n-searchByRANGO_TARIFA_RECURSO" : "Búsqueda por rango de tarifa",
+    "i18n-searchByLOGIN_RESPONSABLE" : "Búsqueda por responsable",
+
+    "i18n-searchByID_RESERVA" : "Búsqueda por id de reserva",
+    "i18n-searchByFECHA_SOLICITUD_RESERVA" : "Búsqueda por fecha de solicitud (dd/mm/yyyy)",
+    "i18n-searchByESTADO_RESERVA" : "Búsqueda por estado",
+
     /* CALENDAR VIEWS */
     "i18n-assocResources" : "Recursos asociados:",
     "i18n-nonAssocResources" : "Todavía no hay ningún recurso asociado a este calendario.",

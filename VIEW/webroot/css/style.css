@@ -80,6 +80,76 @@ a {
         align-self: center;
     }
 
+/* Search bar */
+#search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+    margin-bottom: 10px;
+}
+
+#search-bar form[name="searchForm"] {
+    border-radius: 30px;
+    box-sizing: border-box;
+    background-color: var(--grey-1);
+    margin: 0px 15px;
+    padding-top: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 300px;
+    transition: width 0.2s ease-in-out;
+    border-bottom: 3px solid transparent;
+
+}
+
+#search-bar form[name="searchForm"]:focus-within,
+#search-bar form[name="searchForm"]:hover {
+    width: 350px;
+    transition: width 0.2s ease-in-out;
+    border-bottom: 3px solid var(--important-color-0);
+}
+
+#search-bar input {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+#search-bar input:focus {
+    border: none;
+    outline: none;
+}
+
+#filters {
+    align-self: center;
+    display: flex;
+    margin-bottom: 40px;
+    margin-right: 25px;
+}
+
+#filters input[type="radio"]{
+    width: 10px;
+    height: 10px;
+    background: none;
+    box-shadow: none;
+    cursor: pointer;
+    border: none;
+    margin-right: 5px;
+}
+
+#filters label {
+    display: inline;
+}
+
+#filters div {
+    margin: 0px 5px;
+}
+
+
+
+
 /* Validation modal and other modals */
 
 .modal-dialog {

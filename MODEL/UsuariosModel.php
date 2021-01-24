@@ -15,7 +15,7 @@ class UsuariosModel extends BaseModel {
     );
 
     // Define which atributes will be selected in search
-    protected static $atributesForSearch = array (  "LOGIN_USUARIO",
+    public static $atributesForSearch = array (  "LOGIN_USUARIO",
                                                     "NOMBRE_USUARIO",
                                                     "EMAIL_USUARIO",
                                                     "TIPO_USUARIO");

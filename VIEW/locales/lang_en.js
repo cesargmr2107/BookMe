@@ -48,6 +48,28 @@ var translations_en = {
     "i18n-usersSearch" : "Users list",
     "i18n-newUser" : "New user",
 
+    /* SEARCH BAR */
+    "i18n-noResults" : "No results were found...",
+    "i18n-searchByNOMBRE_USUARIO" : "Search by name",
+    "i18n-searchByLOGIN_USUARIO" : "Search by login",
+    "i18n-searchByEMAIL_USUARIO" : "Search by email",
+    "i18n-searchByTIPO_USUARIO" : "Search by type",
+
+    "i18n-searchByID_CALENDARIO" : "Search by calendar id",
+    "i18n-searchByNOMBRE_CALENDARIO" : "Search by name",
+    "i18n-searchByFECHA_INICIO_CALENDARIO" : "Search by start date (dd/mm/yyyy)",
+    "i18n-searchByFECHA_FIN_CALENDARIO" : "Search by end date (dd/mm/yyyy)",
+
+    "i18n-searchByID_RECURSO" : "Search by resource id",
+    "i18n-searchByNOMBRE_RECURSO" : "Search by name",
+    "i18n-searchByTARIFA_RECURSO" : "Search by price",
+    "i18n-searchByRANGO_TARIFA_RECURSO" : "Search by price rate",
+    "i18n-searchByLOGIN_RESPONSABLE" : "Search by manager",
+
+    "i18n-searchByID_RESERVA" : "Search by booking id",
+    "i18n-searchByFECHA_SOLICITUD_RESERVA" : "Search by request date (dd/mm/yyyy)",
+    "i18n-searchByESTADO_RESERVA" : "Search by status",
+
     /* CALENDAR VIEWS */
     "i18n-assocResources" : "Associated resources:",
     "i18n-nonAssocResources" : "There aren't any associated resources with this calendar.",
