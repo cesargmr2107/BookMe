@@ -84,7 +84,7 @@ class SubreservasModel extends BaseModel {
                  "( S.HORA_INICIO_SUBRESERVA < '" . $horaFin . "' AND S.HORA_FIN_SUBRESERVA > '" . $horaInicio . "' ) )";
 
         // DEBUG: Check query and result
-        echo "<p>" . $query . "</p>";
+        // echo "<p>" . $query . "</p>";
         // echo '<pre style="color:red">' . var_export($this->SEARCH($query), true) . '</pre>';
 
 

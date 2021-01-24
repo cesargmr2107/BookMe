@@ -396,7 +396,8 @@ abstract class BaseView{
                                             echo "maxDate: new Date('$max'),";
                                         } else {
                                             echo "minDate: moment({h:$min}),";
-                                            echo "maxDate: moment({h:$max+1}),";
+                                            $max++;
+                                            echo "maxDate: moment({h:$max}),";
                                         }
                                     }
                                 ?>
