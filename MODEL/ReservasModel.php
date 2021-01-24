@@ -352,7 +352,7 @@ class ReservasModel extends BaseModel {
                  "WHERE R.ID_RESERVA = S.ID_RESERVA AND R.ID_RECURSO = $idRecurso AND " .
                  "R.ESTADO_RESERVA = 'PENDIENTE' AND " .
                  "( S.FECHA_INICIO_SUBRESERVA <= '" . $fechaFin . "' AND S.FECHA_FIN_SUBRESERVA >= '" . $fechaInicio . "' ) AND " .
-                 "( S.HORA_INICIO_SUBRESERVA < '" . $horaFin . "' AND S.HORA_FIN_SUBRESERVA > '" . $horaInicio . "' ) )";
+                 "( S.HORA_INICIO_SUBRESERVA <= '" . $horaFin . "' AND S.HORA_FIN_SUBRESERVA >= '" . $horaInicio . "' )";
 
             // DEBUG: Check query    
             // echo '<p>' . $query . '</p>';
