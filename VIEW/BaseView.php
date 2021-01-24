@@ -19,7 +19,8 @@ abstract class BaseView{
         "CHART" => "far fa-chart-bar",
         "SEARCH" => "fas fa-search",
         "BOOKING" => "far fa-calendar-plus",
-        "PROFILE" => "fas fa-user-alt"
+        "PROFILE" => "fas fa-user-alt",
+        "CANCEL-BOOKING" => "far fa-calendar-times"
     );
 
 
@@ -522,6 +523,35 @@ abstract class BaseView{
                             <span class="<?= $this->icons["CANCEL"] ?>" data-dismiss="modal"></span>
                         </div>
     
+                    </div>
+                </div>
+            </div>
+        <?php
+    }
+
+    protected function includeCancelModal(){
+        ?>
+            <!-- Cancel button -->
+            <span class="<?= $this->icons["CANCEL-BOOKING"]?>" data-toggle="modal" href="#cancelModal"></span>
+
+            <!-- Cancel modal -->
+            <div class="modal" id="cancelModal">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                    
+                        <!-- Modal Header  -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">
+                                <span class="i18n-cancelConfirmation"></span>
+                            </h4>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body options">
+                            <?= $this->includeButton("ACCEPT", "cancelForm", "post", "ReservasController", "cancel", array("ID_RESERVA" => $this->data["ID_RESERVA"])) ?>
+                            <span class="<?= $this->icons["CANCEL"] ?>" data-dismiss="modal"></span>
+                        </div>
+
                     </div>
                 </div>
             </div>

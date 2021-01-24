@@ -127,7 +127,16 @@ class ReservasController extends BaseController{
         $data = $reservas->SEARCH_CONFIRM();
 
         new ReservasConfirmView($data);
+    }
 
+    function cancel(){
+        $reserva = new ReservasModel();
+        $reserva->setAtributes(array(
+            "ID_RESERVA" => $_POST["ID_RESERVA"],
+            "ESTADO_RESERVA" => "CANCELADA",
+        ));
+        $reserva->EDIT();
+        parent::show();
     }
 
 }

@@ -27,6 +27,48 @@ class UsuariosShowView extends BaseView{
                                         "ID_RECURSO" );
             }
         echo "</div>";
+        // Links
+        $this->includeTitle("i18n-options", "h3");
+        echo "<div class='show-options'>";
+            $controller = "UsuariosController";
+            $idAtribute = "LOGIN_USUARIO";
+            $id = $this->data["normal_info"]["LOGIN_USUARIO"];
+            $this->includeButton("EDIT", "editBt", "post", $controller, "editForm", array ($idAtribute => $id));
+            if(isAdminUser() && $_SESSION["LOGIN_USUARIO"]!=$this->data["normal_info"]["LOGIN_USUARIO"]){
+                $this->includeDeleteButtonAndModal($idAtribute, $id, $this->data["normal_info"]["NOMBRE_USUARIO"], $controller);
+            } else if(!isAdminUser() && !isRespUser()){
+                $this->includeDeleteOwnProfileModal();
+            }
+        echo "</div>";
+    }
+
+    public function includeDeleteOwnProfileModal(){
+        ?>
+            <!-- Delete button -->
+            <span class="<?= $this->icons["DELETE"]?>" data-toggle="modal" href="#deleteModal"></span>
+
+            <!-- Delete modal -->
+            <div class="modal" id="deleteModal">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                    
+                        <!-- Modal Header  -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">
+                                <span class="i18n-deleteOwnConfirmation"></span>
+                            </h4>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body options">
+                            <?= $this->includeButton("ACCEPT", "deleteForm", "post", "UsuariosController", "delete", array("LOGIN_USUARIO" => $_SESSION["LOGIN_USUARIO"])) ?>
+                            <span class="<?= $this->icons["CANCEL"] ?>" data-dismiss="modal"></span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        <?php
     }
 }
 ?>

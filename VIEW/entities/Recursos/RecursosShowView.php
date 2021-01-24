@@ -33,9 +33,19 @@ class RecursosShowView extends BaseView{
                 $this->includeShowInfo("i18n-descripcion", $this->data["DESCRIPCION_RECURSO"]);
                 echo "</div>";
                 // Links
-                echo "<div>";
-                    $this->includeTitle("i18n-options", "h3");
-                    $this->includeButton("CHART", "goToStats", "post", "RecursosController", "stats", array("ID_RECURSO" => $this->data["ID_RECURSO"]));
+                $this->includeTitle("i18n-options", "h3");
+                echo "<div class='show-options'>";
+                    $controller = "RecursosController";
+                    $idAtribute = "ID_RECURSO";
+                    $id = $this->data["ID_RECURSO"];
+                    $this->includeButton("CHART", "goToStats", "post", "RecursosController", "stats", array ($idAtribute => $id));
+                    $this->includeButton("BOOKING", "goToBook", "post", "ReservasController", "addForm", array ($idAtribute => $id) );
+                    if(isAdminUser()){
+                        $this->includeButton("EDIT", "editBt", "post", $controller, "editForm", array ($idAtribute => $id));
+                        $this->includeDeleteButtonAndModal($idAtribute, $id, $this->data["NOMBRE_RECURSO"], $controller);
+                    }else if(isRespUser() && $_SESSION["LOGIN_USUARIO"] === $this->data["LOGIN_RESPONSABLE"]){
+                        $this->includeButton("EDIT", "editBt", "post", $controller, "editForm", array ($idAtribute => $id));
+                    }
                 echo "</div>";
             echo "</div>";
 

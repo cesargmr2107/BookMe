@@ -18,10 +18,11 @@ class ReservasModel extends BaseModel {
 
     // Define which atributes will be selected in search
     public static $atributesForSearch = array (  "ID_RESERVA",
-                                                    "LOGIN_USUARIO",
-                                                    "ID_RECURSO",
-                                                    "FECHA_SOLICITUD_RESERVA",
-                                                    "ESTADO_RESERVA");
+                                                "LOGIN_USUARIO",
+                                                "ID_RECURSO",
+                                                "FECHA_SOLICITUD_RESERVA",
+                                                "ESTADO_RESERVA",
+                                                "COSTE_RESERVA");
 
     // Set booking status
     public static $bookingStatus = array("PENDIENTE", "ACEPTADA", "RECHAZADA", "CANCELADA", "RECURSO_USADO", "RECURSO_NO_USADO");

@@ -24,12 +24,13 @@ class ReservasSearchView extends BaseView{
         // Get data
         $idAtribute = $optionsData["idAtribute"];
         $id = $optionsData["row"][$idAtribute];
-        $nameAtribute = $optionsData["nameAtribute"];
-        $name = $optionsData["row"][$nameAtribute];
         $controller = $optionsData["controller"];
 
         echo "<td id='row-options'>";
             $this->includeButton("SHOW", "goToShow$id", "post", $controller, "show", array ($idAtribute => $id) );
+            if($optionsData["row"]["ESTADO_RESERVA"] === "PENDIENTE" || $optionsData["row"]["ESTADO_RESERVA"] === "ACEPTADA"){
+                $this->includeButton("CANCEL-BOOKING", "goToCancel$id", "post", $controller, "cancel", array ($idAtribute => $id) );
+            }
         echo '</td>';
     }
 }

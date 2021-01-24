@@ -87,7 +87,7 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 40px;
+    margin-top: 20px;
     margin-bottom: 10px;
 }
 
@@ -99,7 +99,7 @@ a {
     padding-top: 3px;
     padding-left: 10px;
     padding-right: 10px;
-    width: 300px;
+    width: 400px;
     transition: width 0.2s ease-in-out;
     border-bottom: 3px solid transparent;
 
@@ -107,7 +107,7 @@ a {
 
 #search-bar form[name="searchForm"]:focus-within,
 #search-bar form[name="searchForm"]:hover {
-    width: 350px;
+    width: 450px;
     transition: width 0.2s ease-in-out;
     border-bottom: 3px solid var(--important-color-0);
 }
@@ -150,9 +150,6 @@ a {
     margin: 0px 5px;
 }
 
-
-
-
 /* Validation modal and other modals */
 
 .modal-dialog {
@@ -184,6 +181,9 @@ modal-header {
     justify-content: center;
 }
 
+.modal h4 {
+    text-align: center;
+}
 
 /* Forms */
 
@@ -685,6 +685,11 @@ h2.fc-toolbar-title {
     margin: 20px;
 }
 
+h3.i18n-options + div.show-options {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 /* RESOURCE INFO */
 
@@ -697,6 +702,10 @@ h2.fc-toolbar-title {
 #resource-info-container #resource-info {
     padding: 0px 20px;
     margin: 0px 30px;
+}
+
+#resource-info-container .show-options {
+    display: flex;
 }
 
 /* RESOURCE STATS */

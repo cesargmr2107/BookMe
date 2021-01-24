@@ -24,6 +24,7 @@ class ReservasShowView extends BaseView{
 
             echo '<div>';
                 $this->includeTitle("i18n-bookingRequest", "h4");
+                $this->includeShowInfo("i18n-id", $this->data["ID_RESERVA"]);
                 $this->includeShowDate("i18n-fecha_solicitud", $this->data["FECHA_SOLICITUD_RESERVA"]);
                 $this->includeShowInfo("i18n-estado", $this->data["ESTADO_RESERVA"]);
                 if ($this->data["FECHA_RESPUESTA_RESERVA"] != '') {
@@ -70,7 +71,16 @@ class ReservasShowView extends BaseView{
         echo "</div>";
 
         echo "<h4><strong class='i18n-bookingTotalCost'></strong>" . $this->data["COSTE_RESERVA"] . "€</h4>";
+        
+        if($this->data["ESTADO_RESERVA"] == "ACEPTADA" || $this->data["ESTADO_RESERVA"] == "PENDIENTE"){
+            $this->includeTitle("i18n-options", "h3");
+            echo "<div class='show-options'>";
+                $this->includeCancelModal();
+            echo "</div>";
+        }
 
     }
+
 }
+
 ?>

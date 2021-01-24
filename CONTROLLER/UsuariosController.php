@@ -70,9 +70,14 @@ class UsuariosController extends BaseController{
         }else{
             $data["result"] = $user->DELETE();
         }
-        $data["controller"] = $this->controller;
-        $data["action"] = "search";
-        $this->redirectToMsg($data);
+        if($_SESSION["LOGIN_USUARIO"] === $user->get("LOGIN_USUARIO")){
+            session_destroy();
+            header("Location: index.php");
+        }else{
+            $data["controller"] = $this->controller;
+            $data["action"] = "search";
+            $this->redirectToMsg($data);
+        }
 	}
 
 }

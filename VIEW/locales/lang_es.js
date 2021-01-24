@@ -12,7 +12,9 @@ var translations_es = {
     "i18n-fecha_fin" : "Fecha de fin",
     "i18n-hora_inicio" : "Hora de inicio" ,
     "i18n-hora_fin" : "Hora de fin",
+    "i18n-cancelConfirmation" : "¿Quieres cancelar esta reserva?",
     "i18n-deleteConfirmation" : "¿Quieres borrar ",
+    "i18n-deleteOwnConfirmation" : "¿Quieres desactivar tu cuenta?",
     "i18n-horas" : "Horas: ",
     "i18n-fechas" : "Fechas: ",
 
@@ -72,6 +74,7 @@ var translations_es = {
     "i18n-searchByID_RESERVA" : "Búsqueda por id de reserva",
     "i18n-searchByFECHA_SOLICITUD_RESERVA" : "Búsqueda por fecha de solicitud (dd/mm/yyyy)",
     "i18n-searchByESTADO_RESERVA" : "Búsqueda por estado",
+    "i18n-searchByCOSTE_RESERVA" : "Búsqueda por coste",
 
     /* CALENDAR VIEWS */
     "i18n-assocResources" : "Recursos asociados:",
@@ -147,6 +150,7 @@ var translations_es = {
     "i18n-pendingBookingsByResource" : "Solicitudes pendientes de recurso",
     "i18n-pendingList" : "Lista de solicitudes",
     "i18n-cost" : "Coste (€): ",
+    "i18n-coste" : "Coste (€)",
     "i18n-selectedResource" : "Recurso seleccionado",
     "i18n-addInterval" : "Añade un intervalo a tu reserva",
     "i18n-selectedIntervals" : "Intervalos seleccionados",

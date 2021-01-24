@@ -24,6 +24,18 @@ class CalendariosShowView extends BaseView{
                 $this->includeShowList($this->data["resources"], "i18n-assocResources", "i18n-nonAssocResources", "NOMBRE_RECURSO", "ID_RECURSO" );
             echo "</div>";
         echo "</div>";
+
+        if(isAdminUser()){
+            // Links
+            $this->includeTitle("i18n-options", "h3");
+            echo "<div class='show-options'>";
+                $controller = "CalendariosController";
+                $idAtribute = "ID_CALENDARIO";
+                $id = $this->data["ID_CALENDARIO"];
+                $this->includeButton("EDIT", "editBt", "post", $controller, "editForm", array ($idAtribute => $id));
+                $this->includeDeleteButtonAndModal($idAtribute, $id, $this->data["NOMBRE_CALENDARIO"], $controller);
+            echo "</div>";
+        }
     }
 }
 ?>

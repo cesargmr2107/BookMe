@@ -29,6 +29,7 @@ class RecursosSearchView extends BaseView{
 
         echo "<td id='row-options'>";
             $this->includeButton("SHOW", "goToShow$id", "post", $controller, "show", array ($idAtribute => $id) );
+            $this->includeButton("CHART", "goToStats$id", "post", $controller, "stats", array ($idAtribute => $id));
             if(isAdminUser()){
                 $this->includeButton("EDIT", "editBt$id", "post", $controller, "editForm", array ($idAtribute => $id));
                 $this->includeDeleteButtonAndModal($idAtribute, $id, $name, $controller);

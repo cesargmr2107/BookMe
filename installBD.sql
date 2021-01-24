@@ -1,0 +1,171 @@
+-- phpMyAdmin SQL Dump
+-- version 5.0.2
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: localhost
+-- Tiempo de generación: 10-11-2020 a las 11:55:36
+-- Versión del servidor: 10.3.23-MariaDB-0+deb10u1
+-- Versión de PHP: 7.3.19-1~deb10u1
+SET
+  SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+
+START TRANSACTION;
+
+SET
+  time_zone = "+00:00";
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */
+;
+
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */
+;
+
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */
+;
+
+/*!40101 SET NAMES utf8mb4 */
+;
+
+--
+-- Base de datos: `53196285E`
+--
+DROP DATABASE IF EXISTS `53196285E`;
+
+CREATE DATABASE IF NOT EXISTS `53196285E` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
+
+USE `53196285E`;
+
+-- --------------------------------------------------------
+--
+-- Estructura de tabla para la tabla `USUARIOS`
+--
+CREATE TABLE `USUARIOS` (
+  `LOGIN_USUARIO`   varchar(15) COLLATE utf8_spanish_ci NOT NULL,
+  `PASSWD_USUARIO`  varchar(128) COLLATE utf8_spanish_ci NOT NULL,
+  `NOMBRE_USUARIO`  varchar(60) COLLATE utf8_spanish_ci NOT NULL,
+  `EMAIL_USUARIO`   varchar(40) COLLATE utf8_spanish_ci NOT NULL,
+  `TIPO_USUARIO`    enum('NORMAL', 'ADMINISTRADOR', 'RESPONSABLE') COLLATE utf8_spanish_ci NOT NULL DEFAULT 'NORMAL',
+  `ES_ACTIVO`       enum('SI', 'NO') COLLATE utf8_spanish_ci NOT NULL DEFAULT 'SI' COMMENT 'ATRIBUTO PARA INDICAR SI EL USUARIO PUEDE LOGUEARSE O NO (BANEADO)',
+
+  PRIMARY KEY(`LOGIN_USUARIO`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_spanish_ci;
+
+
+-- --------------------------------------------------------
+--
+-- Estructura de tabla para la tabla `RESPONSABLES_RECURSO`
+--
+CREATE TABLE `RESPONSABLES_RECURSO` (
+  `LOGIN_RESPONSABLE`     varchar(15) COLLATE utf8_spanish_ci NOT NULL COMMENT 'LOGIN EN TABLA USUARIO DEL RESPONSABLE',
+  `DIRECCION_RESPONSABLE` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `TELEFONO_RESPONSABLE`  int(9) NOT NULL,
+
+  PRIMARY KEY(`LOGIN_RESPONSABLE`),
+  FOREIGN KEY(`LOGIN_RESPONSABLE`) REFERENCES `USUARIOS` (`LOGIN_USUARIO`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_spanish_ci;
+
+-- --------------------------------------------------------
+--
+-- Estructura de tabla para la tabla `CALENDARIOS_DE_USO`
+--
+CREATE TABLE `CALENDARIOS_DE_USO` (
+  `ID_CALENDARIO`           int           NOT NULL AUTO_INCREMENT,
+  `NOMBRE_CALENDARIO`       varchar(40)   COLLATE utf8_spanish_ci NOT NULL,
+  `DESCRIPCION_CALENDARIO`  varchar(200)  COLLATE utf8_spanish_ci NOT NULL,
+  `FECHA_INICIO_CALENDARIO` date          NOT NULL,
+  `FECHA_FIN_CALENDARIO`    date          NOT NULL,
+  `HORA_INICIO_CALENDARIO`  time          NOT NULL COMMENT 'HORA DE COMIENZO DE CUALQUIER DIA DEL CALENDARIO',
+  `HORA_FIN_CALENDARIO`     time          NOT NULL COMMENT 'HORA DE FIN DE CUALQUIER DIA DEL CALENDARIO',
+  `BORRADO_LOGICO`         enum('SI', 'NO') COLLATE utf8_spanish_ci NOT NULL COMMENT 'BORRADO LOGICO DE LA TUPLA',
+
+  PRIMARY KEY(`ID_CALENDARIO`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_spanish_ci;
+
+-- --------------------------------------------------------
+--
+-- Estructura de tabla para la tabla `RECURSOS`
+--
+CREATE TABLE `RECURSOS` (
+  `ID_RECURSO`             int           NOT NULL AUTO_INCREMENT,
+  `NOMBRE_RECURSO`         varchar(40)   COLLATE utf8_spanish_ci NOT NULL,
+  `DESCRIPCION_RECURSO`    varchar(200)  COLLATE utf8_spanish_ci NOT NULL,
+  `TARIFA_RECURSO`         int(3)        NOT NULL COMMENT 'VALOR MONETARIO DE TARIFICACIÓN POR RANGO',
+  `RANGO_TARIFA_RECURSO`   enum('HORA', 'DIA', 'SEMANA', 'MES') COLLATE utf8_spanish_ci NOT NULL COMMENT 'RANGO DE APLICACIÓN DE LA TARIFA',
+  `ID_CALENDARIO`          int          NOT NULL COMMENT 'CALENDARIO ASOCIADO AL RECURSO',
+  `LOGIN_RESPONSABLE`      varchar(15)   COLLATE utf8_spanish_ci NOT NULL,
+  `BORRADO_LOGICO`         enum('SI', 'NO') COLLATE utf8_spanish_ci NOT NULL COMMENT 'BORRADO LOGICO DE LA TUPLA EN EL CASO DE QUE EXISTA INFORMACIÓN EN LA BD DE ESTE RECURSO',
+
+  PRIMARY KEY(`ID_RECURSO`),
+  FOREIGN KEY(`LOGIN_RESPONSABLE`) REFERENCES `RESPONSABLES_RECURSO` (`LOGIN_RESPONSABLE`),
+  FOREIGN KEY(`ID_CALENDARIO`) REFERENCES `CALENDARIOS_DE_USO` (`ID_CALENDARIO`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_spanish_ci;
+
+-- --------------------------------------------------------
+--
+-- Estructura de tabla para la tabla `RESERVAS`
+--
+CREATE TABLE `RESERVAS` (
+  `ID_RESERVA`                 int    NOT NULL AUTO_INCREMENT,
+
+  `LOGIN_USUARIO`              varchar(15) COLLATE utf8_spanish_ci NOT NULL COMMENT 'PERSONA QUE HACE LA PETICION DE USO DEL RECURSO',
+  `ID_RECURSO`                 int    NOT NULL,
+  
+  `FECHA_SOLICITUD_RESERVA`    date NOT NULL COMMENT 'FECHA EN QUE SE SOLICITA EL RECURSO',
+  `FECHA_RESPUESTA_RESERVA`    date NULL COMMENT 'FECHA EN QUE SE AUTORIZA/RECHAZA LA RESERVA POR EL RESPONSABLE',
+
+  `MOTIVO_RECHAZO_RESERVA`     varchar(200) NULL COMMENT 'MOTIVO POR EL CUAL LA RESERVA ES RECHAZADA',
+
+  `ESTADO_RESERVA`             enum(
+                                 'PENDIENTE',
+                                 'ACEPTADA',
+                                 'RECHAZADA',
+                                 'CANCELADA',
+                                 'RECURSO_USADO',
+                                 'RECURSO_NO_USADO'
+                               ) COLLATE utf8_spanish_ci NOT NULL DEFAULT 'PENDIENTE',
+ 
+  `COSTE_RESERVA`               double(6, 2) NOT NULL,
+
+  PRIMARY KEY(`ID_RESERVA`),
+  FOREIGN KEY(`LOGIN_USUARIO`) REFERENCES `USUARIOS` (`LOGIN_USUARIO`),
+  FOREIGN KEY(`ID_RECURSO`) REFERENCES `RECURSOS` (`ID_RECURSO`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_spanish_ci;
+
+-- --------------------------------------------------------
+--
+-- Estructura de tabla para la tabla `RESERVAS`
+--
+CREATE TABLE `SUBRESERVAS` (
+  
+  `ID_RESERVA`              int  NOT NULL, 
+  `ID_SUBRESERVA`           int  NOT NULL,
+
+  `FECHA_INICIO_SUBRESERVA` date NOT NULL COMMENT 'FECHA EN LA QUE COMIENZA LA RESERVA',
+  `FECHA_FIN_SUBRESERVA`    date NOT NULL COMMENT 'FECHA EN LA QUE TERMINA LA RESERVA',
+  `HORA_INICIO_SUBRESERVA`  time NOT NULL COMMENT 'HORA DE COMIENZO DE LA RESERVA',
+  `HORA_FIN_SUBRESERVA`     time NOT NULL COMMENT 'HORA DE FIN DE LA RESERVA',
+
+  `COSTE_SUBRESERVA` double(6, 2) NOT NULL,
+
+   PRIMARY KEY(`ID_RESERVA`,`ID_SUBRESERVA`),
+   FOREIGN KEY(`ID_RESERVA`) REFERENCES `RESERVAS` (`ID_RESERVA`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_spanish_ci;
+
+grant all privileges on 53196285E.* to pma@localhost identified by "iu";
+
+-- SENTENCIAS DE INSERCIÓN MÍNIMAS
+
+-- Para tabla 'USUARIOS'
+INSERT INTO `USUARIOS` (`LOGIN_USUARIO`, `PASSWD_USUARIO`, `NOMBRE_USUARIO`, `EMAIL_USUARIO`, `TIPO_USUARIO`, `ES_ACTIVO`) VALUES
+('admin', '21232f297a57a5a743894a0e4a801fc3', 'César Gabriel Márquez Rodríguez', 'cmrodriguez17@esei.uvigo.es', 'ADMINISTRADOR', 'SI');
+
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */
+;
+
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */
+;
+
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */
+;
