@@ -504,6 +504,31 @@ class Test extends BaseView{
                 ],
                 [
                     "atributes" => [
+                        "LOGIN_USUARIO" => "cesarino",
+                        "ID_RECURSO" => "1",
+                        "FECHA_SOLICITUD_RESERVA" => "20/01/2021",
+                        "COSTE_RESERVA" => "5",
+                        "infoSubreservas" => [ 
+                            "subreservas" => [
+                                "subreserva-0" => [
+                                    "FECHA_INICIO_SUBRESERVA" => "28/01/2021",
+                                    "FECHA_FIN_SUBRESERVA" => "31/01/2021",
+                                    "HORA_INICIO_SUBRESERVA" => "17:00:00",
+                                    "HORA_FIN_SUBRESERVA" => "18:00:00"
+                                ],
+                                "subreserva-1" => [
+                                    "FECHA_INICIO_SUBRESERVA" => "28/01/2021",
+                                    "FECHA_FIN_SUBRESERVA" => "31/01/2021",
+                                    "HORA_INICIO_SUBRESERVA" => "17:00:00",
+                                    "HORA_FIN_SUBRESERVA" => "18:00:00"
+                                ]
+                            ]
+                        ]
+                    ],
+                    "expected" => "AC031"
+                ],
+                [
+                    "atributes" => [
                         "LOGIN_USUARIO" => "emmolina15",
                         "ID_RECURSO" => "1",
                         "FECHA_SOLICITUD_RESERVA" => "20/01/2021",

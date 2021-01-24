@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 24-01-2021 a las 16:24:29
+-- Tiempo de generación: 24-01-2021 a las 17:09:14
 -- Versión del servidor: 10.3.23-MariaDB-0+deb10u1
 -- Versión de PHP: 7.3.19-1~deb10u1
 
@@ -107,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `RESERVAS` (
   PRIMARY KEY (`ID_RESERVA`),
   KEY `LOGIN_USUARIO` (`LOGIN_USUARIO`),
   KEY `ID_RECURSO` (`ID_RECURSO`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `RESERVAS`
@@ -126,7 +126,8 @@ INSERT INTO `RESERVAS` (`ID_RESERVA`, `LOGIN_USUARIO`, `ID_RECURSO`, `FECHA_SOLI
 (10, 'marta', 7, '2021-01-24', '2021-01-24', 'El recurso se averió en el último momento', 'RECHAZADA', 175.00),
 (11, 'paco_simon', 3, '2021-01-24', NULL, NULL, 'CANCELADA', 39.00),
 (12, 'cesarino', 4, '2021-01-24', NULL, NULL, 'PENDIENTE', 34.52),
-(13, 'cesarino', 2, '2021-01-24', '2021-01-24', NULL, 'ACEPTADA', 180.00);
+(13, 'cesarino', 2, '2021-01-24', '2021-01-24', NULL, 'ACEPTADA', 180.00),
+(14, 'admin', 1, '2021-01-24', NULL, NULL, 'PENDIENTE', 102.86);
 
 -- --------------------------------------------------------
 
@@ -191,7 +192,8 @@ INSERT INTO `SUBRESERVAS` (`ID_RESERVA`, `ID_SUBRESERVA`, `FECHA_INICIO_SUBRESER
 (10, 1, '2021-01-25', '2021-02-28', '09:00:00', '15:00:00', 175.00),
 (11, 1, '2021-02-16', '2021-03-26', '11:00:00', '13:00:00', 39.00),
 (12, 1, '2021-01-25', '2021-02-28', '16:00:00', '18:00:00', 34.52),
-(13, 1, '2021-01-24', '2021-02-28', '09:00:00', '14:00:00', 180.00);
+(13, 1, '2021-01-24', '2021-02-28', '09:00:00', '14:00:00', 180.00),
+(14, 1, '2021-01-24', '2021-02-28', '17:00:00', '18:00:00', 102.86);
 
 -- --------------------------------------------------------
 
@@ -224,6 +226,7 @@ INSERT INTO `USUARIOS` (`LOGIN_USUARIO`, `PASSWD_USUARIO`, `NOMBRE_USUARIO`, `EM
 ('paco_simon', '3645eee297670eb35f413b4f097e6b80', 'Paco Simón Lorenzo', 'pacosl1998@hotmail.com', 'NORMAL', 'SI'),
 ('resp1', 'a1866c1e61653fd2a77033750c72c90c', 'Eliana Patricia Aray Cappello', 'eliana@mail.com', 'RESPONSABLE', 'SI'),
 ('resp2', 'bb1797702574859ad9bab93694ed779d', 'Iria Martínez Álvarez', 'iria@mail.com', 'RESPONSABLE', 'SI'),
+('resp3', '593a5edd7afe246c14824018fc6b14ab', 'María Ángela Rodríguez Araujo', 'mara@mail.com', 'RESPONSABLE', 'SI'),
 ('roberto17', '49fc712b673c8806e44b36d134fc55c4', 'Roberto Vázquez Alonso', 'rvazquez20@alumnos.uvigo.es', 'NORMAL', 'SI');
 
 --
@@ -256,9 +259,6 @@ ALTER TABLE `RESPONSABLES_RECURSO`
 ALTER TABLE `SUBRESERVAS`
   ADD CONSTRAINT `SUBRESERVAS_ibfk_1` FOREIGN KEY (`ID_RESERVA`) REFERENCES `RESERVAS` (`ID_RESERVA`);
 SET FOREIGN_KEY_CHECKS=1;
-
-grant all privileges on 53196285E.* to pma@localhost identified by "iu";
-
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
