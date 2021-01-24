@@ -297,7 +297,7 @@ function checkResourceForm(form){
         LOGIN_RESPONSABLE: {
             checkSelected: {
                 args: {},
-                code: "i18n-resourceNotSelected"
+                code: "i18n-respNotSelected"
             },
         }
     };

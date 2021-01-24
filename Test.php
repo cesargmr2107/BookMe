@@ -455,7 +455,7 @@ class Test extends BaseView{
             "ADD" => [
                 [
                     "atributes" => [
-                        "LOGIN_USUARIO" => "emmolina15",
+                        "LOGIN_USUARIO" => "cesarino",
                         "ID_RECURSO" => "1",
                         "FECHA_SOLICITUD_RESERVA" => "20/01/2021",
                         "infoSubreservas" => [ 
@@ -819,7 +819,7 @@ class Test extends BaseView{
 
 // Restore DB
 $mysql = new mysqli('localhost', 'pma', 'iu');
-$DBScript = file_get_contents("./53196285E.sql");
+$DBScript = file_get_contents("./installBD.sql");
 if($mysql->multi_query($DBScript)) {
     do{
         $mysql->next_result();

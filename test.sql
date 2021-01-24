@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 24-01-2021 a las 16:24:29
+-- Tiempo de generación: 24-01-2021 a las 15:52:45
 -- Versión del servidor: 10.3.23-MariaDB-0+deb10u1
 -- Versión de PHP: 7.3.19-1~deb10u1
 
@@ -107,26 +107,23 @@ CREATE TABLE IF NOT EXISTS `RESERVAS` (
   PRIMARY KEY (`ID_RESERVA`),
   KEY `LOGIN_USUARIO` (`LOGIN_USUARIO`),
   KEY `ID_RECURSO` (`ID_RECURSO`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `RESERVAS`
 --
 
 INSERT INTO `RESERVAS` (`ID_RESERVA`, `LOGIN_USUARIO`, `ID_RECURSO`, `FECHA_SOLICITUD_RESERVA`, `FECHA_RESPUESTA_RESERVA`, `MOTIVO_RECHAZO_RESERVA`, `ESTADO_RESERVA`, `COSTE_RESERVA`) VALUES
-(1, 'cesarino', 1, '2021-01-24', '2021-01-24', NULL, 'RECURSO_NO_USADO', 134.29),
-(2, 'cesarino', 3, '2021-01-24', '2021-01-24', NULL, 'ACEPTADA', 139.92),
-(3, 'cesarino', 2, '2021-01-24', '2021-01-24', NULL, 'RECURSO_USADO', 140.00),
-(4, '_beltran_', 6, '2021-01-24', '2021-01-24', NULL, 'RECURSO_NO_USADO', 28.00),
-(5, '_beltran_', 5, '2021-01-24', '2021-01-24', NULL, 'ACEPTADA', 200.00),
-(6, '_beltran_', 2, '2021-01-24', '2021-01-24', 'Tu reserva ha sido rechazada porque se solapaba en el tiempo con otra de mayor prioridad', 'RECHAZADA', 120.00),
-(7, 'marta', 4, '2021-01-24', '2021-01-24', 'El recurso necesita mantenimiento en ese intervalo', 'RECHAZADA', 76.89),
+(1, 'cesarino', 1, '2021-01-24', NULL, NULL, 'PENDIENTE', 134.29),
+(2, 'cesarino', 3, '2021-01-24', NULL, NULL, 'PENDIENTE', 139.92),
+(3, 'cesarino', 2, '2021-01-24', NULL, NULL, 'PENDIENTE', 140.00),
+(4, '_beltran_', 6, '2021-01-24', NULL, NULL, 'PENDIENTE', 28.00),
+(5, '_beltran_', 5, '2021-01-24', NULL, NULL, 'PENDIENTE', 200.00),
+(6, '_beltran_', 2, '2021-01-24', NULL, NULL, 'PENDIENTE', 120.00),
+(7, 'marta', 4, '2021-01-24', NULL, NULL, 'PENDIENTE', 76.89),
 (8, 'marta', 4, '2021-01-24', NULL, NULL, 'CANCELADA', 34.52),
-(9, 'marta', 6, '2021-01-24', '2021-01-24', 'Tu reserva ha sido rechazada porque se solapaba en el tiempo con otra de mayor prioridad', 'RECHAZADA', 58.96),
-(10, 'marta', 7, '2021-01-24', '2021-01-24', 'El recurso se averió en el último momento', 'RECHAZADA', 175.00),
-(11, 'paco_simon', 3, '2021-01-24', NULL, NULL, 'CANCELADA', 39.00),
-(12, 'cesarino', 4, '2021-01-24', NULL, NULL, 'PENDIENTE', 34.52),
-(13, 'cesarino', 2, '2021-01-24', '2021-01-24', NULL, 'ACEPTADA', 180.00);
+(9, 'marta', 6, '2021-01-24', NULL, NULL, 'PENDIENTE', 58.96),
+(10, 'marta', 7, '2021-01-24', NULL, NULL, 'PENDIENTE', 175.00);
 
 -- --------------------------------------------------------
 
@@ -188,10 +185,7 @@ INSERT INTO `SUBRESERVAS` (`ID_RESERVA`, `ID_SUBRESERVA`, `FECHA_INICIO_SUBRESER
 (8, 1, '2021-02-17', '2021-02-26', '08:00:00', '18:00:00', 9.86),
 (8, 2, '2021-02-28', '2021-03-24', '08:00:00', '18:00:00', 24.66),
 (9, 1, '2021-02-01', '2021-03-31', '08:00:00', '19:00:00', 58.96),
-(10, 1, '2021-01-25', '2021-02-28', '09:00:00', '15:00:00', 175.00),
-(11, 1, '2021-02-16', '2021-03-26', '11:00:00', '13:00:00', 39.00),
-(12, 1, '2021-01-25', '2021-02-28', '16:00:00', '18:00:00', 34.52),
-(13, 1, '2021-01-24', '2021-02-28', '09:00:00', '14:00:00', 180.00);
+(10, 1, '2021-01-25', '2021-02-28', '09:00:00', '15:00:00', 175.00);
 
 -- --------------------------------------------------------
 
@@ -218,7 +212,6 @@ INSERT INTO `USUARIOS` (`LOGIN_USUARIO`, `PASSWD_USUARIO`, `NOMBRE_USUARIO`, `EM
 ('_beltran_', 'b3da0bd68248b52687332e4d315e6974', 'Beltrán Martínez-Smith', 'beltranms@yahoo.es', 'NORMAL', 'SI'),
 ('admin', '21232f297a57a5a743894a0e4a801fc3', 'César Gabriel Márquez Rodríguez', 'cmrodriguez17@esei.uvigo.es', 'ADMINISTRADOR', 'SI'),
 ('cesarino', 'f9e2ede9ed5b31ffb5a9694ed3b02968', 'César Gabriel Márquez Rodríguez', 'cesar@mail.com', 'NORMAL', 'SI'),
-('felipe', '7e04da88cbb8cc933c7b89fbfe121cca', 'Felipe Hernández Fidalgo', 'felipe@mail.com', 'NORMAL', 'SI'),
 ('marta', 'a763a66f984948ca463b081bf0f0e6d0', 'Marta Rodríguez Fernández', 'marta.rodriguez.fernandez@gmail.com', 'NORMAL', 'SI'),
 ('otro_admin', 'e7d881995fbdc209b7cb041f9e1a44cd', 'Javier Rodeiro Iglesias', 'javi@gmail.com', 'ADMINISTRADOR', 'SI'),
 ('paco_simon', '3645eee297670eb35f413b4f097e6b80', 'Paco Simón Lorenzo', 'pacosl1998@hotmail.com', 'NORMAL', 'SI'),
@@ -256,9 +249,6 @@ ALTER TABLE `RESPONSABLES_RECURSO`
 ALTER TABLE `SUBRESERVAS`
   ADD CONSTRAINT `SUBRESERVAS_ibfk_1` FOREIGN KEY (`ID_RESERVA`) REFERENCES `RESERVAS` (`ID_RESERVA`);
 SET FOREIGN_KEY_CHECKS=1;
-
-grant all privileges on 53196285E.* to pma@localhost identified by "iu";
-
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

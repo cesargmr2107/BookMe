@@ -81,9 +81,12 @@ class UsuariosModel extends BaseModel {
             return $this->actionCodes["bad_credentials"];
         }
         
-        $userSearch= $this->SEARCH("SELECT * FROM USUARIOS WHERE LOGIN_USUARIO = '" . $this->atributes["LOGIN_USUARIO"] . "'");
+        $query = "SELECT * FROM USUARIOS WHERE LOGIN_USUARIO = '" . $this->atributes["LOGIN_USUARIO"] . "' " .
+                 "AND PASSWD_USUARIO = '" . $this->atributes["PASSWD_USUARIO"] . "' ";
+
+        $userSearch= $this->SEARCH($query);
         
-        if(!count("$userSearch")){
+        if(!count($userSearch)){
             return $this->actionCodes["bad_credentials"];
         }
 
