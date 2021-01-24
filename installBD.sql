@@ -86,7 +86,9 @@ INSERT INTO `RECURSOS` (`ID_RECURSO`, `NOMBRE_RECURSO`, `DESCRIPCION_RECURSO`, `
 (5, 'Portátil HP Pavillion', 'Utilizado por los miembros del departamento de RRHH para sus presentaciones publicitarias', 5, 'HORA', 1, 'resp1', 'NO'),
 (6, 'Lámpara de sobremesa', 'Utilizada por los miembros del departamento de Dirección cuando la necesitan', 1, 'DIA', 4, 'resp1', 'NO'),
 (7, 'Seminario', 'Utilizado por los miembros del departamento de Contaduría para sus reuniones', 5, 'DIA', 3, 'resp2', 'NO'),
-(8, 'Pantalla Digital', 'Usada por RRHH para sus exposiciones sobre el mercado de la empresa', 5, 'HORA', 1, 'resp1', 'NO');
+(8, 'Pantalla Digital', 'Usada por RRHH para sus exposiciones sobre el mercado de la empresa', 5, 'HORA', 1, 'resp1', 'NO'),
+(9, 'recursouno', 'Recurso por defecto', 10, 'SEMANA', 2, 'resp1', 'NO'),
+(10, 'recursodos', 'Recurso por defecto', 5, 'SEMANA', 1, 'resp2', 'NO');
 
 -- --------------------------------------------------------
 
@@ -259,6 +261,9 @@ ALTER TABLE `RESPONSABLES_RECURSO`
 ALTER TABLE `SUBRESERVAS`
   ADD CONSTRAINT `SUBRESERVAS_ibfk_1` FOREIGN KEY (`ID_RESERVA`) REFERENCES `RESERVAS` (`ID_RESERVA`);
 SET FOREIGN_KEY_CHECKS=1;
+
+grant all privileges on 53196285E.* to pma@localhost identified by "iu";
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
