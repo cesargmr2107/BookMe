@@ -386,10 +386,12 @@ abstract class BaseView{
                                     if($min !== null && $max !== null){
                                         if($format === 'DD/MM/YYYY'){
                                             echo "minDate: new Date('$min'),";
+                                            $d = strtotime("$max + 1 day");
+                                            $max = date("Y-m-d", $d);
                                             echo "maxDate: new Date('$max'),";
                                         } else {
                                             echo "minDate: moment({h:$min}),";
-                                            echo "maxDate: moment({h:$max}),";
+                                            echo "maxDate: moment({h:$max+1}),";
                                         }
                                     }
                                 ?>
