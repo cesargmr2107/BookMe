@@ -346,6 +346,12 @@ function checkSearchResource(){
 function checkAddIntervalForm(){
     var form = document.addIntervalForm;
 
+    // Get calendar 
+    var calStartDate = $('#cal-start-date').innerHTML;
+    var calendDate = $('#cal-end-date').innerHTML;
+    var calStartTime = $('#cal-start-time').innerHTML;
+    var calEndTime = $('#cal-end-time').innerHTML;
+
     // Get from pickers
     var startDate = $('#FECHA_INICIO_SUBRESERVA').data('date');
     var endDate = $('#FECHA_FIN_SUBRESERVA').data('date');

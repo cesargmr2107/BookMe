@@ -48,9 +48,9 @@ CREATE TABLE IF NOT EXISTS `CALENDARIOS_DE_USO` (
 --
 
 INSERT INTO `CALENDARIOS_DE_USO` (`ID_CALENDARIO`, `NOMBRE_CALENDARIO`, `DESCRIPCION_CALENDARIO`, `FECHA_INICIO_CALENDARIO`, `FECHA_FIN_CALENDARIO`, `HORA_INICIO_CALENDARIO`, `HORA_FIN_CALENDARIO`, `BORRADO_LOGICO`) VALUES
-(1, 'Calendario de RRHH', 'Este es el calendario de disponibilidad de los recursos  de RRHH', '2021-01-01', '2021-12-31', '08:00:00', '14:00:00', 'NO'),
-(2, 'Calendario de Ventas', 'Este es el calendario que describe la disponibilidad de los recursos de Ventas', '2021-01-01', '2021-12-31', '15:00:00', '20:00:00', 'NO'),
-(3, 'Calendario de Contaduría', 'Este es el calendario que describe la disponibilidad de los recursos de Contaduría', '2021-01-01', '2021-06-30', '09:00:00', '16:00:00', 'NO'),
+(1, 'Calendario de RRHH', 'Este es el calendario de disponibilidad de los recursos  de RRHH', '2021-01-01', '2021-12-31', '08:00:00', '16:00:00', 'NO'),
+(2, 'Calendario de Ventas', 'Este es el calendario que describe la disponibilidad de los recursos de Ventas', '2021-01-01', '2021-12-31', '15:00:00', '17:00:00', 'NO'),
+(3, 'Calendario de Contaduría', 'Este es el calendario que describe la disponibilidad de los recursos de Contaduría', '2021-01-01', '2021-06-30', '18:00:00', '16:00:00', 'NO'),
 (4, 'Calendario de Dirección', 'Este calendario describe la disponibilidad de los recursos de Dirección', '2021-01-24', '2021-12-31', '07:00:00', '19:00:00', 'NO');
 
 -- --------------------------------------------------------

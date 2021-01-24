@@ -58,8 +58,8 @@ class ReservasAddView extends BaseView{
                 $endDate = $this->formatDate($info["calendar-info"]['FECHA_FIN_CALENDARIO']);
                 ?>
                     <p><strong class='i18n-nombre'></strong>: <?=$info["calendar-info"]['NOMBRE_CALENDARIO']?></p>
-                    <p><strong class='i18n-fechas'></strong><?=$startDate?> - <?=$endDate?></p>
-                    <p><strong class='i18n-horas'></strong><?=$info["calendar-info"]['HORA_INICIO_CALENDARIO']?> - <?=$info["calendar-info"]['HORA_FIN_CALENDARIO']?></p>
+                    <p><strong class='i18n-fechas'></strong><span id="cal-start-date"><?=$startDate?></span> - <span id="cal-end-date"><?=$endDate?></span></p>
+                    <p><strong class='i18n-horas'></strong><span id="cal-start-time"><?=$info["calendar-info"]['HORA_INICIO_CALENDARIO']?></span> - <span id="cal-end-time"><?=$info["calendar-info"]['HORA_FIN_CALENDARIO']?></span></p>
                 <?php
             echo "</div>";
         echo "</div>";
