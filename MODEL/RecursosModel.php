@@ -113,6 +113,18 @@ class RecursosModel extends BaseModel {
         
         $result["events"] = $this->SEARCH($query);
 
+        $query = "SELECT C.NOMBRE_CALENDARIO, C.FECHA_INICIO_CALENDARIO, C.FECHA_FIN_CALENDARIO, C.HORA_INICIO_CALENDARIO, C.HORA_FIN_CALENDARIO " .
+                 "FROM RECURSOS R, CALENDARIOS_DE_USO C " .
+                 "WHERE R.ID_CALENDARIO = C.ID_CALENDARIO AND " . 
+                 "C.ID_CALENDARIO = '" . $result["ID_CALENDARIO"] . "' AND ".
+                 "R.ID_RECURSO = '" . $this->atributes["ID_RECURSO"] . "'"; 
+
+
+        // DEBUG: Check events
+        // echo "<p>" . $query . "</p>";
+
+        $result["calendar-info"] = $this->SEARCH($query)[0];
+
         return $result;
     }
 

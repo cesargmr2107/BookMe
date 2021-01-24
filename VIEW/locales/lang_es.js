@@ -13,6 +13,8 @@ var translations_es = {
     "i18n-hora_inicio" : "Hora de inicio" ,
     "i18n-hora_fin" : "Hora de fin",
     "i18n-deleteConfirmation" : "¿Quieres borrar ",
+    "i18n-horas" : "Horas: ",
+    "i18n-fechas" : "Fechas: ",
 
     /* LOGIN AND REGISTER VIEWS */
     "i18n-welcome" : "Bienvenido a ",

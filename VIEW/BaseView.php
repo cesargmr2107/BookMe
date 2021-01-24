@@ -354,21 +354,21 @@ abstract class BaseView{
         <?php
     }
 
-    protected function includeDateField($labelCode, $atribute, $useMinDateAsCurrent, $value = 'dd/mm/yyyy'){
+    protected function includeDateField($labelCode, $atribute, $minDate, $maxDate, $value = 'dd/mm/yyyy'){
         if($value !== 'dd/mm/yyyy') {
             $d = DateTime::createFromFormat('Y-m-d', $value);
             $value = date_format($d,'d/m/Y');
         }
-        $this->includeDatetimeField($labelCode, $atribute, 'DD/MM/YYYY', $value, $useMinDateAsCurrent);
+        $this->includeDatetimeField($labelCode, $atribute, 'DD/MM/YYYY', $minDate, $maxDate, $value );
     }
     
-    protected function includeTimeField($labelCode, $atribute, $value = 'hh:mm:ss'){
-        $this->includeDatetimeField($labelCode, $atribute, 'HH:00:00', $value);
+    protected function includeTimeField($labelCode, $atribute, $minHour, $maxHour, $value = 'hh:mm:ss'){
+        $this->includeDatetimeField($labelCode, $atribute, 'HH:00:00', $minHour, $maxHour, $value);
     }
 
-    private function includeDatetimeField($labelCode, $atribute, $format, $value, $useMinDateAsCurrent = false){
+    private function includeDatetimeField($labelCode, $atribute, $format, $min, $max, $value){
         $icon = ($format === 'DD/MM/YYYY') ? 'fa fa-calendar' : 'fa fa-clock';
-        $valueTag = ($value !== null) ? "value='$value'" : '';
+        $valueTag = ($value !== 'hh:mm:ss' && $value !== 'dd/mm/yyyy') ? "value='$value'" : "placeholder='$value'";
         ?>
             <div class="form-group">
                 <label class="<?=$labelCode?>" for="<?=$atribute?>"></label>
@@ -383,8 +383,15 @@ abstract class BaseView{
                         var dp = $('#<?=$atribute?>').datetimepicker(
                             {
                                 <?php
-                                    if($format === 'DD/MM/YYYY' && $useMinDateAsCurrent === true)
-                                    echo 'minDate: new Date(),';
+                                    if($min !== null && $max !== null){
+                                        if($format === 'DD/MM/YYYY'){
+                                            echo "minDate: new Date('$min'),";
+                                            echo "maxDate: new Date('$max'),";
+                                        } else {
+                                            echo "minDate: moment({h:$min}),";
+                                            echo "maxDate: moment({h:$max}),";
+                                        }
+                                    }
                                 ?>
                                 locale: moment.locale('es'),
                                 format: '<?=$format?>',

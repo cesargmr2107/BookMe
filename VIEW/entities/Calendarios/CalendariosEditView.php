@@ -17,10 +17,10 @@ class CalendariosEditView extends BaseView{
                 </div>
                 <div>
                     <?php
-                        $this->includeDateField("i18n-fecha_inicio", 'FECHA_INICIO_CALENDARIO', false, $this->data["FECHA_INICIO_CALENDARIO"]);
-                        $this->includeDateField("i18n-fecha_fin", 'FECHA_FIN_CALENDARIO', false,  $this->data["FECHA_FIN_CALENDARIO"]);
-                        $this->includeTimeField("i18n-hora_inicio", 'HORA_INICIO_CALENDARIO', $this->data["HORA_INICIO_CALENDARIO"]);
-                        $this->includeTimeField("i18n-hora_fin", 'HORA_FIN_CALENDARIO', $this->data["HORA_FIN_CALENDARIO"]);
+                        $this->includeDateField("i18n-fecha_inicio", 'FECHA_INICIO_CALENDARIO', null, null, $this->data["FECHA_INICIO_CALENDARIO"]);
+                        $this->includeDateField("i18n-fecha_fin", 'FECHA_FIN_CALENDARIO', null, null,  $this->data["FECHA_FIN_CALENDARIO"]);
+                        $this->includeTimeField("i18n-hora_inicio", 'HORA_INICIO_CALENDARIO', null, null, $this->data["HORA_INICIO_CALENDARIO"]);
+                        $this->includeTimeField("i18n-hora_fin", 'HORA_FIN_CALENDARIO', null, null, $this->data["HORA_FIN_CALENDARIO"]);
                     ?>
                 </div>
             </form>

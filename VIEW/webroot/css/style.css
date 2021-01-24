@@ -448,8 +448,13 @@ form[name="loginForm"], form[name="registerForm"]{
     padding: 20px;
 }
 
-#resource-info {
-    margin-bottom: 20px;
+#resource-details {
+    margin: 20px 0px;
+    display: flex;
+}
+
+#resource-details div {
+    margin-right: 30px;
 }
 
 .add-booking-title h4 {

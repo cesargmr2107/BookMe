@@ -15,6 +15,8 @@ var translations_gl = {
     "i18n-deleteConfirmation" : "Queres borrar ",
     "i18n-searchByName" : "Búsqueda por nome",
     "i18n-searchByLogin" : "Búsqueda por login",
+    "i18n-horas" : "Horas: ",
+    "i18n-fechas" : "Datas: ",
 
     /* LOGIN AND REGISTER VIEWS */
     "i18n-welcome" : "Benvido a ",

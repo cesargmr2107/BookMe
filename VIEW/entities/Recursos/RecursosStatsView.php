@@ -22,8 +22,8 @@ class RecursosStatsView extends BaseView{
         ?>
             <form id="statsForm" name="statsForm" action="index.php" method="post">
                 <?= $this->includeHiddenField("ID_RECURSO", $this->data["id"])?>
-                <?= $this->includeDateField("i18n-fecha_inicio", "FECHA_INICIO_INFORME", false, $this->data["defaultStartDate"])?>
-                <?= $this->includeDateField("i18n-fecha_fin", "FECHA_FIN_INFORME", false, $this->data["defaultEndDate"])?>
+                <?= $this->includeDateField("i18n-fecha_inicio", "FECHA_INICIO_INFORME", null, null, $this->data["defaultStartDate"])?>
+                <?= $this->includeDateField("i18n-fecha_fin", "FECHA_FIN_INFORME", null, null, $this->data["defaultEndDate"])?>
                 <span class="<?=$this->icons["SEARCH"]?>" onclick="sendForm(document.statsForm, 'RecursosController', 'stats', checkResourceStatsForm())"></span>
             </form>
         <?php
