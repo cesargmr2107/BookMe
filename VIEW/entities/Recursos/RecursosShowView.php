@@ -45,5 +45,6 @@ class RecursosShowView extends BaseView{
             echo "</div>";
         echo "</div>";
     }
+
 }
 ?>

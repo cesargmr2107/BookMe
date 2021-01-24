@@ -61,7 +61,6 @@ function checkTimeRange(args){
 function checkSelected(args){
     return args["value"] != translations["i18n-options"];
 }
-
 function doChecks(form, toCheck){
     // Reset
     document.getElementById('errorMsgs').innerHTML = '';
@@ -396,7 +395,7 @@ function checkAddIntervalForm(){
     };
 
     // If there's a format problem, false; else check overlappings
-    return !doChecks(form, toCheck) ? false : checkOverlappings(startDate, endDate, startTime, endTime);
+    return doChecks(form, toCheck) && checkOverlappings(startDate, endDate, startTime, endTime);
 }
 
 function checkOverlappings(startDate, endDate, startTime, endTime){
@@ -421,6 +420,19 @@ function checkOverlappings(startDate, endDate, startTime, endTime){
     }
 
     return true;
+}
+
+function checkAddBookingForm(){
+    // Check cost in range
+    var totalCost = parseFloat(document.getElementById('totalCost').innerHTML);
+    var args = { value: totalCost, min: 0.0, max: 9999.99 };
+    if(checkNumberRange(args)){
+        return true;
+    } else {
+        addMsgsToModal([ "i18n-badCostRange" ]);
+        openModal();
+        return false;
+    }
 }
 
 function checkUsersAddForm() {

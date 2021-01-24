@@ -57,12 +57,12 @@ class ReservasConfirmView extends BaseView{
                     </div>
 
                     <!-- Modal body -->
-                    <div class="modal-body">
-                        <span class="<?= $this->icons["CANCEL"] ?>" data-dismiss="modal"></span>
+                    <div class="modal-body options">
                         <?php
                             $data = array("ID_RESERVA" => $id);
                             $this->includeButton("ACCEPT", "usedModal$id","post", "ReservasController", "confirmUse", $data)
                         ?>
+                        <span class="<?= $this->icons["CANCEL"] ?>" data-dismiss="modal"></span>
                     </div>
 
                 </div>

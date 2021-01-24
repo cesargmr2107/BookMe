@@ -250,9 +250,15 @@ class ReservasModel extends BaseModel {
 
     public function SEARCH_PENDING(){
         
-        $query = "SELECT REC.ID_RECURSO, REC.NOMBRE_RECURSO, COUNT(*) AS COUNT FROM RESERVAS RES, RECURSOS REC " .
-                 "WHERE RES.ID_RECURSO = REC.ID_RECURSO AND RES.ESTADO_RESERVA = 'PENDIENTE' GROUP BY ID_RECURSO";
-        
+        if(isAdminUser()){
+            $query = "SELECT REC.ID_RECURSO, REC.NOMBRE_RECURSO, COUNT(*) AS COUNT FROM RESERVAS RES, RECURSOS REC " .
+                     "WHERE RES.ID_RECURSO = REC.ID_RECURSO AND RES.ESTADO_RESERVA = 'PENDIENTE' GROUP BY ID_RECURSO";
+        }else{
+            $login = $_SESSION["LOGIN_USUARIO"];
+            $query = "SELECT REC.ID_RECURSO, REC.NOMBRE_RECURSO, COUNT(*) AS COUNT FROM RESERVAS RES, RECURSOS REC " .
+                     "WHERE RES.ID_RECURSO = REC.ID_RECURSO AND RES.ESTADO_RESERVA = 'PENDIENTE' AND REC.LOGIN_RESPONSABLE = '$login' GROUP BY ID_RECURSO";
+        }
+
         $result = $this->SEARCH($query);
         
         // DEBUG: Check bookings    
@@ -262,8 +268,17 @@ class ReservasModel extends BaseModel {
     }
 
     public function SEARCH_CONFIRM(){
-        $query = "SELECT RES.ID_RESERVA, RES.FECHA_SOLICITUD_RESERVA, RES.LOGIN_USUARIO,  REC.NOMBRE_RECURSO " .
-                 "FROM RESERVAS RES, RECURSOS REC WHERE RES.ID_RECURSO = REC.ID_RECURSO AND RES.ESTADO_RESERVA = 'ACEPTADA'";
+
+        if(isAdminUser()){
+            $query = "SELECT RES.ID_RESERVA, RES.FECHA_SOLICITUD_RESERVA, RES.LOGIN_USUARIO,  REC.NOMBRE_RECURSO " .
+                     "FROM RESERVAS RES, RECURSOS REC WHERE RES.ID_RECURSO = REC.ID_RECURSO AND RES.ESTADO_RESERVA = 'ACEPTADA'";
+        }else{
+            $login = $_SESSION["LOGIN_USUARIO"];
+            $query = "SELECT RES.ID_RESERVA, RES.FECHA_SOLICITUD_RESERVA, RES.LOGIN_USUARIO,  REC.NOMBRE_RECURSO " .
+                     "FROM RESERVAS RES, RECURSOS REC " . 
+                     "WHERE RES.ID_RECURSO = REC.ID_RECURSO AND RES.ESTADO_RESERVA = 'ACEPTADA' AND REC.LOGIN_RESPONSABLE = '$login'";
+        }
+
         return $this->SEARCH($query);
     }
 

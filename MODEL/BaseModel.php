@@ -1,5 +1,7 @@
 <?php
 
+include_once './COMMON/utils.php';
+
 class BaseModel {
 
     public static $atributeNames;

@@ -99,7 +99,7 @@ class ReservasAddView extends BaseView{
                 <h4>
                     <span class="i18n-bookingTotalCost"></span>
                     <span id="totalCost">0.00</span>
-                    <span class="<?=$this->icons["BOOKING"]?>" onclick="sendForm(document.addForm, 'ReservasController', 'add', true)"></span>
+                    <span class="<?=$this->icons["BOOKING"]?>" onclick="sendForm(document.addForm, 'ReservasController', 'add', checkAddBookingForm())"></span>
                 </h4>
             </form>
         <?php

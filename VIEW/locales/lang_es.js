@@ -172,6 +172,7 @@ var translations_es = {
     "i18n-noStartDate" : "Debes introducir la fecha de inicio",
     "i18n-noEndDate" : "Debes introducir la fecha de fin",
     "i18n-badDateRange" : "La fecha de fin debe ser igual o superior a la de inicio",
+    "i18n-badCostRange" : "El coste de la reserva debe estar entre 0.0€ y 9999.9€",
     "i18n-noStartTime" : "Debes introducir la hora de inicio",
     "i18n-noEndTime" : "Debes introducir la hora de fin",
     "i18n-badTimeRange" : "La hora de fin debe ser superior a la de inicio",

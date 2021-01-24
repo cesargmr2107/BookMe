@@ -172,6 +172,7 @@ var translations_en = {
     "i18n-noStartDate" : "Enter the start date",
     "i18n-noEndDate" : "Enter the end date",
     "i18n-badDateRange" : "The end date must be greater or equal than the start date",
+    "i18n-badCostRange" : "The cost of the reservation must be between 0.0€ and 9999.9€",
     "i18n-noStartTime" : "Enter the start time",
     "i18n-noEndTime" : "Enter the end time",
     "i18n-badTimeRange" : "The end time must be greater or equal than the start time",
