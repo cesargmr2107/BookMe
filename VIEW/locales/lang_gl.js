@@ -194,6 +194,7 @@ var translations_gl = {
     "i18n-AC001" : "Erro nunha consulta á base de datos",
     "i18n-AC002" : "Credenciais de usuario incorrectas",
     "i18n-AC003" : "Token inválido",
+    "i18n-AC004" : "Conta desactivada",
 
     // CalendariosModel
     "i18n-AC111" : "O calendario engadiuse correctamente",

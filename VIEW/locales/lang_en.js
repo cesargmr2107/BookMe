@@ -189,8 +189,9 @@ var translations_en = {
     // General
     "i18n-AC000" : "Database not accessible",
     "i18n-AC001" : "Database query error",
-    "i18n-AC002" : "incorrect user credentials",
+    "i18n-AC002" : "Incorrect user credentials",
     "i18n-AC003" : "Invalid token",
+    "i18n-AC004" : "Disabled account",
     
     // CalendariosModel
     "i18n-AC111" : "The calendar was correctly added",

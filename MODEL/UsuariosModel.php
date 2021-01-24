@@ -40,6 +40,7 @@ class UsuariosModel extends BaseModel {
         $this->actionCodes[parent::DELETE_FAIL]["code"] = "AC063";
 
         $this->actionCodes["bad_credentials"] = array("code" => "AC002");
+        $this->actionCodes["disabled_account"] = array("code" => "AC004");
                 
         $this->tableName = "USUARIOS";      
           
@@ -80,13 +81,17 @@ class UsuariosModel extends BaseModel {
             return $this->actionCodes["bad_credentials"];
         }
         
-        $userSearch= $this->SEARCH();
+        $userSearch= $this->SEARCH("SELECT * FROM USUARIOS WHERE LOGIN_USUARIO = '" . $this->atributes["LOGIN_USUARIO"] . "'");
         
-        if(!count($userSearch)){
+        if(!count("$userSearch")){
             return $this->actionCodes["bad_credentials"];
         }
 
         $this->atributes = $userSearch[0];
+
+        if($this->atributes["ES_ACTIVO"] === "NO"){
+            return $this->actionCodes["disabled_account"];
+        }
 
         return true;
     }

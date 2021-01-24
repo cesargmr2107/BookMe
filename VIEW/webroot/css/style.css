@@ -299,6 +299,14 @@ textarea {
         text-decoration: none;
     }
 
+#nav-bar-icons {
+    display: flex;
+}
+
+#nav-bar-icons span {
+    margin: 0px 10px ;
+}
+
 /* Body container */
 
 #container {

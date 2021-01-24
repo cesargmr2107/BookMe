@@ -18,7 +18,8 @@ abstract class BaseView{
         "CALENDAR" => "far fa-calendar-alt",
         "CHART" => "far fa-chart-bar",
         "SEARCH" => "fas fa-search",
-        "BOOKING" => "far fa-calendar-plus"
+        "BOOKING" => "far fa-calendar-plus",
+        "PROFILE" => "fas fa-user-alt"
     );
 
 
@@ -146,7 +147,10 @@ abstract class BaseView{
                     </ul>
                     <?php
                         $this->includeLangSelection();
-                        $this->includeButton("LOGOUT", "logoutButton", "post", "AuthenticationController", "logout");
+                        echo "<div id='nav-bar-icons'>";
+                            $this->includeButton("PROFILE", "profileButton", "post", "UsuariosController", "show", ["LOGIN_USUARIO" => $_SESSION["LOGIN_USUARIO"]]);
+                            $this->includeButton("LOGOUT", "logoutButton", "post", "AuthenticationController", "logout");
+                        echo "</div>";
                     ?>
                 </div>
             </nav>
