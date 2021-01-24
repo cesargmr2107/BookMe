@@ -69,7 +69,7 @@ abstract class BaseView{
                 <link href="./VIEW/webroot/libraries/bootstrap/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
                 <script src="./VIEW/webroot/libraries/bootstrap/jquery.min.js"></script>
                 <script src="./VIEW/webroot/libraries/bootstrap/bootstrap.min.js"></script>
-                <script src="./VIEW/webroot/libraries/bootstrap/moment.min.js"></script>
+                <script src="./VIEW/webroot/libraries/bootstrap/moment-with-locales.js"></script>
                 <script src="./VIEW/webroot/libraries/bootstrap/bootstrap-datetimepicker.min.js"></script>
                 
                 <!-- Font awesome icons -->
@@ -180,7 +180,8 @@ abstract class BaseView{
     private function includeNavBarRecursos(){
 
         $options = array(
-            array("textCode" => "i18n-resourcesSearch", "controller" => "RecursosController", "action" => "search")
+            array("textCode" => "i18n-resourcesSearch", "controller" => "RecursosController", "action" => "search"),
+            array("textCode" => "i18n-resourcesGlobal", "controller" => "RecursosController", "action" => "global")
         );
 
         if(isAdminUser()){
@@ -379,16 +380,18 @@ abstract class BaseView{
                 </div>
                 <script type="text/javascript">
                     $(function () {
-                        $('#<?=$atribute?>').datetimepicker(
+                        var dp = $('#<?=$atribute?>').datetimepicker(
                             {
                                 <?php
                                     if($format === 'DD/MM/YYYY' && $useMinDateAsCurrent === true)
                                     echo 'minDate: new Date(),';
                                 ?>
+                                locale: moment.locale('es'),
                                 format: '<?=$format?>',
                                 ignoreReadonly: true
                             }
                         );
+                        pickers.push(dp);
                     });
                 </script>
             </div>

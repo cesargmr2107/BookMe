@@ -1,5 +1,7 @@
 
 
+var pickers = [];
+
 function addField(form, name, value){
 	var input = document.createElement('input');
     input.type = 'hidden';

@@ -38,6 +38,7 @@ var translations_gl = {
     // Resources
     "i18n-navbar-resources" : "Recursos",
     "i18n-resourcesSearch" : "Listado de recursos",
+    "i18n-resourcesGlobal" : "Horario global",
     "i18n-newResource" : "Novo recurso",
 
     // Calendars

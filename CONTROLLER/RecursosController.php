@@ -51,6 +51,12 @@ class RecursosController extends BaseController {
         }
         new RecursosStatsView($data);
     }
+
+    function global(){
+        $resource = new RecursosModel();
+        $data = $resource->GLOBAL();
+        new RecursosGlobalView($data);
+    }
     
 }
 ?>

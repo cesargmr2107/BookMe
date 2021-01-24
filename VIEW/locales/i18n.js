@@ -41,6 +41,12 @@ function setLang(lang = null) {
         statsChart.update();
     }
 
+    // Reload datetimepickers
+    for(var i = 0; i < pickers.length; i++){
+        var locale = lang.toLowerCase();
+        pickers[i].data("DateTimePicker").locale(locale);
+    }
+
 }
 
 function translate(translations){

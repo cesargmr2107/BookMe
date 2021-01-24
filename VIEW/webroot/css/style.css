@@ -728,3 +728,14 @@ form[name="statsForm"] .fa-search {
     align-self: center;
     margin: 20px 0px;
 }
+
+/* GLOBAL SCHEDULE */
+
+#global-calendar  {
+    align-self: center;
+}
+
+#global-calendar #calendar {
+    width: 80vw;
+    max-height: 75vh;
+}

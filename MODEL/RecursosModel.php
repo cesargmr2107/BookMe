@@ -116,6 +116,23 @@ class RecursosModel extends BaseModel {
         return $result;
     }
 
+    public function GLOBAL(){
+
+        $result = [];
+
+        $query = "SELECT A.NOMBRE_RECURSO, B.FECHA_INICIO_SUBRESERVA, B.FECHA_FIN_SUBRESERVA, B.HORA_INICIO_SUBRESERVA, B.HORA_FIN_SUBRESERVA " .
+                 "FROM RECURSOS A, SUBRESERVAS B, RESERVAS C " .
+                 "WHERE A.ID_RECURSO = C.ID_RECURSO AND B.ID_RESERVA = C.ID_RESERVA AND " .
+                 "C.ESTADO_RESERVA = 'ACEPTADA'";
+
+        $result["events"] = $this->SEARCH($query);
+
+        // DEBUG: Check events
+        // echo "<p>" . $query . "</p>";
+
+        return $result;
+    }
+
     public function STATS($formStartDate = null, $formEndDate = null){
 
         // Get this resource's calendar ID
