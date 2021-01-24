@@ -82,6 +82,15 @@ class ReservasModel extends BaseModel {
                 "checkRange" => array('COSTE_RESERVA', 0.00, 9999.99, 'AT372')
             )
         );
+
+    }
+
+    public function checkHasSubreservas($errorCode){
+        if(isset($this->infoSubreservas) && !empty($this->infoSubreservas)){
+            return true;
+        }else{
+            return [ "ID_RESERVA" => [ "checkHasSubreservas" => $errorCode] ];
+        }
     }
 
     public function setInfoSubreservas($jsonString){
@@ -126,6 +135,13 @@ class ReservasModel extends BaseModel {
     }
 
     public function ADD(){
+
+        $checkSubreservas = $this->checkHasSubreservas('AT302');
+        if($checkSubreservas !== true ){
+            $response = $this->actionCodes[self::ADD_FAIL];
+            $response["atributeErrors"] = $checkSubreservas;
+            return $response;
+        }
 
         $this->initialAddSettings();
 

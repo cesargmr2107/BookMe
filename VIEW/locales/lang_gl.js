@@ -246,6 +246,7 @@ var translations_gl = {
     "i18n-AC033" : "A reserva non se eliminou correctamente",
     
     "i18n-AT301" : "O id da reserva (xestionado polo sistema) é un enteiro",
+    "i18n-AT302" : "A reserva debe ter polo menos un intervalo válido",
     "i18n-AT311" : "O usuario é descoñecido",
     "i18n-AT321" : "O recurso é descoñecido",
     "i18n-AT331" : "A data debe ter o formato dd/mm/yyyy",

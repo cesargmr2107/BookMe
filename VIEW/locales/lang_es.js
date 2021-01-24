@@ -244,6 +244,7 @@ var translations_es = {
     "i18n-AC033" : "La reserva no se eliminó correctamente",
     
     "i18n-AT301" : "El id de la reserva (gestionado por el sistema) es un entero",
+    "i18n-AT302" : "La reserva debe tener al menos un intervalo válido",
     "i18n-AT311" : "El usuario es desconocido",
     "i18n-AT321" : "El recurso es desconocido",
     "i18n-AT331" : "La fecha debe tener el formato dd/mm/yyyy",

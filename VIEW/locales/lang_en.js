@@ -243,6 +243,7 @@ var translations_en = {
     "i18n-AC033" : "The reservation was not removed correctly",
 
     "i18n-AT301" : "The booking id (managed by the system) is an integer",
+    "i18n-AT302" : "The booking must have at least one valid interval",
     "i18n-AT311" : "User is unknown",
     "i18n-AT321" : "The resource is unknown",
     "i18n-AT331" : "The date must have the format dd/mm/yyyy",

@@ -501,6 +501,18 @@ class Test extends BaseView{
                         ]
                     ],
                     "expected" => "AC031"
+                ],
+                [
+                    "atributes" => [
+                        "LOGIN_USUARIO" => "emmolina15",
+                        "ID_RECURSO" => "1",
+                        "FECHA_SOLICITUD_RESERVA" => "20/01/2021",
+                        "COSTE_RESERVA" => "5",
+                        "infoSubreservas" => [ 
+                            "subreservas" => [ ]
+                        ]
+                    ],
+                    "expected" => "AC031"
                 ]
             ],
             "EDIT" => [
